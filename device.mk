@@ -40,7 +40,6 @@ PRODUCT_PACKAGES += \
     fstab.samsungexynos7870 \
     init.baseband.rc \
     init.rilchip.rc \
-    init.power.rc \
     init.samsung.rc \
     init.samsungexynos7870.rc \
     init.samsungexynos7870.usb.rc \
@@ -101,13 +100,8 @@ PRODUCT_PACKAGES += \
     AdvancedDisplay
 
 # Camera
-PRODUCT_PACKAGES += \
-    camera.universal7870 \
-    libstlport \
-    libxml2
-
-PRODUCT_PACKAGES += \
-    Snap
+#PRODUCT_PACKAGES += \
+#    Snap
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -179,7 +173,7 @@ PRODUCT_COPY_FILES += \
 # Keys
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:/system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:/system/usr/keylayout/sec_touchkey.kl
+    $(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:/system/usr/keylayout/sec_touchscreen.kl
 
 # Touchscreen
 PRODUCT_COPY_FILES += \

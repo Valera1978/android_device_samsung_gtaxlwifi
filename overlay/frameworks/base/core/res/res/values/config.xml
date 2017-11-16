@@ -236,4 +236,27 @@
 
     <!-- The device supports freeform window management -->
     <bool name="config_freeformWindowManagement">true</bool>
+
+    <!-- Hide this setting because we are forcing it to be enabled in build.prop.
+         Note: This is declared in both values/config.xml and values-sw600dp/config.xml.
+               It is actually the latter definition that wins but overlay both
+               to be on the safe side.
+ -->
+    <bool name="config_enableLockScreenRotation">false</bool>
+
+    <!-- If true, the screen can be rotated via the accelerometer in all 4
+         rotations as the default behavior. -->
+    <bool name="config_allowAllRotations">true</bool>
+
+    <!-- Override the default detection behavior for the framework method
+         android.view.ViewConfiguration#hasPermanentMenuKey().
+         Valid settings are:
+         0 - No change. Use the default autodetection behavior.
+         1 - The device DOES have a permanent menu key; ignore autodetection.
+         2 - The device DOES NOT have a permanent menu key; ignore autodetection. -->
+    <integer name="config_overrideHasPermanentMenuKey">2</integer>
+
+    <!-- Enable blur support -->
+    <bool name="config_uiBlurEnabled">true</bool>
+
 </resources>
