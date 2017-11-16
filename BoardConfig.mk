@@ -63,8 +63,7 @@ KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aa
 #TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 # Kernel config
-#TARGET_KERNEL_SOURCE := kernel/samsung/gtaxllte
-TARGET_KERNEL_SOURCE := kernel/samsung/gtaxllte_permissive
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
 TARGET_KERNEL_CONFIG := lineage-gtaxllte_defconfig
 
 # Partitions
