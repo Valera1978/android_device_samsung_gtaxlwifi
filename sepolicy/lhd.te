@@ -1,0 +1,20 @@
+#### lhd
+#
+type lhd, domain;
+type lhd_exec, exec_type, file_type;
+
+allow lhd bbd_device:chr_file { read write getattr open ioctl };
+
+allow lhd efs_file:dir search;
+allow lhd gps_data_file:dir { search write add_name };
+
+allow lhd fwmarkd_socket:sock_file write;
+allow lhd gps_data_file:fifo_file { read write open create setattr };
+allow lhd gps_data_file:file { write lock open create };
+allow lhd node:tcp_socket node_bind;
+allow lhd port:tcp_socket name_bind;
+allow lhd sec_efs_file:dir search;
+allow lhd self:tcp_socket { bind connect create };
+allow lhd sysfs:file { read write open };
+
+init_daemon_domain(lhd);

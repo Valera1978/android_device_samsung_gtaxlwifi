@@ -1,15 +1,11 @@
-# /dev/m2m1shot_jpeg
-allow cameraserver camera_device:chr_file rw_file_perms;
-
 # /sys/devices/virtual/camera/*/*_camfw
-allow cameraserver sysfs_camera_writable:file { read open getattr };
+# /dev/m2m1shot_jpeg
+allow cameraserver camera_device:dir { search };
+allow cameraserver camera_device:file { read write open getattr };
+allow cameraserver camera_device:chr_file { read open getattr };
 
-# searching for syses nodes
-allow cameraserver sysfs_camera_writable:dir search;
+allow camera_device sysfs:filesystem associate;
 
-# /data/camera/ISP_CV
-allow cameraserver camera_data_file:file r_file_perms;
+allow cameraserver camera_data_file:file { read open };
 
-# /data/media(/.*)?
-allow cameraserver media_rw_data_file:dir r_dir_perms;
-allow cameraserver media_rw_data_file:file r_file_perms;
+allow cameraserver media_rw_data_file:dir search;

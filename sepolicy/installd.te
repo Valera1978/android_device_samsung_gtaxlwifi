@@ -1,2 +1,0 @@
-# TbStorage (mobicore)
-allow installd tee_data_file:dir { rw_dir_perms rmdir };

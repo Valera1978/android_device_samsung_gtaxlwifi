@@ -1,5 +1,2 @@
-# /system/lib/omx/
-allow mediacodec system_file:dir r_dir_perms;
-
-# /sys/class/video4linux/video6/name
-allow mediacodec sysfs:file r_file_perms;
+allow mediacodec system_file:dir { read open };
+allow mediacodec sysfs:file { read open getattr };
