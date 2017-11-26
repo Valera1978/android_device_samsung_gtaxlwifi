@@ -24,7 +24,7 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1200
@@ -49,6 +49,10 @@ PRODUCT_PACKAGES += \
 # cpboot-daemon
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/cbd:root/sbin/cbd
+
+# sswap
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ramdisk/sswap:root/sbin/sswap
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -82,11 +86,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
-
-# Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml
 
 PRODUCT_PACKAGES += \
     gralloc.exynos5
@@ -98,10 +100,6 @@ PRODUCT_PACKAGES += \
 # hardware/samsung/AdvancedDisplay (MDNIE)
 PRODUCT_PACKAGES += \
     AdvancedDisplay
-
-# Camera
-#PRODUCT_PACKAGES += \
-#    Snap
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -121,12 +119,6 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes \
     libebtc
-
-# WCNSS
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wifi/grippower.info:system/etc/firmware/wlan/grippower.info \
-    $(LOCAL_PATH)/configs/wifi/qcom_cfg.ini:system/etc/firmware/wlan/qcom_cfg.ini \
-    $(LOCAL_PATH)/configs/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/WCNSS_cfg.dat
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -150,11 +142,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/mixer_paths_rev00.xml:system/etc/mixer_paths_rev00.xml
 
 PRODUCT_PACKAGES += \
-    audio.primary.universal7870_32 \
+    audio.primary.universal7870 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libtfa98xx_32 \
     libtinycompress
 
 # Media
@@ -163,6 +154,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml  \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # GPS
@@ -192,6 +184,24 @@ PRODUCT_PACKAGES += \
 # Root
 PRODUCT_PACKAGES += \
     su
+
+# Offmode charger
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    cm_charger_res_images
+
+# adb
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.debuggable=1 \
+#	persist.sys.usb.config=adb \
+#	persist.service.adb.enable=1 \
+#	persist.service.debuggable=1
+
+#PRODUCT_BUILD_PROP_OVERRIDES += \
+#	ro.secure=0 \
+#	ro.debuggable=1 \
+#	ro.adb.secure=0 \
+#	persist.sys.usb.config=adb
 
 # call Samsung LSI board support package
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
