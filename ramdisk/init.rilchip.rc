@@ -26,16 +26,16 @@ on property:persist.sys.cpboot=disable
     stop ril-daemon
     stop cpboot-daemon
 
-service SMD-daemon /system/bin/smdexe
-    class main
-    user root
-    group system radio inet net_raw
+#service SMD-daemon /system/bin/smdexe
+#    class main
+#    user root
+#    group system radio inet net_raw
 
 # DIAG
-service DIAG-daemon /system/bin/diagexe
-    class main
-    user root
-    group system radio inet net_raw
+#service DIAG-daemon /system/bin/diagexe
+#    class main
+#    user root
+#    group system radio inet net_raw
 
 on early-boot
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
