@@ -18,10 +18,10 @@ qcom.bluetooth.soc=rome
 # Dalvik/Art
 dalvik.vm.dex2oat-filter=speed
 dalvik.vm.heapstartsize=8m
-dalvik.vm.heapgrowthlimit=128m
+dalvik.vm.heapgrowthlimit=192m
 dalvik.vm.heapsize=512m
 dalvik.vm.heaptargetutilization=0.75
-dalvik.vm.heapminfree=2m
+dalvik.vm.heapminfree=512k
 dalvik.vm.heapmaxfree=8m
 dalvik.vm.image-dex2oat-filter=speed
 dalvik.vm.isa.arm64.variant=generic
@@ -36,8 +36,8 @@ debug.hwc.force_gpu=1
 lockscreen.rot_override=true
 
 # Hwui
-ro.hwui.texture_cache_size=50
-ro.hwui.layer_cache_size=34
+ro.hwui.texture_cache_size=54
+ro.hwui.layer_cache_size=36
 ro.hwui.path_cache_size=10
 ro.hwui.texture_cache_flushrate=0.4
 ro.hwui.shape_cache_size=4
@@ -52,18 +52,15 @@ ro.hwui.text_large_cache_height=1024
 # Radio
 persist.radio.sib16_support=0
 rild.libpath=/system/lib/libsec-ril.so
-ro.ril.hsxpa=1
-ro.ril.gprsclass=10
-ro.ril.telephony.mqanelements=6
 ro.telephony.default_network=9
 ro.telephony.ril_class=SlteRIL
-
-# Wifi
-wifi.interface=wlan0
+ro.ril.gprsclass=10
+ro.ril.hsxpa=1
+ro.ril.telephony.mqanelements=6
 
 # read DS/SS property
 import /efs/factory.prop
+ro.multisim.simslotcount=1
 
-######################################
-# Camera
-#camera2.portability.force_api=1
+# Wifi
+wifi.interface=wlan0
