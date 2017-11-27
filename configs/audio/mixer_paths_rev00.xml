@@ -8,6 +8,7 @@
 	<pcmdai baseband_link="2" />
 	<pcmdai bluetooth_link="3" />
 
+
 	<!-- Reset configurations -->
 	<!-- TODO: Need to figure out what to put in reset configuration. -->
 	<ctl name="DAC L1 Source" value="Stereo DAC Mixer"/>

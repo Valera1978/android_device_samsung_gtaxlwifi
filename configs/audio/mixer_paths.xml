@@ -165,7 +165,7 @@
 		<ctl name="DAC L2 Source" value="Stereo DAC Mixer"/>
 		<ctl name="DAC R2 Source" value="Stereo DAC Mixer"/>
 		<ctl name="SPK MIXL DAC L2 Switch" value="1"/>
-		<ctl name="SPK MIXR DAC R2 Switch" value="1"/>	
+		<ctl name="SPK MIXR DAC R2 Switch" value="1"/>
 		<ctl name="SPO L MIX SPKVOL L Switch" value="1"/>
 		<ctl name="SPO R MIX SPKVOL R Switch" value="1"/>
 		<ctl name="SPKVOL L Switch" value="1"/>
@@ -207,13 +207,13 @@
 	</path>
 
 	<path name="dev-main-mic">
-        <ctl name="RECMIX1L BST3 Switch" value="1"/>
-        <ctl name="RECMIX1R BST3 Switch" value="1"/>
-        <ctl name="Stereo1 ADC Source" value="ADC1"/>
-        <ctl name="Stereo1 ADC1 Source" value="ADC"/>
-        <ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
-        <ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
-        <ctl name="Main Mic Switch" value="1" />
+		<ctl name="RECMIX1L BST3 Switch" value="1"/>
+		<ctl name="RECMIX1R BST3 Switch" value="1"/>
+		<ctl name="Stereo1 ADC Source" value="ADC1"/>
+		<ctl name="Stereo1 ADC1 Source" value="ADC"/>
+		<ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
+		<ctl name="Main Mic Switch" value="1" />
 	</path>
 
 	<path name="dev-2nd-mic">
@@ -225,13 +225,13 @@
 	</path>
 
 	<path name="dev-headset-mic">
-       <ctl name="RECMIX1L BST1 Switch" value="1"/>
-       <ctl name="RECMIX1R BST1 Switch" value="1"/>
-       <ctl name="Stereo1 ADC Source" value="ADC1"/>
-       <ctl name="Stereo1 ADC1 Source" value="ADC"/>
-       <ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
-       <ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
-       <ctl name="Headset Mic Switch" value="1" />
+		<ctl name="RECMIX1L BST1 Switch" value="1"/>
+		<ctl name="RECMIX1R BST1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC Source" value="ADC1"/>
+		<ctl name="Stereo1 ADC1 Source" value="ADC"/>
+		<ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
+		<ctl name="Headset Mic Switch" value="1" />
 	</path>
 
 	<path name="dev-codec-in-disable">
@@ -611,7 +611,7 @@
 		<path name="incall_wb-bt-sco-headset" />
 	</path>
 
-	<!-- VoLTE CP WB/EXTRA_VOL -->	
+	<!-- VoLTE CP WB/EXTRA_VOL -->
 	<path name="volte_cp_wb_extra_vol-handset">
 		<path name="incall_wb-handset" />
 	</path>
@@ -673,9 +673,25 @@
 		<path name="route-ap" />
 		<path name="dev-speaker" />
 	</path>
-	
+
 	<path name="realtimeloopback-headset">
 		<path name="route-ap" />
+		<path name="dev-headset" />
+	</path>
+
+	<!-- Codec Loopback -->
+	<path name="loopback_codec-handset">
+	</path>
+
+	<path name="loopback_codec-speaker">
+		<ctl name="DAC1 MIXL Stereo ADC Switch" value="1" />
+		<ctl name="DAC1 MIXR Stereo ADC Switch" value="1" />
+		<path name="dev-speaker" />
+	</path>
+
+	<path name="loopback_codec-headset">
+		<ctl name="DAC1 MIXL Stereo ADC Switch" value="1" />
+		<ctl name="DAC1 MIXR Stereo ADC Switch" value="1" />
 		<path name="dev-headset" />
 	</path>
 
@@ -1081,7 +1097,7 @@
 		<path name="incall_nb-bt-sco-headset-in" />
 	</path>
 
-	<!-- WB/EXTRA_VOL -->	
+	<!-- WB/EXTRA_VOL -->
 	<path name="incall_wb_extra_vol-handset-mic">
 		<path name="incall_wb-handset-mic" />
 	</path>
@@ -1253,17 +1269,30 @@
 		<path name="route-ap" />
 		<path name="dev-main-mic" />
 	</path>
-	
+
 	<path name="realtimeloopback-2nd-mic">
 		<path name="route-ap" />
 		<path name="dev-2nd-mic" />
 	</path>
-	
+
 	<path name="realtimeloopback-headset-mic">
 		<path name="route-ap" />
 		<path name="dev-headset-mic" />
 	</path>
-	
+
+	<!-- Codec Loopback Input -->
+	<path name="loopback_codec-mic">
+		<path name="dev-main-mic" />
+	</path>
+
+	<path name="loopback_codec-2nd-mic">
+		<path name="dev-2nd-mic" />
+	</path>
+
+	<path name="loopback_codec-headset-mic">
+		<path name="dev-headset-mic" />
+	</path>
+
 	<!-- TTY Mode Input -->
 	<path name="tty_mode-hco-mic">
 		<path name="route-ap" />

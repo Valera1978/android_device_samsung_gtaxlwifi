@@ -17,9 +17,9 @@
 	</path>
 
 	<path name="gain-media-speaker-headset">
-		<ctl name="DAC1 Playback Volume" value="165"/>
-		<ctl name="Speaker Playback Volume" value="34"/>
-		<ctl name="Headphone Playback Volume" value="0"/>
+		<ctl name="DAC1 Playback Volume" value="157"/>
+		<ctl name="Speaker Playback Volume" value="31"/>
+		<ctl name="Headphone Playback Volume" value="5"/>
 	</path>
 
 	<path name="gain-media-bt-sco-headset">
@@ -45,9 +45,9 @@
 	</path>
 
 	<path name="gain-ringtone-speaker-headset">
-		<ctl name="DAC1 Playback Volume" value="165"/>
-		<ctl name="Speaker Playback Volume" value="34"/>
-		<ctl name="Headphone Playback Volume" value="0"/>
+		<ctl name="DAC1 Playback Volume" value="175"/>
+		<ctl name="Speaker Playback Volume" value="31"/>
+		<ctl name="Headphone Playback Volume" value="31"/>
 	</path>
 
 	<path name="gain-ringtone-bt-sco-headset">
@@ -463,7 +463,7 @@
 
 	<path name="gain-realtimeloopback-speaker">
 		<ctl name="DAC1 Playback Volume" value="175"/>
-		<ctl name="Speaker Playback Volume" value="31"/>
+		<ctl name="Speaker Playback Volume" value="35"/>
 	</path>
 
 	<path name="gain-realtimeloopback-headset">
@@ -471,6 +471,22 @@
 		<ctl name="Headphone Playback Volume" value="31"/>
 	</path>
 	
+	<!-- Codec Loopback output volume-->
+	<path name="gain-loopback_codec-handset">
+		<ctl name="DAC1 Playback Volume" value="175"/>
+		<ctl name="Mono Playback Volume" value="31"/>
+	</path>
+
+	<path name="gain-loopback_codec-speaker">
+		<ctl name="DAC1 Playback Volume" value="175"/>
+		<ctl name="Speaker Playback Volume" value="31"/>
+	</path>
+
+	<path name="gain-loopback_codec-headset">
+		<ctl name="DAC1 Playback Volume" value="148"/>
+		<ctl name="Headphone Playback Volume" value="31"/>
+	</path>
+
 	<!-- TTY Mode volume-->
 	<path name="gain-tty_mode-handset">
 	</path>
@@ -1070,6 +1086,26 @@
 	<path name="gain-realtimeloopback-speaker-dualmic">
 	</path>
 	
+	<!-- Codec Loopback Input -->
+	<path name="gain-loopback_codec-mic">
+		<ctl name="IN3 Boost Volume" value="25"/>
+		<ctl name="STO1 ADC Capture Volume" value="46"/>
+	</path>
+
+	<path name="gain-loopback_codec-2nd-mic">
+	</path>
+
+	<path name="gain-loopback_codec-headset-mic">
+		<ctl name="IN1 Boost Volume" value="31"/>
+		<ctl name="STO1 ADC Capture Volume" value="47"/>
+	</path>
+
+	<path name="gain-loopback_codec-handset-dualmic">
+	</path>
+
+	<path name="gain-loopback_codec-speaker-dualmic">
+	</path>
+
 	<!-- TTY Mode Input volume -->
 	<path name="gain-tty_mode-hco-mic">
 	</path>

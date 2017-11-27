@@ -29,13 +29,13 @@
 /* DTBH_MAGIC + DTBH_VERSION + DTB counts */
 #define DT_HEADER_PHYS_SIZE 12
 
-/* model = "Samsung Galaxy Tab A LTE rev01 board based on Exynos7870";
+/* model = "Samsung Galaxy Tab A WIFI rev00 board based on Exynos7870";
  * model_info-chip = <7870>;
  * model_info-platform = "android";
  * model_info-subtype = "samsung";
- * model_info-hw_rev = <2>;
+ * model_info-hw_rev = <0>;
  * model_info-hw_rev_end = <3>;
- * compatible = "samsung, Galaxy Tab A LTE 01", "samsung,exynos7870";
+ * compatible = "samsung, Galaxy Tab A WIFI", "samsung,exynos7870";
 */
 
 /*

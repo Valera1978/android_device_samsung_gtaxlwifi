@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/gtaxllte
+LOCAL_PATH := device/samsung/gtaxlwifi
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
@@ -55,7 +55,7 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
-TARGET_KERNEL_CONFIG := lineage-gtaxllte_defconfig
+TARGET_KERNEL_CONFIG := lineage-gtaxlwifi_defconfig
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
@@ -150,11 +150,6 @@ CHARGING_ENABLED_PATH := /sys/class/power_supply/battery/batt_lp_charging
 
 # RIL
 BOARD_VENDOR := samsung
-BOARD_MODEM_TYPE := ss333
-BOARD_PROVIDES_LIBRIL := true
-
-# RIL.java overwrite
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
@@ -167,7 +162,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 #RECOVERY_VARIANT := twrp
 BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.samsungexynos7870
-TARGET_OTA_ASSERT_DEVICE := gtaxllte
+TARGET_OTA_ASSERT_DEVICE := gtaxlwifi
 
 # TWRP
 ifeq ($(RECOVERY_VARIANT),twrp)
@@ -191,4 +186,4 @@ BOARD_SECCOMP_POLICY += $(LOCAL_PATH)/seccomp
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
 
 # Inherit from the proprietary version
--include vendor/samsung/gtaxllte/BoardConfigVendor.mk
+-include vendor/samsung/gtaxlwifi/BoardConfigVendor.mk

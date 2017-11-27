@@ -1,9 +1,9 @@
-ro.product.model=SM-T585
-ro.product.device=gtaxllte
-ro.product.name=gtaxlltexx
-ro.build.product=gtaxllte
-ro.build.description=gtaxlltexx-user 7.0 NRD90M T585XXU2BQE4 release-keys
-ro.build.fingerprint=samsung/gtaxlltexx/gtaxllte:7.0/NRD90M/T585XXU2BQE4:user/release-keys
+ro.product.model=SM-T580
+ro.product.device=gtaxlwifi
+ro.product.name=gtaxlwifixx
+ro.build.product=gtaxlwifi
+ro.build.description=gtaxlwifixx-user 7.0 NRD90M T580XXU2BQI9 release-keys
+ro.build.fingerprint=samsung/gtaxlwifixx/gtaxlwifi:7.0/NRD90M/T580XXU2BQI9:user/release-keys
 
 # Audio
 af.fast_track_multiplier=1
@@ -50,17 +50,7 @@ ro.hwui.text_large_cache_width=2048
 ro.hwui.text_large_cache_height=1024
 
 # Radio
-persist.radio.sib16_support=0
-rild.libpath=/system/lib/libsec-ril.so
-ro.telephony.default_network=9
-ro.telephony.ril_class=SlteRIL
-ro.ril.gprsclass=10
-ro.ril.hsxpa=1
-ro.ril.telephony.mqanelements=6
-
-# read DS/SS property
-import /efs/factory.prop
-ro.multisim.simslotcount=1
+ro.radio.noril=yes
 
 # Wifi
 wifi.interface=wlan0
