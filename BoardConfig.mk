@@ -58,7 +58,6 @@ TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
 TARGET_KERNEL_CONFIG := lineage-gtaxlwifi_defconfig
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
@@ -76,9 +75,8 @@ BOARD_CACHEIMAGE_PARTITION_SIZE    := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# Use these flags if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -93,7 +91,7 @@ TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Samsung Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Samsung Camera
@@ -150,10 +148,6 @@ CHARGING_ENABLED_PATH := /sys/class/power_supply/battery/batt_lp_charging
 
 # RIL
 BOARD_VENDOR := samsung
-
-# Sensors
-TARGET_NO_SENSOR_PERMISSION_CHECK := true
-TARGET_SEC_FP_HAL_VARIANT := bauth
 
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
