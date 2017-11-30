@@ -50,10 +50,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/cbd:root/sbin/cbd
 
-# sswap
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/sswap:root/sbin/sswap
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \

@@ -150,15 +150,6 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 
-    # Assume HMP uses shared cpufreq policy for all LITTLE CPUs
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-
-    chown system system sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq
-    chmod 0660 sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_max_freq
-    chown system system sys/devices/system/cpu/cpufreq/mp-cpufreq/boot_low_freq
-    chmod 0660 sys/devices/system/cpu/cpufreq/mp-cpufreq/boot_low_freq
-
     chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
     chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
@@ -776,7 +767,6 @@ service gpsd /system/bin/gpsd
     user gps
     group system inet wakelock
     ioprio be 0
-    seclabel u:r:gpsd:s0
 
 # LPM
 service lpm /system/bin/lpm
@@ -820,6 +810,7 @@ service rpmbd /system/bin/rpmbd
      class main
 
 on property:sys.mobicoredaemon.enable=true
+    start cs_service
     write /proc/iccc_ready 1
 
 on property:ro.multisim.simslotcount=1
@@ -827,12 +818,6 @@ on property:ro.multisim.simslotcount=1
 
 on property:ro.multisim.simslotcount=2
     setprop persist.radio.multisim.config dsds
-
-# deferred initcall
-#service sec-sh /system/bin/sh /system/etc/init.sec.boot.sh
-#    class main
-#    user root
-#    oneshot
 
 # Modem boot daemon
 #    service cpboot-daemon /system/bin/cbd -d
@@ -847,10 +832,10 @@ on property:ro.multisim.simslotcount=2
 #    group system
 
 # FINGERPRINT FRAMEWORK : starts fingerprintd
-#service fingerprintd /system/bin/fingerprintd
-#    class late_start
-#    user system
-#    group system
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system
 
 # VC daemon
     service VC-daemon /system/bin/vcd
@@ -894,12 +879,12 @@ on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ1
     write /sys/module/fiq_debugger/parameters/kgdb_enable 1
 
-#service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.dwmmc0/by-name/PARAM
-#    class core
-#    user root
-#    group root
-#    seclabel u:r:prepare_param:s0
-#    oneshot
+service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.dwmmc0/by-name/PARAM
+    class core
+    user root
+    group root
+    seclabel u:r:prepare_param:s0
+    oneshot
 
 # Secure Storage startup
 service secure_storage /system/bin/secure_storage_daemon
@@ -907,10 +892,17 @@ service secure_storage /system/bin/secure_storage_daemon
     user system
     group system
     disabled
+on property:ro.securestorage.knox=true
+    mkdir /dev/.secure_storage
+    chmod 0711 /dev/.secure_storage
+    chown system system /dev/.secure_storage
+    restorecon -R /dev/.secure_storage
+    start secure_storage
 on property:ro.securestorage.support=true
     mkdir /dev/.secure_storage
     chmod 0711 /dev/.secure_storage
     chown system system /dev/.secure_storage
+    restorecon -R /dev/.secure_storage
     start secure_storage
 
 # umount service
@@ -927,7 +919,7 @@ on property:persist.sys.storage_preload=0
     start umount_service
 
 # SSWAP
-service swapon /sbin/sswap -s -f 1536
+service swapon /sbin/sswap -s
     class core
     user root
     group root
