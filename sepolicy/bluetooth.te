@@ -1,10 +1,11 @@
-# /dev/ttySAC3
-allow bluetooth bluetooth_device:chr_file { rw_file_perms ioctl };
+allow bluetooth sysfs:file rw_file_perms;
+allow bluetooth sysfs_usb:file w_file_perms;
 
-# /data/.cid.info
-allow bluetooth wifi_data_file:file r_file_perms;
+allow bluetooth ttyHS0_device:chr_file rw_file_perms;
+allow bluetooth start_hci_filter:unix_stream_socket connectto;
 
-allow bluetooth sysfs:file write;
+set_prop(bluetooth, wc_transport_prop)
 
-allow bluetooth gps_device:chr_file { open ioctl };
-allow bluetooth uart_device:chr_file { read write open ioctl };
+# read /persist/bdaddr.txt
+#allow bluetooth persist_file:dir search;
+#allow bluetooth persist_file:file r_file_perms;

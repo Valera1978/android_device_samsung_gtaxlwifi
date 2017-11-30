@@ -10,6 +10,7 @@
 /dev/sec-nfc                 u:object_r:nfc_device:s0
 
 /dev/ttySAC3                 u:object_r:bluetooth_device:s0
+/dev/ttyHS0                  u:object_r:ttyHS0_device:s0
 
 /dev/batch_io                u:object_r:batch_io_device:s0
 
@@ -72,6 +73,8 @@
 /data/.wifiver.info          u:object_r:wifi_data_file:s0
 
 /data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
+
+/system/bin/wcnss_filter     u:object_r:start_hci_filter_exec:s0
 
 # biometrics
 /data/biometrics(/.*)?	     u:object_r:biometrics_data_file:s0
