@@ -784,6 +784,11 @@ on property:ro.bootmode=charger
 on property:ro.bootmode=charger
    class_start sec-charger
 
+service battery_charger /sbin/healthd -c
+    class charger
+    critical
+    seclabel u:r:healthd:s0
+
 # Bluetooth
 on property:wc_transport.start_hci=true
     start start_hci_filter
