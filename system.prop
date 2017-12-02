@@ -1,10 +1,3 @@
-ro.product.model=SM-T585
-ro.product.device=gtaxllte
-ro.product.name=gtaxlltexx
-ro.build.product=gtaxllte
-ro.build.description=gtaxlltexx-user 7.0 NRD90M T585XXU2BQE4 release-keys
-ro.build.fingerprint=samsung/gtaxlltexx/gtaxllte:7.0/NRD90M/T585XXU2BQE4:user/release-keys
-
 # Audio
 af.fast_track_multiplier=1
 audio_hal.force_voice_config=wide

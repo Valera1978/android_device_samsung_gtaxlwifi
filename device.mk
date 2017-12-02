@@ -82,9 +82,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 PRODUCT_PACKAGES += \
     gralloc.exynos5
@@ -185,19 +183,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images \
     cm_charger_res_images
-
-# adb
-#PRODUCT_PROPERTY_OVERRIDES += \
-#	ro.debuggable=1 \
-#	persist.sys.usb.config=adb \
-#	persist.service.adb.enable=1 \
-#	persist.service.debuggable=1
-
-#PRODUCT_BUILD_PROP_OVERRIDES += \
-#	ro.secure=0 \
-#	ro.debuggable=1 \
-#	ro.adb.secure=0 \
-#	persist.sys.usb.config=adb
 
 # call Samsung LSI board support package
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
