@@ -176,7 +176,7 @@
     <bool name="config_animateScreenLights">false</bool>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
-    <bool name="config_unplugTurnsOnScreen">false</bool>
+    <bool name="config_unplugTurnsOnScreen">true</bool>
 
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
@@ -259,10 +259,23 @@
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
 
+    <!-- Override the default detection behavior for the framework method		
+         android.view.ViewConfiguration#hasPermanentMenuKey().		
+         Valid settings are:		
+         0 - No change. Use the default autodetection behavior.		
+         1 - The device DOES have a permanent menu key; ignore autodetection.		
+         2 - The device DOES NOT have a permanent menu key; ignore autodetection. -->		
+    <integer name="config_overrideHasPermanentMenuKey">2</integer>
+
     <!-- Enable blur support -->
     <bool name="config_uiBlurEnabled">true</bool>
 
 <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
+
+    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
+      it causes the device to wake up.
+      The default is false. -->
+    <bool name="config_lidControlsSleep">true</bool>
 
 </resources>
