@@ -40,9 +40,11 @@ on post-fs-data
     chown system system /data/privatemode
     restorecon /data/privatemode
 
-# Permissions for gnss
-    chmod 0660 /dev/gnss_ipc
-    chown system system /dev/gnss_ipc
+#GPS
+    chown root system /dev/ttySAC1
+    chmod 0660 /dev/ttySAC1
+    chown root system /sys/class/sec/gps/GPS_PWR_EN/value
+    chmod 0664 /sys/class/sec/gps/GPS_PWR_EN/value
     mkdir /data/system 0771 system system
     chown system system /data/system
     mkdir /data/system/gps 0771 system system
@@ -761,11 +763,12 @@ service argos-daemon /system/bin/argosd
     group system radio
 	
 # GPS
-service gpsd /system/bin/gpsd
+service gpsd /system/bin/gpsd -c /system/etc/gps.xml
     class main
     user gps
-    group system inet wakelock
+    group system inet net_raw wakelock
     ioprio be 0
+    seclabel u:r:gpsd:s0
 
 # LPM
 service lpm /system/bin/lpm
@@ -824,10 +827,12 @@ on property:ro.multisim.simslotcount=2
     setprop persist.radio.multisim.config dsds
 
 # Modem boot daemon
-#    service cpboot-daemon /system/bin/cbd -d
+#service wifi-daemon /sbin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
 #    class main
 #    user root
-#    group radio cache inet misc audio sdcard_rw log
+#    group radio cache inet misc audio sdcard_rw log sdcard_r shell
+#    seclabel u:r:cbd:s0
+#    oneshot
 
 # DM daemon
 #    service DM-daemon /system/bin/dmd
