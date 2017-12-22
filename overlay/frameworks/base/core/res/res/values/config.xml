@@ -134,7 +134,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareKeys">83</integer>
+<!--    <integer name="config_deviceHardwareKeys">83</integer> -->
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -148,7 +148,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareWakeKeys">65</integer>
+<!--    <integer name="config_deviceHardwareWakeKeys">65</integer> -->
 
     <!-- Control the behavior when the user long presses the home button.
             0 - Nothing
@@ -233,7 +233,7 @@
     <integer name="config_screenBrightnessDim">14</integer>
 
     <!-- Boolean to enable stk functionality on Samsung phones -->
-    <bool name="config_samsung_stk">true</bool>
+<!--    <bool name="config_samsung_stk">true</bool> -->
 
     <!-- Doze (Ambient display) -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
@@ -274,7 +274,7 @@
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
 
     <!-- Enable blur support -->
-    <bool name="config_uiBlurEnabled">true</bool>
+<!--    <bool name="config_uiBlurEnabled">true</bool> -->
 
 <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>

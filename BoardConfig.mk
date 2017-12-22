@@ -25,6 +25,9 @@ TARGET_NO_RADIOIMAGE := true
 
 #BLOCK_BASED_OTA:= false
 
+# ADB Legacy Interface
+TARGET_USES_LEGACY_ADB_INTERFACE := true
+
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
 TARGET_SLSI_VARIANT := cm
@@ -60,7 +63,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
 
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
-TARGET_USES_UNCOMPRESSED_KERNEL := true
+BOARD_KERNEL_IMAGE_NAME := Image
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 33554432
@@ -88,11 +91,17 @@ TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Samsung Hardware
-BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
-BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
+BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/lineagehw
+BOARD_HARDWARE_CLASS += hardware/samsung/lineagehw
 
 # Samsung Camera
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
+
+# Gralloc
+TARGET_USES_GRALLOC1_ADAPTER := true
+
+# ION
+TARGET_USES_ION := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
@@ -121,24 +130,23 @@ BOARD_USE_VP8ENC_SUPPORT := true
 TARGET_OMX_LEGACY_RESCALING := true
 
 # Wifi
-BOARD_HAS_QCOM_WLAN := true
-BOARD_WLAN_DEVICE := qcwcn
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_DRIVER_FW_PATH_AP := "ap"
-WIFI_DRIVER_FW_PATH_STA := "sta"
-WIFI_DRIVER_FW_PATH_P2P := "p2p"
-WIFI_DRIVER_MODULE_NAME := wlan
-WIFI_DRIVER_MODULE_PATH := /system/lib/modules/qca_cld/qca_cld_wlan.ko
-WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_HAS_QCOM_WLAN_SDK          := true
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+BOARD_WLAN_DEVICE                := qcwcn
+WPA_SUPPLICANT_USE_HIDL          := true
 
 # Wifi loader
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Charger
-WITH_LINEAGE_CHARGER := true
+WITH_LINEAGE_CHARGER := false
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
@@ -151,6 +159,9 @@ BOARD_PROVIDES_LIBRIL := true
 
 # RIL.java overwrite
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
+
+#Hidl
+DEVICE_MANIFEST_FILE := device/samsung/gtaxllte/manifest.xml
 
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
@@ -180,7 +191,7 @@ endif
 BOARD_SECCOMP_POLICY += $(LOCAL_PATH)/seccomp
 
 # SELinux
-BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
 
 # Inherit from the proprietary version
 -include vendor/samsung/gtaxllte/BoardConfigVendor.mk

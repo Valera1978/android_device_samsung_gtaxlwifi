@@ -1,2 +1,3 @@
 allow nfc efs_file:dir search;
 allow nfc sec_efs_file:dir search;
+allow nfc sysfs:dir { getattr open read };

@@ -2,6 +2,9 @@
 af.fast_track_multiplier=1
 audio_hal.force_voice_config=wide
 
+#Treble
+persist.media.treble_omx=false
+
 # Bluetooth
 ro.bt.bdaddr_path="/efs/bluetooth/bt_addr"
 
@@ -43,17 +46,23 @@ ro.hwui.text_large_cache_width=2048
 ro.hwui.text_large_cache_height=1024
 
 # Radio
-persist.radio.sib16_support=0
+persist.radio.add_power_save=1
+persist.radio.apm_sim_not_pwdn=1
 rild.libpath=/system/lib/libsec-ril.so
 ro.telephony.default_network=9
-ro.telephony.ril_class=SlteRIL
 ro.ril.gprsclass=10
 ro.ril.hsxpa=1
+persist.data.netmgrd.qos.enable=false
+ro.use_data_netmgrd=false
 ro.ril.telephony.mqanelements=6
-
-# read DS/SS property
-import /efs/factory.prop
-ro.multisim.simslotcount=1
+telephony.lteOnGsmDevice=1
+telephony.lteOnCdmaDevice=0
+ro.telephony.get_imsi_from_sim=true
+ro.ril.force_eri_from_xml=true
+net.tethering.noprovisioning=true 
 
 # Wifi
 wifi.interface=wlan0
+
+# sdcardfs
+ro.sys.sdcardfs=false

@@ -78,21 +78,41 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-PRODUCT_PACKAGES += \
-    gralloc.exynos5
+#PRODUCT_PACKAGES += \
+#    gralloc.exynos5
 
 PRODUCT_PACKAGES += \
     libion \
-    libfimg
+    libfimg \
+    libhwc2on1adapter \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl
+
+# RenderScript HAL
+#PRODUCT_PACKAGES += \
+#    android.hardware.renderscript@1.0-impl
+
+# DRM
+#PRODUCT_PACKAGES += \
+#    android.hardware.drm@1.0-impl
 
 # hardware/samsung/AdvancedDisplay (MDNIE)
+#PRODUCT_PACKAGES += \
+#    AdvancedDisplay
+
 PRODUCT_PACKAGES += \
-    AdvancedDisplay
+    camera.device@3.2-impl \
+    camera.device@1.0-impl \
+    android.hardware.camera.provider@2.4-impl
 
 # Radio
 PRODUCT_PACKAGES += \
     libxml2 \
-    libprotobuf-cpp-full
+    libprotobuf-cpp-full \
+    android.hardware.radio@1.0 \
+    android.hardware.radio.deprecated@1.0 \
 
 PRODUCT_PACKAGES += \
     libsecril-client \
@@ -108,19 +128,35 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
+# Memory
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl 
+
 # WiFi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 PRODUCT_PACKAGES += \
-    hostapd \
+    p2p_supplicant_overlay.conf \
+    wpa_supplicant_overlay.conf \
+    hostapd.accept \
+    hostapd.deny \
+    hostapd_default.conf \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
-    wifiloader \
+    libnetcmdiface \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    android.hardware.wifi@1.0-service \
+    wificond \
+    wifiloader
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    libbt-vendor
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -134,7 +170,9 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libtinycompress
+    libtinycompress \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -150,10 +188,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.cfg:system/etc/gps.cfg \
     $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
 
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl
+
 # Keys
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:/system/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:/system/usr/keylayout/sec_touchscreen.kl
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -163,11 +208,18 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.universal7870
+    power.universal7870 \
+    android.hardware.power@1.0-impl
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.universal7870
+    lights.universal7870 \
+    android.hardware.light@2.0-impl
+
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.vibrator@1.0-impl
 
 # Root
 PRODUCT_PACKAGES += \
