@@ -19,12 +19,12 @@ Copyright (C) 2017 Valera Chigir <valera1978@tut.by>
 
   - Make a workspace
 
-mkdir cm14
-cd cm14
+mkdir cm15
+cd cm15
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b cm-14.1
+repo init -u git://github.com/LineageOS/android.git -b lineage-15.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -32,7 +32,7 @@ repo init -u git://github.com/LineageOS/android.git -b cm-14.1
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <project name="Valera1978/android_device_samsung_gtaxllte" path="device/samsung/gtaxllte" remote="github" />
-  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="cm-14.1_perm" />
+  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="lineage-15.0_perm" />
   <project name="Valera1978/android_vendor_samsung_gtaxllte" path="vendor/samsung/gtaxllte" remote="github" />
   <project name="Valera1978/android_hardware_samsung_slsi-cm_exynos" path="hardware/samsung_slsi-cm/exynos" remote="github" />
   <project name="Valera1978/android_hardware_samsung_slsi-cm_exynos7870" path="hardware/samsung_slsi-cm/exynos7870" remote="github" />
@@ -59,6 +59,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - Build cm14
+  - Build cm15
 
 brunch gtaxllte
