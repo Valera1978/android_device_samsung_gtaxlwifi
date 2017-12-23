@@ -12,7 +12,7 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
-#    export LD_SHIM_LIBS
+    export LD_SHIM_LIBS "/system/bin/gpsd|libdmitry-shim.so:/system/lib/libexynoscamera.so|/system/vendor/lib/libcamhelpr.so"
 
     start watchdogd
 
@@ -73,7 +73,6 @@ on post-fs-data
     chown audio audio /dev/i2c-20
 
 on boot
-
     # override init.rc to keep plenty of large order chunks around
     # to improve allocation times
 #    write /proc/sys/vm/min_free_kbytes 32768
