@@ -103,6 +103,7 @@ PRODUCT_PACKAGES += \
 #    AdvancedDisplay
 
 PRODUCT_PACKAGES += \
+    libcamhelpr \
     camera.device@3.2-impl \
     camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl
@@ -138,20 +139,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 PRODUCT_PACKAGES += \
-    p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf \
-    hostapd.accept \
-    hostapd.deny \
-    hostapd_default.conf \
+    hostapd \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
-    libnetcmdiface \
     wpa_supplicant \
     wpa_supplicant.conf \
-    android.hardware.wifi@1.0-service \
     wificond \
-    wifiloader
+    android.hardware.wifi@1.0-service
 
 # Bluetooth
 PRODUCT_PACKAGES += \
