@@ -12,7 +12,7 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS "/system/bin/gpsd|libdmitry-shim.so:/system/lib/libexynoscamera.so|/system/vendor/lib/libcamhelpr.so"
+    export LD_SHIM_LIBS "/system/lib/libsec-ril.so|/system/vendor/lib/libprotobuf-cpp-shim.so:/system/lib/libexynoscamera.so|/system/vendor/lib/libcamhelpr.so"
 
     start watchdogd
 
@@ -770,11 +770,11 @@ service argos-daemon /system/bin/argosd
     group system radio
 	
 # GPS
-service gpsd /system/bin/gpsd
-    class main
-    user gps
-    group system inet wakelock
-    ioprio be 0
+#service gpsd /system/bin/gpsd
+#    class main
+#    user gps
+#    group system inet wakelock
+#    ioprio be 0
 
 # LPM
 service lpm /system/bin/lpm
