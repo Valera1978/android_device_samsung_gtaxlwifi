@@ -157,9 +157,6 @@ BOARD_VENDOR := samsung
 BOARD_MODEM_TYPE := ss333
 BOARD_PROVIDES_LIBRIL := true
 
-# RIL.java overwrite
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
-
 #Hidl
 DEVICE_MANIFEST_FILE := device/samsung/gtaxllte/manifest.xml
 
@@ -191,7 +188,7 @@ endif
 BOARD_SECCOMP_POLICY += $(LOCAL_PATH)/seccomp
 
 # SELinux
-#BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
 
 # Inherit from the proprietary version
 -include vendor/samsung/gtaxllte/BoardConfigVendor.mk
