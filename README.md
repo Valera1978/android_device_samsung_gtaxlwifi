@@ -24,22 +24,24 @@ cd cm15
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b lineage-15.0
+repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="Valera1978/android_device_samsung_gtaxllte" path="device/samsung/gtaxllte" remote="github" />
+
+  <project name="Valera1978/android_device_samsung_gtaxllte" path="device/samsung/gtaxllte" remote="github" revision="lineage-15.1" />
   <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="lineage-15.0_perm" />
-  <project name="Valera1978/android_vendor_samsung_gtaxllte" path="vendor/samsung/gtaxllte" remote="github" />
-  <project name="Valera1978/android_hardware_samsung_slsi-cm_exynos" path="hardware/samsung_slsi-cm/exynos" remote="github" />
-  <project name="Valera1978/android_hardware_samsung_slsi-cm_exynos7870" path="hardware/samsung_slsi-cm/exynos7870" remote="github" />
-  <project name="LineageOS/android_external_stlport" path="external/stlport" remote="github" />
-  <project name="LineageOS/android_hardware_samsung" path="hardware/samsung" remote="github" />
-  <project name="LineageOS/android_hardware_samsung_slsi-cm_exynos5" path="hardware/samsung_slsi-cm/exynos5" remote="github" />
-  <project name="LineageOS/android_hardware_samsung_slsi-cm_openmax" path="hardware/samsung_slsi-cm/openmax" remote="github" />
+  <project name="Valera1978/android_vendor_samsung_gtaxllte" path="vendor/samsung/gtaxllte" remote="github" revision="lineage-15.1" />
+
+  <project name="TeamNexus/android_hardware_samsung_slsi-cm_exynos7870" path="hardware/samsung_slsi-cm/exynos7870" remote="github" revision="nx-8.0" />
+  <project name="ivanmeler/android_hardware_samsung_slsi-cm_exynos" path="hardware/samsung_slsi-cm/exynos" remote="github" revision="lineage-15.0" />
+  <project name="ivanmeler/android_hardware_samsung_slsi-cm_exynos5" path="hardware/samsung_slsi-cm/exynos5" remote="github" revision="lineage-15.1" />
+  <project name="ivanmeler/android_hardware_samsung_slsi-cm_openmax" path="hardware/samsung_slsi-cm/openmax" remote="github" revision="lineage-15.1" />
+  <project name="ivanmeler/android_hardware_samsung" path="hardware/samsung" remote="github" revision="lineage-15.1" />
+
 </manifest>
 ```
 
