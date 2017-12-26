@@ -91,7 +91,7 @@ TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Samsung Hardware
-#BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/lineagehw
+BOARD_HARDWARE_CLASS += device/samsung/gtaxllte/lineagehw
 BOARD_HARDWARE_CLASS += hardware/samsung/lineagehw
 
 # Samsung Camera
