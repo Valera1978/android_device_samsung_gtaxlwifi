@@ -1,9 +1,13 @@
 # Wi-Fi init file
 
 on post-fs-data
+
+    #Load Wifi Driver
+    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko
+    setprop wlan.driver.status ok
+
     #Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
-
 
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi system
@@ -64,10 +68,6 @@ on post-fs-data
 
 on boot
     setprop wifi.interface wlan0
-
-#Load Wifi Driver
-    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko
-    setprop wlan.driver.status ok
 
     # Pcie WiFi T-put setting
     write /sys/class/net/wlan0/queues/rx-0/rps_cpus 00
