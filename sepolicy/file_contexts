@@ -9,9 +9,6 @@
 /dev/bcm2079x                u:object_r:nfc_device:s0
 /dev/sec-nfc                 u:object_r:nfc_device:s0
 
-/dev/ttySAC3                 u:object_r:bluetooth_device:s0
-/dev/ttyHS0                  u:object_r:ttyHS0_device:s0
-
 /dev/batch_io                u:object_r:batch_io_device:s0
 
 /dev/bbd_control             u:object_r:bbd_device:s0
@@ -37,7 +34,9 @@
 /dev/mipi-lli/lli_control    u:object_r:mif_device:s0
 
 /dev/ttyBCM[0-9]*            u:object_r:bbd_device:s0
-/dev/ttySAC[0-9]*            u:object_r:uart_device:s0
+/dev/ttySAC[0-9]*            u:object_r:bluetooth_device:s0
+#/dev/ttySAC0                 u:object_r:hci_attach_dev:s0
+
 
 /dev/block/mmcblk0p[0-9]*    u:object_r:emmcblk_device:s0
 
@@ -74,7 +73,7 @@
 
 /data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
 
-/system/bin/wcnss_filter     u:object_r:start_hci_filter_exec:s0
+/system/bin/wcnss_filter     u:object_r:wcnss_filter_exec:s0
 
 # biometrics
 /data/biometrics(/.*)?	     u:object_r:biometrics_data_file:s0

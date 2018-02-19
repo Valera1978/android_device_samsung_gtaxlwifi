@@ -1,0 +1,37 @@
+#============= init ==============
+#allow init device:chr_file { ioctl open read write };
+allow init dnsproxyd_socket:sock_file write;
+allow init netd:unix_stream_socket connectto;
+allow init self:tcp_socket create;
+#allow init shell_exec:file execute_no_trans;
+
+#============= rild ==============
+#allow rild device:chr_file { open read };
+allow rild init:dir search;
+allow rild init:file { getattr open read };
+
+#============= toolbox ==============
+#allow toolbox system_data_file:file { read write };
+
+#============= wcnss_filter ==============
+allow wcnss_filter bluetooth_device:chr_file { ioctl open read write };
+allow wcnss_filter init:unix_stream_socket connectto;
+allow wcnss_filter property_socket:sock_file write;
+allow wcnss_filter wc_transport_prop:file { getattr open read };
+
+#============= init ==============
+allow init fwmarkd_socket:sock_file write;
+
+#============= wcnss_filter ==============
+allow wcnss_filter wc_transport_prop:property_service set;
+
+#============= audioserver ==============
+allow audioserver init:unix_stream_socket connectto;
+allow audioserver property_socket:sock_file write;
+
+#============= cbd ==============
+allow cbd efs_file:file { read open };
+
+#============= ueventd ==============
+allow ueventd camera_device:dir relabelto;
+allow ueventd camera_device:lnk_file relabelto;

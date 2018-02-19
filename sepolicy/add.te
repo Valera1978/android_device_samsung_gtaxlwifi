@@ -1,0 +1,43 @@
+#============= init ==============
+allow init rild:unix_stream_socket connectto;
+#allow init shell_exec:file execute_no_trans;
+
+#============= bluetooth ==============
+allow bluetooth system_data_file:file open;
+allow bluetooth start_hci_filter:unix_stream_socket connectto;
+
+#============= start_hci_filter ==============
+allow start_hci_filter uart_device:chr_file { ioctl open read write };
+
+#============= ueventd ==============
+allow ueventd camera_device:dir relabelto;
+allow ueventd camera_device:lnk_file relabelto;
+
+#============= rild ==============
+#allow rild device:chr_file { open read };
+allow rild self:capability { dac_override fowner fsetid };
+allow rild sysfs:dir write;
+allow rild system_data_file:file { getattr open read };
+
+#============= radio ==============
+allow radio system_app_data_file:dir getattr;
+
+#============= untrusted_app_25 ==============
+allow untrusted_app_25 lineage_weather_service:service_manager find;
+
+#============= shell ==============
+allow shell bin_nv_data_efs_file:file getattr;
+allow shell efs_file:file getattr;
+#allow shell hal_telephony_hwservice:hwservice_manager add;
+allow shell hidl_base_hwservice:hwservice_manager add;
+#allow shell rild_exec:file execute_no_trans;
+allow shell sec_efs_file:file getattr;
+allow shell self:udp_socket ioctl;
+
+#============= toolbox ==============
+allow toolbox init:fifo_file { getattr read write };
+allow toolbox init:unix_stream_socket { read write };
+#allow toolbox system_data_file:file { read write };
+
+#============= untrusted_app ==============
+#allow untrusted_app proc:file read;
