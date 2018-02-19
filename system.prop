@@ -49,14 +49,12 @@ ro.hwui.text_large_cache_height=1024
 persist.radio.sib16_support=0
 rild.libpath=/system/lib/libsec-ril.so
 ro.telephony.default_network=9
-ro.telephony.ril_class=SlteRIL
 ro.ril.gprsclass=10
 ro.ril.hsxpa=1
 ro.ril.telephony.mqanelements=6
 
-ro.telephony.get_imsi_from_sim=true
-ro.ril.force_eri_from_xml=true
-net.tethering.noprovisioning=true
+# read DS/SS property
+import /efs/factory.prop
 
 # Wifi
 wifi.interface=wlan0
