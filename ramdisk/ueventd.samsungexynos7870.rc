@@ -60,9 +60,9 @@
 
 # mfc
 /dev/video6               0660   mediacodec      mediadrm
-/dev/video7               0660   media      mediadrm
-/dev/video8               0660   media      mediadrm
-/dev/video9               0660   media      mediadrm
+/dev/video7               0660   mediacodec      mediadrm
+/dev/video8               0660   mediacodec      mediadrm
+/dev/video9               0660   mediacodec      mediadrm
 
 # camera
 /dev/video100             0660   cameraserver      cameraserver
@@ -87,11 +87,18 @@
 /dev/video151             0660   cameraserver      cameraserver
 /dev/video152             0660   cameraserver      cameraserver
 /dev/video160             0660   cameraserver      cameraserver
+/dev/video161             0660   cameraserver      cameraserver
+/dev/video170             0660   cameraserver      cameraserver
+/dev/video171             0660   cameraserver      cameraserver
+/dev/video172             0660   cameraserver      cameraserver
+/dev/video173             0660   cameraserver      cameraserver
+/dev/video174             0660   cameraserver      cameraserver
+/dev/video180             0660   cameraserver      cameraserver
 /dev/media2               0660   media      media
 
 # hevc
-/dev/video10              0660   media      media
-/dev/video11              0660   media      media
+/dev/video10              0660   mediacodec mediadrm
+/dev/video11              0660   mediacodec mediadrm
 
 # jpeg
 /dev/video12              0660   cameraserver      media
@@ -100,11 +107,18 @@
 /dev/seiren               0660   system     audio
 
 # MobiCore
-#/dev/mobicore             0600   drmrpc     drmrpc
-#/dev/mobicore-user        0660   drm        drmrpc
+/dev/mobicore             0600   drmrpc     drmrpc
+/dev/mobicore-user        0660   drm        drmrpc
 
 # Secure MEM driver
-#/dev/s5p-smem             0660   drm        drmrpc
+/dev/s5p-smem             0660   drm        drmrpc
+
+# MobiCore
+#/dev/mobicore             0700   system     system
+#/dev/mobicore-user        0666   radio     system
+
+# Secure MEM driver
+#/dev/s5p-smem             0660   system     system
 
 # cbd modem block
 /dev/block/mmcblk0p5     0400  radio   system
