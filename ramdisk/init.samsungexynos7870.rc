@@ -12,8 +12,6 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS /system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so:/system/lib/hw/camera.universal7870.so|/vendor/lib/libshim_camera.so
-
     start watchdogd
 
     mkdir /preload 0771 system system
