@@ -2,9 +2,6 @@
 af.fast_track_multiplier=1
 audio_hal.force_voice_config=wide
 
-#Treble
-persist.media.treble_omx=false
-
 # Bluetooth
 ro.bt.bdaddr_path="/efs/bluetooth/bt_addr"
 
@@ -12,14 +9,12 @@ ro.bt.bdaddr_path="/efs/bluetooth/bt_addr"
 qcom.bluetooth.soc=rome
 
 # Dalvik/Art
-dalvik.vm.dex2oat-filter=speed
 dalvik.vm.heapstartsize=8m
 dalvik.vm.heapgrowthlimit=192m
 dalvik.vm.heapsize=512m
 dalvik.vm.heaptargetutilization=0.75
 dalvik.vm.heapminfree=512k
 dalvik.vm.heapmaxfree=8m
-dalvik.vm.image-dex2oat-filter=speed
 dalvik.vm.isa.arm64.variant=generic
 dalvik.vm.isa.arm64.features=default
 dalvik.vm.isa.arm.variant=cortex-a15
@@ -28,12 +23,15 @@ dalvik.vm.isa.arm.features=default
 # Graphics
 ro.opengles.version=196610
 ro.sf.lcd_density=240
-debug.hwc.force_gpu=1
 lockscreen.rot_override=true
 
+# HWC
+debug.hwc.otf=1
+debug.hwc.winupdate=1
+
 # Hwui
-ro.hwui.texture_cache_size=54
-ro.hwui.layer_cache_size=36
+ro.hwui.texture_cache_size=50
+ro.hwui.layer_cache_size=34
 ro.hwui.path_cache_size=10
 ro.hwui.texture_cache_flushrate=0.4
 ro.hwui.shape_cache_size=4
@@ -45,19 +43,31 @@ ro.hwui.text_small_cache_height=1024
 ro.hwui.text_large_cache_width=2048
 ro.hwui.text_large_cache_height=1024
 
+# Boot directly from charger mode
+ro.enable_boot_charger_mode=1
+
+# Allows healthd to boot directly from charger mode rather than initiating a reboot.
+ro.enable_boot_charger_mode=1
+
 # Radio
 persist.radio.sib16_support=0
 rild.libpath=/system/lib/libsec-ril.so
-ro.telephony.default_network=9
-ro.ril.gprsclass=10
 ro.ril.hsxpa=1
+ro.ril.gprsclass=10
 ro.ril.telephony.mqanelements=6
+ro.telephony.default_network=9
+ro.telephony.get_imsi_from_sim=true
+ro.ril.force_eri_from_xml=true
 
 # read DS/SS property
 import /efs/factory.prop
 
-# Wifi
-wifi.interface=wlan0
+#Treble
+persist.media.treble_omx=false
 
 # sdcardfs
 ro.sys.sdcardfs=false
+
+# Wifi
+wifi.interface=wlan0
+net.tethering.noprovisioning=true
