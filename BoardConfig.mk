@@ -81,7 +81,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
-#BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_HAS_QCA_BT_ROME := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 QCOM_BT_USE_BTNV := true
@@ -102,7 +101,7 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Gralloc
-#TARGET_USES_GRALLOC1_ADAPTER := true
+TARGET_USES_GRALLOC1_ADAPTER := true
 
 # ION
 TARGET_USES_ION := true
@@ -201,6 +200,39 @@ endif
 
 # Seccomp filters
 BOARD_SECCOMP_POLICY += $(LOCAL_PATH)/seccomp
+
+zero_shims_omx := \
+    /system/lib/omx/libOMX.Exynos.AVC.Decoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.AVC.Encoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.HEVC.Decoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.HEVC.Encoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.MPEG4.Decoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.MPEG4.Encoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.VP8.Decoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.VP8.Encoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.VP9.Decoder.so|/system/lib/SHIM_TARGET.so \
+    /system/lib/omx/libOMX.Exynos.WMV.Decoder.so|/system/lib/SHIM_TARGET.so \
+
+# Shims: libstagefright
+TARGET_LD_SHIM_LIBS += $(subst SHIM_TARGET,libstagefright_shim,$(zero_shims_omx))
+
+# Shims: libui
+TARGET_LD_SHIM_LIBS += $(subst SHIM_TARGET,libui_shim,$(zero_shims_omx))
+
+# Shims: camera
+TARGET_LD_SHIM_LIBS += \
+    /system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so \
+    /system/lib/hw/camera.universal7870.so|/vendor/lib/libshim_camera.so
+
+TARGET_LD_SHIM_LIBS += \
+    /system/lib/libexynoscamera.so|/system/lib/libstagefright_shim.so \
+    /system/lib/hw/camera.universal7870.so|/system/lib/libstagefright_shim.so
+
+#TARGET_LD_SHIM_LIBS += /system/lib/libstagefright.so|/system/lib/libstagefright_shim.so
+
+#TARGET_LD_SHIM_LIBS += \
+#    /system/lib/libexynoscamera.so|/system/lib/libui_shim.so \
+#    /system/lib/hw/camera.universal7870.so|/system/lib/libui_shim.so
 
 # SELinux
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
