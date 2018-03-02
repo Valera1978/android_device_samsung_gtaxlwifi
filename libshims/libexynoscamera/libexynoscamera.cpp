@@ -20,12 +20,7 @@ namespace android
 {
 	
 const char CameraParameters::PIXEL_FORMAT_YUV420SP_NV21[] = "nv21";
-const char CameraParameters::EFFECT_CARTOONIZE[] = "cartoonize";
-const char CameraParameters::EFFECT_POINT_RED_YELLOW[] = "point-red-yellow";
-const char CameraParameters::EFFECT_POINT_GREEN[] = "point-green";
 const char CameraParameters::EFFECT_POINT_BLUE[] = "point-blue";
-const char CameraParameters::EFFECT_VINTAGE_COLD[] = "vintage-cold";
-const char CameraParameters::EFFECT_VINTAGE_WARM[] = "vintage-warm";
 const char CameraParameters::EFFECT_WASHED[] = "washed";
 const char CameraParameters::ISO_AUTO[] = "auto";
 const char CameraParameters::ISO_NIGHT[] = "night";
@@ -39,7 +34,6 @@ const char CameraParameters::ISO_200[] = "200";
 const char CameraParameters::ISO_100[] = "100";
 const char CameraParameters::ISO_80[] = "80";
 const char CameraParameters::ISO_50[] = "50";
-const char CameraParameters::KEY_SUPPORTED_METERING_MODE[] = "metering-values";
 const char CameraParameters::METERING_CENTER[] = "center";
 const char CameraParameters::METERING_MATRIX[] = "matrix";
 const char CameraParameters::METERING_SPOT[] = "spot";
