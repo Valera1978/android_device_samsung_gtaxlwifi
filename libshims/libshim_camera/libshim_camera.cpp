@@ -16,18 +16,19 @@
 
 
 #include <string>
+#include <cutils/native_handle.h>
 
-// GraphicBuffer(uint32_t inWidth, uint32_t inHeight, PixelFormat inFormat,
-//               uint32_t inUsage, std::string requestorName = "<Unknown>");
-extern "C" void _ZN7android13GraphicBufferC1EjjijNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE(
-    uint32_t inWidth, uint32_t inHeight, int inFormat, uint32_t inUsage,
-    std::string requestorName);
+//    GraphicBuffer(uint32_t inWidth, uint32_t inHeight, PixelFormat inFormat,
+//            uint32_t inLayerCount, uint32_t inUsage, uint32_t inStride,
+//            native_handle_t* inHandle, bool keepOwnership);
 
-extern "C" void _ZN7android13GraphicBufferC1Ejjij(
-    uint32_t inWidth, uint32_t inHeight, int inFormat, uint32_t inUsage) {
-  std::string requestorName = "<Unknown>";
-  _ZN7android13GraphicBufferC1EjjijNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE(
-      inWidth, inHeight, inFormat, inUsage, requestorName);
+extern "C" void _ZN7android13GraphicBufferC1EjjijjjP13native_handleb(uint32_t inWidth, uint32_t inHeight, int inFormat,
+            uint32_t inLayerCount, uint32_t inUsage, uint32_t inStride,
+            native_handle_t* inHandle, bool keepOwnership);
+
+extern "C" void _ZN7android13GraphicBufferC1EjjijjP13native_handleb(uint32_t inWidth, uint32_t inHeight, int inFormat,
+            uint32_t inLayerCount, uint32_t inUsage,
+            native_handle_t* inHandle, bool keepOwnership)
+{
+    _ZN7android13GraphicBufferC1EjjijjjP13native_handleb(inWidth, inHeight, inFormat, inLayerCount, inUsage, 0, inHandle, keepOwnership);
 }
-
-extern "C" void _ZN7android13GraphicBufferC1EjjijjP13native_handleb() {}
