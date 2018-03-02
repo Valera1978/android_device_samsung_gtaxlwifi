@@ -92,8 +92,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libExynosOMX_shim \
-    libstagefright_shim \
     libui_shim \
+
+#    libstagefright_shim \
 
 # Overriden service definition
 PRODUCT_COPY_FILES += \
@@ -116,7 +117,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libshim_camera \
-    libexynoscamera_shim \
+    libexynoscamera_shim
+
+PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl
