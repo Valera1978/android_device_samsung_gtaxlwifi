@@ -6,9 +6,6 @@ on post-fs-data
     insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko
     setprop wlan.driver.status ok
 
-    #Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
-
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi system
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
@@ -122,10 +119,3 @@ on property:init.svc.macloader=stopped
     chown system root /data/.rev
     chmod 0664 /data/.rev
 # end of WiFi MFG (TestMode)
-
-service hostapd /vendor/bin/hostapd -dddd /data/hostapd/hostapd.conf
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
