@@ -16,6 +16,9 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+
 LOCAL_PATH := device/samsung/gtaxllte
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -40,6 +43,7 @@ PRODUCT_PACKAGES += \
     fstab.samsungexynos7870 \
     init.baseband.rc \
     init.rilchip.rc \
+    init.power.rc \
     init.samsung.rc \
     init.samsungexynos7870.rc \
     init.samsungexynos7870.usb.rc \
@@ -100,7 +104,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init/android.hardware.media.omx@1.0-service.rc:system/vendor/etc/init/android.hardware.media.omx@1.0-service.rc
 
+# HIDL
 PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
+
+PRODUCT_PACKAGES += \
+    memtrack.exynos5 \
     hwcomposer.exynos5
 
 # RenderScript HAL
@@ -108,21 +118,21 @@ PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
 # DRM
-#PRODUCT_PACKAGES += \
-#    android.hardware.drm@1.0-impl
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
 
 # hardware/samsung/AdvancedDisplay (MDNIE)
-#PRODUCT_PACKAGES += \
-#    AdvancedDisplay
+PRODUCT_PACKAGES += \
+    AdvancedDisplay
+
+# Camera
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl-legacy \
+    camera.device@1.0-impl-legacy
 
 PRODUCT_PACKAGES += \
-    libshim_camera \
-    libexynoscamera_shim
-
-PRODUCT_PACKAGES += \
-    camera.device@3.2-impl \
-    camera.device@1.0-impl \
-    android.hardware.camera.provider@2.4-impl
+    libexynoscamera_shim \
+    libcamera_client_shim
 
 PRODUCT_PACKAGES += \
     Snap
@@ -206,8 +216,8 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps/gps.cfg:system/etc/gps.cfg \
-    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/gps.cfg:system/vendor/etc/gnss/gps.cfg \
+    $(LOCAL_PATH)/configs/gps/gps_debug.conf:system/etc/gps_debug.conf
 
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
@@ -247,6 +257,11 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.vibrator@1.0-impl
 
+# ADB
+#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+#    persist.sys.usb.config=adb \
+#    ro.adb.secure=0
+
 # Root
 PRODUCT_PACKAGES += \
     su
@@ -254,7 +269,7 @@ PRODUCT_PACKAGES += \
 # Offmode charger
 PRODUCT_PACKAGES += \
     charger_res_images \
-    cm_charger_res_images
+    lineage_charger_res_images
 
 # call Samsung LSI board support package
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
