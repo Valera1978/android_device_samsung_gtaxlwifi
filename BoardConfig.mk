@@ -42,8 +42,10 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
 
+ENABLE_CPUSETS := true
+
 # Binder
-TARGET_USES_64_BIT_BINDER := false
+TARGET_USES_64_BIT_BINDER := true
 
 # Kernel
 TARGET_KERNEL_ARCH := arm64
@@ -160,7 +162,6 @@ WPA_SUPPLICANT_USE_HIDL          := true
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Charger
-WITH_LINEAGE_CHARGER := false
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
@@ -214,13 +215,10 @@ TARGET_LD_SHIM_LIBS := \
     /system/lib/omx/libOMX.Exynos.VP9.Decoder.so|/system/lib/libui_shim.so \
     /system/lib/omx/libOMX.Exynos.WMV.Decoder.so|/system/lib/libui_shim.so \
 
-# Shims: camera - missed parameters
+# Shims
 TARGET_LD_SHIM_LIBS += \
-    /system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so
-
-# Shims: camera - missed symbol _ZN7android13GraphicBufferC1EjjijjP13native_handleb
-TARGET_LD_SHIM_LIBS += \
-    /system/lib/hw/camera.universal7870.so|/vendor/lib/libshim_camera.so
+    /system/lib/libcamera_client.so|libcamera_client_shim.so \
+    /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
 # SELinux
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
