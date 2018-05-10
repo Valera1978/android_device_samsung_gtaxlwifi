@@ -16,11 +16,11 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    libexynoscamera.cpp
+    CameraParameters.cpp
 
 LOCAL_SHARED_LIBRARIES := liblog
 
-LOCAL_MODULE := libexynoscamera_shim
+LOCAL_MODULE := libcamera_client_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_PROPRIETARY_MODULE := true

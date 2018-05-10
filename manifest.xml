@@ -15,7 +15,7 @@
     <hal format="hidl">
         <name>android.hardware.camera.device</name>
         <transport arch="32">passthrough</transport>
-        <version>3.3</version>
+        <version>1.0</version>
         <interface>
             <name>ICameraDevice</name>
             <instance>legacy/0</instance>
