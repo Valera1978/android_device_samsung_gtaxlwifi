@@ -52,7 +52,11 @@ PRODUCT_PACKAGES += \
 
 # cpboot-daemon
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/cbd:root/sbin/cbd
+    $(LOCAL_PATH)/ramdisk/cbd:system/bin/cbd
+
+# sswap
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ramdisk/sswap:system/bin/sswap
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -82,9 +86,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-#PRODUCT_PACKAGES += \
-#    gralloc.exynos5
-
 PRODUCT_PACKAGES += \
     libion \
     libfimg \
@@ -110,12 +111,21 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0
 
 PRODUCT_PACKAGES += \
-    memtrack.exynos5 \
     hwcomposer.exynos5
+
+# Memory
+PRODUCT_PACKAGES += \
+    memtrack.exynos5 \
+    android.hardware.memtrack@1.0-impl 
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
+
+# seccomp_policy
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -142,7 +152,7 @@ PRODUCT_PACKAGES += \
     libxml2 \
     libprotobuf-cpp-full \
     android.hardware.radio@1.0 \
-    android.hardware.radio.deprecated@1.0 \
+    android.hardware.radio.deprecated@1.0
 
 PRODUCT_PACKAGES += \
     rild \
@@ -160,9 +170,11 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
-# Memory
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl 
+# WCNSS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/grippower.info:system/etc/firmware/wlan/grippower.info \
+    $(LOCAL_PATH)/configs/wifi/qcom_cfg.ini:system/etc/firmware/wlan/qcom_cfg.ini \
+    $(LOCAL_PATH)/configs/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/WCNSS_cfg.dat
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -211,7 +223,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml  \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:system/etc/media_profiles_V1_0.xml
 
 # GPS
@@ -258,9 +269,9 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl
 
 # ADB
-#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-#    persist.sys.usb.config=adb \
-#    ro.adb.secure=0
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=adb \
+    ro.adb.secure=0
 
 # Root
 PRODUCT_PACKAGES += \
