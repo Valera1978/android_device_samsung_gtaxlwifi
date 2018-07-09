@@ -29,20 +29,12 @@ public class DisplayColorCalibration {
 
     private static final String TAG = "DisplayColorCalibration";
 
-    private static final String RGB_FILE = "/sys/class/mdnie/mdnie/sensorRGB";
-
-    private static final boolean sUseGPUMode;
-
     private static final int MIN = 1;
     private static final int MAX = 255;
 
     private static final int[] sCurColors = new int[] { MAX, MAX, MAX };
 
     static {
-        // We can also support GPU transform using RenderEngine. This is not
-        // preferred though, as it has a high power cost.
-        sUseGPUMode = !FileUtils.isFileWritable(RGB_FILE) ||
-                SystemProperties.getBoolean("debug.livedisplay.force_gpu", false);
     }
 
     public static boolean isSupported() {
@@ -63,19 +55,10 @@ public class DisplayColorCalibration {
     }
 
     public static String getCurColors()  {
-        if (!sUseGPUMode) {
-            return FileUtils.readOneLine(RGB_FILE);
-        }
-
-        return String.format("%d %d %d", sCurColors[0],
-                sCurColors[1], sCurColors[2]);
+        return String.format("%d %d %d", sCurColors[0], sCurColors[1], sCurColors[2]);
     }
 
     public static boolean setColors(String colors) {
-        if (!sUseGPUMode) {
-            return FileUtils.writeLine(RGB_FILE, colors);
-        }
-
         float[] mat = toColorMatrix(colors);
 
         // set to null if identity
@@ -135,7 +118,7 @@ public class DisplayColorCalibration {
                 } else {
                     data.writeInt(0);
                 }
-                flinger.transact(1030, data, null, 0);
+                flinger.transact(1015, data, null, 0);
                 data.recycle();
             }
         } catch (RemoteException ex) {
