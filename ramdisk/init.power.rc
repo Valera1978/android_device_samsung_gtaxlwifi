@@ -70,6 +70,7 @@ on late-fs
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 80000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 50
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 858000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 80000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 1170000:85"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
@@ -80,6 +81,7 @@ on late-fs
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 80000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 50
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 858000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 80000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "75 1170000:85"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000
@@ -91,6 +93,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 85
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 858000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 1170000:85"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
@@ -101,6 +104,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 0
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 85
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 858000
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "75 1170000:85"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000

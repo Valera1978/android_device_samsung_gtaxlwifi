@@ -10,7 +10,6 @@ on early-init
     mkdir /efs 0771 radio system
     mkdir /cpefs 0771 radio system
     mount debugfs /sys/kernel/debug /sys/kernel/debug
-
 on init
     start watchdogd
 
@@ -22,16 +21,8 @@ on init
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
-    symlink /sdcard1 /storage/sdcard1
-    symlink /sdcard1 /mnt/extSdCard
-    symlink /sdcard1 /mnt/sdcard1
-    symlink /sdcard1 /external_sd
-    symlink /storage/usbdisk /mnt/usbdisk
 
     export EXTERNAL_STORAGE /sdcard
-    export SECONDARY_STORAGE /storage/extSdCard
-
     symlink /data/app /factory
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
     symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
@@ -40,16 +31,22 @@ on post-fs-data
 # Log data folder
 #   mkdir /data/log 0771 radio system
 
-#Private Mode
-    mkdir /mnt/shell/privatemode 0700 system system
-    mkdir /storage/Private 0000 system system
-    mkdir /data/privatemode 0770 system system
-    chown system system /data/privatemode
-    restorecon /data/privatemode
+# C-STATE
+    chown system system /sys/module/cpuidle/parameters/off
+    chmod 0660 /sys/module/cpuidle/parameters/off
+
+# CPU Idle
+    chown system system /sys/module/cpuidle_exynos64/parameters/enable_mask
+
+# Audio I2C node for TFA amp
+    chmod 0660 /dev/i2c-20
+    chown audio audio /dev/i2c-20
 
 # Permissions for gnss
     chmod 0660 /dev/gnss_ipc
     chown system system /dev/gnss_ipc
+
+# Directory for GPS
     mkdir /data/system 0771 system system
     chown system system /data/system
     mkdir /data/system/gps 0771 system system
@@ -59,16 +56,15 @@ on post-fs-data
     rm /data/system/gps/beidou_started
     rm /data/system/gps/smd_started
     rm /data/system/gps/sv_cno.info
-    
+
+
     setprop vold.post_fs_data_done 1
-    
+
 # /efs/factory.prop for Dual / Single SIM settings
     chown radio radio /efs/factory.prop
     chmod 0600 /efs/factory.prop
 
-# Audio I2C node for TFA amp
-    chmod 0660 /dev/i2c-20
-    chown audio audio /dev/i2c-20
+    restorecon /sys/kernel/debug/tracing/trace_marker
 
 on boot
     # override init.rc to keep plenty of large order chunks around
@@ -77,7 +73,7 @@ on boot
 #    write /proc/sys/vm/min_free_order_shift 1
 
 # SSWAP
-    write /proc/sys/vm/swappiness 160
+    write /proc/sys/vm/swappiness 130
 
 #   mount debugfs /sys/kernel/debug /sys/kernel/debug
     # Allow to access debugfs for system:system
@@ -96,6 +92,27 @@ on boot
 
     # sec_log
     chown system log /proc/sec_log
+
+    # EFS permissions
+    chown system radio /efs/nv_data.bin
+    chown system radio /efs/nv_data.bin.md5
+    chown system radio /cpefs/.nv_core.bak
+    chown system radio /efs/.nv_core.bak
+
+    # Permissions for NAD
+    symlink /dev/block/platform/13540000.dwmmc0/by-name/NAD_REFER /dev/block/NAD_REFER
+    chown system radio /sys/class/sec/sec_nad/nad_stat
+    chmod 0664 /sys/class/sec/sec_nad/nad_stat
+    chown system radio /sys/class/sec/sec_nad/nad_erase
+    chmod 0664 /sys/class/sec/sec_nad/nad_erase
+    chown system radio /sys/class/sec/sec_nad/nad_acat
+    chmod 0664 /sys/class/sec/sec_nad/nad_acat
+    chown system radio /sys/class/sec/sec_nad/nad_dram
+    chmod 0664 /sys/class/sec/sec_nad/nad_dram
+    chown system radio /sys/class/sec/sec_nad/nad_all
+    chmod 0664 /sys/class/sec/sec_nad/nad_all
+    chown system radio /dev/block/NAD_REFER
+    chmod 0664 /dev/block/NAD_REFER
 
     # 1-key hard reset
     chown system system /sys/power/reset_enabled
@@ -180,12 +197,25 @@ on boot
     chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
 
+    # RTC status
+    chown system system /sys/power/rtc_status
+    chmod 0444 /sys/power/rtc_status
+    chown system system /efs/FactoryApp/rtc_status
+    chmod 0664 /efs/FactoryApp/rtc_status
+
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
 
 # sem_daemon permission
     chown system system /efs/sec_efs/ssp_data
     chmod 0644 /efs/sec_efs/ssp_data
+
+#MST HW Support
+    setprop ro.mst.support 1
+
+#Secure OS migration
+    chown radio system /sys/devices/system/sec_os_ctrl/migrate_os
+    chmod 664 /sys/devices/system/sec_os_ctrl/migrate_os
 
 # permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
@@ -207,8 +237,6 @@ on boot
     chown system radio /sys/class/sensors/accelerometer_sensor/name
     chown system radio /sys/class/sensors/accelerometer_sensor/selftest
     chown system radio /sys/class/sensors/accelerometer_sensor/lowpassfilter
-    chown system system /efs/calibration_data
-    chmod 0666 /efs/calibration_data
 
 # Proximity_sensor
     chown system radio /sys/class/sensors/proximity_sensor/state
@@ -219,9 +247,12 @@ on boot
     chown system radio /sys/class/sensors/proximity_sensor/name
     chown system radio /sys/class/sensors/proximity_sensor/thresh_high
     chown system radio /sys/class/sensors/proximity_sensor/thresh_low
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_low
     chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
     chown system radio /sys/class/sensors/proximity_sensor/prox_offset_pass
     chown system radio /sys/class/sensors/proximity_sensor/prox_trim
+    chown system radio /sys/class/sensors/proximity_sensor/prox_probe
 
 # Light_sensor
     chown system radio /sys/class/sensors/light_sensor/lux
@@ -238,355 +269,59 @@ on boot
     chown system radio /sys/class/sensors/gyro_sensor/vendor
     chown system radio /sys/class/sensors/gyro_sensor/name
 
+# Barometer_sensor
+    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
+    chown system radio /sys/class/sensors/barometer_sensor/vendor
+    chown system radio /sys/class/sensors/barometer_sensor/name
+    chown system radio /sys/class/sensors/barometer_sensor/calibration
+    chown system radio /sys/class/sensors/barometer_sensor/temperature
+
 # Magnetic_sensor
     chown system radio /sys/class/sensors/magnetic_sensor/raw_data
     chown system radio /sys/class/sensors/magnetic_sensor/vendor
     chown system radio /sys/class/sensors/magnetic_sensor/name
-    chown system radio /sys/class/sensors/magnetic_sensor/selftest
-    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
 
-# Grip_sensor
-    chown system radio /sys/class/sensors/grip_sensor/name
-    chown system radio /sys/class/sensors/grip_sensor/vendor
-    chown system radio /sys/class/sensors/grip_sensor/raw_data
-    chown system radio /sys/class/sensors/grip_sensor/threshold
-    chown system radio /sys/class/sensors/grip_sensor/calibration
-    chown system radio /sys/class/sensors/grip_sensor/onoff
-    chown system radio /sys/class/sensors/grip_sensor/reset
-    chown system radio /sys/class/sensors/grip_sensor/mode
-    chown system radio /sys/class/sensors/grip_sensor/gain
-    chown system radio /sys/class/sensors/grip_sensor/start
-    chown system radio /sys/class/sensors/grip_sensor/normal_threshold
-    chown system radio /sys/class/sensors/grip_sensor/gain_ch2
-    chown system radio /sys/class/sensors/grip_sensor/raw_data_ch2
-    chown system radio /sys/class/sensors/grip_sensor/diff_avg_ch2
-    chown system radio /sys/class/sensors/grip_sensor/normal_threshold_ch2
-    chown system radio /sys/class/sensors/grip_sensor/ch_state
-    chown system radio /sys/class/sensors/grip_sensor/body_threshold
-    chown system radio /sys/class/sensors/grip_sensor/freq
- 
-# Grip_sensor wifi
-    chown system radio /sys/class/sensors/grip_sensor_wifi/name
-    chown system radio /sys/class/sensors/grip_sensor_wifi/vendor
-    chown system radio /sys/class/sensors/grip_sensor_wifi/raw_data
-    chown system radio /sys/class/sensors/grip_sensor_wifi/threshold
-    chown system radio /sys/class/sensors/grip_sensor_wifi/calibration
-    chown system radio /sys/class/sensors/grip_sensor_wifi/onoff
-    chown system radio /sys/class/sensors/grip_sensor_wifi/reset
-    chown system radio /sys/class/sensors/grip_sensor_wifi/mode
-    chown system radio /sys/class/sensors/grip_sensor_wifi/gain
-    chown system radio /sys/class/sensors/grip_sensor_wifi/normal_threshold
-    chown system radio /sys/class/sensors/grip_sensor_wifi/freq
+# SensorHub
+    chown system radio /sys/class/sensors/ssp_sensor/enable
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_rev
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_name
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_test
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_reset
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_update
+    chown system radio /sys/class/sensors/ssp_sensor/mcu_sleep_test
+    chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/sensor_dump
 
-#device
-    chown system system /dev/iio:device0
-    chown system system /dev/iio:device1
-    chown system system /dev/iio:device2
-    chmod 660  /dev/iio:device0
-    chmod 660  /dev/iio:device1
-    chmod 660  /dev/iio:device2
+# Sensorhub IIO
+    chown system radio /sys/class/sensors/ssp_sensor/accel_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/rot_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/game_rot_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/step_det_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/gyro_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/uncalib_gyro_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/mag_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/uncal_mag_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/light_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/pressure_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/prox_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/sig_motion_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/step_cnt_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/uncal_gyro_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/interrupt_gyro_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/tilt_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/pickup_poll_delay
+    chown system radio /sys/class/sensors/ssp_sensor/ssp_flush
+    chown system radio /sys/class/sensors/ssp_sensor/int_gyro_enable
+    chown system radio /sys/class/sensors/ssp_sensor/sensor_state
+    chmod 0600 /dev/batch_io
+    chown system system /dev/batch_io
 
-# MPL IIO
-    chown system radio /sys/bus/iio/devices/iio:device1/accel_enable
-    chown system radio /sys/bus/iio/devices/iio:device1/accel_fifo_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/accel_matrix
-    chown system radio  /sys/bus/iio/devices/iio:device1/accel_rate
-    chown system radio  /sys/bus/iio/devices/iio:device1/batchmode_timeout
-    chown system radio  /sys/bus/iio/devices/iio:device1/batchmode_wake_fifo_full_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/buffer
-    chown system radio  /sys/bus/iio/devices/iio:device1/buffer/enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/buffer/length
-    chown system radio  /sys/bus/iio/devices/iio:device1/dev
-    chown system radio  /sys/bus/iio/devices/iio:device1/dmp_event_int_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/dmp_firmware
-    chown system radio  /sys/bus/iio/devices/iio:device1/dmp_int_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/dmp_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_accel_motion
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_pedometer
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_qshot_finish
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_qshot_start
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_shealth_int
-    chown system radio  /sys/bus/iio/devices/iio:device1/event_smd
-    chown system radio  /sys/bus/iio/devices/iio:device1/firmware_loaded
-    chown system radio  /sys/bus/iio/devices/iio:device1/flush_batch
-    chown system radio  /sys/bus/iio/devices/iio:device1/gyro_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/gyro_fifo_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/gyro_matrix
-    chown system radio  /sys/bus/iio/devices/iio:device1/gyro_rate
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_scale
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_self_test_scale
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_x_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_x_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_x_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_y_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_y_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_y_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_z_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_z_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_accel_z_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_scale
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_self_test_scale
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_x_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_x_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_x_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_y_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_y_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_y_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_z_calibbias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_z_dmp_bias
-    chown system radio  /sys/bus/iio/devices/iio:device1/in_anglvel_z_offset
-    chown system radio  /sys/bus/iio/devices/iio:device1/master_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/motion_lpa_freq
-    chown system radio  /sys/bus/iio/devices/iio:device1/motion_lpa_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/motion_lpa_threshold
-    chown system radio  /sys/bus/iio/devices/iio:device1/name
-    chown system radio  /sys/bus/iio/devices/iio:device1/ped_q_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/ped_q_rate
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_counter
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_int_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_int_thresh
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_peak_thresh
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_step_thresh
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_step_thresh_time
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_steps
-    chown system radio  /sys/bus/iio/devices/iio:device1/pedometer_time
-    chown system radio  /sys/bus/iio/devices/iio:device1/power
-    chown system radio  /sys/bus/iio/devices/iio:device1/power/autosuspend_delay_ms
-    chown system radio  /sys/bus/iio/devices/iio:device1/power/control
-    chown system radio  /sys/bus/iio/devices/iio:device1/power/runtime_active_time
-    chown system radio  /sys/bus/iio/devices/iio:device1/power/runtime_status
-    chown system radio  /sys/bus/iio/devices/iio:device1/power/runtime_suspended_time
-    chown system radio  /sys/bus/iio/devices/iio:device1/power_state
-    chown system radio  /sys/bus/iio/devices/iio:device1/qshot_finish_angle
-    chown system radio  /sys/bus/iio/devices/iio:device1/qshot_finish_int_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/qshot_start_angle
-    chown system radio  /sys/bus/iio/devices/iio:device1/qshot_start_int_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/reg_dump
-    chown system radio  /sys/bus/iio/devices/iio:device1/sampling_frequency
-    chown system radio  /sys/bus/iio/devices/iio:device1/sampling_frequency_available
-    chown system radio  /sys/bus/iio/devices/iio:device1/scan_elements
-    chown system radio  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_en
-    chown system radio  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_index
-    chown system radio  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_type
-    chown system radio  /sys/bus/iio/devices/iio:device1/secondary_name
-    chown system radio  /sys/bus/iio/devices/iio:device1/self_test
-    chown system radio  /sys/bus/iio/devices/iio:device1/self_test_samples
-    chown system radio  /sys/bus/iio/devices/iio:device1/self_test_threshold
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_cadence
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_cadence_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_flush_cadence
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_freq_threshold
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_instant_cadence
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_int_period
-    chown system radio  /sys/bus/iio/devices/iio:device1/shealth_timer
-    chown system radio  /sys/bus/iio/devices/iio:device1/six_axes_q_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/six_axes_q_rate
-    chown system radio  /sys/bus/iio/devices/iio:device1/six_axes_q_value
-    chown system radio  /sys/bus/iio/devices/iio:device1/smd_delay_threshold
-    chown system radio  /sys/bus/iio/devices/iio:device1/smd_delay_threshold2
-    chown system radio  /sys/bus/iio/devices/iio:device1/smd_enable
-    chown system radio  /sys/bus/iio/devices/iio:device1/smd_threshold
-    chown system radio  /sys/bus/iio/devices/iio:device1/step_detector_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/step_indicator_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/subsystem
-    chown system radio  /sys/bus/iio/devices/iio:device1/temperature
-    chown system radio  /sys/bus/iio/devices/iio:device1/timestamp
-    chown system radio  /sys/bus/iio/devices/iio:device1/three_axes_q_on
-    chown system radio  /sys/bus/iio/devices/iio:device1/three_axes_q_rate
-    chown system radio  /sys/bus/iio/devices/iio:device1/trigger
-    chown system radio  /sys/bus/iio/devices/iio:device1/trigger/current_trigger
-    chown system radio  /sys/bus/iio/devices/iio:device1/uevent
-
-    chmod 660  /sys/bus/iio/devices/iio:device1/accel_matrix
-    chmod 660  /sys/bus/iio/devices/iio:device1/accel_rate
-    chmod 660  /sys/bus/iio/devices/iio:device1/batchmode_timeout
-    chmod 660  /sys/bus/iio/devices/iio:device1/batchmode_wake_fifo_full_on
-    chmod 700  /sys/bus/iio/devices/iio:device1/buffer
-    chmod 700  /sys/bus/iio/devices/iio:device1/buffer/enable
-    chmod 700  /sys/bus/iio/devices/iio:device1/buffer/length
-    chmod 660  /sys/bus/iio/devices/iio:device1/dev
-    chmod 660  /sys/bus/iio/devices/iio:device1/dmp_event_int_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/dmp_firmware
-    chmod 660  /sys/bus/iio/devices/iio:device1/dmp_int_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/dmp_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_accel_motion
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_pedometer
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_qshot_finish
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_qshot_start
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_shealth_int
-    chmod 660  /sys/bus/iio/devices/iio:device1/event_smd
-    chmod 660  /sys/bus/iio/devices/iio:device1/firmware_loaded
-    chmod 660  /sys/bus/iio/devices/iio:device1/flush_batch
-    chmod 660  /sys/bus/iio/devices/iio:device1/gyro_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/gyro_fifo_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/gyro_matrix
-    chmod 660  /sys/bus/iio/devices/iio:device1/gyro_rate
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_scale
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_self_test_scale
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_x_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_x_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_x_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_y_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_y_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_y_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_z_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_z_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_accel_z_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_scale
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_self_test_scale
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_x_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_x_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_x_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_y_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_y_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_y_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_z_calibbias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_z_dmp_bias
-    chmod 660  /sys/bus/iio/devices/iio:device1/in_anglvel_z_offset
-    chmod 660  /sys/bus/iio/devices/iio:device1/master_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/motion_lpa_freq
-    chmod 660  /sys/bus/iio/devices/iio:device1/motion_lpa_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/motion_lpa_threshold
-    chmod 660  /sys/bus/iio/devices/iio:device1/name
-    chmod 660  /sys/bus/iio/devices/iio:device1/ped_q_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/ped_q_rate
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_counter
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_int_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_int_thresh
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_peak_thresh
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_step_thresh
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_step_thresh_time
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_steps
-    chmod 660  /sys/bus/iio/devices/iio:device1/pedometer_time
-    chmod 700  /sys/bus/iio/devices/iio:device1/power
-    chmod 700  /sys/bus/iio/devices/iio:device1/power/autosuspend_delay_ms
-    chmod 700  /sys/bus/iio/devices/iio:device1/power/control
-    chmod 700  /sys/bus/iio/devices/iio:device1/power/runtime_active_time
-    chmod 700  /sys/bus/iio/devices/iio:device1/power/runtime_status
-    chmod 700  /sys/bus/iio/devices/iio:device1/power/runtime_suspended_time
-    chmod 660  /sys/bus/iio/devices/iio:device1/power_state
-    chmod 660  /sys/bus/iio/devices/iio:device1/qshot_finish_angle
-    chmod 660  /sys/bus/iio/devices/iio:device1/qshot_finish_int_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/qshot_start_angle
-    chmod 660  /sys/bus/iio/devices/iio:device1/qshot_start_int_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/reg_dump
-    chmod 660  /sys/bus/iio/devices/iio:device1/sampling_frequency
-    chmod 660  /sys/bus/iio/devices/iio:device1/sampling_frequency_available
-    chmod 700  /sys/bus/iio/devices/iio:device1/scan_elements
-    chmod 700  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_en
-    chmod 700  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_index
-    chmod 700  /sys/bus/iio/devices/iio:device1/scan_elements/in_timestamp_type
-    chmod 660  /sys/bus/iio/devices/iio:device1/secondary_name
-    chmod 660  /sys/bus/iio/devices/iio:device1/self_test
-    chmod 660  /sys/bus/iio/devices/iio:device1/self_test_samples
-    chmod 660  /sys/bus/iio/devices/iio:device1/self_test_threshold
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_cadence
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_cadence_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_flush_cadence
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_freq_threshold
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_instant_cadence
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_int_period
-    chmod 660  /sys/bus/iio/devices/iio:device1/shealth_timer
-    chmod 660  /sys/bus/iio/devices/iio:device1/six_axes_q_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/six_axes_q_rate
-    chmod 660  /sys/bus/iio/devices/iio:device1/six_axes_q_value
-    chmod 660  /sys/bus/iio/devices/iio:device1/smd_delay_threshold
-    chmod 660  /sys/bus/iio/devices/iio:device1/smd_delay_threshold2
-    chmod 660  /sys/bus/iio/devices/iio:device1/smd_enable
-    chmod 660  /sys/bus/iio/devices/iio:device1/smd_threshold
-    chmod 660  /sys/bus/iio/devices/iio:device1/step_detector_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/step_indicator_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/subsystem
-    chmod 660  /sys/bus/iio/devices/iio:device1/temperature
-    chmod 660  /sys/bus/iio/devices/iio:device1/timestamp
-    chmod 660  /sys/bus/iio/devices/iio:device1/three_axes_q_on
-    chmod 660  /sys/bus/iio/devices/iio:device1/three_axes_q_rate
-    chmod 700  /sys/bus/iio/devices/iio:device1/trigger
-    chmod 700  /sys/bus/iio/devices/iio:device1/trigger/current_trigger
-    chmod 660  /sys/bus/iio/devices/iio:device1/uevent
-
-#Magnetic IIO
-    chown system radio	/sys/bus/iio/devices/iio:device2/buffer
-    chown system radio	/sys/bus/iio/devices/iio:device2/buffer/enable
-    chown system radio	/sys/bus/iio/devices/iio:device2/buffer/length
-    chown system radio	/sys/bus/iio/devices/iio:device2/dev
-    chown system radio	/sys/bus/iio/devices/iio:device2/hard_offset
-    chown system radio	/sys/bus/iio/devices/iio:device2/in_magn_scale
-    chown system radio	/sys/bus/iio/devices/iio:device2/in_magn_x_raw
-    chown system radio	/sys/bus/iio/devices/iio:device2/in_magn_y_raw
-    chown system radio	/sys/bus/iio/devices/iio:device2/in_magn_z_raw
-    chown system radio	/sys/bus/iio/devices/iio:device2/mag_average_sample
-    chown system radio	/sys/bus/iio/devices/iio:device2/name
-    chown system radio	/sys/bus/iio/devices/iio:device2/ouflow_thresh
-    chown system radio	/sys/bus/iio/devices/iio:device2/position
-    chown system radio	/sys/bus/iio/devices/iio:device2/power
-    chown system radio	/sys/bus/iio/devices/iio:device2/power/autosuspend_delay_ms
-    chown system radio	/sys/bus/iio/devices/iio:device2/power/control
-    chown system radio	/sys/bus/iio/devices/iio:device2/power/runtime_active_time
-    chown system radio	/sys/bus/iio/devices/iio:device2/power/runtime_status
-    chown system radio	/sys/bus/iio/devices/iio:device2/power/runtime_suspended_time
-    chown system radio	/sys/bus/iio/devices/iio:device2/sampling_frequency
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_en
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_index
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_type
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_en
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_index
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_type
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_en
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_index
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_type
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_en
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_index
-    chown system radio	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_type
-    chown system radio	/sys/bus/iio/devices/iio:device2/self_test
-    chown system radio	/sys/bus/iio/devices/iio:device2/self_test_noise
-    chown system radio	/sys/bus/iio/devices/iio:device2/static_matrix
-    chown system radio	/sys/bus/iio/devices/iio:device2/trigger
-    chown system radio	/sys/bus/iio/devices/iio:device2/trigger/current_trigger
-    chown system radio	/sys/class/sensors/sensor_dev/flush
-
-    chmod 760	/sys/bus/iio/devices/iio:device2/buffer
-    chmod 760	/sys/bus/iio/devices/iio:device2/buffer/enable
-    chmod 760	/sys/bus/iio/devices/iio:device2/buffer/length
-    chmod 760	/sys/bus/iio/devices/iio:device2/dev
-    chmod 760	/sys/bus/iio/devices/iio:device2/hard_offset
-    chmod 760	/sys/bus/iio/devices/iio:device2/in_magn_scale
-    chmod 760	/sys/bus/iio/devices/iio:device2/in_magn_x_raw
-    chmod 760	/sys/bus/iio/devices/iio:device2/in_magn_y_raw
-    chmod 760	/sys/bus/iio/devices/iio:device2/in_magn_z_raw
-    chmod 760	/sys/bus/iio/devices/iio:device2/mag_average_sample
-    chmod 760	/sys/bus/iio/devices/iio:device2/name
-    chmod 760	/sys/bus/iio/devices/iio:device2/ouflow_thresh
-    chmod 760	/sys/bus/iio/devices/iio:device2/position
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/autosuspend_delay_ms
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/control
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/runtime_active_time
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/runtime_status
-    chmod 760	/sys/bus/iio/devices/iio:device2/power/runtime_suspended_time
-    chmod 760	/sys/bus/iio/devices/iio:device2/sampling_frequency
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_en
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_index
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_x_type
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_en
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_index
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_y_type
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_en
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_index
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_magn_z_type
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_en
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_index
-    chmod 760	/sys/bus/iio/devices/iio:device2/scan_elements/in_timestamp_type
-    chmod 760	/sys/bus/iio/devices/iio:device2/self_test
-    chmod 760	/sys/bus/iio/devices/iio:device2/self_test_noise
-    chmod 760	/sys/bus/iio/devices/iio:device2/static_matrix
-    chmod 760	/sys/bus/iio/devices/iio:device2/trigger
-    chmod 760	/sys/bus/iio/devices/iio:device2/trigger/current_trigger
-    chmod 760	/sys/class/sensors/sensor_dev/flush
+ # MOBEAM
+    chown system radio /sys/class/sec/sec_barcode_emul/vendor
+    chown system radio /sys/class/sec/sec_barcode_emul/name
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
 
 #Meta event
     chown system radio /sys/class/sensors/sensor_dev/flush
@@ -628,6 +363,13 @@ on boot
 # Support AP/CP log dump
     chmod 0770 /system/bin/sced
 
+# Switch Device
+    chown system radio /sys/class/sec/switch/vbus_value
+
+# LPM mode for ccic
+    chown system radio /sys/class/sec/ccic/lpm_mode
+    chown system radio /sys/class/sec/ccic/ccic_control_option
+
 # IPSec for VOLTE
     chown root system /dev/socket
     chmod 0775 /dev/socket
@@ -636,18 +378,6 @@ on fs
     mount_all /fstab.samsungexynos7870
     setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
-
-    # For Absolute Persistence Partition
-    mkdir /persdata 0755 system system
-    mkdir /persdata/absolute 0750 system system
-
-    wait /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA
-    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA /persdata/absolute nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
-
-    chown system system /persdata
-    chmod 0755 /persdata
-    chown system system /persdata/absolute
-    chmod 0750 /persdata/absolute
 
 # Permissions for ION
     chmod 0660 /sys/class/ion_cma/ion_video_ext/isolated
@@ -663,21 +393,27 @@ on fs
     chown system system /sys/class/lcd/panel/temperature
     chown system radio /sys/class/lcd/panel/power_reduce
     chown system system /sys/class/lcd/panel/lux
-    chown system media_rw /sys/class/lcd/panel/adaptive_control
-
-# Permissions for input_booster
-    chown system radio /sys/class/input_booster/level
-    chown system radio /sys/class/input_booster/head
-    chown system radio /sys/class/input_booster/tail
-    chmod 0664 /sys/class/input_booster/level
-    chmod 0664 /sys/class/input_booster/head
-    chmod 0664 /sys/class/input_booster/tail
+    chown system system /sys/class/lcd/panel/adaptive_control
+    chown system system /sys/class/lcd/panel/alpm
+    chown system system /sys/class/lcd/panel/dpui
+    chown system system /sys/class/lcd/panel/dpui_dbg
+    chown system system /sys/devices/svc/OCTA/SVC_OCTA
 
 # Permissions for MDNIE
     chown system media_rw /sys/class/mdnie/mdnie/mode
     chown system media_rw /sys/class/mdnie/mdnie/scenario
     chown system system /sys/class/mdnie/mdnie/accessibility
     chown system system /sys/class/mdnie/mdnie/sensorRGB
+    chown system system /sys/class/mdnie/mdnie/mdnie_ldu
+    chown system system /sys/class/mdnie/mdnie/night_mode
+    chown system system /sys/class/mdnie/mdnie/whiteRGB
+
+    chown system system /sys/class/lcd/panel/hmt_on
+    chmod 0660 /sys/class/lcd/panel/hmt_on
+    chown system system /sys/class/lcd/panel/hmt_bright
+    chmod 0660 /sys/class/lcd/panel/hmt_bright
+    chown system system /sys/class/mdnie/mdnie/hmt_color_temperature
+    chmod 0660 /sys/class/mdnie/mdnie/hmt_color_temperature
 
 # For cpefs partition
     check_fs /dev/block/platform/13540000.dwmmc0/by-name/CPEFS ext4
@@ -699,9 +435,20 @@ on fs
     chmod 0660 /dev/p3
     chown system system /dev/p3
 
+# Permission for flashlight control for HAL3.3
+    chmod 0660 /sys/class/camera/flash/rear_torch_flash
+    chown media system /sys/class/camera/flash/rear_torch_flash
+    chmod 0660 /sys/class/camera/flash/front_torch_flash
+    chown media system /sys/class/camera/flash/front_torch_flash
 # Permissions for TouchScreen
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/input/enabled
+    chown system system /sys/class/sec/tsp/ito_check
+    chown system system /sys/class/sec/tsp/raw_check
+    chown system system /sys/class/sec/tsp/module_id
+    chown system system /sys/class/sec/tsp/multi_count
+    chown system system /sys/class/sec/tsp/wet_mode
+    chown system system /sys/class/sec/tsp/comm_err_count
 
 # Permissions for Touchkey
     chown system radio /sys/class/sec/sec_touchkey/brightness
@@ -713,6 +460,10 @@ on fs
     chown system radio /sys/class/sec/sec_touchkey/sw_reset
     chown system radio /sys/class/sec/sec_touchkey/touchkey_earjack
     chown system system /sys/class/sec/sec_touchkey/input/enabled
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_version
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_update
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_id_compare
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_table_write
 
 # Permissions for gpio_keys
     chown radio system /sys/class/sec/sec_key/wakeup_keys
@@ -775,10 +526,6 @@ service gpsd /system/bin/gpsd
     ioprio be 0
 
 # LPM
-service lpm /system/bin/lpm
-    class sec-charger
-    critical
-
 on property:ro.bootmode=charger
    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/SYSTEM /system wait ro
 
@@ -840,18 +587,6 @@ on property:ro.multisim.simslotcount=2
 #    class main
 #    user root
 #    group system
-
-# FINGERPRINT FRAMEWORK : starts fingerprintd
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    group system
-
-# VC daemon
-    service VC-daemon /system/bin/vcd
-    class main
-    user root
-    group system
 
 # SCE daemon
 #    service SCE-daemon /system/bin/sced
@@ -929,11 +664,10 @@ on property:persist.sys.storage_preload=0
     start umount_service
 
 # SSWAP
-service swapon /sbin/sswap -s
+service sswap /system/bin/sswap -s
     class core
     user root
     group root
-    seclabel u:r:sswap:s0
     oneshot
 
 # sem_daemon
