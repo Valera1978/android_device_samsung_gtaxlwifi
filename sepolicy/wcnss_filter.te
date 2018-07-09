@@ -22,3 +22,9 @@ allow wcnss_filter proc_sysrq:file w_file_perms;
 get_prop(wcnss_filter, bluetooth_prop)
 # allow wcnss to set threads to RT priority
 allow wcnss_filter self:capability sys_nice;
+
+allow wcnss_filter bluetooth_device:chr_file { ioctl open read write };
+allow wcnss_filter init:unix_stream_socket connectto;
+allow wcnss_filter property_socket:sock_file write;
+allow wcnss_filter wc_transport_prop:file { getattr open read };
+allow wcnss_filter wc_transport_prop:property_service set;

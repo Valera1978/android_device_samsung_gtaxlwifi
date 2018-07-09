@@ -5,3 +5,10 @@ allow ueventd emmcblk_device:blk_file { ioctl read write create getattr setattr 
 allow ueventd sysfs_multipdp_writable:file rw_file_perms;
 
 allow ueventd camera_device:file { relabelto getattr write open };
+
+allow ueventd gps_data_file:file relabelto;
+
+allow ueventd camera_device:dir relabelto;
+allow ueventd camera_device:lnk_file relabelto;
+
+allow ueventd sswap_data_file:blk_file { create getattr setattr };

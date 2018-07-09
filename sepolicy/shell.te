@@ -1,0 +1,5 @@
+allow shell bin_nv_data_efs_file:file getattr;
+allow shell efs_file:file getattr;
+allow shell hidl_base_hwservice:hwservice_manager add;
+allow shell sec_efs_file:file getattr;
+allow shell self:udp_socket ioctl;

@@ -5,3 +5,6 @@ allow audioserver sec_efs_file:file { read open };
 
 allow audioserver imei_efs_file:dir search;
 allow audioserver imei_efs_file:file { read open getattr };
+allow audioserver audio_prop:property_service set;
+allow audioserver init:unix_stream_socket connectto;
+allow audioserver property_socket:sock_file write;

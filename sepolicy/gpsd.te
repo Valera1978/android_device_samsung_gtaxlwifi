@@ -1,0 +1,28 @@
+type gpsd, domain;
+type gpsd_exec, exec_type, file_type;
+
+init_daemon_domain(gpsd)
+
+type gps_data_file, file_type, data_file_type;
+file_type_auto_trans(gpsd, system_data_file, gps_data_file);
+
+allow gpsd gps_data_file:dir { search write add_name remove_name };
+allow gpsd gps_data_file:file { create rw_file_perms };
+allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
+allow gps_data_file sysfs:filesystem associate;
+
+allow gpsd gps_device:chr_file { getattr setattr rw_file_perms };
+allow gpsd sysfs:file { getattr read open };
+allow gpsd sysfs_wake_lock:file { write open };
+
+allow gpsd dnsproxyd_socket:sock_file write;
+allow gpsd mif_device:chr_file { read open ioctl};
+allow gpsd self:udp_socket { create bind connect read setopt write };
+allow gpsd netd:unix_stream_socket connectto;
+allow gpsd shell_exec:file { open read execute execute_no_trans };
+allow gpsd fwmarkd_socket:sock_file write;
+allow gpsd shell_exec:file getattr;
+allow gpsd toolbox_exec:file { open read execute getattr execute_no_trans };
+allow gpsd vendor_toolbox_exec:file execute_no_trans;
+allow gpsd rild:unix_stream_socket connectto;
+allow gpsd sysfs_wake_lock:file read;

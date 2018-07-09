@@ -1,0 +1,5 @@
+allow untrusted_app_25 lineage_weather_service:service_manager find;
+allow untrusted_app_25 mnt_media_rw_file:dir getattr;
+allow untrusted_app_25 rootfs:dir read;
+allow untrusted_app_25 proc:file getattr;
+allow untrusted_app_25 proc_stat:file { getattr open };

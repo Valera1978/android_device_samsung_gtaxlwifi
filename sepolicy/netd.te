@@ -4,3 +4,6 @@ allow netd wifi_data_file:sock_file { create setattr unlink };
 
 allow netd self:system module_request;
 allow netd self:capability sys_module;
+allow netd gpsd:fd use;
+allow netd gpsd:udp_socket { setopt getopt read write };
+allow netd init:udp_socket { read write };

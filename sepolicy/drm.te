@@ -1,0 +1,8 @@
+type drm, domain;
+type drm_exec, exec_type, file_type;
+
+init_daemon_domain(drm)
+
+allow drm vndbinder_device:chr_file { ioctl open read write };
+allow drm hwservicemanager_prop:file { read open getattr };
+allow drm hwservicemanager:binder { call transfer };

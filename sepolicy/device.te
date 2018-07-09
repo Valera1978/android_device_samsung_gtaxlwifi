@@ -30,3 +30,5 @@ type vfs_device, dev_type;
 type batch_io_device, dev_type;
 
 type ttyHS0_device, dev_type;
+
+type gps_device, dev_type;

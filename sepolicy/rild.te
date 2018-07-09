@@ -1,3 +1,6 @@
+# Allow rild to change perms
+allow rild self:capability { chown };
+
 # Allow additiional efs access
 allow rild bin_nv_data_efs_file:file create_file_perms;
 allow rild nv_log_efs_file:file { open read write append };
@@ -5,6 +8,12 @@ allow rild imei_efs_file:dir r_dir_perms;
 allow rild imei_efs_file:file rw_file_perms;
 allow rild app_efs_file:dir r_dir_perms;
 allow rild app_efs_file:file r_file_perms;
+
+# /dev
+allow rild audioserver:dir { search r_dir_perms };
+
+# /proc/<pid>/cmdline
+allow rild audioserver:file r_file_perms;
 
 # /dev/mbin0
 allow rild block_device:dir r_dir_perms;
@@ -18,6 +27,9 @@ allow rild sysfs_multipdp_writable:file rw_file_perms;
 
 # /proc/sys/net/ipv6/conf/*/accept_ra_defrtr
 allow rild proc_net:file rw_file_perms;
+
+allow rild gpsd:dir { search r_dir_perms };
+allow rild gpsd:file { getattr open read r_file_perms };
 
 # rild reads /proc/pid/cmdline of mediaserver
 allow rild mediaserver:dir { open read search getattr };
@@ -35,7 +47,12 @@ allow rild mnt_user_file:lnk_file { r_file_perms };
 
 allow rild radio_block_device:blk_file { read open };
 allow rild ctl_rildaemon_prop:property_service set;
-allow rild self:capability chown;
+allow rild self:capability { chown dac_override fowner fsetid };
+allow rild sysfs:dir write;
+allow rild system_data_file:file { getattr open read };
 
-allow rild audioserver:dir search;
-allow rild audioserver:file { read open getattr };
+allow rild init:dir search;
+allow rild init:file { getattr open read };
+allow rild sec_efs_file:file getattr;
+
+allow rild modemloader_prop:property_service set;
