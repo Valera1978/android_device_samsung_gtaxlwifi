@@ -274,51 +274,65 @@ bool can_perform_action(char action) {
 }
 
 void stop_hci_filter() {
-       char value[PROPERTY_VALUE_MAX] = {'\0'};
-       int retval, filter_ctrl, i;
-       char stop_val = STOP_WCNSS_FILTER;
-       int soc_type = BT_SOC_DEFAULT;
+    char value[PROPERTY_VALUE_MAX] = {'\0'};
+    int retval, filter_ctrl, i;
+    char stop_val = STOP_WCNSS_FILTER;
+    int soc_type = BT_SOC_DEFAULT;
 
-       ALOGV("%s: Entry ", __func__);
+    ALOGV("%s: Entry ", __func__);
 
-       property_get("wc_transport.hci_filter_status", value, "0");
-       if (strcmp(value, "0") == 0) {
-           ALOGI("%s: hci_filter has been stopped already", __func__);
-       }
-       else {
-           filter_ctrl = connect_to_local_socket("wcnssfilter_ctrl");
-           if (filter_ctrl < 0) {
-               ALOGI("%s: Error while connecting to CTRL_SOCK, filter should stopped: %d",
-                     __func__, filter_ctrl);
-           }
-           else {
-               retval = write(filter_ctrl, &stop_val, 1);
-               if (retval != 1) {
-                   ALOGI("%s: problem writing to CTRL_SOCK, ignore: %d", __func__, retval);
-                   //Ignore and fallback
-               }
+    if ((soc_type = get_bt_soc_type()) == BT_SOC_CHEROKEE) {
+        property_get("wc_transport.hci_filter_status", value, "0");
+        if (strcmp(value, "0") == 0) {
+            ALOGI("%s: hci_filter has been stopped already", __func__);
+        }
+        else {
+            filter_ctrl = connect_to_local_socket("wcnssfilter_ctrl");
+            if (filter_ctrl < 0) {
+                ALOGI("%s: Error while connecting to CTRL_SOCK, filter should stopped: %d",
+                       __func__, filter_ctrl);
+            }
+            else {
+                retval = write(filter_ctrl, &stop_val, 1);
+                if (retval != 1) {
+                    ALOGI("%s: problem writing to CTRL_SOCK, ignore: %d", __func__, retval);
+                    //Ignore and fallback
+                }
 
-               close(filter_ctrl);
-           }
-       }
+                close(filter_ctrl);
+            }
+        }
 
-       /* Ensure Filter is closed by checking the status before
-          RFKILL 0 operation. this should ideally comeout very
-          quick */
-       for(i=0; i<500; i++) {
-           property_get(BT_VND_FILTER_START, value, "false");
-           if (strcmp(value, "false") == 0) {
-               ALOGI("%s: WCNSS_FILTER stopped", __func__);
-               usleep(STOP_WAIT_TIMEOUT * 10);
-               break;
-           } else {
-               /*sleep of 1ms, This should give enough time for FILTER to
-               exit with all necessary cleanup*/
-               usleep(STOP_WAIT_TIMEOUT);
-           }
-       }
+        /* Ensure Filter is closed by checking the status before
+           RFKILL 0 operation. this should ideally comeout very
+           quick */
+        for(i=0; i<500; i++) {
+            property_get(BT_VND_FILTER_START, value, "false");
+            if (strcmp(value, "false") == 0) {
+                ALOGI("%s: WCNSS_FILTER stopped", __func__);
+                usleep(STOP_WAIT_TIMEOUT * 10);
+                break;
+            } else {
+                /*sleep of 1ms, This should give enough time for FILTER to
+                exit with all necessary cleanup*/
+                usleep(STOP_WAIT_TIMEOUT);
+            }
+        }
 
-       ALOGV("%s: Exit ", __func__);
+        /*Never use SIGKILL to stop the filter*/
+        /* Filter will be stopped by below two conditions
+         - by Itself, When it realizes there are no CONNECTED clients
+         - Or through STOP_WCNSS_FILTER byte on Control socket
+         both of these ensure clean shutdown of chip
+        */
+        //property_set(BT_VND_FILTER_START, "false");
+    } else if (soc_type == BT_SOC_ROME) {
+        property_set(BT_VND_FILTER_START, "false");
+    } else {
+        ALOGI("%s: Unknown soc type %d, Unexpected!", __func__, soc_type);
+    }
+
+    ALOGV("%s: Exit ", __func__);
 }
 
 int start_hci_filter() {
