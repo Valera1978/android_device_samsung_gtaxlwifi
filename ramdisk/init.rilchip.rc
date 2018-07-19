@@ -4,7 +4,7 @@
 # This is a common source of Android security bugs.
 #
 
-service ril-daemon /vendor/bin/hw/rild -c 1 -l /system/lib/libsec-ril.so
+service ril-daemon /vendor/bin/hw/rild -c 1 -l /system/lib64/libsec-ril.so
     class main
     socket rild stream 660 root radio
     socket sap_uim_socket1 stream 660 bluetooth bluetooth
