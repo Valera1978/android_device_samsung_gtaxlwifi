@@ -1,0 +1,14 @@
+allow system_server app_efs_file:dir { add_name write };
+allow system_server app_efs_file:file { create write };
+
+allow hal_sensors_default app_efs_file:dir search;
+allow hal_sensors_default app_efs_file:file { open read };
+allow hal_sensors_default sysfs:file { open read write };
+
+allow mediadrmserver secmem_device:chr_file { ioctl open read write };
+allow mediadrmserver tee:unix_stream_socket connectto;
+allow mediadrmserver sec_efs_file:file { getattr open read };
+
+allow untrusted_app net_dns_prop:file open;
+#allow untrusted_app proc:file { open read };
+#allow untrusted_app_25 proc:file { open read };
