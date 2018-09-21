@@ -19,7 +19,5 @@ type sysfs_multipdp_writable, fs_type, sysfs_type, mlstrustedobject;
 
 allow sysfs_type tmpfs:filesystem associate;
 
-type biometrics_data_file, file_type;
-
-type mobicore_data_file, file_type;
+type mobicore_data_file, file_type, data_file_type;
 type sswap_data_file, file_type;

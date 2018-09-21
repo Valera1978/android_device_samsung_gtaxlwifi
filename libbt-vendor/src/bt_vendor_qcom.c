@@ -26,7 +26,10 @@
 #define LOG_TAG "bt_vendor"
 #define BLUETOOTH_MAC_ADDR_BOOT_PROPERTY "ro.boot.btmacaddr"
 
-#include <utils/Log.h>
+//#include <utils/Log.h>
+#include <unistd.h>
+#include <log/log.h>
+#include <pthread.h>
 #include <cutils/properties.h>
 #include <fcntl.h>
 #include <termios.h>

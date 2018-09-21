@@ -1,0 +1,6 @@
+#============= hal_wifi_supplicant_default ==============
+allow hal_wifi_supplicant_default vendor_file:file { getattr open };
+
+#============= tee ==============
+allow tee vendor_app_file:dir search;
+allow tee vendor_app_file:file { getattr open read };

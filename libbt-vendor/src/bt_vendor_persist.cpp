@@ -48,7 +48,8 @@ typedef enum {
 #include "bt_nv.h"
 #endif
 #define LOG_TAG "QCOM-BTNV"
-#include <utils/Log.h>
+//#include <utils/Log.h>
+#include <log/log.h>
 
 /*===========================================================================
 FUNCTION   bt_vendor_nv_read

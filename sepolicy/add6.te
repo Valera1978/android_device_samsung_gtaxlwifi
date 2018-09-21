@@ -1,0 +1,29 @@
+#============= audioserver ==============
+allow audioserver audio_device:chr_file { ioctl open };
+
+#============= cameraserver ==============
+allow cameraserver hidl_memory_hwservice:hwservice_manager find;
+allow cameraserver sysfs:file write;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default input_device:chr_file { ioctl open read };
+allow hal_sensors_default sysfs:dir { open read };
+allow hal_sensors_default sysfs:file getattr;
+
+#============= untrusted_app ==============
+allow untrusted_app vendor_file:file read;
+
+#============= cameraserver ==============
+allow cameraserver vendor_file:file execute;
+
+#============= healthd ==============
+allow healthd vendor_file:file { execute getattr open read };
+
+#============= untrusted_app ==============
+allow untrusted_app vendor_file:file open;
+
+#============= init ==============
+allow init bluetooth_device:chr_file write;
+
+#============= surfaceflinger ==============
+allow surfaceflinger vendor_file:file read;

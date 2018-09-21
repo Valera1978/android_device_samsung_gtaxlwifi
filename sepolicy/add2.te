@@ -1,0 +1,11 @@
+#============= audioserver ==============
+allow audioserver vendor_file:file execute;
+
+#============= cameraserver ==============
+allow cameraserver vendor_file:file { getattr open read };
+
+#============= init ==============
+allow init proc_modules:file getattr;
+
+#============= system_server ==============
+allow system_server vendor_file:file { execute getattr };

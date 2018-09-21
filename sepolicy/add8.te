@@ -1,0 +1,14 @@
+#============= init ==============
+allow init audioserver:binder call;
+allow init hal_camera_hwservice:hwservice_manager find;
+allow init hal_graphics_mapper_hwservice:hwservice_manager find;
+allow init hidl_allocator_hwservice:hwservice_manager find;
+allow init hidl_memory_hwservice:hwservice_manager find;
+allow init mediaserver:binder call;
+allow init servicemanager:binder call;
+allow init system_server:binder call;
+
+#============= servicemanager ==============
+allow servicemanager init:dir search;
+allow servicemanager init:file { open read };
+allow servicemanager init:process getattr;

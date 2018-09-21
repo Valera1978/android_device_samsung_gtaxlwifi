@@ -1,10 +1,10 @@
 # modem daemon sec label
-type cbd, domain;
+type cbd, coredomain;
 type cbd_exec, exec_type, file_type;
 
-net_domain(cbd);
+#net_domain(cbd);
 init_daemon_domain(cbd);
-wakelock_use(cbd);
+#wakelock_use(cbd);
 unix_socket_connect(cbd, property, init)
 
 allow cbd self:capability { dac_override setuid setgid };

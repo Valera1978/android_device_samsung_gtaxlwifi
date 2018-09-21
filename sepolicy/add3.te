@@ -1,0 +1,89 @@
+#============= bootanim ==============
+allow bootanim vendor_file:dir getattr;
+
+#============= bootstat ==============
+allow bootstat vendor_file:dir getattr;
+
+#============= fsck ==============
+allow fsck vendor_file:dir getattr;
+
+#============= hal_keymaster_default ==============
+allow hal_keymaster_default vendor_file:dir getattr;
+allow hal_keymaster_default vendor_file:file { execute getattr open read };
+
+#============= hal_wifi_default ==============
+allow hal_wifi_default vendor_file:file { open read };
+
+#============= hal_wifi_supplicant_default ==============
+allow hal_wifi_supplicant_default vendor_file:dir getattr;
+allow hal_wifi_supplicant_default vendor_file:file execute;
+
+#============= hwservicemanager ==============
+allow hwservicemanager vendor_file:dir getattr;
+
+#============= idmap ==============
+allow idmap vendor_file:dir getattr;
+
+#============= init ==============
+allow init vendor_file:file { execute };
+
+#============= logd ==============
+allow logd vendor_file:dir getattr;
+
+#============= logpersist ==============
+allow logpersist vendor_file:dir getattr;
+
+#============= mediacodec ==============
+allow mediacodec binder_device:chr_file ioctl;
+
+#============= platform_app ==============
+allow platform_app vendor_file:dir getattr;
+
+#============= priv_app ==============
+allow priv_app vendor_file:dir getattr;
+allow priv_app vendor_file:file { execute getattr open read };
+
+#============= radio ==============
+allow radio vendor_file:dir getattr;
+
+#============= recovery_refresh ==============
+allow recovery_refresh vendor_file:dir getattr;
+
+#============= rild ==============
+allow rild unlabeled:file { append getattr open };
+allow rild vendor_file:lnk_file read;
+
+#============= sdcardd ==============
+allow sdcardd vendor_file:dir getattr;
+
+#============= servicemanager ==============
+allow servicemanager vendor_file:dir getattr;
+
+#============= shell ==============
+allow shell vendor_file:dir getattr;
+
+#============= system_app ==============
+allow system_app vendor_file:dir getattr;
+
+#============= system_server ==============
+allow system_server vendor_file:dir getattr;
+
+#============= untrusted_app_25 ==============
+allow untrusted_app_25 vendor_file:dir getattr;
+allow untrusted_app_25 vendor_file:file read;
+
+#============= vdc ==============
+allow vdc vendor_file:dir getattr;
+
+#============= vndservicemanager ==============
+allow vndservicemanager vendor_file:dir getattr;
+allow vndservicemanager vendor_file:file { execute getattr open read };
+
+#============= vold ==============
+allow vold vendor_file:dir getattr;
+
+#============= webview_zygote ==============
+allow webview_zygote vendor_file:dir getattr;
+
+#============= zygote ==============
+allow zygote vendor_file:dir getattr;

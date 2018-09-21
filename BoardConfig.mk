@@ -73,17 +73,31 @@ BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 BOARD_KERNEL_IMAGE_NAME := Image
 
 # Partitions
+
+#boot:      33,554,432 bytes from pit
+#system: 3,565,158,400 bytes from pit
+#cache:    209,715,200 bytes from pit
+
+# dd if=/dev/zero of=system.img bs=4k count=735000
+# mkfs.ext4 system.img
+# dd if=/dev/zero of=vendor.img bs=4k count=75000
+# mkfs.ext4 vendor.img
+
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 39845888
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3072000000
-#original system size = 3565158400, but some times device had diff system size (us-eu), better decrease a bit
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
-BOARD_CACHEIMAGE_PARTITION_SIZE    := 209715200
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
-BOARD_FLASH_BLOCK_SIZE := 4096
 
+BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3010560000
+#BOARD_VENDORIMAGE_PARTITION_SIZE := 307200000
+BOARD_VENDORIMAGE_PARTITION_SIZE := 209715200
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+
+#BOARD_CACHEIMAGE_PARTITION_SIZE    := 209715200
+#BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
+BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -92,6 +106,9 @@ BOARD_HAS_QCA_BT_ROME := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
+
+# Keymaster
+#BOARD_USES_TRUST_KEYMASTER := true
 
 # Samsung HALs
 TARGET_AUDIOHAL_VARIANT := samsung
@@ -105,6 +122,7 @@ BOARD_HARDWARE_CLASS += hardware/samsung/lineagehw
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
@@ -124,6 +142,7 @@ BOARD_USES_DT := true
 BOARD_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
 
 # Samsung OpenMAX Video
+BOARD_USE_ANDROID := true
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USE_DMA_BUF := true
@@ -162,7 +181,7 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 #WIFI_DRIVER_FW_PATH_AP           := "ap"
 #WIFI_DRIVER_FW_PATH_STA          := "sta"
-WIFI_DRIVER_FW_PATH_P2P         := "p2p"
+WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 
 # Wifi loader
@@ -184,53 +203,25 @@ BOARD_VENDOR := samsung
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
 # Recovery
-#RECOVERY_VARIANT := twrp
 BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.samsungexynos7870
 TARGET_OTA_ASSERT_DEVICE := gtaxlwifi
 
-# TWRP
-ifeq ($(RECOVERY_VARIANT),twrp)
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/twrp.fstab
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_THEME := portrait_hdpi
-TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
-TW_MAX_BRIGHTNESS := 255
-TW_NO_REBOOT_BOOTLOADER := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_NTFS_3G := true
-TW_HAS_DOWNLOAD_MODE := true
-TW_NO_EXFAT_FUSE := true
-TW_EXCLUDE_SUPERSU := true
-endif
-
-# Shims: libui
-TARGET_LD_SHIM_LIBS += \
-    /system/lib/omx/libOMX.Exynos.AVC.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.AVC.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.HEVC.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.HEVC.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG2.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG4.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG4.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.VP9.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.AVC.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.AVC.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.HEVC.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.HEVC.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG2.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG4.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG4.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.VP9.Decoder.so|libui_shim.so
-
-
-# Shims
-TARGET_LD_SHIM_LIBS += \
-    /system/lib/libcamera_client.so|libcamera_client_shim.so \
-    /system/lib/libexynoscamera.so|libexynoscamera_shim.so
-
 # SELinux
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
+
+# Treble
+TARGET_COPY_OUT_VENDOR := vendor
+
+PRODUCT_FULL_TREBLE_OVERRIDE := true
+BOARD_VNDK_RUNTIME_DISABLE := true
+BOARD_VNDK_VERSION := current
+
+PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE := 27
+PRODUCT_SHIPPING_API_LEVEL := 21
+
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+TARGET_VENDOR_PROP += device/samsung/gtaxlwifi/vendor.prop
 
 # Inherit from the proprietary version
 -include vendor/samsung/gtaxlwifi/BoardConfigVendor.mk

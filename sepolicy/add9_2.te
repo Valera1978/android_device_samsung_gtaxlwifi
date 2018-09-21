@@ -1,0 +1,14 @@
+allow hal_wifi_default rootfs:file { open read };
+
+#============= cameraserver ==============
+allow cameraserver system_file:dir { open read };
+
+#============= cameraserver ==============
+#allow cameraserver hal_allocator_default:fd use;
+allow cameraserver video_device:chr_file { read write };
+
+#============= init ==============
+allow init vendor_file:file execute_no_trans;
+
+#============= system_app ==============
+allow system_app default_android_hwservice:hwservice_manager find;

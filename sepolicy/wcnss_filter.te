@@ -1,5 +1,5 @@
 # Policy for /vendor/bin/wcnss_filter
-type wcnss_filter, domain;
+type wcnss_filter, domain, coredomain;
 type wcnss_filter_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(wcnss_filter)
 # talk to /dev/ttyHS0

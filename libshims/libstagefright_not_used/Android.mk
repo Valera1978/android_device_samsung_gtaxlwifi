@@ -23,7 +23,10 @@ LOCAL_C_INCLUDES := \
     $(TOP)/frameworks/native/include/media/hardware \
     $(TOP)/frameworks/native/include/media/openmax \
     $(TOP)/frameworks/native/libs/arect/include \
-    $(TOP)/frameworks/native/libs/nativebase/include
+    $(TOP)/frameworks/native/libs/nativebase/include \
+    $(TOP)/hardware/libhardware/include \
+    $(TOP)/frameworks/native/include \
+    $(TOP)/frameworks/native/opengl/include
 
 LOCAL_SHARED_LIBRARIES := \
     android.hardware.graphics.bufferqueue@1.0 \
@@ -35,5 +38,6 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_MODULE := libstagefright_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+#LOCAL_VENDOR_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)

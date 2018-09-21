@@ -1,0 +1,41 @@
+#============= dex2oat ==============
+allow dex2oat device:file { read open };
+
+#============= init ==============
+allow init system_file:file execute_no_trans;
+
+#============= logd ==============
+allow logd device:file { getattr open read };
+
+#============= mediaserver ==============
+allow mediaserver vendor_file:file { getattr open read };
+
+#============= priv_app ==============
+allow priv_app device:file { open read };
+allow priv_app sysfs:file { open read };
+
+#============= servicemanager ==============
+allow servicemanager device:file { open read };
+allow servicemanager nonplat_service_contexts_file:file { getattr open read };
+
+#============= surfaceflinger ==============
+allow surfaceflinger device:file { open read };
+
+#============= system_server ==============
+allow system_server device:file { open read };
+allow system_server proc:file { getattr read };
+allow system_server sysfs:file { getattr open read write };
+allow system_server sysfs:dir { open read };
+allow system_server sysfs_devices_system_cpu:file write;
+
+#============= untrusted_app ==============
+allow untrusted_app device:file { open read };
+
+#============= webview_zygote ==============
+allow webview_zygote zygote:unix_dgram_socket write;
+
+#============= zygote ==============
+allow zygote device:file { open read };
+
+#============= hal_cas_default ==============
+allow hal_cas_default vndbinder_device:chr_file { ioctl open };

@@ -1,0 +1,35 @@
+#============= audioserver ==============
+allow audioserver vendor_file:file { getattr open read };
+
+#============= init ==============
+allow init loop_device:blk_file relabelto;
+
+#============= mediacodec ==============
+allow mediacodec mediacodec_service:service_manager add;
+
+#============= surfaceflinger ==============
+allow surfaceflinger vendor_file:file { execute getattr open };
+
+#============= bootanim ==============
+allow bootanim vendor_file:file { execute getattr open read };
+
+#============= cameraserver ==============
+allow cameraserver hidl_allocator_hwservice:hwservice_manager find;
+allow cameraserver sysfs:file { getattr open read };
+
+#============= hal_cas_default ==============
+allow hal_cas_default vndbinder_device:chr_file { read write };
+
+#============= hal_graphics_composer_default ==============
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket { bind create setopt };
+allow hal_graphics_composer_default sysfs:file { open read };
+
+#============= keystore ==============
+allow keystore vendor_file:file execute;
+
+#============= system_server ==============
+allow system_server vendor_file:file { open read };
+
+#============= zygote ==============
+allow zygote cgroup:file create;
+allow zygote vendor_file:file { execute getattr open read };

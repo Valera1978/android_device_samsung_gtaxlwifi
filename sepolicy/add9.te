@@ -1,0 +1,12 @@
+#============= init ==============
+allow init mediaserver:binder transfer;
+allow init platform_app:binder call;
+allow init system_server:binder transfer;
+allow init untrusted_app_25:binder call;
+allow init video_device:chr_file { ioctl write };
+
+#============= untrusted_app ==============
+#allow untrusted_app init:binder call;
+
+#============= untrusted_app_25 ==============
+#allow untrusted_app_25 init:binder transfer;

@@ -1,0 +1,27 @@
+#============= bluetooth ==============
+allow bluetooth vendor_file:file { open read };
+
+#============= hal_wifi_supplicant_default ==============
+allow hal_wifi_supplicant_default vendor_file:file read;
+
+#============= netd ==============
+allow netd vendor_file:dir getattr;
+
+#============= recovery_persist ==============
+allow recovery_persist vendor_file:dir getattr;
+
+#============= sgdisk ==============
+allow sgdisk vendor_file:dir getattr;
+
+#============= system_app ==============
+allow system_app vendor_file:file { execute getattr open read };
+
+#============= tee ==============
+allow tee vendor_file:dir getattr;
+allow tee vendor_file:file { execute getattr open read };
+
+#============= tzdatacheck ==============
+allow tzdatacheck vendor_file:dir getattr;
+
+#============= untrusted_app_25 ==============
+allow untrusted_app_25 vendor_file:file open;

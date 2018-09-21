@@ -512,11 +512,13 @@ service argos-daemon /system/bin/argosd
     group system radio
 	
 # GPS
-service gpsd /system/bin/gpsd -c /vendor/etc/gps.xml
+service gpsd /vendor/bin/gpsd -c /vendor/etc/gps.xml
     class main
     user gps
     group system inet net_raw wakelock
     ioprio be 0
+    seclabel u:r:gpsd:s0
+#    setenv LD_PRELOAD "/vendor/lib/gpsd_shim.so"
 
 # LPM
 on property:ro.bootmode=charger
@@ -541,14 +543,14 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service start_hci_filter /system/bin/wcnss_filter
+service start_hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
     group bluetooth
     disabled
 
 # MobiCore startup
-service wifi-daemon /system/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
+service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
@@ -659,7 +661,7 @@ on property:persist.sys.storage_preload=0
     start umount_service
 
 # SSWAP
-service sswap /system/bin/sswap -s
+service sswap /vendor/bin/sswap -s
     class core
     user root
     group root

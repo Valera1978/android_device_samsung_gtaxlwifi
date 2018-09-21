@@ -3,7 +3,7 @@
 on post-fs-data
 
     #Load Wifi Driver
-    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko
+    insmod /modules/qca_cld/qca_cld_wlan.ko
     setprop wlan.driver.status ok
 
     # give system access to wpa_supplicant.conf for backup and restore
@@ -71,7 +71,7 @@ on boot
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
         -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-        -I/system/vendor/etc/wifi/wpa_supplicant_overlay.conf \
+        -I/vendor/etc/wifi/wpa_supplicant_overlay.conf \
         -O/data/misc/wifi/sockets \
         -m/data/misc/wifi/p2p_supplicant.conf \
         -puse_p2p_group_interface=1 \
@@ -95,7 +95,7 @@ service wlandutservice /system/bin/wlandutservice
     disabled
     oneshot
 
-service macloader /system/bin/macloader
+service macloader /vendor/bin/macloader
     class main
     oneshot
 
