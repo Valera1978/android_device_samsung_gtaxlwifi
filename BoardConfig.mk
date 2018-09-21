@@ -42,7 +42,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
@@ -54,8 +54,7 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
-#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-cortex_a53-linux-gnueabi-uber/bin
+#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
 #KERNEL_TOOLCHAIN_PREFIX := aarch64-cortex_a53-linux-gnueabi-
 
 BOARD_KERNEL_BASE := 0x10000000
@@ -91,7 +90,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_ROME := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 QCOM_BT_USE_BTNV := true
-QCOM_BT_USE_SMD_TTY := true
+#QCOM_BT_USE_SMD_TTY := true
 
 # Samsung HALs
 TARGET_AUDIOHAL_VARIANT := samsung
@@ -223,11 +222,14 @@ TARGET_LD_SHIM_LIBS += \
     /system/lib64/omx/libOMX.Exynos.MPEG4.Encoder.so|libui_shim.so \
     /system/lib64/omx/libOMX.Exynos.VP9.Decoder.so|libui_shim.so
 
-
-# Shims
+# Shims: camera
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libcamera_client.so|libcamera_client_shim.so \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
+
+# Shims: gps
+TARGET_LD_SHIM_LIBS += \
+    /system/bin/gpsd|gpsd_shim.so
 
 # SELinux
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
