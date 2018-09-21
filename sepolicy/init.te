@@ -1,5 +1,9 @@
 # Mount debugfs on /sys/kernel/debug.
 allow init debugfs:dir mounton;
+allow init self:capability sys_module;
+
+# mmcblk0p19
+#allow init system_file:file execute_no_trans;
 
 # /dev/block/mmcblk0p[0-9]
 allow init emmcblk_device:blk_file rw_file_perms;
@@ -21,7 +25,6 @@ allow init tee_device:chr_file { write ioctl };
 allow init mif_device:chr_file { write ioctl };
 
 allow init kmsg_device:chr_file write;
-allow init log_device:chr_file write;
 
 allow init property_socket:sock_file write;
 
@@ -32,3 +35,28 @@ allow init camera_device:lnk_file { relabelto };
 allow init camera_device:dir { relabelto };
 allow init debugfs:file write;
 allow init efs_file:dir mounton;
+
+# superuser
+allow init su:process { transition rlimitinh siginh noatsecure };
+
+# RIL
+allow init socket_device:sock_file { create open read write getattr setattr unlink };
+
+#allow init vendor_file:file { read open getattr execute map execute_no_trans };
+allow init vendor_file:system module_load;
+allow init uart_device:chr_file { write ioctl };
+allow init rild:unix_stream_socket connectto;
+allow init device:chr_file ioctl;
+
+allow init dnsproxyd_socket:sock_file write;
+allow init netd:unix_stream_socket connectto;
+allow init self:tcp_socket create;
+allow init fwmarkd_socket:sock_file write;
+
+allow init hidl_base_hwservice:hwservice_manager add;
+allow init ion_device:chr_file { write ioctl };
+allow init mediadrmserver:binder transfer;
+allow init self:process execmem;
+
+allow init secmem_device:chr_file { ioctl write };
+allow init system_data_file:file rename;

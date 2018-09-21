@@ -9,3 +9,10 @@ set_prop(bluetooth, wc_transport_prop)
 # read /persist/bdaddr.txt
 #allow bluetooth persist_file:dir search;
 #allow bluetooth persist_file:file r_file_perms;
+
+allow bluetooth system_data_file:file open;
+allow bluetooth bluetooth_prop:property_service set;
+
+#r_dir_file(bluetooth, firmware_file)
+allow bluetooth wcnss_filter:unix_stream_socket connectto;
+allow bluetooth bluetooth_device:chr_file { open read write ioctl };

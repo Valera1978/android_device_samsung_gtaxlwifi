@@ -1,0 +1,14 @@
+type sswap, domain;
+type sswap_exec, exec_type, file_type;
+
+init_daemon_domain(sswap)
+
+allow sswap sswap_data_file:file { create write open };
+allow sswap sswap_data_file:blk_file { open read write };
+
+allow sswap init:unix_stream_socket connectto;
+allow sswap property_socket:sock_file write;
+allow sswap sysfs:file { open write };
+allow sswap system_prop:property_service set;
+allow sswap block_device:dir search;
+allow sswap self:capability sys_admin;

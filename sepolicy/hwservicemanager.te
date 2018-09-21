@@ -1,0 +1,4 @@
+allow hwservicemanager drm:binder call;
+allow hwservicemanager drm:dir search;
+allow hwservicemanager drm:file { read open };
+allow hwservicemanager drm:process getattr;

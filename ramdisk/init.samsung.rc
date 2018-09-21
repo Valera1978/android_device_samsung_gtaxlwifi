@@ -1,4 +1,3 @@
-on init
 # [ SEC_SELINUX_PORTING_COMMON
     # for audit message
     chown system system /proc/avc_msg
@@ -199,7 +198,9 @@ on post-fs-data
     # mobicore
     export MC_AUTH_TOKEN_PATH /efs
     mkdir /efs/TEE  0770 radio system
+    chmod 0660 /dev/s5p-smem
     chmod 0660 /dev/t-base-tui
+    chown media system /dev/s5p-smem
     chown system system /dev/t-base-tui
     start mobicore
 
@@ -285,12 +286,12 @@ on boot
     chmod 0775 /efs/bluetooth
 
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown radio net_bt_stack /efs/bluetooth/bt_addr
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown radio bluetooth /efs/bluetooth/bt_addr
     chmod 0640 /efs/bluetooth/bt_addr
     chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
     # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
@@ -379,6 +380,8 @@ on boot
    chmod 0775 /efs/Battery
    copy /system/vendor/firmware/battery_data.dat /efs/Battery/battery_data.dat
    chmod 0400 /efs/Battery/battery_data.dat
+   chown system radio /sys/class/power_supply/battery/batt_update_data
+   chmod 0644 /sys/class/power_supply/battery/batt_update_data
    write /sys/class/power_supply/battery/batt_update_data "/efs/Battery/battery_data.dat"
    chown system radio /sys/class/power_supply/battery/batt_ext_dev_chg
    chown system radio /efs/Battery/fg_full_voltage
@@ -721,12 +724,7 @@ on charger
 service drm /system/bin/drmserver
     class main
     user drm
-# [ SEC_MM_DRM
-# fix
-    group system drm inet drmrpc readproc dpgp
-# org
-#    group drm system inet drmrpc
-# ]
+    group drm system inet drmrpc
 
 service scs /system/bin/scs
     class main

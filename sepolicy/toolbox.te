@@ -1,0 +1,3 @@
+allow toolbox init:fifo_file { getattr read write };
+allow toolbox init:unix_stream_socket { read write };
+allow toolbox system_data_file:file { read };
