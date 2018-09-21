@@ -45,6 +45,8 @@ LOCAL_C_INCLUDES := \
     hardware/samsung_slsi-cm/openmax/osal/ \
     $(TOP)/frameworks/native/libs/nativewindow/include
 
+LOCAL_CFLAGS += -Wno-implicit-function-declaration
+
 LOCAL_MODULE := libExynosOMX_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
