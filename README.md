@@ -19,12 +19,12 @@ Copyright (C) 2017 Valera Chigir <valera1978@tut.by>
 
   - Make a workspace
 
-mkdir cm15
-cd cm15
+mkdir cm16
+cd cm16
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
+repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -61,6 +61,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - Build cm15
+  - Build cm16
 
 brunch gtaxlwifi
