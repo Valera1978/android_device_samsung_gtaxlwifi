@@ -16,9 +16,6 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-#$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-#$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-
 LOCAL_PATH := device/samsung/gtaxlwifi
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -151,12 +148,9 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    Snap
 
-# Radio
 PRODUCT_PACKAGES += \
     libxml2 \
-    libprotobuf-cpp-full \
-    android.hardware.radio@1.0 \
-    android.hardware.radio.deprecated@1.0
+    libprotobuf-cpp-full
 
 PRODUCT_PACKAGES += \
     SamsungServiceMode
@@ -191,14 +185,11 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wificond \
-    android.hardware.wifi@1.0-service \
-    android.hardware.wifi@1.0 \
-    android.hardware.wifi@1.0-impl
+    android.hardware.wifi@1.0-service
 
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth.a2dp@1.0-impl \
     libbt-vendor
 
 # Network
@@ -218,6 +209,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     libtinycompress \
+    libtinyalsa \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl
 
@@ -236,9 +228,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gps.xml
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1-service
-
-#    android.hardware.gnss@1.0-impl
+    android.hardware.gnss@1.0-impl \
+    android.hardware.gnss@1.0-service
 
 PRODUCT_PACKAGES += \
     gpsd_shim
