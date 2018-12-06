@@ -1,0 +1,35 @@
+#============= audioserver ==============
+allow audioserver gpsd_exec:file getattr;
+
+#============= bootanim ==============
+allow bootanim gpsd_exec:file getattr;
+
+#============= gpsd ==============
+allow gpsd sysfs:file write;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default input_device:chr_file read;
+
+#============= hal_wifi_supplicant_default ==============
+allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };
+
+#============= netd ==============
+allow netd gpsd_exec:file getattr;
+
+#============= tee ==============
+allow tee gpsd_exec:file getattr;
+
+#============= untrusted_app_25 ==============
+allow untrusted_app_25 proc_vmstat:file getattr;
+
+#============= zygote ==============
+allow zygote gpsd_exec:file getattr;
+
+#============= hal_cas_default ==============
+allow hal_cas_default gpsd_exec:file getattr;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default input_device:chr_file { ioctl open };
+
+#============= healthd ==============
+allow healthd gpsd_exec:file getattr;

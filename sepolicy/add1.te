@@ -1,0 +1,35 @@
+#============= healthd ==============
+allow healthd sysfs:file { getattr open read };
+
+#============= system_server ==============
+allow system_server proc:file getattr;
+allow system_server sysfs_devices_system_cpu:file write;
+allow system_server unlabeled:file unlink;
+
+#============= webview_zygote ==============
+allow webview_zygote zygote:unix_dgram_socket write;
+
+
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default sysfs:dir { open read };
+
+#============= init ==============
+allow init proc:file { open setattr write };
+allow init sysfs:file { open setattr write };
+allow init sysfs_wlan_fwpath:file setattr;
+allow init vendor_file:file execute_no_trans;
+
+#============= system_server ==============
+allow system_server proc:file { open read };
+
+
+
+#============= cbd ==============
+allow cbd vendor_file:file entrypoint;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default sysfs:file getattr;
+
+#============= init ==============
+allow init sswap_data_file:blk_file { open read write };

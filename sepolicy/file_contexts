@@ -40,12 +40,17 @@
 
 /dev/block/mmcblk0p[0-9]*    u:object_r:emmcblk_device:s0
 
-/dev/block/platform/155a0000.ufs/by-name/EFS  u:object_r:efs_block_device:s0
+#/dev/block/platform/155a0000.ufs/by-name/EFS  u:object_r:efs_block_device:s0
 /dev/block/platform/155a0000.ufs/by-name/CACHE    u:object_r:cache_block_device:s0
 /dev/block/platform/155a0000.ufs/by-name/USERDATA    u:object_r:userdata_block_device:s0
-/dev/block/platform/.+/by-name/(radio|RADIO)?   u:object_r:radio_block_device:s0
+#/dev/block/platform/.+/by-name/(radio|RADIO)?   u:object_r:radio_block_device:s0
+
+/dev/block/platform/13540000.dwmmc0/by-name/EFS u:object_r:efs_block_device:s0
+/dev/block/platform/13540000.dwmmc0/by-name/RADIO u:object_r:radio_block_device:s0
+
 
 /dev/rfkill                  u:object_r:rfkill_device:s0
+/dev/knox_kap                u:object_r:knox_kap_device:s0
 
 ####################################
 # efs files

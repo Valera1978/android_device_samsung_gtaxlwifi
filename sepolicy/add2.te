@@ -1,0 +1,55 @@
+#============= bootstat ==============
+allow bootstat gpsd_exec:file getattr;
+
+#============= dex2oat ==============
+allow dex2oat gpsd_exec:file getattr;
+
+#============= fsck ==============
+allow fsck gpsd_exec:file getattr;
+
+#============= hal_keymaster_default ==============
+allow hal_keymaster_default gpsd_exec:file getattr;
+
+#============= hwservicemanager ==============
+allow hwservicemanager gpsd_exec:file getattr;
+
+#============= idmap ==============
+allow idmap gpsd_exec:file getattr;
+
+#============= init ==============
+allow init hal_gnss_hwservice:hwservice_manager add;
+allow init hwservicemanager:binder call;
+allow init system_server:binder call;
+
+#============= logd ==============
+allow logd gpsd_exec:file getattr;
+
+#============= sdcardd ==============
+allow sdcardd gpsd_exec:file getattr;
+
+#============= servicemanager ==============
+allow servicemanager gpsd_exec:file getattr;
+
+#============= shell ==============
+allow shell gpsd_exec:file getattr;
+
+#============= system_server ==============
+allow system_server init:binder call;
+
+#============= tzdatacheck ==============
+allow tzdatacheck gpsd_exec:file getattr;
+
+#============= untrusted_app_25 ==============
+allow untrusted_app_25 proc_vmstat:file open;
+
+#============= vdc ==============
+allow vdc gpsd_exec:file getattr;
+
+#============= vndservicemanager ==============
+allow vndservicemanager gpsd_exec:file getattr;
+
+#============= vold ==============
+allow vold gpsd_exec:file getattr;
+
+#============= vold_prepare_subdirs ==============
+allow vold_prepare_subdirs gpsd_exec:file getattr;
