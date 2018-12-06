@@ -122,7 +122,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl.exynos7870 \
     android.hardware.camera.provider@2.4-service \
-    camera.universal7870
+    camera.universal7870 \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    camera.device@3.3-impl
 
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
@@ -274,8 +277,10 @@ PRODUCT_PACKAGES += \
     lineage_charger_res_images
 
 # call Samsung LSI board support package
+ifneq ($(INCLUDE_EXYNOS_BSP),)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos7870/exynos7870.mk)
+endif
 
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/gtaxlwifi/gtaxlwifi-vendor.mk)
