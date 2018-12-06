@@ -100,6 +100,7 @@ extern "C" {
 #define MAX_QEMU_PIPE_NAME_LENGTH  11
 #define MAX_UUID_LENGTH 64
 
+struct ril_event;
 typedef void * RIL_Token;
 
 typedef enum {
@@ -588,11 +589,6 @@ typedef struct {
                          -1 if unknown or not applicable*/
 } RIL_SMS_Response;
 
-typedef struct {
-    RIL_SMS_Response response;
-    int retryCount;   /* Samsung */
-} RIL_SMS_Response_Ext;
- 
 /** Used by RIL_REQUEST_WRITE_SMS_TO_SIM */
 typedef struct {
     int status;     /* Status of message.  See TS 27.005 3.1, "<stat>": */
@@ -694,6 +690,8 @@ typedef struct {
     int             toa;         /* "type" from TS 27.007 7.11 */
     char *          number;      /* "number" from TS 27.007 7.11. May be NULL */
     int             timeSeconds; /* for CF no reply only */
+    char *          startTime;   /* SEC addition */
+    char *          endTime;     /* SEC addition */
 }RIL_CallForwardInfo;
 
 typedef struct {

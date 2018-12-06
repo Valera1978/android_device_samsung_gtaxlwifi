@@ -30,7 +30,7 @@ TARGET_USES_LEGACY_ADB_INTERFACE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
-TARGET_SLSI_VARIANT := cm
+TARGET_SLSI_VARIANT := bsp
 TARGET_SOC := exynos7870
 TARGET_BOOTLOADER_BOARD_NAME := universal7870
 
@@ -38,14 +38,14 @@ TARGET_BOOTLOADER_BOARD_NAME := universal7870
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_2ND_CPU_ABI2 :=
+TARGET_2ND_CPU_VARIANT := generic
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -54,13 +54,11 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
-#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-cortex_a53-linux-gnueabi-uber/bin
-#KERNEL_TOOLCHAIN_PREFIX := aarch64-cortex_a53-linux-gnueabi-
 
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 
+TARGET_LINUX_KERNEL_VERSION := 3.18
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
 TARGET_KERNEL_CONFIG := lineage-gtaxllte_defconfig
 
@@ -69,6 +67,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 -
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
 
+BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 BOARD_KERNEL_IMAGE_NAME := Image
 
@@ -82,8 +81,12 @@ BOARD_CACHEIMAGE_PARTITION_SIZE    := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
 
+# Use these flags if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
+
+# Vendor separation
+TARGET_COPY_OUT_VENDOR := system/vendor
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -91,40 +94,33 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_ROME := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 QCOM_BT_USE_BTNV := true
-QCOM_BT_USE_SMD_TTY := true
 
 # Samsung HALs
 TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
-# Samsung Hardware
-BOARD_HARDWARE_CLASS += device/samsung/gtaxllte/lineagehw
-BOARD_HARDWARE_CLASS += hardware/samsung/lineagehw
+# Lineage HW
+JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/samsung/gtaxllte/lineagehw|**/*.java
 
 # Samsung Camera
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+BOARD_BACK_CAMERA_SENSOR := 0
+BOARD_FRONT_CAMERA_SENSOR := 1
+
 # Graphics
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
 
-# HDMI
-BOARD_HDMI_INCAPABLE := true
-
-# FIMG2D
-BOARD_USES_SKIA_FIMGAPI := true
-
-# (G)SCALER
-BOARD_USES_SCALER := true
-BOARD_USES_DT := true
-
-# Samsung LSI OpenMAX
-BOARD_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
+# VR Front buffer
+#BOARD_USES_VR_FRONT_BUFFER := true
 
 # Samsung OpenMAX Video
-BOARD_USE_STOREMETADATA := true
+BOARD_USE_STOREMETADATA := false
+#BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USE_DMA_BUF := true
 BOARD_USE_ANB_OUTBUF_SHARE := true
@@ -146,12 +142,40 @@ BOARD_USE_CUSTOM_COMPONENT_SUPPORT := true
 BOARD_USE_VIDEO_EXT_FOR_WFD_HDCP := true
 BOARD_USE_SINGLE_PLANE_IN_DRM := true
 
+# HWComposer
+BOARD_USES_VPP := true
+#BOARD_USES_VPP_V2 := true // 8890 only
+BOARD_HDMI_INCAPABLE := true
+
+# HWCServices - requires framework support
+#BOARD_USES_HWC_SERVICES := true
+
+# Device Tree
+BOARD_USES_DT := true
+
+# WiFiDisplay
+#BOARD_USES_VIRTUAL_DISPLAY := true - depends on platform changes
+BOARD_USES_VIRTUAL_DISPLAY_DECON_EXT_WB := false
+BOARD_USE_VIDEO_EXT_FOR_WFD_DRM := false
+BOARD_USES_VDS_BGRA8888 := true
+BOARD_VIRTUAL_DISPLAY_DISABLE_IDMA_G0 := false
+
+# LIBHWJPEG
+TARGET_USES_UNIVERSAL_LIBHWJPEG := true
+
+# FIMG2D
+BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_FIMGAPI_V5X := true
+
+# SCALER
+BOARD_USES_DEFAULT_CSC_HW_SCALER := true
+BOARD_USES_SCALER_M2M1SHOT := true
+
 # Video scaling issue workaround
 TARGET_OMX_LEGACY_RESCALING := true
 
-# Render Script
-BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a53
-BOARD_OVERRIDE_RS_CPU_VARIANT_64 := cortex-a53
+# HWComposer
+TARGET_HWC2_NO_SKIPVALIDATE := true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
@@ -179,9 +203,6 @@ BOARD_VENDOR := samsung
 BOARD_MODEM_TYPE := tss310
 BOARD_PROVIDES_LIBRIL := true
 
-#Hidl
-#DEVICE_MANIFEST_FILE := device/samsung/gtaxllte/manifest.xml
-
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
@@ -198,37 +219,22 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_THEME := portrait_hdpi
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 162
 TW_NO_REBOOT_BOOTLOADER := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NTFS_3G := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_NO_EXFAT_FUSE := true
 TW_EXCLUDE_SUPERSU := true
+TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_USE_TOOLBOX=true
+TW_EXCLUDE_TWRPAPP := true
 endif
 
-# Shims: libui
+# Shims: camera
 TARGET_LD_SHIM_LIBS += \
-    /system/lib/omx/libOMX.Exynos.AVC.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.AVC.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.HEVC.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.HEVC.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG2.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG4.Decoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.MPEG4.Encoder.so|libui_shim.so \
-    /system/lib/omx/libOMX.Exynos.VP9.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.AVC.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.AVC.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.HEVC.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.HEVC.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG2.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG4.Decoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.MPEG4.Encoder.so|libui_shim.so \
-    /system/lib64/omx/libOMX.Exynos.VP9.Decoder.so|libui_shim.so
-
-
-# Shims
-TARGET_LD_SHIM_LIBS += \
-    /system/lib/libcamera_client.so|libcamera_client_shim.so \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
 # SELinux
