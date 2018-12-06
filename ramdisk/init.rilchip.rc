@@ -12,6 +12,7 @@ service ril-daemon /vendor/bin/hw/rild -c 1 -l /system/lib64/libsec-ril.so
     user root
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    onrestart restart cpboot-daemon
 
 on property:persist.sys.cpboot=disable
     stop ril-daemon
