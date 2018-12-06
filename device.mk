@@ -29,7 +29,9 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 # Boot animation
 TARGET_SCREEN_WIDTH := 1200
 TARGET_SCREEN_HEIGHT := 1920
-TARGET_BOOTANIMATION_HALF_RES := true
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+
 
 # Flat device tree for boot image
 #PRODUCT_PACKAGES += \
@@ -69,10 +71,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.software.freeform_window_management.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.freeform_window_management.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -84,44 +87,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 PRODUCT_PACKAGES += \
-    libion \
-    libfimg \
-    libhwc2on1adapter \
     android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.renderscript@1.0-impl \
+    gralloc.exynos5 \
+    libhwc2on1adapter \
+    memtrack.exynos5
 
 PRODUCT_PACKAGES += \
-    libExynosOMX_shim \
-    libui_shim
-
-#    libstagefright_shim \
-
-# Overriden service definition
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init/android.hardware.media.omx@1.0-service.rc:system/vendor/etc/init/android.hardware.media.omx@1.0-service.rc
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
-
-PRODUCT_PACKAGES += \
-    hwcomposer.exynos5
-
-# Healthd
-PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl
-
-# Memory
-PRODUCT_PACKAGES += \
-    memtrack.exynos5 \
-    android.hardware.memtrack@1.0-impl
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
+    libion \
+    libfimg
 
 # seccomp_policy
 PRODUCT_COPY_FILES += \
@@ -132,21 +109,26 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
 
+# Keymaster
+PRODUCT_PACKAGES += \
+    keystore.exynos5 \
+    android.hardware.keymaster@3.0-impl
+
 # hardware/samsung/AdvancedDisplay (MDNIE)
 PRODUCT_PACKAGES += \
     AdvancedDisplay
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl-legacy \
-    camera.device@1.0-impl-legacy
+    android.hardware.camera.provider@2.4-impl.exynos7870 \
+    android.hardware.camera.provider@2.4-service \
+    camera.universal7870
 
 PRODUCT_PACKAGES += \
-    libexynoscamera_shim \
-    libcamera_client_shim
+    libexynoscamera_shim
 
-#PRODUCT_PACKAGES += \
-#    Snap
+PRODUCT_PACKAGES += \
+    Snap
 
 PRODUCT_PACKAGES += \
     libxml2 \
@@ -160,6 +142,10 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes \
     libebtc
+
+# Versioned netutils
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
 
 # WCNSS
 PRODUCT_COPY_FILES += \
@@ -192,10 +178,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     libbt-vendor
 
-# Network
-PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
-
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
@@ -209,7 +191,6 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     libtinycompress \
-    libtinyalsa \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl
 
@@ -217,10 +198,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml  \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+
+# Healthd
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-service
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -228,8 +214,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gps.xml
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service
+    android.hardware.gnss@1.0-impl
 
 PRODUCT_PACKAGES += \
     gpsd_shim
@@ -239,16 +224,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
 
-# Keymaster
-PRODUCT_PACKAGES += \
-    keystore.exynos5 \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
-
 # Configstore
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-impl \
-    android.hardware.configstore@1.0-service
+    android.hardware.configstore@1.1-service
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -262,25 +240,24 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.universal7870 \
-    android.hardware.power@1.0-impl
+    android.hardware.power@1.0-impl \
+    power.universal7870
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.universal7870 \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-impl \
+    lights.universal7870
 
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
+#PRODUCT_PACKAGES += \
+#    android.hardware.vibrator@1.0-impl
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
-
-# Vibrator
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
 
 # ADB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -297,8 +274,8 @@ PRODUCT_PACKAGES += \
     lineage_charger_res_images
 
 # call Samsung LSI board support package
-$(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
-$(call inherit-product, hardware/samsung_slsi-cm/exynos7870/exynos7870.mk)
+$(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
+$(call inherit-product, hardware/samsung_slsi/exynos7870/exynos7870.mk)
 
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/gtaxlwifi/gtaxlwifi-vendor.mk)
