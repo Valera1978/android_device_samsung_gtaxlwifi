@@ -27,14 +27,12 @@ dalvik.vm.isa.arm.features=default
 ro.opengles.version=196610
 debug.hwc.skip_dma_types=0,2
 debug.hwc.force_gpu=1
+#debug.hwc.winupdate=0
 
 ro.sf.lcd_density=240
 lockscreen.rot_override=true
 
 # Boot directly from charger mode
-ro.enable_boot_charger_mode=1
-
-# Allows healthd to boot directly from charger mode rather than initiating a reboot.
 ro.enable_boot_charger_mode=1
 
 # Radio
