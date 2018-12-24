@@ -32,7 +32,6 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
-
 # Flat device tree for boot image
 #PRODUCT_PACKAGES += \
 #    dtbhtoolExynos
@@ -166,6 +165,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# Custom wifi service
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
+
 PRODUCT_PACKAGES += \
     hostapd \
     libqsap_sdk \
@@ -277,6 +280,7 @@ PRODUCT_PACKAGES += \
     lineage_charger_res_images
 
 # call Samsung LSI board support package
+#INCLUDE_EXYNOS_BSP := true
 ifneq ($(INCLUDE_EXYNOS_BSP),)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos7870/exynos7870.mk)
