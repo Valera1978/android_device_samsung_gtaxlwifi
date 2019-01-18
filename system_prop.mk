@@ -37,10 +37,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.latch_unsignaled=1 \
     debug.sf.disable_backpressure=1
 
-# Display
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240
-
 # Lockscreen rotation
 PRODUCT_PROPERTY_OVERRIDES += \
     lockscreen.rot_override=true
