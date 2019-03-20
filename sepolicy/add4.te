@@ -1,0 +1,11 @@
+#============= hal_sensors_default ==============
+allow hal_sensors_default input_device:dir { read search };
+
+#============= surfaceflinger ==============
+allow surfaceflinger sysfs:file { read open getattr };
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default efs_file:dir search;
+
+#============= init ==============
+allow init bluetooth_device:chr_file ioctl;
