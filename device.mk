@@ -56,10 +56,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/sswap:$(TARGET_COPY_OUT_VENDOR)/bin/sswap
 
-# qca_cld_wlan
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/qca_cld_wlan.ko:root/modules/qca_cld/qca_cld_wlan.ko
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -91,6 +87,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
@@ -110,16 +107,17 @@ PRODUCT_COPY_FILES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    keystore.exynos5 \
-    android.hardware.keymaster@3.0-impl
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
-# hardware/samsung/AdvancedDisplay (MDNIE)
+# Doze
 PRODUCT_PACKAGES += \
-    AdvancedDisplay
+    SamsungDoze
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -128,18 +126,26 @@ PRODUCT_PACKAGES += \
     camera.universal7870 \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
-    camera.device@3.3-impl
+    camera.device@3.3-impl \
+    camera.device@3.4-impl
+
+PRODUCT_PACKAGES += \
+    libhwjpeg \
+    libion_exynos
 
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
 
 PRODUCT_PACKAGES += \
-    Snap
+    Snap2
+
+# TextClassifier
+PRODUCT_PACKAGES += \
+    textclassifier.bundle1
 
 # HIDL
 PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
+    android.hidl.base@1.0
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -158,9 +164,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     modemloader
-
-PRODUCT_PACKAGES += \
-    SamsungServiceMode
 
 # IPv6
 PRODUCT_PACKAGES += \
@@ -238,9 +241,6 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-service
 
 # GPS
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps/gps.cfg:system/vendor/etc/gnss/gps.cfg
-
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
 
@@ -266,6 +266,7 @@ PRODUCT_COPY_FILES += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service \
     power.universal7870
 
 # Lights
@@ -278,16 +279,18 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
 # ADB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=adb \
-    ro.adb.secure=0
+    ro.adb.secure=0 \
+    ro.secure=0
 
 # Root
 PRODUCT_PACKAGES += \
