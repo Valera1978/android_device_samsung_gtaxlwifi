@@ -1,3 +1,9 @@
+# Low memory optimization
+#ro.config.low_ram=true
+
+# add tweeks
+#logcat.live=disable
+
 # Audio
 af.fast_track_multiplier=1
 audio_hal.force_voice_config=wide
@@ -10,27 +16,24 @@ ro.bt.bdaddr_path=/efs/bluetooth/bt_addr
 qcom.bluetooth.soc=rome
 
 # Dalvik/Art
-dalvik.vm.dex2oat-filter=speed
 dalvik.vm.heapstartsize=8m
-dalvik.vm.heapgrowthlimit=128m
+dalvik.vm.heapgrowthlimit=192m
 dalvik.vm.heapsize=512m
 dalvik.vm.heaptargetutilization=0.75
-dalvik.vm.heapminfree=2m
+dalvik.vm.heapminfree=512k
 dalvik.vm.heapmaxfree=8m
-dalvik.vm.image-dex2oat-filter=speed
-dalvik.vm.isa.arm64.variant=generic
-dalvik.vm.isa.arm64.features=default
-dalvik.vm.isa.arm.variant=cortex-a15
-dalvik.vm.isa.arm.features=default
 
 # Graphics
 ro.opengles.version=196610
 debug.hwc.skip_dma_types=0,2
 debug.hwc.force_gpu=1
-#debug.hwc.winupdate=0
+debug.sf.enable_hwc_vds=1
 
 ro.sf.lcd_density=240
 lockscreen.rot_override=true
+
+# ro.product.first_api_level indicates the first api level the device has commercially launched on.
+ro.product.first_api_level=23
 
 # Boot directly from charger mode
 ro.enable_boot_charger_mode=1
@@ -46,4 +49,3 @@ ro.sys.sdcardfs=true
 
 # Wifi
 wifi.interface=wlan0
-
