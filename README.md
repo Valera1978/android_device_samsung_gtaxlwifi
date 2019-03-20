@@ -19,12 +19,13 @@ Copyright (C) 2017 Valera Chigir <valera1978@tut.by>
 
   - Make a workspace
 
-mkdir cm15
-cd cm15
+mkdir cm16
+cd cm16
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
+repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
+repo init -u git://github.com/crdroidandroid/android.git -b 9.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -33,13 +34,9 @@ repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
 <manifest>
 
   <project name="Valera1978/android_device_samsung_gtaxllte" path="device/samsung/gtaxllte" remote="github" />
-  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="J600GDXU1ARE2_los15.1" />
+  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" />
   <project name="Valera1978/android_vendor_samsung_gtaxllte" path="vendor/samsung/gtaxllte" remote="github" />
 
-  <project name="Exynos7870/android_hardware_samsung_slsi-cm_exynos7870" path="hardware/samsung_slsi-cm/exynos7870" remote="github" />
-  <project name="Exynos7870/android_hardware_samsung_slsi-cm_exynos" path="hardware/samsung_slsi-cm/exynos" remote="github" />
-  <project name="Exynos7870/android_hardware_samsung_slsi-cm_exynos5" path="hardware/samsung_slsi-cm/exynos5" remote="github" />
-  <project name="Exynos7870/android_hardware_samsung_slsi-cm_openmax" path="hardware/samsung_slsi-cm/openmax" remote="github" />
   <project name="Exynos7870/android_hardware_samsung" path="hardware/samsung" remote="github" />
 
 </manifest>
@@ -61,6 +58,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - Build cm15
+  - Build cm16
 
 brunch gtaxllte
