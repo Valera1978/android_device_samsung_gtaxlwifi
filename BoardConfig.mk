@@ -40,7 +40,7 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a53
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
@@ -81,7 +81,10 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Use these flags if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
+
+# Filesystems
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Vendor separation
 TARGET_COPY_OUT_VENDOR := system/vendor
@@ -99,7 +102,7 @@ TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Lineage HW
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/samsung/gtaxllte/lineagehw|**/*.java
+JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(LOCAL_PATH)/lineagehw|**/*.java
 
 # Samsung Camera
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
@@ -151,7 +154,7 @@ BOARD_USES_VPP := true
 BOARD_HDMI_INCAPABLE := true
 
 # HWCServices - requires framework support
-BOARD_USES_HWC_TINY := true
+#BOARD_USES_HWC_TINY := true
 BOARD_USES_HWC_SERVICES := true
 
 # Device Tree
@@ -188,8 +191,6 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
-WIFI_DRIVER_MODULE_NAME          := wlan
-WIFI_DRIVER_MODULE_PATH          := /modules/qca_cld/qca_cld_wlan.ko
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 WPA_SUPPLICANT_USE_HIDL          := true
 
@@ -242,6 +243,11 @@ endif
 # Shims: camera
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
+
+# Security patch level - T585XXU4CRK5
+VENDOR_SECURITY_PATCH := 2018-11-01
+
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
