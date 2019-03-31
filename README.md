@@ -34,10 +34,11 @@ repo init -u git://github.com/crdroidandroid/android.git -b 9.0
 <manifest>
 
   <project name="Valera1978/android_device_samsung_gtaxllte" path="device/samsung/gtaxllte" remote="github" />
-  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" />
+  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="lineage-16.0-upstream" />
   <project name="Valera1978/android_vendor_samsung_gtaxllte" path="vendor/samsung/gtaxllte" remote="github" />
 
-  <project name="Exynos7870/android_hardware_samsung" path="hardware/samsung" remote="github" />
+  <project name="Valera1978/android_hardware_samsung" path="hardware/samsung" remote="github" />
+  <project name="LineageOS/android_packages_resources_devicesettings" path="packages/resources/devicesettings" remote="github" />
 
 </manifest>
 ```
