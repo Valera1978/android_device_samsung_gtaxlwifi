@@ -84,13 +84,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.composer@2.2-service \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
     android.hardware.renderscript@1.0-impl \
     gralloc.exynos5 \
     libhwc2on1adapter \
     memtrack.exynos5
+
+PRODUCT_PACKAGES += \
+    libtinyxml
 
 PRODUCT_PACKAGES += \
     libion \
@@ -132,16 +136,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
 
-PRODUCT_PACKAGES += \
-    Snap2
+#PRODUCT_PACKAGES += \
+#    Snap
 
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.bundle1
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0
 
 PRODUCT_PACKAGES += \
     libxml2 \
@@ -153,8 +153,10 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
-# Versioned netutils
+# Net
 PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0 \
+    libandroid_net \
     netutils-wrapper-1.0
 
 # WCNSS
@@ -219,8 +221,14 @@ PRODUCT_COPY_FILES += \
 
 # Healthd
 PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl \
-    android.hardware.health@1.0-service
+    android.hardware.health@2.0-impl
+
+# HIDL
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.base@1.0_system \
+    android.hidl.manager@1.0 \
+    android.hidl.manager@1.0_system
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -266,6 +274,10 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
+
+# Trust HAL
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \
