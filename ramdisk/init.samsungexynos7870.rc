@@ -561,9 +561,9 @@ service rpmbd /system/bin/rpmbd
      group drmrpc
      class main
 
-on property:sys.mobicoredaemon.enable=true
-    start cs_service
-    write /proc/iccc_ready 1
+#on property:sys.mobicoredaemon.enable=true
+#    start cs_service
+#    write /proc/iccc_ready 1
 
 on property:ro.multisim.simslotcount=1
     setprop persist.radio.multisim.config ss

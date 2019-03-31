@@ -165,7 +165,7 @@
 
 on post-fs
     # mobicore
-    setprop sys.mobicoredaemon.enable stopped
+#    setprop sys.mobicoredaemon.enable stopped
 
 on post-fs-data
 # [ SEC_SELINUX_PORTING_COMMON
@@ -202,7 +202,7 @@ on post-fs-data
     chmod 0660 /dev/t-base-tui
     chown media system /dev/s5p-smem
     chown system system /dev/t-base-tui
-    start mobicore
+#    start mobicore
 
     chmod 0775 /data/misc/radio
 
@@ -697,7 +697,7 @@ on boot
 
 on nonencrypted
     # mobicore
-    mkdir /data/misc/mcRegistry 0775 system system
+#    mkdir /data/misc/mcRegistry 0775 system system
 
 on charger
     chmod 0664 /sys/class/power_supply/battery/batt_temp_table
@@ -734,11 +734,11 @@ service scs /system/bin/scs
     disabled
 
 # MobiCore startup
-service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin -r /system/app/mcRegistry/ffffffffd0000000000000000000001c.tlbin
-    class core
-    user system
-    group system
-    disabled
+#service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin -r /system/app/mcRegistry/ffffffffd0000000000000000000001c.tlbin
+#    class core
+#    user system
+#    group system
+#    disabled
 
 # icd
 service icd /system/bin/icd
