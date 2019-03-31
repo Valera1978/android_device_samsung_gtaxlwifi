@@ -16,8 +16,8 @@
 /dev/bbd_sensor              u:object_r:bbd_device:s0
 
 /dev/s5p-smem                u:object_r:secmem_device:s0
-/dev/mobicore                u:object_r:tee_device:s0
-/dev/mobicore-user           u:object_r:tee_device:s0
+#/dev/mobicore                u:object_r:tee_device:s0
+#/dev/mobicore-user           u:object_r:tee_device:s0
 /dev/vfsspi                  u:object_r:vfs_device:s0
 
 /dev/v4l-subdev[0-9]*        u:object_r:video_device:s0
@@ -80,7 +80,7 @@
 /data/biometrics(/.*)?	     u:object_r:biometrics_data_file:s0
 
 # tee
-/data/misc/mcRegistry(/.*)?  u:object_r:mobicore_data_file:s0
+#/data/misc/mcRegistry(/.*)?  u:object_r:mobicore_data_file:s0
 
 # bluetooth
 /sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
@@ -107,7 +107,7 @@
 # deamons
 #
 
-/system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
+#/system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
 /system/bin/macloader        u:object_r:macloader_exec:s0
 /system/bin/modemloader      u:object_r:modemloader_exec:s0
 

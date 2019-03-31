@@ -14,5 +14,5 @@ allow tee system_prop:property_service set;
 
 allow tee prov_efs_file:dir search;
 
-allow tee mobicore_data_file:file { create write open };
-allow tee mobicore_data_file:dir { write search add_name create };
+#allow tee mobicore_data_file:file { create write open };
+#allow tee mobicore_data_file:dir { write search add_name create };
