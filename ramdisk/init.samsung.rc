@@ -378,7 +378,7 @@ on boot
    mkdir /efs/Battery 0775 radio system
    chown radio system /efs/Battery
    chmod 0775 /efs/Battery
-   copy /system/vendor/firmware/battery_data.dat /efs/Battery/battery_data.dat
+   copy /vendor/firmware/battery_data.dat /efs/Battery/battery_data.dat
    chmod 0400 /efs/Battery/battery_data.dat
    chown system radio /sys/class/power_supply/battery/batt_update_data
    chmod 0644 /sys/class/power_supply/battery/batt_update_data
@@ -717,7 +717,7 @@ on charger
     mkdir /efs/Battery 0775 radio system
     chown radio system /efs/Battery
     chmod 0775 /efs/Battery
-    copy /system/vendor/firmware/battery_data.dat /efs/Battery/battery_data.dat
+    copy /vendor/firmware/battery_data.dat /efs/Battery/battery_data.dat
     chmod 0400 /efs/Battery/battery_data.dat
     write /sys/class/power_supply/battery/batt_update_data "/efs/Battery/battery_data.dat"
 

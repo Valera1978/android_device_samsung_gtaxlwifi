@@ -512,7 +512,7 @@ service argos-daemon /system/bin/argosd
     group system radio
 	
 # GPS
-service gpsd /system/bin/gpsd -c /vendor/etc/gps.xml
+service gpsd /vendor/bin/gpsd -c /vendor/etc/gps.xml
     class main
     user gps
     group system inet net_raw wakelock
