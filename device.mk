@@ -118,6 +118,10 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-impl \
     android.hardware.keymaster@4.0-service
 
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-service.software
+
 # Doze
 #PRODUCT_PACKAGES += \
 #    SamsungDoze
