@@ -1,14 +1,14 @@
-import init.samsungexynos7870.usb.rc
-import init.baseband.rc
-import init.wifi.rc
-import init.rilchip.rc
+import /vendor/etc/init/hw/init.samsungexynos7870.usb.rc
+import /vendor/etc/init/hw/init.baseband.rc
+import /vendor/etc/init/hw/init.wifi.rc
+import /vendor/etc/init/hw/init.rilchip.rc
 
 # Samsung stock init.rc additions
-import init.samsung.rc
+import /vendor/etc/init/hw/init.samsung.rc
 
 on early-init
-    mkdir /efs 0771 radio system
-    mkdir /cpefs 0771 radio system
+#    mkdir /efs 0771 radio system
+#    mkdir /cpefs 0771 radio system
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 on init
     start watchdogd
@@ -212,94 +212,6 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
 
-# Sensors permissions
-# Accelerometer_sensor
-    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
-    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
-    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
-    chown system radio /sys/class/sensors/accelerometer_sensor/name
-    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
-    chown system radio /sys/class/sensors/accelerometer_sensor/lowpassfilter
-
-# Proximity_sensor
-    chown system radio /sys/class/sensors/proximity_sensor/state
-    chown system radio /sys/class/sensors/proximity_sensor/raw_data
-    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
-    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
-    chown system radio /sys/class/sensors/proximity_sensor/vendor
-    chown system radio /sys/class/sensors/proximity_sensor/name
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_high
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_low
-    chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
-    chown system radio /sys/class/sensors/proximity_sensor/prox_offset_pass
-    chown system radio /sys/class/sensors/proximity_sensor/prox_trim
-    chown system radio /sys/class/sensors/proximity_sensor/prox_probe
-
-# Light_sensor
-    chown system radio /sys/class/sensors/light_sensor/lux
-    chown system radio /sys/class/sensors/light_sensor/raw_data
-    chown system radio /sys/class/sensors/light_sensor/vendor
-    chown system radio /sys/class/sensors/light_sensor/name
-
-# Gyro_sensor
-    chown system radio /sys/class/sensors/gyro_sensor/power_on
-    chown system radio /sys/class/sensors/gyro_sensor/power_off
-    chown system radio /sys/class/sensors/gyro_sensor/temperature
-    chown system radio /sys/class/sensors/gyro_sensor/selftest
-    chown system radio /sys/class/sensors/gyro_sensor/selftest_dps
-    chown system radio /sys/class/sensors/gyro_sensor/vendor
-    chown system radio /sys/class/sensors/gyro_sensor/name
-
-# Barometer_sensor
-    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
-    chown system radio /sys/class/sensors/barometer_sensor/vendor
-    chown system radio /sys/class/sensors/barometer_sensor/name
-    chown system radio /sys/class/sensors/barometer_sensor/calibration
-    chown system radio /sys/class/sensors/barometer_sensor/temperature
-
-# Magnetic_sensor
-    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
-    chown system radio /sys/class/sensors/magnetic_sensor/vendor
-    chown system radio /sys/class/sensors/magnetic_sensor/name
-
-# SensorHub
-    chown system radio /sys/class/sensors/ssp_sensor/enable
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_rev
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_name
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_test
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_reset
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_update
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_sleep_test
-    chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/sensor_dump
-
-# Sensorhub IIO
-    chown system radio /sys/class/sensors/ssp_sensor/accel_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/rot_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/game_rot_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/step_det_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/gyro_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/uncalib_gyro_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/mag_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/uncal_mag_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/light_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/pressure_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/prox_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/sig_motion_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/step_cnt_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/uncal_gyro_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/interrupt_gyro_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/tilt_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/pickup_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/ssp_flush
-    chown system radio /sys/class/sensors/ssp_sensor/int_gyro_enable
-    chown system radio /sys/class/sensors/ssp_sensor/sensor_state
-    chmod 0600 /dev/batch_io
-    chown system system /dev/batch_io
-
  # MOBEAM
     chown system radio /sys/class/sec/sec_barcode_emul/vendor
     chown system radio /sys/class/sec/sec_barcode_emul/name
@@ -359,7 +271,7 @@ on boot
     chmod 0775 /dev/socket
 
 on fs
-    mount_all /fstab.samsungexynos7870
+    mount_all /vendor/etc/fstab.samsungexynos7870
     setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
 
@@ -400,7 +312,7 @@ on fs
     chmod 0660 /sys/class/mdnie/mdnie/hmt_color_temperature
 
 # For cpefs partition
-    check_fs /dev/block/platform/13540000.dwmmc0/by-name/CPEFS ext4
+#    check_fs /dev/block/platform/13540000.dwmmc0/by-name/CPEFS ext4
     mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/CPEFS /cpefs noatime nosuid nodev barrier=1
     chown radio system /cpefs
     chmod 0771 /cpefs
@@ -507,9 +419,9 @@ on property:ro.bootmode=charger
    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/SYSTEM /system wait ro
 
 on property:ro.bootmode=charger
-    wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
-    check_fs /dev/block/platform/13540000.dwmmc0/by-name/EFS ext4
-    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit
+#    wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
+#    check_fs /dev/block/platform/13540000.dwmmc0/by-name/EFS ext4
+#    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit
 
 on property:ro.bootmode=charger
    class_start sec-charger

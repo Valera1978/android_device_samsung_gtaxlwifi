@@ -27,7 +27,7 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     
     # copy wpa_supplicant.conf
-    copy /system/vendor/etc/wifi/wpa_supplicant.conf /data/vendor/wifi/wpa/wpa_supplicant.conf
+    copy /vendor/etc/wifi/wpa_supplicant.conf /data/vendor/wifi/wpa/wpa_supplicant.conf
     chown wifi system /data/vendor/wifi/wpa/wpa_supplicant.conf
     chmod 0660 /data/vendor/wifi/wpa/wpa_supplicant.conf
 
