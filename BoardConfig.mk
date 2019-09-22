@@ -16,6 +16,9 @@
 
 LOCAL_PATH := device/samsung/gtaxllte
 
+# temporary
+WITHOUT_CHECK_API := true
+
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
@@ -51,7 +54,7 @@ TARGET_USES_64_BIT_BINDER := true
 # Kernel
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -88,6 +91,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Vendor separation
 TARGET_COPY_OUT_VENDOR := system/vendor
+
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true

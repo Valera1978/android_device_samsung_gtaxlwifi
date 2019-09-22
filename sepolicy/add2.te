@@ -1,9 +1,6 @@
 #============= bootstat ==============
 allow bootstat gpsd_exec:file getattr;
 
-#============= dex2oat ==============
-allow dex2oat gpsd_exec:file getattr;
-
 #============= fsck ==============
 allow fsck gpsd_exec:file getattr;
 
