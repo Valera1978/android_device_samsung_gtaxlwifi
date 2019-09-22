@@ -252,6 +252,10 @@ endif
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
+
+TARGET_LD_SHIM_LIBS += \
+    /vendor/bin/hw/gpsd|gpsd_shim.so
+
 # Security patch level - T585XXU4CRK5
 VENDOR_SECURITY_PATCH := 2018-11-01
 
