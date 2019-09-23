@@ -193,6 +193,7 @@ service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
 
 service charger /system/bin/charger
     class charger
+    capabilities SYS_BOOT
     critical
     seclabel u:r:charger:s0
 
