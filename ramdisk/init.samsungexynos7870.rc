@@ -442,9 +442,12 @@ on property:ro.bootmode=charger
 on property:ro.bootmode=charger
    class_start sec-charger
 
-service charger /charger
+service charger /system/bin/charger
     class charger
-    seclabel u:r:healthd:s0
+    user system
+    group system graphics input
+    critical
+    seclabel u:r:charger:s0
 
 # Bluetooth
 on property:wc_transport.start_hci=true
