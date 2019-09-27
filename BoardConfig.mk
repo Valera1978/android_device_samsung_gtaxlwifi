@@ -221,6 +221,9 @@ DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
+# Ramdisk
+BOARD_ROOT_EXTRA_FOLDERS := efs
+
 # Recovery
 #RECOVERY_VARIANT := twrp
 BOARD_HAS_DOWNLOAD_MODE := true
