@@ -1,0 +1,23 @@
+#============= init ==============
+allow init hal_wifi_hwservice:hwservice_manager add;
+allow init self:netlink_socket { bind create getattr read setopt write };
+allow init self:udp_socket { getopt connect ioctl };
+allow init sysfs_wlan_fwpath:file { open write };
+
+#============= netd ==============
+allow netd init:udp_socket { getopt setopt };
+
+#============= vendor_init ==============
+allow vendor_init sysfs:lnk_file setattr;
+
+#============= vold ==============
+allow vold hal_bootctl_hwservice:hwservice_manager find;
+
+#============= fsck ==============
+allow fsck emmcblk_device:blk_file ioctl;
+
+#============= priv_app ==============
+allow priv_app system_data_file:dir { open read };
+
+#============= hwservicemanager ==============
+allow hwservicemanager init:binder call;
