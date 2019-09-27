@@ -552,6 +552,17 @@ on boot
     chmod 0664 /sys/class/usb_notify/usb_control/hw_param
 
 # Sensors permissions
+    chown system radio /sys/class/input/input0
+    chown system radio /sys/class/input/input1
+    chown system radio /sys/class/input/input2
+    chown system radio /sys/class/input/input3
+    chown system radio /sys/class/input/input4
+    chown system radio /sys/class/input/input5
+    chown system radio /sys/class/input/input6
+    chown system radio /sys/class/input/input7
+    chown system radio /sys/class/input/input8
+    chown system radio /sys/class/input/input9
+
 # Accelerometer_sensor
     chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
     chown system radio /sys/class/sensors/accelerometer_sensor/calibration
