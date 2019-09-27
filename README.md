@@ -19,13 +19,13 @@ Copyright (C) 2017 Valera Chigir <valera1978@tut.by>
 
   - Make a workspace
 
-mkdir cm16
-cd cm16
+mkdir cm17
+cd cm17
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
-repo init -u git://github.com/crdroidandroid/android.git -b 9.0
+repo init -u git://github.com/LineageOS/android.git -b lineage-17.0
+repo init -u git://github.com/crdroidandroid/android.git -b 10.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -34,7 +34,7 @@ repo init -u git://github.com/crdroidandroid/android.git -b 9.0
 <manifest>
 
   <project name="Valera1978/android_device_samsung_gtaxlwifi" path="device/samsung/gtaxlwifi" remote="github" />
-  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" revision="lineage-16.0-upstream" />
+  <project name="Valera1978/android_kernel_samsung_exynos7870" path="kernel/samsung/exynos7870" remote="github" />
   <project name="Valera1978/android_vendor_samsung_gtaxlwifi" path="vendor/samsung/gtaxlwifi" remote="github" />
 
   <project name="Valera1978/android_hardware_samsung" path="hardware/samsung" remote="github" />
@@ -59,6 +59,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - Build cm16
+  - Build cm17
 
 brunch gtaxlwifi
