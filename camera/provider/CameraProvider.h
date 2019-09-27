@@ -17,13 +17,11 @@
 #ifndef ANDROID_HARDWARE_CAMERA_PROVIDER_V2_4_CAMERAPROVIDER_H
 #define ANDROID_HARDWARE_CAMERA_PROVIDER_V2_4_CAMERAPROVIDER_H
 
-#include <regex>
+#include <android/hardware/camera/provider/2.4/ICameraProvider.h>
 #include "hardware/camera_common.h"
 #include "utils/Mutex.h"
 #include "utils/SortedVector.h"
-#include <android/hardware/camera/provider/2.4/ICameraProvider.h>
-#include <hidl/Status.h>
-#include <hidl/MQDescriptor.h>
+
 #include "CameraModule.h"
 #include "VendorTagDescriptor.h"
 
@@ -59,17 +57,17 @@ struct CameraProvider : public ICameraProvider, public camera_module_callbacks_t
 
     // Methods from ::android::hardware::camera::provider::V2_4::ICameraProvider follow.
     Return<Status> setCallback(const sp<ICameraProviderCallback>& callback) override;
-    Return<void> getVendorTags(getVendorTags_cb _hidl_cb) override;
-    Return<void> getCameraIdList(getCameraIdList_cb _hidl_cb) override;
-    Return<void> isSetTorchModeSupported(isSetTorchModeSupported_cb _hidl_cb) override;
+    Return<void> getVendorTags(ICameraProvider::getVendorTags_cb _hidl_cb) override;
+    Return<void> getCameraIdList(ICameraProvider::getCameraIdList_cb _hidl_cb) override;
+    Return<void> isSetTorchModeSupported(ICameraProvider::isSetTorchModeSupported_cb _hidl_cb) override;
     Return<void> getCameraDeviceInterface_V1_x(
             const hidl_string& cameraDeviceName,
-            getCameraDeviceInterface_V1_x_cb _hidl_cb) override;
+            ICameraProvider::getCameraDeviceInterface_V1_x_cb _hidl_cb) override;
     Return<void> getCameraDeviceInterface_V3_x(
             const hidl_string& cameraDeviceName,
-            getCameraDeviceInterface_V3_x_cb _hidl_cb) override;
+            ICameraProvider::getCameraDeviceInterface_V3_x_cb _hidl_cb) override;
 
-private:
+protected:
     Mutex mCbLock;
     sp<ICameraProviderCallback> mCallbacks = nullptr;
 
