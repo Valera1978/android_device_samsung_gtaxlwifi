@@ -191,6 +191,8 @@ PRODUCT_PACKAGES += \
     wificond \
     android.hardware.wifi@1.0-service
 
+#    android.hardware.wifi@1.0-service-lazy
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
