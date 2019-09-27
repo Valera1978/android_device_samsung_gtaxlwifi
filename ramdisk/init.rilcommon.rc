@@ -42,7 +42,7 @@ setprop persist.radio.atfwd.start false
 service diag_uart_log /system/bin/diag_uart_log
     class main
     user root
-    group radio qcom_diag
+    group radio
     disabled
 
 on property:ro.radio.needcalibration=yes
