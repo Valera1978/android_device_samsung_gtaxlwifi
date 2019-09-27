@@ -19,8 +19,8 @@ Copyright (C) 2017 Valera Chigir <valera1978@tut.by>
 
   - Make a workspace
 
-mkdir cm16
-cd cm16
+mkdir cm17
+cd cm17
 
   - Do repo init & sync
 
