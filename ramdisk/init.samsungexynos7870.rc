@@ -419,16 +419,19 @@ on property:ro.bootmode=charger
    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/SYSTEM /system wait ro
 
 on property:ro.bootmode=charger
-#    wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
+    wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
 #    check_fs /dev/block/platform/13540000.dwmmc0/by-name/EFS ext4
-#    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit
+    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit
 
 on property:ro.bootmode=charger
    class_start sec-charger
 
-service charger /charger
+service charger /system/bin/charger
     class charger
-    seclabel u:r:healthd:s0
+    user system
+    group system graphics input
+    critical
+    seclabel u:r:charger:s0
 
 # Bluetooth
 on property:wc_transport.start_hci=true
