@@ -33,7 +33,6 @@ TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Flat device tree for boot image
-#PRODUCT_PACKAGES += \
 PRODUCT_HOST_PACKAGES += \
     dtbhtoolExynos
 
@@ -209,6 +208,8 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     wificond \
     android.hardware.wifi@1.0-service
+
+#    android.hardware.wifi@1.0-service-lazy
 
 # Bluetooth
 PRODUCT_PACKAGES += \
