@@ -33,8 +33,8 @@ TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Flat device tree for boot image
-#PRODUCT_PACKAGES += \
-#    dtbhtoolExynos
+PRODUCT_HOST_PACKAGES += \
+    dtbhtoolExynos
 
 # Ramdisk
 PRODUCT_PACKAGES += \
