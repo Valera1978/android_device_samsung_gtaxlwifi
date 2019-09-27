@@ -1,0 +1,133 @@
+#============= audioserver ==============
+allow audioserver debugfs_tracing_debug:file { open write };
+allow audioserver unlabeled:file { getattr open read };
+
+#============= bootanim ==============
+allow bootanim debugfs_tracing_debug:file { open write };
+
+#============= fsck ==============
+allow fsck cache_file:dir getattr;
+
+#============= hal_camera_default ==============
+allow hal_camera_default debugfs_tracing_debug:file { open write };
+
+#============= hal_cas_default ==============
+allow hal_cas_default debugfs_tracing_debug:file { open write };
+
+#============= hal_configstore_default ==============
+allow hal_configstore_default debugfs_tracing_debug:file { open write };
+
+#============= hal_drm_default ==============
+allow hal_drm_default debugfs_tracing_debug:file { open write };
+
+#============= hal_graphics_allocator_default ==============
+allow hal_graphics_allocator_default debugfs_tracing_debug:file { open write };
+
+#============= hal_graphics_composer_default ==============
+allow hal_graphics_composer_default debugfs_tracing_debug:file { open write };
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket { bind create read setopt };
+allow hal_graphics_composer_default sysfs:file { getattr open read };
+allow hal_graphics_composer_default vndbinder_device:chr_file { ioctl open read write };
+allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
+
+#============= hal_memtrack_default ==============
+allow hal_memtrack_default debugfs_tracing_debug:file { open write };
+
+#============= hal_power_default ==============
+allow hal_power_default debugfs_tracing_debug:file { open write };
+allow hal_power_default sysfs:dir { open read };
+allow hal_power_default sysfs:file { open read };
+allow hal_power_default sysfs_devices_system_cpu:file write;
+
+#============= hal_radio_config_default ==============
+allow hal_radio_config_default debugfs_tracing_debug:file { open write };
+
+#============= hal_vibrator_default ==============
+allow hal_vibrator_default debugfs_tracing_debug:file { open write };
+
+#============= hal_wifi_default ==============
+allow hal_wifi_default debugfs_tracing_debug:file { open write };
+
+#============= healthd ==============
+allow healthd debugfs_tracing_debug:file { open write };
+
+#============= hwservicemanager ==============
+allow hwservicemanager init:dir search;
+allow hwservicemanager init:file { open read };
+allow hwservicemanager init:process getattr;
+
+#============= init ==============
+allow init debugfs_tracing_debug:file write;
+allow init hwservicemanager:binder transfer;
+allow init sysfs:file read;
+allow init sysfs_devices_block:file { open write };
+allow init system_file:file execute_no_trans;
+allow init default_android_hwservice:hwservice_manager find;
+allow init hal_gnss_hwservice:hwservice_manager find;
+allow init system_server:binder transfer;
+
+#============= surfaceflinger ==============
+allow surfaceflinger debugfs_tracing_debug:file { open write };
+
+#============= vendor_init ==============
+allow vendor_init block_device:lnk_file setattr;
+allow vendor_init camera_data_file:dir { create setattr };
+allow vendor_init camera_device:file setattr;
+allow vendor_init debugfs_tracing_debug:file { getattr write };
+allow vendor_init dhcp_data_file:dir setattr;
+allow vendor_init media_rw_data_file:dir { add_name create setattr write };
+allow vendor_init proc:file write;
+allow vendor_init radio_data_file:dir setattr;
+allow vendor_init system_data_file:dir { add_name create setattr write };
+allow vendor_init system_data_file:file { create open setattr write };
+allow vendor_init tmpfs:dir { add_name write };
+allow vendor_init wpa_socket:dir setattr;
+
+#============= vndservicemanager ==============
+allow vndservicemanager hal_graphics_composer_default:dir search;
+allow vndservicemanager hal_graphics_composer_default:file { open read };
+allow vndservicemanager hal_graphics_composer_default:process getattr;
+
+#============= fsck ==============
+allow fsck emmcblk_device:blk_file ioctl;
+
+#============= hal_power_default ==============
+allow hal_power_default sysfs:file write;
+
+#============= init ==============
+allow init bluetooth_device:chr_file { open read };
+allow init debugfs_tracing_debug:dir { add_name create write };
+allow init default_android_hwservice:hwservice_manager add;
+allow init gps_device:chr_file { ioctl open read write };
+allow init hal_power_stats_hwservice:hwservice_manager add;
+allow init hal_usb_hwservice:hwservice_manager add;
+allow init mif_device:chr_file { open read };
+allow init sysfs_wake_lock:file { open write };
+allow init vendor_data_file:file lock;
+
+#============= installd ==============
+allow installd device:file { open write };
+
+#============= netd ==============
+allow netd device:file { open write };
+
+#============= platform_app ==============
+allow platform_app default_android_service:service_manager find;
+
+#============= system_app ==============
+allow system_app default_android_hwservice:hwservice_manager find;
+
+#============= system_server ==============
+allow system_server default_android_hwservice:hwservice_manager find;
+allow system_server default_android_service:service_manager { add find };
+
+#============= vendor_init ==============
+allow vendor_init unlabeled:dir setattr;
+
+#============= webview_zygote ==============
+allow webview_zygote app_data_file:dir getattr;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default device:file { open write };
+allow hal_sensors_default app_efs_file:file write;
+allow hal_sensors_default unlabeled:file { execute getattr open read };
