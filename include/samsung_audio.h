@@ -19,23 +19,22 @@
 #ifndef SAMSUNG_AUDIO_H
 #define SAMSUNG_AUDIO_H
 
-/*
- * Sound card specific defines.
- *
- * This is an example configuration for a WolfsonMicro WM1814 sound card.
- * Codec: Vegas
- *
- * If you driver does not support one of the devices, the id should not be
- * defined.
- */
-
 #define MIXER_CARD 0
 #define SOUND_CARD 0
 
+/*
+	<pcmdai playback_link="4" />
+	<pcmdai playback_deep_link="5" />
+	<pcmdai playback_jam_link="6" />
+	<pcmdai capture_link="0" />
+	<pcmdai baseband_link="2" />
+	<pcmdai bluetooth_link="3" />
+*/
+
 /* Playback */
-#define SOUND_DEEP_BUFFER_DEVICE 2
-#define SOUND_PLAYBACK_DEVICE 2
-#define SOUND_PLAYBACK_SCO_DEVICE 2
+#define SOUND_DEEP_BUFFER_DEVICE 5
+#define SOUND_PLAYBACK_DEVICE 4
+#define SOUND_PLAYBACK_SCO_DEVICE 3
 
 /* Capture */
 #define SOUND_CAPTURE_DEVICE 0
@@ -43,7 +42,7 @@
 
 /* Voice calls */
 #define SOUND_PLAYBACK_VOICE_DEVICE 2
-#define SOUND_CAPTURE_VOICE_DEVICE 1
+#define SOUND_CAPTURE_VOICE_DEVICE 2
 
 /* Wideband AMR callback */
 #ifndef RIL_UNSOL_SNDMGR_WB_AMR_REPORT
