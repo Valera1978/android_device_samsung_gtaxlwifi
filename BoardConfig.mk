@@ -256,7 +256,7 @@ TARGET_LD_SHIM_LIBS += \
 
 # Shims: gps
 TARGET_LD_SHIM_LIBS += \
-    /system/bin/gpsd|gpsd_shim.so
+    /vendor/bin/hw/gpsd|gpsd_shim.so
 
 # Security patch level - T580XXU4CRK5
 VENDOR_SECURITY_PATCH := 2018-11-01
