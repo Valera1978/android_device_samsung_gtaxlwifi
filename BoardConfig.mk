@@ -92,6 +92,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Vendor separation
 TARGET_COPY_OUT_VENDOR := system/vendor
 
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
