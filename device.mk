@@ -189,9 +189,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wificond \
-    android.hardware.wifi@1.0-service
-
-#    android.hardware.wifi@1.0-service-lazy
+    android.hardware.wifi@1.0-service-lazy
 
 # Bluetooth
 PRODUCT_PACKAGES += \
