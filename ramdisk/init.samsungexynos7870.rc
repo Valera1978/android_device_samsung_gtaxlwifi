@@ -422,7 +422,7 @@ service argos-daemon /system/bin/argosd
     class main
     user system
     group system radio
-	
+
 # GPS
 service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     class main
@@ -431,22 +431,8 @@ service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     ioprio be 0
 
 # LPM
-on property:ro.bootmode=charger
-   mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/SYSTEM /system wait ro
-
-on property:ro.bootmode=charger
-    wait /dev/block/platform/13540000.dwmmc0/by-name/EFS
-#    check_fs /dev/block/platform/13540000.dwmmc0/by-name/EFS ext4
-    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit
-
-on property:ro.bootmode=charger
-   class_start sec-charger
-
-service charger /system/bin/charger
+service charger /charger
     class charger
-    user system
-    group system graphics input
-    critical
     seclabel u:r:charger:s0
 
 # Bluetooth
