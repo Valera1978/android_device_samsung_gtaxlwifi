@@ -17,7 +17,7 @@
 LOCAL_PATH := device/samsung/gtaxllte
 
 # temporary
-WITHOUT_CHECK_API := true
+BUILD_BROKEN_DUP_RULES := true
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
