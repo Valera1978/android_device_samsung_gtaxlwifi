@@ -225,6 +225,16 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 # Ramdisk
 BOARD_ROOT_EXTRA_FOLDERS := efs
 
+# Dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+DONT_DEXPREOPT_PREBUILTS := true
+
 # Recovery
 #RECOVERY_VARIANT := twrp
 BOARD_HAS_DOWNLOAD_MODE := true
