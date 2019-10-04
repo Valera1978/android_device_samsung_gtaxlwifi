@@ -214,7 +214,7 @@ CHARGING_ENABLED_PATH := /sys/class/power_supply/battery/batt_lp_charging
 # RIL
 BOARD_VENDOR := samsung
 BOARD_MODEM_TYPE := tss310
-BOARD_PROVIDES_LIBRIL := true
+BOARD_PROVIDES_LIBRIL := false
 
 # Networking
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
