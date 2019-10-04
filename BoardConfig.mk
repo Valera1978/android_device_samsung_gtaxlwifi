@@ -227,7 +227,10 @@ DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
 # Ramdisk
-BOARD_ROOT_EXTRA_FOLDERS := efs
+BOARD_ROOT_EXTRA_FOLDERS := efs cpefs
+
+# Filesystem
+TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 
 # Recovery
 #RECOVERY_VARIANT := twrp
