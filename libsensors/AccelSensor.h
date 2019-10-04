@@ -34,10 +34,8 @@ class AccelSensor : public SensorBase {
     int mEnabled;
     InputEventCircularReader mInputReader;
     sensors_event_t mPendingEvent;
-    bool mHasPendingEvent;
     char input_sysfs_path[PATH_MAX];
     int input_sysfs_path_len;
-    float prev_axis[3];
     bool mIsInitialize;
 
     int setInitialState(int32_t handle);

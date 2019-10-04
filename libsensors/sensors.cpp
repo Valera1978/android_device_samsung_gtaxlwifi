@@ -63,7 +63,7 @@ static const struct sensor_t sSensorList[] = {
         .version    = 1,
         .handle     = SENSORS_ACCELERATION_HANDLE,
         .type       = SENSOR_TYPE_ACCELEROMETER,
-        .maxRange   = 39.2266f,
+        .maxRange   = 4.f * GRAVITY_EARTH,
         .resolution = 0.0011971008f,
         .power      = 0.13f,
         .minDelay   = 20000,
@@ -121,11 +121,11 @@ private:
         numFds,
     };
 
-    static const size_t wake = numFds - 1;
+    static const size_t wake = numSensorDrivers;
     static const char WAKE_MESSAGE = 'W';
     struct pollfd mPollFds[numFds];
-    int mWritePipeFd;
-    SensorBase* mSensors[numSensorDrivers];
+    int mWritePipeFd = 0;
+    SensorBase *mSensors[numSensorDrivers];
 
     int handleToDriver(int handle) const {
       switch (handle) {

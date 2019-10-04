@@ -33,22 +33,24 @@
 // come from kernel - drivers/sensors/k2hh.c
 #define MAX_ACCEL_1G          8192
 #define ACCEL_VALUE_COEFF     (1.f * GRAVITY_EARTH / MAX_ACCEL_1G)
-//#define ACCEL_VALUE_COEFF     (10.f * M_PI / MAX_ACCEL_1G)
+
+//#define TIME_LO_MASK 0x00000000FFFFFFFF
+//#define TIME_HI_MASK 0xFFFFFFFF00000000
+//#define TIME_HI_SHIFT 32
 
 /*****************************************************************************/
 AccelSensor::AccelSensor()
     : SensorBase(NULL, "accelerometer_sensor"),
     mEnabled(0),
     mInputReader(4),
-    mHasPendingEvent(false),
     mIsInitialize(false)
 {
-    prev_axis[0] = prev_axis[1] = prev_axis[2] = 0.f;
     memset(&mPendingEvent, 0, sizeof(mPendingEvent));
 
     mPendingEvent.version = sizeof(sensors_event_t);
     mPendingEvent.sensor = ID_A;
     mPendingEvent.type = SENSOR_TYPE_ACCELEROMETER;
+    mPendingEvent.acceleration.status = SENSOR_STATUS_ACCURACY_HIGH;
 
     if (data_fd) {
         strcpy(input_sysfs_path, "/sys/class/input/");
@@ -113,7 +115,6 @@ bool AccelSensor::hasPendingEvents() const {
     return false;
 }
 
-#define DIFF_VALUE(v1, v2)     abs(v1 - v2) > 0.5
 int AccelSensor::readEvents(sensors_event_t *data, int count)
 {
     if (count < 1)
@@ -125,9 +126,6 @@ int AccelSensor::readEvents(sensors_event_t *data, int count)
     int numEventReceived = 0;
     input_event const* event;
 
-    mPendingEvent.sensor = ID_A;
-    mPendingEvent.type = SENSOR_TYPE_ACCELEROMETER;
-
     while (count && mInputReader.readEvent(&event)) {
         int type = event->type;
         if (type == EV_REL) {
@@ -137,25 +135,19 @@ int AccelSensor::readEvents(sensors_event_t *data, int count)
                 mPendingEvent.acceleration.y = ACCEL_VALUE_COEFF * event->value;
             else if (event->code == EVENT_TYPE_ACCEL_Z)
                 mPendingEvent.acceleration.z = ACCEL_VALUE_COEFF * event->value;
+/*            else if (event->code == EVENT_TYPE_ACCEL_HI) {
+                int64_t timestamp = event->value;
+                mPendingEvent.timestamp = (timestamp << TIME_HI_SHIFT) + (mPendingEvent.timestamp & TIME_LO_MASK);
+            }
+            else if (event->code == EVENT_TYPE_ACCEL_LO)
+                mPendingEvent.timestamp = (mPendingEvent.timestamp & TIME_HI_SHIFT) + event->value; */
         } else if (type == EV_SYN) {
-            int enbl = mEnabled;
             mPendingEvent.timestamp = timevalToNano(event->time);
-
-/*            if (DIFF_VALUE(prev_axis[0], mPendingEvent.acceleration.x) ||
-                DIFF_VALUE(prev_axis[1], mPendingEvent.acceleration.y) ||
-                DIFF_VALUE(prev_axis[2], mPendingEvent.acceleration.z)) {*/
-
-//                ALOGE("AccelerometerSensor: dump (enable=%d, x=%f, y=%f, z=%f)", enbl, mPendingEvent.acceleration.x, mPendingEvent.acceleration.y, mPendingEvent.acceleration.z);
-
-                if (mEnabled) {
-                    *data++ = mPendingEvent;
-                    count--;
-                    numEventReceived++;
-/*                    prev_axis[0] = mPendingEvent.acceleration.x;
-                    prev_axis[1] = mPendingEvent.acceleration.y;
-                    prev_axis[2] = mPendingEvent.acceleration.z;*/
-                }
-//            }
+            if (mEnabled) {
+                *data++ = mPendingEvent;
+                count--;
+                numEventReceived++;
+            }
         } else
             ALOGE("AccelerometerSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
