@@ -18,9 +18,9 @@ package org.lineageos.settings.doze;
 
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.MenuItem;
 
