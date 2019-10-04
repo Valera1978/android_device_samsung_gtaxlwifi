@@ -1,0 +1,37 @@
+#============= init ==============
+allow init bluetooth_device:chr_file write;
+
+#============= shell ==============
+allow shell hal_telephony_hwservice:hwservice_manager add;
+allow shell mif_device:chr_file ioctl;
+allow shell radio_data_file:dir getattr;
+allow shell rild_exec:file execute_no_trans;
+
+#============= cbd ==============
+allow cbd efs_file:file { open read };
+allow cbd modemloader_prop:property_service set;
+allow cbd proc_cmdline:file { open read };
+
+#============= hal_camera_default ==============
+allow hal_camera_default vndbinder_device:chr_file { open read write ioctl };
+allow hal_camera_default camera_device:dir search;
+allow hal_camera_default camera_device:file { open read };
+
+#============= netd ==============
+allow netd sysfs:file { open write };
+
+#============= shell ==============
+allow shell self:udp_socket ioctl;
+allow shell shell:udp_socket ioctl;
+
+#============= untrusted_app ==============
+allow untrusted_app proc_vmstat:file { getattr open };
+
+#============= rild ==============
+allowxperm rild self:udp_socket ioctl priv_sock_ioctls;
+allow rild proc_qtaguid_stat:file { open read getattr };
+allow rild default_prop:property_service set;
+allow rild sec_efs_file:dir search;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default unlabeled:dir search;

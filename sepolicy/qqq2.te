@@ -1,0 +1,27 @@
+#============= fsck ==============
+allow fsck emmcblk_device:blk_file ioctl;
+allow fsck sec_efs_file:blk_file { getattr ioctl open read write };
+
+#============= init ==============
+allow init sec_efs_file:blk_file { getattr open read };
+allow init sec_efs_file:dir mounton;
+
+#============= priv_app ==============
+allow priv_app sysfs:file getattr;
+
+#============= rild ==============
+allow rild device:chr_file { ioctl open read };
+
+#============= system_server ==============
+allow system_server init:binder transfer;
+
+#============= ueventd ==============
+allow ueventd sec_efs_file:blk_file { getattr setattr };
+
+#============= vendor_init ==============
+allow vendor_init device:file { create write };
+
+#============= radio ==============
+allow radio gpu_service:service_manager find;
+allow radio gpuservice:binder call;
+

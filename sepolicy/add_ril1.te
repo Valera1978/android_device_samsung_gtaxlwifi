@@ -1,0 +1,33 @@
+#============= gpsd ==============
+allow gpsd system_file:dir { open read };
+
+#============= hal_camera_default ==============
+allow hal_camera_default camera_device:file getattr;
+
+#============= mediadrmserver ==============
+allow mediadrmserver media_data_file:dir { open getattr read search };
+allow mediadrmserver media_data_file:file { read getattr open };
+
+#============= priv_app ==============
+allow priv_app sysfs:dir open;
+allow priv_app sysfs:file { read open };
+
+#============= untrusted_app_27 ==============
+allow untrusted_app_27 apk_data_file:file setattr;
+allow untrusted_app_27 proc_tty_drivers:file read;
+allow untrusted_app_27 proc_vmstat:file open;
+allow untrusted_app_27 sysfs_net:dir search;
+allow untrusted_app_27 proc:file read;
+allow untrusted_app_27 proc_stat:file open;
+
+#============= vendor_init ==============
+allow vendor_init wifi_data_file:dir { add_name create setattr write };
+
+#============= wificond ==============
+allow wificond wifi_data_file:file { read write };
+
+#============= shell ==============
+allow shell kernel:system syslog_read;
+
+#============= hal_wifi_hostapd_default ==============
+allow hal_wifi_hostapd_default rfkill_device:chr_file { open read };

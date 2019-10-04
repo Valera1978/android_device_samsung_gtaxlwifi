@@ -1,0 +1,27 @@
+#============= hal_wifi_default ==============
+allow hal_wifi_default rootfs:file { getattr open read };
+allow hal_wifi_default self:capability { sys_module sys_resource };
+allow hal_wifi_default system_data_file:file { open read write };
+
+#============= init ==============
+allow init socket_device:sock_file unlink;
+
+#============= untrusted_app_27 ==============
+allow untrusted_app_27 proc:file { getattr open };
+allow untrusted_app_27 apk_data_file:file setattr;
+allow untrusted_app_27 proc_tty_drivers:file { open getattr };
+
+#============= rild ==============
+allow rild imei_efs_file:file write;
+
+#============= dnsmasq ==============
+allow dnsmasq netd:fifo_file getattr;
+allow dnsmasq netd:unix_stream_socket getattr;
+
+#============= kernel ==============
+allow kernel self:capability dac_override;
+allow kernel system_data_file:file { open write };
+allow kernel wifi_efs_file:file open;
+
+#============= vold ==============
+allow vold self:capability sys_resource;
