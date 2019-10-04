@@ -104,7 +104,7 @@ QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 
 # Samsung HALs
-TARGET_AUDIOHAL_VARIANT := samsung
+#TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Lineage HW
