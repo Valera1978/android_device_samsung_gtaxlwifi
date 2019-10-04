@@ -33,7 +33,6 @@ LightSensor::LightSensor()
     : SensorBase(NULL, "light_sensor"),
     mEnabled(0),
     mInputReader(4),
-    mHasPendingEvent(false),
     mPreviousLight(0.f)
 {
     memset(&mPendingEvent, 0, sizeof(mPendingEvent));
@@ -98,20 +97,13 @@ int LightSensor::enable(int32_t handle, int en)
 }
 
 bool LightSensor::hasPendingEvents() const {
-    return mHasPendingEvent;
+    return false;
 }
 
 int LightSensor::readEvents(sensors_event_t* data, int count)
 {
     if (count < 1)
         return -EINVAL;
-
-    if (mHasPendingEvent) {
-        mHasPendingEvent = false;
-        mPendingEvent.timestamp = getTimestamp();
-        *data = mPendingEvent;
-        return mEnabled ? 1 : 0;
-    }
 
     ssize_t n = mInputReader.fill(data_fd);
     if (n < 0)
