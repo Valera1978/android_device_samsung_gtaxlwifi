@@ -59,10 +59,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - fixes for build (repopick)
-
-. picks.sh
-
   - Build cm17
 
 brunch gtaxlwifi
