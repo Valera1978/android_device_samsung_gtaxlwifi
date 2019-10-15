@@ -94,6 +94,7 @@ TARGET_COPY_OUT_VENDOR := system/vendor
 
 # Audio
 USE_XML_AUDIO_POLICY_CONF := 1
+AUDIOSERVER_MULTILIB := 32
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -104,7 +105,7 @@ QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 
 # Samsung HALs
-#TARGET_AUDIOHAL_VARIANT := samsung
+TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
 # Lineage HW
