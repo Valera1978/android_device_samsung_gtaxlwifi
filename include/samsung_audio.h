@@ -22,18 +22,9 @@
 #define MIXER_CARD 0
 #define SOUND_CARD 0
 
-/*
-	<pcmdai playback_link="4" />
-	<pcmdai playback_deep_link="5" />
-	<pcmdai playback_jam_link="6" />
-	<pcmdai capture_link="0" />
-	<pcmdai baseband_link="2" />
-	<pcmdai bluetooth_link="3" />
-*/
-
 /* Playback */
-#define SOUND_DEEP_BUFFER_DEVICE 5
-#define SOUND_PLAYBACK_DEVICE 4
+#define SOUND_DEEP_BUFFER_DEVICE 1
+#define SOUND_PLAYBACK_DEVICE 0
 #define SOUND_PLAYBACK_SCO_DEVICE 3
 
 /* Capture */
