@@ -32,6 +32,9 @@ debug.sf.enable_hwc_vds=1
 ro.sf.lcd_density=240
 lockscreen.rot_override=true
 
+# Disable more Codec2.0 components
+debug.stagefright.ccodec=0
+
 # ro.product.first_api_level indicates the first api level the device has commercially launched on.
 ro.product.first_api_level=23
 
