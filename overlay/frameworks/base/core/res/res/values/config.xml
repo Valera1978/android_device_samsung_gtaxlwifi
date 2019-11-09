@@ -187,7 +187,7 @@
     <integer name="config_autoBrightnessInitialLightSensorRate">50</integer>
 
     <!-- Boolean to enable stk functionality on Samsung phones -->
-<!--    <bool name="config_samsung_stk">true</bool> -->
+    <!--    <bool name="config_samsung_stk">true</bool> -->
 
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
@@ -228,7 +228,7 @@
          Note: This is declared in both values/config.xml and values-sw600dp/config.xml.
                It is actually the latter definition that wins but overlay both
                to be on the safe side.
- -->
+    -->
     <bool name="config_enableLockScreenRotation">true</bool>
 
     <!-- If true, the screen can be rotated via the accelerometer in all 4
@@ -244,14 +244,22 @@
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
 
     <!-- Enable blur support -->
-<!--    <bool name="config_uiBlurEnabled">true</bool> -->
+    <!-- <bool name="config_uiBlurEnabled">true</bool> -->
 
-<!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
       it causes the device to wake up.
       The default is false. -->
     <bool name="config_lidControlsSleep">true</bool>
+
+    <!-- Enable Night display, which requires HWC 2.0. -->
+    <bool name="config_nightDisplayAvailable">true</bool>
+
+    <!-- The list of components which should be automatically disabled for a specific device. -->
+    <string-array name="config_deviceDisabledComponents" translatable="false">
+        <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
+    </string-array>
 
 </resources>
