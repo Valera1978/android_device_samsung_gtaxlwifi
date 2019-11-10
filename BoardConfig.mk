@@ -110,9 +110,6 @@ QCOM_BT_USE_SMD_TTY := true
 TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
-# Lineage HW
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(LOCAL_PATH)/lineagehw|**/*.java
-
 # Samsung Camera
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 TARGET_USES_MEDIA_EXTENSIONS := true
