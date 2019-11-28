@@ -291,8 +291,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    lights.universal7870
+    android.hardware.light@2.0-service.samsung
 
 # Sensors
 PRODUCT_PACKAGES += \

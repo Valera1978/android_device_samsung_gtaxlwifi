@@ -126,3 +126,5 @@
 /sys/devices/soc0/machine    u:object_r:gps_data_file:s0
 
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service.widevine     u:object_r:drm_exec:s0
+
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.samsung               u:object_r:hal_light_default_exec:s0
