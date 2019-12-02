@@ -203,10 +203,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
-# Custom wifi service
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init/android.hardware.wifi@1.0-service-lazy.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service-lazy.rc
-
 PRODUCT_PACKAGES += \
     hostapd \
     libqsap_sdk \
@@ -215,7 +211,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wificond \
-    android.hardware.wifi@1.0-service-lazy
+    android.hardware.wifi@1.0-service.exynos7870
 
 # Bluetooth
 PRODUCT_PACKAGES += \
