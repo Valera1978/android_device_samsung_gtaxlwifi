@@ -193,7 +193,7 @@ PRODUCT_COPY_FILES += \
 
 # Custom wifi service
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init/android.hardware.wifi@1.0-service-lazy.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service-lazy.rc
+    $(LOCAL_PATH)/configs/init/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
 
 PRODUCT_PACKAGES += \
     hostapd \
@@ -203,7 +203,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wificond \
-    android.hardware.wifi@1.0-service-lazy
+    android.hardware.wifi@1.0-service
 
 # Bluetooth
 PRODUCT_PACKAGES += \
