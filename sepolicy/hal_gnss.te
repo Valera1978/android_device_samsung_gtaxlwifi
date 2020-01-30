@@ -1,0 +1,2 @@
+allow hal_gnss_default gps_data_file:fifo_file { open write };
+allow hal_gnss_default gps_data_file:dir { write add_name };

@@ -1,0 +1,11 @@
+allow bootanim debugfs_tracing_debug:file { open write };
+allow zygote debugfs_tracing_debug:file { open write getattr };
+allow mediacodec debugfs_tracing_debug:file { open write };
+allow adbd debugfs_tracing_debug:file { open write };
+allow dex2oat debugfs_tracing_debug:file { open write };
+allow hal_memtrack_default debugfs:dir { open read };
+allow hal_memtrack_default debugfs:file { open read getattr };
+allow audioserver debugfs_tracing_debug:file { open write };
+allow installd debugfs_tracing_debug:file { open write };
+allow mediaserver debugfs_tracing_debug:file { open write };
+allow webview_zygote debugfs_tracing_debug:file { open write getattr };

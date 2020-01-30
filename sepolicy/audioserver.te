@@ -8,3 +8,4 @@ allow audioserver imei_efs_file:file { read open getattr };
 allow audioserver audio_prop:property_service set;
 allow audioserver init:unix_stream_socket connectto;
 allow audioserver property_socket:sock_file write;
+allow audioserver debugfs_tracing_debug:file { open write };
