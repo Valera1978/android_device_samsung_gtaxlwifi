@@ -44,10 +44,10 @@ allow mediaserver gpsd_exec:file getattr;
 allow surfaceflinger gpsd_exec:file getattr;
 
 #============= sysinit ==============
-allow sysinit gpsd_exec:file getattr;
+#allow sysinit gpsd_exec:file getattr;
 
 #============= hal_allocator_default ==============
-allow hal_allocator_default gpsd_exec:file getattr;
+#allow hal_allocator_default gpsd_exec:file getattr;
 
 #============= hal_drm_default ==============
 allow hal_drm_default gpsd_exec:file getattr;
