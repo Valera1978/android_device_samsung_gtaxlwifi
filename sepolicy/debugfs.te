@@ -1,3 +1,4 @@
+allow init debugfs_tracing_debug:file write;
 allow bootanim debugfs_tracing_debug:file { open write };
 allow zygote debugfs_tracing_debug:file { open write getattr };
 allow mediacodec debugfs_tracing_debug:file { open write };
@@ -9,3 +10,9 @@ allow audioserver debugfs_tracing_debug:file { open write };
 allow installd debugfs_tracing_debug:file { open write };
 allow mediaserver debugfs_tracing_debug:file { open write };
 allow webview_zygote debugfs_tracing_debug:file { open write getattr };
+allow netd debugfs_tracing_debug:file { open write };
+allow vold debugfs_tracing_debug:file write;
+allow hal_drm_default debugfs_tracing_debug:file write;
+allow crash_dump debugfs_tracing_debug:file write;
+allow hal_camera_default debugfs_tracing_debug:file write;
+allow cameraserver debugfs_tracing_debug:file write;

@@ -39,3 +39,24 @@ allow sgdisk gpsd_exec:file getattr;
 
 #============= mediaserver ==============
 allow mediaserver gpsd_exec:file getattr;
+
+#============= surfaceflinger ==============
+allow surfaceflinger gpsd_exec:file getattr;
+
+#============= sysinit ==============
+allow sysinit gpsd_exec:file getattr;
+
+#============= hal_allocator_default ==============
+allow hal_allocator_default gpsd_exec:file getattr;
+
+#============= hal_drm_default ==============
+allow hal_drm_default gpsd_exec:file getattr;
+
+#============= wificond ==============
+allow wificond gpsd_exec:file getattr;
+
+#============= hal_camera_default ==============
+allow hal_camera_default gpsd_exec:file getattr;
+
+#============= cameraserver ==============
+allow cameraserver gpsd_exec:file getattr;
