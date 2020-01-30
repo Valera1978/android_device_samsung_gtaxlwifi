@@ -1,0 +1,2 @@
+allow untrusted_app_27 gpsd_exec:file getattr;
+allow untrusted_app_27 rootfs:dir { open read };

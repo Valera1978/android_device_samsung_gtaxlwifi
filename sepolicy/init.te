@@ -54,7 +54,7 @@ allow init self:tcp_socket create;
 allow init fwmarkd_socket:sock_file write;
 
 allow init hidl_base_hwservice:hwservice_manager add;
-allow init ion_device:chr_file { write ioctl };
+allow init ion_device:chr_file { read write ioctl };
 allow init mediadrmserver:binder transfer;
 allow init self:process execmem;
 

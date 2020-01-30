@@ -14,7 +14,7 @@ allow hal_sensors_default input_device:chr_file read;
 allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };
 
 #============= netd ==============
-allow netd gpsd_exec:file getattr;
+allow netd gpsd_exec:file { write getattr };
 
 #============= tee ==============
 allow tee gpsd_exec:file getattr;
@@ -33,3 +33,9 @@ allow hal_sensors_default input_device:chr_file { ioctl open };
 
 #============= healthd ==============
 allow healthd gpsd_exec:file getattr;
+
+#============= sgdisk ==============
+allow sgdisk gpsd_exec:file getattr;
+
+#============= mediaserver ==============
+allow mediaserver gpsd_exec:file getattr;
