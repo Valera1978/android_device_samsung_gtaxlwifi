@@ -20,3 +20,5 @@ allow surfaceflinger debugfs_tracing_debug:file { open write };
 allow hal_cas_default debugfs_tracing_debug:file { open write };
 allow gatekeeperd debugfs_tracing_debug:file { open write };
 allow hal_sensors_default debugfs_tracing_debug:file { open write };
+allow keystore debugfs_tracing_debug:file { open write };
+allow hal_lineage_trust_default debugfs_tracing_debug:file { open write };
