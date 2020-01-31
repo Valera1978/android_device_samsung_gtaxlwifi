@@ -10,5 +10,6 @@ allow cameraserver camera_data_file:file { read open };
 
 allow cameraserver media_rw_data_file:dir search;
 
-allow hal_camera_default vndbinder_device:chr_file read;
+allow hal_camera_default vndbinder_device:chr_file { ioctl open read write };
 allow hal_camera_default camera_device:dir search;
+allow hal_camera_default camera_device:file read;
