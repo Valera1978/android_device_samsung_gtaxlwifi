@@ -1,0 +1,2 @@
+allow hal_graphics_allocator_default gpsd_exec:file getattr;
+allow hal_graphics_allocator_default debugfs_tracing_debug:file { open write };
