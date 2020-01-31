@@ -1,14 +1,13 @@
 allow audioserver gpsd_exec:file getattr;
 allow bootanim gpsd_exec:file getattr;
 allow gpsd sysfs:file write;
-allow hal_sensors_default input_device:chr_file read;
 allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };
 allow netd gpsd_exec:file { write getattr };
 allow tee gpsd_exec:file getattr;
 allow untrusted_app_25 proc_vmstat:file getattr;
 allow zygote gpsd_exec:file getattr;
 allow hal_cas_default gpsd_exec:file getattr;
-allow hal_sensors_default input_device:chr_file { ioctl open };
+allow hal_sensors_default input_device:chr_file { ioctl open read };
 allow healthd gpsd_exec:file getattr;
 allow sgdisk gpsd_exec:file getattr;
 allow mediaserver gpsd_exec:file getattr;
