@@ -20,6 +20,7 @@ allow hal_power_default sysfs:file { open read write };
 allow hal_power_default sysfs:dir { open read write };
 allow hal_power_default sysfs_devices_system_cpu:file write;
 allow hal_lineage_touch_default sysfs:file { getattr open read write };
+allow netd sysfs:file { open read write };
 
 # Untrusted apps
 allow untrusted_app sysfs:dir { getattr open read };
