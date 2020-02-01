@@ -2,3 +2,6 @@ allow hal_sensors_default input_device:dir { open read search };
 allow surfaceflinger sysfs:file { read open getattr };
 allow hal_sensors_default efs_file:dir search;
 allow init bluetooth_device:chr_file { write ioctl };
+allow vndservicemanager hal_graphics_composer_default:dir search;
+allow vndservicemanager hal_graphics_composer_default:file { open read };
+allow vndservicemanager hal_graphics_composer_default:process getattr;
