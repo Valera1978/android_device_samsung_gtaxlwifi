@@ -26,3 +26,5 @@ allow gpsd toolbox_exec:file { open read execute getattr execute_no_trans };
 allow gpsd vendor_toolbox_exec:file execute_no_trans;
 allow gpsd rild:unix_stream_socket connectto;
 allow gpsd sysfs_wake_lock:file read;
+allow gpsd port:tcp_socket name_connect;
+allow gpsd gpsd:tcp_socket { create connect };
