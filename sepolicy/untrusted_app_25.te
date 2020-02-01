@@ -4,3 +4,8 @@ allow untrusted_app_25 rootfs:dir read;
 allow untrusted_app_25 proc:file getattr;
 allow untrusted_app_25 proc_stat:file { getattr open };
 allow untrusted_app_25 gpsd_exec:file getattr;
+allow untrusted_app_25 camera_device:dir search;
+allow untrusted_app_25 camera_device:file { open read getattr };
+allow untrusted_app_25 serialno_prop:file { open read getattr };
+allow untrusted_app_25 proc_asound:dir search;
+allow untrusted_app_25 proc_asound:file { open read getattr };
