@@ -23,3 +23,11 @@ type biometrics_data_file, file_type;
 
 #type mobicore_data_file, file_type;
 type sswap_data_file, file_type;
+
+type sysinit, file_type;
+
+type hal_allocator_default, file_type;
+
+type storaged, file_type;
+
+type statsd, file_type;

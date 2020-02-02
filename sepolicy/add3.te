@@ -41,3 +41,7 @@ allow mediametrics gpsd_exec:file getattr;
 allow drmserver gpsd_exec:file getattr;
 allow mediacodec gpsd_exec:file getattr;
 allow hal_sensors_default gpsd_exec:file getattr;
+allow sysinit gpsd_exec:file getattr;
+allow hal_allocator_default gpsd_exec:file getattr;
+allow statsd gpsd_exec:file getattr;
+allow storaged gpsd_exec:file getattr;
