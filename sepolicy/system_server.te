@@ -31,3 +31,6 @@ allow system_server gpsd:unix_stream_socket connectto;
 allow system_server gps_data_file:dir { add_name search write remove_name };
 allow system_server crash_dump:process getpgid;
 allow system_server gps_data_file:file { getattr setattr open write create unlink };
+
+allow system_server exfat:dir { open read write };
+allow system_server vfat:dir { open read write };

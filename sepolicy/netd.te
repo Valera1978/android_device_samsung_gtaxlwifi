@@ -9,3 +9,5 @@ allow netd gpsd:udp_socket { setopt getopt read write };
 allow netd gpsd:tcp_socket { setopt getopt read write };
 allow netd init:udp_socket { read write };
 allow netd untrusted_app:unix_stream_socket { read write };
+
+allow dnsmasq netd:fifo_file getattr;
