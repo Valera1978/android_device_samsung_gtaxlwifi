@@ -4,3 +4,5 @@ allow untrusted_app untrusted_app:udp_socket ioctl;
 allow untrusted_app proc_stat:file { open getattr };
 allow untrusted_app gpsd_exec:file getattr;
 #allow untrusted_app proc_version:file { open read getattr };
+allow untrusted_app serialno_prop:file { open read getattr };
+allow untrusted_app storage_stub_file:dir getattr;

@@ -45,3 +45,6 @@ allow sysinit gpsd_exec:file getattr;
 allow hal_allocator_default gpsd_exec:file getattr;
 allow statsd gpsd_exec:file getattr;
 allow storaged gpsd_exec:file getattr;
+allow hal_wifi_hostapd_default gpsd_exec:file getattr;
+allow hal_wifi_hostapd_default rfkill_device:chr_file { open read };
+allow dnsmasq gpsd_exec:file getattr;
