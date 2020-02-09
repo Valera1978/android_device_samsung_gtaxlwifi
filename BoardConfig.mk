@@ -264,9 +264,7 @@ VENDOR_SECURITY_PATCH := 2018-11-01
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
-#BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
-
-include $(LOCAL_PATH)/sepolicy_tmp/sepolicy.mk
+BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
 
 # Inherit from the proprietary version
 -include vendor/samsung/gtaxlwifi/BoardConfigVendor.mk

@@ -419,7 +419,7 @@ service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     user gps
     group system inet net_raw wakelock
     ioprio be 0
-#    seclabel u:r:gpsd:s0
+    seclabel u:r:gpsd:s0
 
 # LPM
 service charger /charger
@@ -448,7 +448,7 @@ service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmm
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
-#    seclabel u:r:cbd:s0
+    seclabel u:r:cbd:s0
     oneshot
 
 # RPMB daemon
