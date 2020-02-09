@@ -314,10 +314,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.secure=0
 
-# Root
-PRODUCT_PACKAGES += \
-    su
-
 # Offmode charger
 PRODUCT_PACKAGES += \
     charger_res_images \
