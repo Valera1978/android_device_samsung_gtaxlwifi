@@ -29,7 +29,6 @@ allow hal_memtrack_default debugfs_tracing_debug:file { open write };
 allow hal_usb_default debugfs_tracing_debug:file { open write };
 allow healthd debugfs_tracing_debug:file { open write };
 allow hal_configstore_default debugfs_tracing_debug:file { open write };
-allow thermalserviced debugfs_tracing_debug:file { open write };
 allow hal_lineage_touch_default debugfs_tracing_debug:file { open write };
 allow usbd debugfs_tracing_debug:file { open write };
 allow hal_wifi_default debugfs_tracing_debug:file { open write };
