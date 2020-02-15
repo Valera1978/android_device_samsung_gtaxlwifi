@@ -34,3 +34,9 @@ allow system_server gps_data_file:file { getattr setattr open write create unlin
 
 allow system_server exfat:dir { open read write };
 allow system_server vfat:dir { open read write };
+
+allow system_server adb_data_file:file { getattr open read };
+allow system_server adb_data_file:dir { getattr open read search };
+
+allow system_server init:process signal;
+

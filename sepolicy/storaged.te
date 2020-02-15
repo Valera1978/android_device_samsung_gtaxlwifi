@@ -1,0 +1,2 @@
+allow storaged debugfs_tracing_debug:file { open write };
+allow storaged device:file { open read write };

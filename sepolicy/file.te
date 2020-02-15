@@ -25,3 +25,18 @@ type biometrics_data_file, file_type;
 type sswap_data_file, file_type;
 
 type sysinit, file_type;
+
+type system_suspend, file_type;
+
+type adbroot, file_type;
+
+type gsid, file_type;
+
+type storaged, file_type;
+
+type hal_allocator_default, file_type;
+
+type dex2oat, file_type;
+
+type blank_screen, file_type;
+
