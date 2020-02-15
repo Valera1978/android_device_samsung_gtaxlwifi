@@ -6,3 +6,4 @@ allow untrusted_app gpsd_exec:file getattr;
 #allow untrusted_app proc_version:file { open read getattr };
 allow untrusted_app serialno_prop:file { open read getattr };
 allow untrusted_app storage_stub_file:dir getattr;
+allow untrusted_app rootfs:dir { open read };

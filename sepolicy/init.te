@@ -64,3 +64,9 @@ allow init system_data_file:file rename;
 allow init pmsg_device:chr_file { open read };
 
 allow init bluetooth_device:chr_file { open read };
+
+allow init vndbinder_device:chr_file { open read write ioctl };
+
+allow init gps_data_file:fifo_file write;
+
+allow init hal_lineage_touch_hwservice:hwservice_manager add;
