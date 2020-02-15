@@ -44,5 +44,5 @@ allow gpuservice debugfs_tracing_debug:file { open write };
 allow hal_allocator_default debugfs_tracing_debug:file { open write };
 allow dex2oat debugfs_tracing_debug:file { open write };
 allow blank_screen debugfs_tracing_debug:file { open write };
-allow system_server debugfs_tracing_debug:file { open read write };
+allow system_server debugfs_tracing_debug:file { getattr open read write };
 
