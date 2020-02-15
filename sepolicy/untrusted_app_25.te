@@ -8,6 +8,5 @@ allow untrusted_app_25 camera_device:file { open read getattr };
 allow untrusted_app_25 serialno_prop:file { open read getattr };
 allow untrusted_app_25 proc_asound:dir search;
 allow untrusted_app_25 proc_asound:file { open read getattr };
-allow untrusted_app_25 rootfs:dir { open read };
 allow untrusted_app_25 adb_data_file:file { getattr open read execute };
 allow untrusted_app_25 adb_data_file:dir { getattr search };
