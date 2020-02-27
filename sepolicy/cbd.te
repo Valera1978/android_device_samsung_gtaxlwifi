@@ -48,3 +48,6 @@ allow cbd sysfs:file { read open write };
 set_prop(cbd, cbd_prop)
 set_prop(cbd, radio_prop)
 set_prop(cbd, system_prop)
+
+allow cbd proc_cmdline:file { open read };
+allow cbd modemloader_prop:property_service set;

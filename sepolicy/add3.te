@@ -1,35 +1,47 @@
-#============= audioserver ==============
 allow audioserver gpsd_exec:file getattr;
-
-#============= bootanim ==============
 allow bootanim gpsd_exec:file getattr;
-
-#============= gpsd ==============
 allow gpsd sysfs:file write;
-
-#============= hal_sensors_default ==============
-allow hal_sensors_default input_device:chr_file read;
-
-#============= hal_wifi_supplicant_default ==============
 allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };
-
-#============= netd ==============
-allow netd gpsd_exec:file getattr;
-
-#============= tee ==============
+allow netd gpsd_exec:file { write getattr };
 allow tee gpsd_exec:file getattr;
-
-#============= untrusted_app_25 ==============
 allow untrusted_app_25 proc_vmstat:file getattr;
-
-#============= zygote ==============
 allow zygote gpsd_exec:file getattr;
-
-#============= hal_cas_default ==============
 allow hal_cas_default gpsd_exec:file getattr;
-
-#============= hal_sensors_default ==============
-allow hal_sensors_default input_device:chr_file { ioctl open };
-
-#============= healthd ==============
+allow hal_sensors_default input_device:chr_file { ioctl open read };
 allow healthd gpsd_exec:file getattr;
+allow sgdisk gpsd_exec:file getattr;
+allow mediaserver gpsd_exec:file getattr;
+allow surfaceflinger gpsd_exec:file getattr;
+allow hal_drm_default gpsd_exec:file getattr;
+allow wificond gpsd_exec:file getattr;
+allow hal_camera_default gpsd_exec:file getattr;
+allow cameraserver gpsd_exec:file getattr;
+allow hal_configstore_default gpsd_exec:file getattr;
+allow hal_gnss_default gpsd_exec:file getattr;
+allow hal_lineage_trust_default gpsd_exec:file getattr;
+allow usbd gpsd_exec:file getattr;
+allow tombstoned gpsd_exec:file getattr;
+allow hal_memtrack_default gpsd_exec:file getattr;
+allow hal_power_default gpsd_exec:file getattr;
+allow hal_usb_default gpsd_exec:file getattr;
+allow hal_wifi_default gpsd_exec:file getattr;
+allow hal_lineage_touch_default gpsd_exec:file getattr;
+allow hal_lineage_touch_default_exec gpsd_exec:file getattr;
+allow lmkd gpsd_exec:file getattr;
+allow installd gpsd_exec:file getattr;
+allow keystore gpsd_exec:file getattr;
+allow gatekeeperd gpsd_exec:file getattr;
+allow incidentd gpsd_exec:file getattr;
+allow hal_wifi_supplicant_default gpsd_exec:file getattr;
+allow system_server gpsd_exec:file getattr;
+allow mediadrmserver gpsd_exec:file getattr;
+allow mediaextractor gpsd_exec:file getattr;
+allow mediametrics gpsd_exec:file getattr;
+allow drmserver gpsd_exec:file getattr;
+allow mediacodec gpsd_exec:file getattr;
+allow hal_sensors_default gpsd_exec:file getattr;
+allow sysinit gpsd_exec:file getattr;
+allow statsd gpsd_exec:file getattr;
+allow hal_wifi_hostapd_default gpsd_exec:file getattr;
+allow hal_wifi_hostapd_default rfkill_device:chr_file { open read };
+allow dnsmasq gpsd_exec:file getattr;

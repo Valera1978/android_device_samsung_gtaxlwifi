@@ -15,9 +15,6 @@ allow vendor_init sysfs:lnk_file setattr;
 #============= vold ==============
 allow vold hal_bootctl_hwservice:hwservice_manager find;
 
-#============= fsck ==============
-allow fsck emmcblk_device:blk_file ioctl;
-
 #============= priv_app ==============
 allow priv_app system_data_file:dir { open read };
 

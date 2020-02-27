@@ -1,5 +1,4 @@
 #============= fsck ==============
-allow fsck emmcblk_device:blk_file ioctl;
 allow fsck sec_efs_file:blk_file { getattr ioctl open read write };
 
 #============= init ==============
@@ -25,3 +24,14 @@ allow vendor_init device:file { create write };
 allow radio gpu_service:service_manager find;
 allow radio gpuservice:binder call;
 
+allow vendor_init wifi_data_file:dir search;
+
+allow vendor_init media_rw_data_file:dir search;
+
+allow crash_dump init:process ptrace;
+
+allow priv_app adb_data_file:file { getattr open read execute };
+allow priv_app adb_data_file:dir { getattr search };
+
+allow platform_app adb_data_file:file { getattr open read execute };
+allow platform_app adb_data_file:dir { getattr search };

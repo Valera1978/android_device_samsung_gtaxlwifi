@@ -1,3 +1,8 @@
 neverallow fsck_untrusted {
  efs_block_device
 }:blk_file no_rw_file_perms;
+
+allow fsck_untrusted gpsd_exec:file getattr;
+
+allow fsck_untrusted vold_device:blk_file ioctl;
+

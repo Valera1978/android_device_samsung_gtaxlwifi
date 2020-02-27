@@ -17,3 +17,7 @@ allow kernel app_efs_file:file { read write open };
 allow kernel efs_file:dir search;
 allow kernel battery_efs_file:dir { search open read };
 allow kernel battery_efs_file:file { read open };
+
+allow kernel wifi_efs_file:file open;
+
+allow kernel kernel:capability dac_override;

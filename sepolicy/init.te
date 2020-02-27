@@ -54,9 +54,19 @@ allow init self:tcp_socket create;
 allow init fwmarkd_socket:sock_file write;
 
 allow init hidl_base_hwservice:hwservice_manager add;
-allow init ion_device:chr_file { write ioctl };
+allow init ion_device:chr_file { read write ioctl };
 allow init mediadrmserver:binder transfer;
 allow init self:process execmem;
 
 allow init secmem_device:chr_file { ioctl write };
 allow init system_data_file:file rename;
+
+allow init pmsg_device:chr_file { open read };
+
+allow init bluetooth_device:chr_file { open read };
+
+allow init vndbinder_device:chr_file { open read write ioctl };
+
+allow init gps_data_file:fifo_file write;
+
+allow init hal_lineage_touch_hwservice:hwservice_manager add;

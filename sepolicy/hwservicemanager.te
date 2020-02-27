@@ -2,3 +2,7 @@ allow hwservicemanager drm:binder call;
 allow hwservicemanager drm:dir search;
 allow hwservicemanager drm:file { read open };
 allow hwservicemanager drm:process getattr;
+allow hwservicemanager gpsd:dir search;
+allow hwservicemanager gpsd:file { open read };
+allow hwservicemanager gpsd:process getattr;
+allow hwservicemanager gpsd:binder transfer;
