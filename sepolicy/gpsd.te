@@ -16,7 +16,7 @@ allow gpsd sysfs:file { getattr read open };
 allow gpsd sysfs_wake_lock:file { write open };
 
 allow gpsd dnsproxyd_socket:sock_file write;
-allow gpsd mif_device:chr_file { read open ioctl};
+allow gpsd mif_device:chr_file { read open ioctl };
 allow gpsd self:udp_socket { create bind connect read setopt write };
 allow gpsd netd:unix_stream_socket connectto;
 allow gpsd shell_exec:file { open read execute execute_no_trans };
@@ -26,9 +26,12 @@ allow gpsd toolbox_exec:file { open read execute getattr execute_no_trans };
 allow gpsd vendor_toolbox_exec:file execute_no_trans;
 allow gpsd rild:unix_stream_socket connectto;
 allow gpsd sysfs_wake_lock:file read;
-allow gpsd port:tcp_socket name_connect;
-allow gpsd gpsd:tcp_socket { create connect getopt };
+allow gpsd port:tcp_socket { name_connect name_bind node_bind };
+allow gpsd gpsd:tcp_socket { create connect getopt bind };
 allow gpsd vendor_file:file entrypoint;
 allow gpsd hwservicemanager_prop:file { getattr open read };
 allow gpsd hwservicemanager_prop:binder call;
 allow gpsd hwservicemanager:binder call;
+allow gpsd bluetooth_device:chr_file { open read write ioctl };
+allow gpsd node:tcp_socket node_bind;
+
