@@ -39,6 +39,9 @@ on post-fs-data
     rm /data/system/gps/smd_started
     rm /data/system/gps/sv_cno.info
 
+    # GnssConfiguration doesn't actually look at gps.conf, just the debug file
+    mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
+
     setprop vold.post_fs_data_done 1
 
 on boot
