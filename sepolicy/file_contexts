@@ -109,8 +109,8 @@
 #
 
 #/system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
-/system/bin/macloader        u:object_r:macloader_exec:s0
-/system/bin/modemloader      u:object_r:modemloader_exec:s0
+/vendor/bin/macloader        u:object_r:macloader_exec:s0
+/vendor/bin/modemloader      u:object_r:modemloader_exec:s0
 
 /vendor/bin/cbd              u:object_r:cbd_exec:s0
 /vendor/bin/sswap            u:object_r:sswap_exec:s0
