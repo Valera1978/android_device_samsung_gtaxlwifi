@@ -27,11 +27,11 @@ allow gpsd vendor_toolbox_exec:file execute_no_trans;
 allow gpsd rild:unix_stream_socket connectto;
 allow gpsd sysfs_wake_lock:file read;
 allow gpsd port:tcp_socket { name_connect name_bind node_bind };
-allow gpsd gpsd:tcp_socket { create connect getopt bind };
+allow gpsd gpsd:tcp_socket { create connect getopt bind write };
 allow gpsd vendor_file:file entrypoint;
 allow gpsd hwservicemanager_prop:file { getattr open read };
 allow gpsd hwservicemanager_prop:binder call;
 allow gpsd hwservicemanager:binder call;
-allow gpsd bluetooth_device:chr_file { open read write ioctl };
+allow gpsd bluetooth_device:chr_file { getattr open read write ioctl };
 allow gpsd node:tcp_socket node_bind;
 
