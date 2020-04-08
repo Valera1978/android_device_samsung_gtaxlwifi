@@ -4,7 +4,7 @@ type bluetooth_device, dev_type;
 type bbd_device, dev_type;
 
 # /dev/block/mmcblk0p[0-9] (/dev/mbin0)
-type emmcblk_device, file_type;
+type emmcblk_device, file_type, dev_type, mlstrustedsubject;
 
 # /dev/umts_boot*, /dev/ehci_power
 type mif_device, dev_type;
