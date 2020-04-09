@@ -1,12 +1,7 @@
 # Wi-Fi init file
 
 on post-fs-data
-
-    #Load Wifi Driver
-#    insmod /modules/qca_cld/qca_cld_wlan.ko
-#    setprop wlan.driver.status ok
-
-    # give system access to wpa_supplicant.conf for backup and restore
+    # give system access to wpa_supplicant.conf for backing up and restoring
     mkdir /data/misc/wifi 0770 wifi system
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     chown system wifi /data/misc/wifi/p2p_supplicant.conf

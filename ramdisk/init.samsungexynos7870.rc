@@ -7,10 +7,10 @@ import /vendor/etc/init/hw/init.samsung.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
+
 on init
     start watchdogd
 
-    # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
@@ -23,21 +23,18 @@ on init
     symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
 
 on post-fs-data
-# Log data folder
-#   mkdir /data/log 0771 radio system
-
-# C-STATE
+    # C-STATE
     chown system system /sys/module/cpuidle/parameters/off
     chmod 0660 /sys/module/cpuidle/parameters/off
 
-# CPU Idle
+    # CPU Idle
     chown system system /sys/module/cpuidle_exynos64/parameters/enable_mask
 
-# Audio I2C node for TFA amp
+    # Audio I2C node for TFA amp
     chmod 0660 /dev/i2c-20
     chown audio audio /dev/i2c-20
 
-#GPS
+    # GPS
     chown root system /dev/ttySAC1
     chmod 0660 /dev/ttySAC1
     chown root system /sys/class/sec/gps/GPS_PWR_EN/value
@@ -52,29 +49,21 @@ on post-fs-data
     rm /data/system/gps/smd_started
     rm /data/system/gps/sv_cno.info
 
-
     setprop vold.post_fs_data_done 1
 
-# /efs/factory.prop for Dual / Single SIM settings
+    # /efs/factory.prop for Dual / Single SIM settings
     chown radio radio /efs/factory.prop
     chmod 0600 /efs/factory.prop
 
     restorecon /sys/kernel/debug/tracing/trace_marker
 
 on boot
-    # override init.rc to keep plenty of large order chunks around
-    # to improve allocation times
-#    write /proc/sys/vm/min_free_kbytes 32768
-#    write /proc/sys/vm/min_free_order_shift 1
-
-# SSWAP
+    # SSWAP
     write /proc/sys/vm/swappiness 130
 
-#   mount debugfs /sys/kernel/debug /sys/kernel/debug
-    # Allow to access debugfs for system:system
-	chmod 755 /sys/kernel/debug
+    # Allow to access debugfs for user and group system
+    chmod 755 /sys/kernel/debug
     chown system system /sys/kernel/debug
-#   setprop ro.radio.noril yes
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
     # Increased technology maximums should be reflected here.
@@ -195,18 +184,18 @@ on boot
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
 
-# sem_daemon permission
+    # sem_daemon permission
     chown system system /efs/sec_efs/ssp_data
     chmod 0644 /efs/sec_efs/ssp_data
 
-#MST HW Support
+    # MST HW Support
     setprop ro.mst.support 1
 
-#Secure OS migration
+    # Secure OS migration
     chown radio system /sys/devices/system/sec_os_ctrl/migrate_os
     chmod 664 /sys/devices/system/sec_os_ctrl/migrate_os
 
-# permissions for bluetooth.
+    # permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
     chown radio bluetooth /efs/bluetooth/bt_addr
@@ -217,17 +206,17 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
 
- # MOBEAM
+    # MOBEAM
     chown system radio /sys/class/sec/sec_barcode_emul/vendor
     chown system radio /sys/class/sec/sec_barcode_emul/name
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
 
-#Meta event
+    # Meta event
     chown system radio /sys/class/sensors/sensor_dev/flush
 
-# Permission for USB SELECT
+    # Permissions for USB SELECT
     chown system system /sys/class/android_usb/android0/enable
     chmod 0660 /sys/class/android_usb/android0/enable
     chown system system /sys/class/android_usb/android0/idVendor
@@ -241,37 +230,34 @@ on boot
     chown system system /sys/class/android_usb/android0/bDeviceClass
     chmod 0660 /sys/class/android_usb/android0/bDeviceClass
 
-# Support DM logging
-#    chmod 0770 /system/bin/dmd
-
-# Support DM logging
+    # Support DM logging
     chmod 0770 /system/bin/diagexe
 
-# terminal mode
+    # terminal mode
     chmod 0660 /sys/class/android_usb/android0/terminal_version
     chown system system /sys/class/android_usb/android0/terminal_version
 
-# for datarouter
+    # for datarouter
     chown system system /dev/dun
     chown system system /dev/ttyGS0
     chown system system /dev/ttyGS1
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
 
-# Support Virtual Com
+    # Support Virtual Com
     chmod 0770 /system/bin/vcd
 
-# Support AP/CP log dump
+    # Support AP/CP log dump
     chmod 0770 /system/bin/sced
 
-# Switch Device
+    # Switch Device
     chown system radio /sys/class/sec/switch/vbus_value
 
-# LPM mode for ccic
+    # LPM mode for ccic
     chown system radio /sys/class/sec/ccic/lpm_mode
     chown system radio /sys/class/sec/ccic/ccic_control_option
 
-# IPSec for VOLTE
+    # IPSec for VOLTE
     chown root system /dev/socket
     chmod 0775 /dev/socket
 
@@ -280,14 +266,14 @@ on fs
     setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
 
-# Permissions for ION
+    # Permissions for ION
     chmod 0660 /sys/class/ion_cma/ion_video_ext/isolated
     chown system system /sys/class/ion_cma/ion_video_ext/isolated
 
-# Permissions for backlight
+    # Permissions for backlight
     chown system system /sys/class/backlight/panel/brightness
 
-# Permissions for LCD
+    # Permissions for LCD
     chown system radio /sys/class/lcd/panel/manufacture_code
     chown system radio /sys/class/lcd/panel/lcd_type
     chown system system /sys/class/lcd/panel/siop_enable
@@ -300,7 +286,7 @@ on fs
     chown system system /sys/class/lcd/panel/dpui_dbg
     chown system system /sys/devices/svc/OCTA/SVC_OCTA
 
-# Permissions for MDNIE
+    # Permissions for MDNIE
     chown system media_rw /sys/class/mdnie/mdnie/mode
     chown system media_rw /sys/class/mdnie/mdnie/scenario
     chown system system /sys/class/mdnie/mdnie/accessibility
@@ -316,26 +302,28 @@ on fs
     chown system system /sys/class/mdnie/mdnie/hmt_color_temperature
     chmod 0660 /sys/class/mdnie/mdnie/hmt_color_temperature
 
-# Copy DRM Key
+    # Copy DRM Key
     copy /system/app/wv.keys /factory/wv.keys
 
-# Permission for DRM Key
+    # Permission for DRM Key
     chmod 0644 /factory/wv.keys
 
-# Permissions for System LSI NFC
-# NFC : Permissions for NFC
+    # Permissions for System LSI NFC
+    # NFC : Permissions for NFC
     chmod 0660 /dev/sec-nfc
     chown nfc nfc /dev/sec-nfc
-# Permissions for S.LSI ESE
+
+    # Permissions for S.LSI ESE
     chmod 0660 /dev/p3
     chown system system /dev/p3
 
-# Permission for flashlight control for HAL3.3
+    # Permission for flashlight control for HAL3.3
     chmod 0660 /sys/class/camera/flash/rear_torch_flash
     chown media system /sys/class/camera/flash/rear_torch_flash
     chmod 0660 /sys/class/camera/flash/front_torch_flash
     chown media system /sys/class/camera/flash/front_torch_flash
-# Permissions for TouchScreen
+
+    # Permissions for touchscreen
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/input/enabled
     chown system system /sys/class/sec/tsp/ito_check
@@ -345,7 +333,7 @@ on fs
     chown system system /sys/class/sec/tsp/wet_mode
     chown system system /sys/class/sec/tsp/comm_err_count
 
-# Permissions for Touchkey
+    # Permissions for Touchkey
     chown system radio /sys/class/sec/sec_touchkey/brightness
     chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
     chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
@@ -360,11 +348,11 @@ on fs
     chown system radio /sys/class/sec/sec_touchkey/touchkey_light_id_compare
     chown system radio /sys/class/sec/sec_touchkey/touchkey_light_table_write
 
-# Permissions for gpio_keys
+    # Permissions for gpio_keys
     chown radio system /sys/class/sec/sec_key/wakeup_keys
     write /sys/class/sec/sec_key/wakeup_keys 116,172
 
-# Permissions Camera
+    # Permissions Camera
     mkdir /data/camera 0770 cameraserver system
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camfw_full
@@ -401,12 +389,13 @@ on fs
     chown system system /sys/devices/svc/Camera/SVC_rear_module
     chown system system /sys/devices/svc/Camera/SVC_front_module
 
-# FM Radio
+    # FM Radio
     chown system audio /dev/radio0
     chmod 0660 /dev/radio0
 
-#ARGOSD network_throughput
+    # ARGOSD network_throughput
     chown system system /dev/network_throughput
+
 # ARGOSD
 service argos-daemon /system/bin/argosd
     class main
@@ -457,39 +446,11 @@ service rpmbd /system/bin/rpmbd
      group drmrpc
      class main
 
-#on property:sys.mobicoredaemon.enable=true
-#    start cs_service
-#    write /proc/iccc_ready 1
-
 on property:ro.multisim.simslotcount=1
     setprop persist.radio.multisim.config ss
 
 on property:ro.multisim.simslotcount=2
     setprop persist.radio.multisim.config dsds
-
-# Modem boot daemon
-#    service cpboot-daemon /system/bin/cbd -d
-#    class main
-#    user root
-#    group radio cache inet misc audio sdcard_rw log
-
-# DM daemon
-#    service DM-daemon /system/bin/dmd
-#    class main
-#    user root
-#    group system
-
-# SCE daemon
-#    service SCE-daemon /system/bin/sced
-#    class main
-#    user root
-#    group system
-
-# diag daemon
-#    service DM-daemon /system/bin/diagexe
-#    class main
-#    user root
-#    group system
 
 service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
     class late_start
@@ -528,12 +489,14 @@ service secure_storage /system/bin/secure_storage_daemon
     user system
     group system
     disabled
+
 on property:ro.securestorage.knox=true
     mkdir /dev/.secure_storage
     chmod 0711 /dev/.secure_storage
     chown system system /dev/.secure_storage
     restorecon -R /dev/.secure_storage
     start secure_storage
+
 on property:ro.securestorage.support=true
     mkdir /dev/.secure_storage
     chmod 0711 /dev/.secure_storage
@@ -548,7 +511,6 @@ service umount_service /system/bin/umount -D /preload
 
 # Support Preload install apks
 on property:persist.sys.storage_preload=1
-#    mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/HIDDEN /preload nosuid nodev ro barrier=1
     setprop storage.preload.complete 1
 
 on property:persist.sys.storage_preload=0

@@ -106,22 +106,11 @@
 # audio
 /dev/seiren               0660   system     audio
 
-# MobiCore
-#/dev/mobicore             0600   drmrpc     drmrpc
-#/dev/mobicore-user        0660   drm        drmrpc
-
 # Secure MEM driver
 /dev/s5p-smem             0660   drm        drmrpc
 
-# MobiCore
-#/dev/mobicore             0700   system     system
-#/dev/mobicore-user        0666   radio     system
-
-# Secure MEM driver
-#/dev/s5p-smem             0660   system     system
-
 # cbd modem block
-/dev/block/mmcblk0p5     0400  radio   system
+/dev/block/mmcblk0p5      0400  radio   system
 
 # for DM tools
 /dev/umts_dm0             0660   radio      radio
@@ -170,10 +159,6 @@
 /dev/block/platform/13540000.dwmmc0/by-name/STEADY    0660    system    system
 
 # from Samsungueventd.rc
-
-# MobiCore
-#/dev/mobicore             0700   system     system
-#/dev/mobicore-user        0666   radio     system
 
 # Secure MEM driver
 /dev/s5p-smem             0660   system     system
