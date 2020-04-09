@@ -404,7 +404,6 @@ service argos-daemon /system/bin/argosd
 
 # GPS
 service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
-    class main
     user gps
     group system inet net_raw wakelock
     ioprio be 0
@@ -531,6 +530,7 @@ service sem_daemon /system/bin/sem_daemon
     disabled
 
 on property:sys.boot_completed=1
+    start gpsd
     setprop security.semdaemonfinish 0
     start sem_daemon
 
