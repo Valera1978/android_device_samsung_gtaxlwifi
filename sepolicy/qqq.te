@@ -33,12 +33,6 @@ allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
 #============= hal_memtrack_default ==============
 allow hal_memtrack_default debugfs_tracing_debug:file { open write };
 
-#============= hal_power_default ==============
-allow hal_power_default debugfs_tracing_debug:file { open write };
-allow hal_power_default sysfs:dir { open read };
-allow hal_power_default sysfs:file { open read };
-allow hal_power_default sysfs_devices_system_cpu:file write;
-
 #============= hal_radio_config_default ==============
 allow hal_radio_config_default debugfs_tracing_debug:file { open write };
 
@@ -87,9 +81,6 @@ allow vendor_init wpa_socket:dir setattr;
 allow vndservicemanager hal_graphics_composer_default:dir search;
 allow vndservicemanager hal_graphics_composer_default:file { open read };
 allow vndservicemanager hal_graphics_composer_default:process getattr;
-
-#============= hal_power_default ==============
-allow hal_power_default sysfs:file write;
 
 #============= init ==============
 allow init bluetooth_device:chr_file { open read };
