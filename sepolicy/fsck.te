@@ -1,6 +1,8 @@
-# /dev/block/mmcblk0p3
+# /dev/block/mmcblk0p[0-9]*
 allow fsck emmcblk_device:blk_file { ioctl rw_file_perms };
 allow fsck efs_block_device:blk_file rw_file_perms;
 
 allow fsck fsck:capability dac_override;
 allow fsck tmpfs:blk_file getattr;
+
+allowxperm fsck emmcblk_device:blk_file ioctl { BLKDISCARDZEROES BLKROGET };
