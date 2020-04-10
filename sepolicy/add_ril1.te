@@ -29,5 +29,3 @@ allow wificond wifi_data_file:file { read write };
 #============= shell ==============
 allow shell kernel:system syslog_read;
 
-#============= hal_wifi_hostapd_default ==============
-allow hal_wifi_hostapd_default rfkill_device:chr_file { open read };
