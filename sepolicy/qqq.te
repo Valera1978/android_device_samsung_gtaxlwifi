@@ -1,49 +1,14 @@
 #============= audioserver ==============
-allow audioserver debugfs_tracing_debug:file { open write };
 allow audioserver unlabeled:file { getattr open read };
-
-#============= bootanim ==============
-allow bootanim debugfs_tracing_debug:file { open write };
 
 #============= fsck ==============
 allow fsck cache_file:dir getattr;
-
-#============= hal_camera_default ==============
-allow hal_camera_default debugfs_tracing_debug:file { open write };
-
-#============= hal_cas_default ==============
-allow hal_cas_default debugfs_tracing_debug:file { open write };
-
-#============= hal_configstore_default ==============
-allow hal_configstore_default debugfs_tracing_debug:file { open write };
-
-#============= hal_drm_default ==============
-allow hal_drm_default debugfs_tracing_debug:file { open write };
-
-#============= hal_graphics_allocator_default ==============
-allow hal_graphics_allocator_default debugfs_tracing_debug:file { open write };
-
-#============= hal_graphics_composer_default ==============
-allow hal_graphics_composer_default debugfs_tracing_debug:file { open write };
-allow hal_graphics_composer_default self:netlink_kobject_uevent_socket { bind create read setopt };
-allow hal_graphics_composer_default sysfs:file { getattr open read };
-allow hal_graphics_composer_default vndbinder_device:chr_file { ioctl open read write };
-allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
-
-#============= hal_memtrack_default ==============
-allow hal_memtrack_default debugfs_tracing_debug:file { open write };
 
 #============= hal_radio_config_default ==============
 allow hal_radio_config_default debugfs_tracing_debug:file { open write };
 
 #============= hal_vibrator_default ==============
 allow hal_vibrator_default debugfs_tracing_debug:file { open write };
-
-#============= hal_wifi_default ==============
-allow hal_wifi_default debugfs_tracing_debug:file { open write };
-
-#============= healthd ==============
-allow healthd debugfs_tracing_debug:file { open write };
 
 #============= hwservicemanager ==============
 allow hwservicemanager init:dir search;
@@ -59,9 +24,6 @@ allow init system_file:file execute_no_trans;
 allow init default_android_hwservice:hwservice_manager find;
 allow init hal_gnss_hwservice:hwservice_manager find;
 allow init system_server:binder transfer;
-
-#============= surfaceflinger ==============
-allow surfaceflinger debugfs_tracing_debug:file { open write };
 
 #============= vendor_init ==============
 allow vendor_init block_device:lnk_file setattr;
@@ -83,7 +45,6 @@ allow vndservicemanager hal_graphics_composer_default:file { open read };
 allow vndservicemanager hal_graphics_composer_default:process getattr;
 
 #============= init ==============
-allow init bluetooth_device:chr_file { open read };
 allow init debugfs_tracing_debug:dir { add_name create write };
 allow init default_android_hwservice:hwservice_manager add;
 allow init gps_device:chr_file { ioctl open read write };

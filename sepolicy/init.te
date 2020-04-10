@@ -63,7 +63,7 @@ allow init system_data_file:file rename;
 
 allow init pmsg_device:chr_file { open read };
 
-allow init bluetooth_device:chr_file { open read };
+allow init bluetooth_device:chr_file { open read write ioctl };
 
 allow init vndbinder_device:chr_file { open read write ioctl };
 
