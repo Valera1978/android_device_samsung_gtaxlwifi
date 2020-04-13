@@ -43,4 +43,5 @@ allow idmap debugfs_tracing_debug:file { open write };
 allow gpuservice debugfs_tracing_debug:file { open write };
 allow system_server debugfs_tracing_debug:file { getattr open read write };
 allow app_zygote debugfs_tracing_debug:file { getattr open write };
+allow mediadrmserver debugfs_tracing_debug:file { open write };
 
