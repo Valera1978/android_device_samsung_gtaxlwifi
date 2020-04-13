@@ -5,8 +5,8 @@ allow gpsd system_file:dir { open read };
 allow hal_camera_default camera_device:file getattr;
 
 #============= mediadrmserver ==============
-allow mediadrmserver media_data_file:dir { open getattr read search };
-allow mediadrmserver media_data_file:file { read getattr open };
+allow mediadrmserver media_data_file:dir { open getattr read search write add_name };
+allow mediadrmserver media_data_file:file { getattr open read write create };
 
 #============= priv_app ==============
 allow priv_app sysfs:dir open;
