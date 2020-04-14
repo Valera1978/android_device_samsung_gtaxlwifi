@@ -1,0 +1,2 @@
+allow vold_prepare_subdirs gpsd_exec:file getattr;
+

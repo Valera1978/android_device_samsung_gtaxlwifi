@@ -1,1 +1,3 @@
 allow mediaextractor fuse:file { getattr read };
+allow mediaextractor gpsd_exec:file getattr;
+

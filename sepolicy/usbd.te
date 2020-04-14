@@ -1,0 +1,3 @@
+allow usbd debugfs_tracing_debug:file { open write };
+allow usbd gpsd_exec:file getattr;
+

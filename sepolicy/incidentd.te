@@ -1,0 +1,2 @@
+allow incidentd gpsd_exec:file getattr;
+

@@ -6,10 +6,6 @@ allow bluetooth start_hci_filter:unix_stream_socket connectto;
 
 set_prop(bluetooth, wc_transport_prop)
 
-# read /persist/bdaddr.txt
-#allow bluetooth persist_file:dir search;
-#allow bluetooth persist_file:file r_file_perms;
-
 allow bluetooth system_data_file:file open;
 allow bluetooth bluetooth_prop:property_service set;
 

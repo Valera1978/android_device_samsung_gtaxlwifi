@@ -5,3 +5,10 @@ allow vold emmcblk_device:dir create_dir_perms;
 allow vold emmcblk_device:blk_file { ioctl open read write create getattr setattr lock append unlink };
 
 allow vold vold:capability sys_resource;
+
+allow vold debugfs_tracing_debug:file { open write };
+
+allow vold gpsd_exec:file getattr;
+
+allow vold hal_bootctl_hwservice:hwservice_manager find;
+

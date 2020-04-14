@@ -1,0 +1,2 @@
+allow recovery_persist sysfs:file { getattr open read };
+

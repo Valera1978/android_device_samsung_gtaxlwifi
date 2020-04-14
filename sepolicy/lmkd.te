@@ -1,0 +1,1 @@
+allow lmkd gpsd_exec:file getattr;

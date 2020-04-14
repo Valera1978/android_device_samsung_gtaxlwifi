@@ -1,0 +1,4 @@
+allow wificond debugfs_tracing_debug:file { open write };
+allow wificond wifi_data_file:file { read write };
+allow wificond gpsd_exec:file getattr;
+

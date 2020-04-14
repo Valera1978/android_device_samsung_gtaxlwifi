@@ -15,3 +15,8 @@ allow mediaserver camera_device:chr_file { read write open getattr ioctl };
 # Snap permissions
 allow mediaserver sensorservice_service:service_manager { find };
 allow mediaserver system_server:unix_stream_socket { read write };
+
+allow mediaserver debugfs_tracing_debug:file { open write };
+
+allow mediaserver gpsd_exec:file getattr;
+

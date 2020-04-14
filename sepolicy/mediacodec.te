@@ -1,2 +1,5 @@
 allow mediacodec system_file:dir { read open };
 allow mediacodec sysfs:file { read open getattr };
+allow mediacodec gpsd_exec:file getattr;
+allow mediacodec debugfs_tracing_debug:file { open write };
+

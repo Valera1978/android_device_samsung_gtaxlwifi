@@ -64,4 +64,14 @@ allow rild sec_efs_file:file getattr;
 
 allow rild modemloader_prop:property_service set;
 
+allowxperm rild self:udp_socket ioctl priv_sock_ioctls;
+allow rild proc_qtaguid_stat:file { open read getattr };
+allow rild default_prop:property_service set;
+allow rild sec_efs_file:dir search;
+
+allow rild imei_efs_file:file write;
+
+allow rild device:chr_file { ioctl open read };
+
 set_prop(rild, rild_prop)
+
