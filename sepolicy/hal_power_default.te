@@ -1,0 +1,6 @@
+allow hal_power_default debugfs_tracing_debug:file { open write };
+allow hal_power_default sysfs:file { getattr open read write };
+allow hal_power_default sysfs:dir { open read write };
+allow hal_power_default sysfs_devices_system_cpu:file write;
+allow hal_power_default gpsd_exec:file getattr;
+

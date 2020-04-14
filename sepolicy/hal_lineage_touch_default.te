@@ -1,0 +1,4 @@
+allow hal_lineage_touch_default debugfs_tracing_debug:file { open write };
+allow hal_lineage_touch_default gpsd_exec:file getattr;
+allow hal_lineage_touch_default sysfs:file { getattr open read write };
+

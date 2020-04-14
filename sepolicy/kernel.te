@@ -7,7 +7,7 @@ allow kernel device:dir { create write remove_name rmdir add_name };
 allow kernel device:chr_file { create setattr getattr unlink };
 
 # /sys/devices/system/cpu/cpu[0-9]/cpufreq/*
-allow kernel kernel:capability { chown };
+allow kernel kernel:capability { dac_override chown };
 allow kernel sysfs_devices_system_cpu:file { setattr };
 allow kernel sysfs:file { setattr read open };
 
@@ -21,4 +21,5 @@ allow kernel battery_efs_file:file { read open };
 allow kernel wifi_efs_file:file open;
 allow kernel wifi_efs_file:dir search;
 
-allow kernel kernel:capability dac_override;
+allow kernel system_data_file:file { open write };
+

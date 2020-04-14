@@ -1,0 +1,5 @@
+allow hal_memtrack_default debugfs:dir { open read };
+allow hal_memtrack_default debugfs:file { open read getattr };
+allow hal_memtrack_default debugfs_tracing_debug:file { open write };
+allow hal_memtrack_default gpsd_exec:file getattr;
+

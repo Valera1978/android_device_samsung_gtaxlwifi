@@ -12,12 +12,11 @@ allow lhd node:tcp_socket node_bind;
 allow lhd port:tcp_socket name_bind;
 allow lhd sec_efs_file:dir search;
 allow lhd self:tcp_socket { bind connect create };
-allow lhd sysfs:file { read write open };
+allow lhd sysfs:file { getattr open read write };
 
 allow lhd system_data_file:file r_file_perms;
 allow lhd system_data_file:fifo_file r_file_perms;
 
-allow lhd sysfs:file { getattr open read };
 allow lhd sysfs:fifo_file { getattr open read };
 
 init_daemon_domain(lhd);

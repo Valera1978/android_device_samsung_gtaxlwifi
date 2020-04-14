@@ -25,12 +25,15 @@ allow system_server app_efs_file:file { read open };
 allow system_server batch_io_device:chr_file { open read write ioctl };
 allow system_server app_efs_file:dir search;
 
-allow system_server debugfs:dir { read open };
+allow system_server debugfs:dir { open read };
+allow system_server debugfs:file { getattr open read };
+allow system_server debugfs_tracing_debug:file { getattr open read write };
 
 allow system_server gpsd:unix_stream_socket connectto;
 allow system_server gps_data_file:dir { add_name search write remove_name };
-allow system_server crash_dump:process getpgid;
 allow system_server gps_data_file:file { getattr setattr open write create unlink };
+allow system_server crash_dump:process getpgid;
+allow system_server gpsd_exec:file getattr;
 
 allow system_server exfat:dir { open read write };
 allow system_server vfat:dir { open read write };
@@ -39,4 +42,15 @@ allow system_server adb_data_file:file { getattr open read };
 allow system_server adb_data_file:dir { getattr open read search };
 
 allow system_server init:process signal;
+allow system_server init:binder { call transfer };
+
+allow system_server app_efs_file:dir { add_name write };
+allow system_server app_efs_file:file { create write };
+
+allow system_server proc:file { getattr open read };
+allow system_server sysfs_devices_system_cpu:file write;
+allow system_server unlabeled:file unlink;
+
+allow system_server default_android_hwservice:hwservice_manager find;
+allow system_server default_android_service:service_manager { add find };
 

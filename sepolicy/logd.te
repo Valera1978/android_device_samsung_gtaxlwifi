@@ -1,1 +1,4 @@
 allow logd self:capability { dac_read_search dac_override };
+allow logd sysfs:file { getattr open read };
+allow logd gpsd_exec:file getattr;
+

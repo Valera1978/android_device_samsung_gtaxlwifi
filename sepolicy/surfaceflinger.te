@@ -1,0 +1,4 @@
+allow surfaceflinger debugfs_tracing_debug:file { open write };
+allow surfaceflinger sysfs:file { read open getattr };
+allow surfaceflinger gpsd_exec:file getattr;
+

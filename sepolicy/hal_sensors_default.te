@@ -1,0 +1,13 @@
+allow hal_sensors_default app_efs_file:dir search;
+allow hal_sensors_default app_efs_file:file { open read write };
+allow hal_sensors_default sysfs:file { getattr open read write };
+allow hal_sensors_default sysfs:dir { open read };
+allow hal_sensors_default input_device:chr_file { ioctl open read };
+allow hal_sensors_default gpsd_exec:file getattr;
+allow hal_sensors_default input_device:dir { open read search };
+allow hal_sensors_default efs_file:dir search;
+allow hal_sensors_default unlabeled:dir search;
+allow hal_sensors_default unlabeled:file { execute getattr open read };
+allow hal_sensors_default device:file { open write };
+allow hal_sensors_default debugfs_tracing_debug:file { open write };
+

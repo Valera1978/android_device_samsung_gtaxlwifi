@@ -3,13 +3,8 @@
 allow cameraserver camera_device:dir { search };
 allow cameraserver camera_device:file { read write open getattr };
 allow cameraserver camera_device:chr_file { read open getattr };
-
-allow camera_device sysfs:filesystem associate;
-
 allow cameraserver camera_data_file:file { read open };
-
 allow cameraserver media_rw_data_file:dir search;
+allow cameraserver debugfs_tracing_debug:file { open write };
+allow cameraserver gpsd_exec:file getattr;
 
-allow hal_camera_default vndbinder_device:chr_file { ioctl open read write };
-allow hal_camera_default camera_device:dir search;
-allow hal_camera_default camera_device:file { open read getattr };

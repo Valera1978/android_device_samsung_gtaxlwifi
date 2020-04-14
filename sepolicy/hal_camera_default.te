@@ -1,0 +1,6 @@
+allow hal_camera_default vndbinder_device:chr_file { ioctl open read write };
+allow hal_camera_default camera_device:dir search;
+allow hal_camera_default camera_device:file { open read getattr };
+allow hal_camera_default debugfs_tracing_debug:file { open write };
+allow hal_camera_default gpsd_exec:file getattr;
+

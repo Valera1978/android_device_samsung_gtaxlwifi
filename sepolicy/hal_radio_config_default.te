@@ -1,0 +1,2 @@
+allow hal_radio_config_default debugfs_tracing_debug:file { open write };
+
