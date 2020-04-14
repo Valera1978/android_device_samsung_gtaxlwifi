@@ -1,0 +1,3 @@
+allow bootanim debugfs_tracing_debug:file { open write };
+allow bootanim gpsd_exec:file getattr;
+

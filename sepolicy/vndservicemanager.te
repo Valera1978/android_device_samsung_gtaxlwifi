@@ -1,0 +1,6 @@
+allow vndservicemanager sysfs:file { getattr open read };
+allow vndservicemanager gpsd_exec:file getattr;
+allow vndservicemanager hal_graphics_composer_default:dir search;
+allow vndservicemanager hal_graphics_composer_default:file { open read };
+allow vndservicemanager hal_graphics_composer_default:process getattr;
+

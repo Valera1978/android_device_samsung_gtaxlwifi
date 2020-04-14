@@ -1,0 +1,4 @@
+allow hal_drm_default vndbinder_device:chr_file { ioctl open read write };
+allow hal_drm_default debugfs_tracing_debug:file { open write };
+allow hal_drm_default gpsd_exec:file getattr;
+

@@ -9,3 +9,8 @@ allow untrusted_app_25 proc_asound:dir search;
 allow untrusted_app_25 proc_asound:file { open read getattr };
 allow untrusted_app_25 adb_data_file:file { getattr open read execute };
 allow untrusted_app_25 adb_data_file:dir { getattr search };
+allow untrusted_app_25 proc_vmstat:file open;
+allow untrusted_app_25 sysfs:file { getattr open read };
+allow untrusted_app_25 sysfs:dir { getattr open read };
+allow untrusted_app_25 proc_vmstat:file getattr;
+

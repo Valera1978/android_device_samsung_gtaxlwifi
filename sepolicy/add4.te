@@ -1,7 +1,0 @@
-allow hal_sensors_default input_device:dir { open read search };
-allow surfaceflinger sysfs:file { read open getattr };
-allow hal_sensors_default efs_file:dir search;
-allow vndservicemanager hal_graphics_composer_default:dir search;
-allow vndservicemanager hal_graphics_composer_default:file { open read };
-allow vndservicemanager hal_graphics_composer_default:process getattr;
-allow crash_dump app_data_file:file { open read };

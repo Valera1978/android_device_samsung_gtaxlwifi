@@ -1,0 +1,2 @@
+allow camera_device sysfs:filesystem associate;
+

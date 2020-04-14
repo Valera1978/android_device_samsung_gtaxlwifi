@@ -2,9 +2,6 @@
 allow init debugfs:dir mounton;
 allow init self:capability sys_module;
 
-# mmcblk0p19
-#allow init system_file:file execute_no_trans;
-
 # /dev/block/mmcblk0p[0-9]
 allow init emmcblk_device:blk_file rw_file_perms;
 
@@ -42,7 +39,6 @@ allow init su:process { transition rlimitinh siginh noatsecure };
 # RIL
 allow init socket_device:sock_file { create open read write getattr setattr unlink };
 
-#allow init vendor_file:file { read open getattr execute map execute_no_trans };
 allow init vendor_file:system module_load;
 allow init uart_device:chr_file { write ioctl };
 allow init rild:unix_stream_socket connectto;
@@ -70,3 +66,39 @@ allow init vndbinder_device:chr_file { open read write ioctl };
 allow init gps_data_file:fifo_file write;
 
 allow init hal_lineage_touch_hwservice:hwservice_manager add;
+
+allow init proc:file { open setattr write };
+allow init sysfs:file { setattr open read write };
+allow init sysfs_wlan_fwpath:file { setattr open write };
+allow init vendor_file:file execute_no_trans;
+
+allow init sswap_data_file:blk_file { open read write };
+
+allow init hal_gnss_hwservice:hwservice_manager { add find };
+allow init hwservicemanager:binder call;
+allow init system_server:binder call;
+
+allow init debugfs_tracing_debug:file { open write };
+allow init debugfs_tracing_debug:dir { add_name create write };
+
+allow init sec_efs_file:blk_file { getattr open read };
+allow init sec_efs_file:dir mounton;
+
+allow init hwservicemanager:binder transfer;
+allow init sysfs_devices_block:file { open write };
+allow init system_file:file execute_no_trans;
+allow init default_android_hwservice:hwservice_manager { add find };
+allow init system_server:binder transfer;
+
+allow init gps_device:chr_file { ioctl open read write };
+allow init hal_power_stats_hwservice:hwservice_manager add;
+allow init hal_usb_hwservice:hwservice_manager add;
+allow init mif_device:chr_file { open read };
+allow init sysfs_wake_lock:file { open write };
+allow init vendor_data_file:file lock;
+
+allow init hal_wifi_hwservice:hwservice_manager add;
+allow init self:netlink_socket { bind create getattr read setopt write };
+allow init self:udp_socket { setopt getopt connect ioctl write };
+allow init su_exec:file getattr;
+

@@ -1,0 +1,3 @@
+allow vdc sysfs:file { getattr open read };
+allow vdc gpsd_exec:file getattr;
+

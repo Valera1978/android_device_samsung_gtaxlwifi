@@ -1,0 +1,1 @@
+allow tombstoned gpsd_exec:file getattr;

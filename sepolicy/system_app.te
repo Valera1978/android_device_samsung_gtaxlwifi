@@ -6,4 +6,7 @@ allow system_app sysfs_zram:dir { open search getattr };
 allow system_app sysfs_zram:file { open read getattr };
 allow system_app adb_data_file:dir { getattr search };
 allow system_app adb_data_file:file { getattr open read execute };
+allow system_app default_android_hwservice:hwservice_manager find;
+allow system_app proc_asound:dir search;
+allow system_app proc_asound:file { open read getattr };
 

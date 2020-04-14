@@ -5,7 +5,10 @@ allow netd self:system module_request;
 allow netd gpsd:fd use;
 allow netd gpsd:udp_socket { setopt getopt read write };
 allow netd gpsd:tcp_socket { setopt getopt read write };
-allow netd init:udp_socket { read write };
+allow netd gpsd_exec:file { write getattr };
+allow netd init:udp_socket { read write getopt setopt };
 allow netd untrusted_app:unix_stream_socket { read write };
+allow netd device:file { open write };
+allow netd debugfs_tracing_debug:file { open write };
+allow netd sysfs:file { open read write };
 
-allow dnsmasq netd:fifo_file getattr;

@@ -9,14 +9,9 @@ unix_socket_connect(cbd, property, init)
 
 allow cbd self:capability { dac_override setuid setgid };
 
-# FIXME neverallow rule
-# allow cbd self:capability mknod;
 allow cbd kernel:system syslog_read;
 allow cbd cgroup:dir create_dir_perms;
 
-# /dev/log/*
-#allow cbd log_device:dir r_dir_perms;
-#allow cbd log_device:chr_file rw_file_perms;
 # /dev/kmsg (write to kernel log)
 allow cbd kmsg_device:chr_file rw_file_perms;
 
@@ -35,6 +30,7 @@ allow cbd sysfs_mipi_writable:file rw_file_perms;
 
 # /efs
 allow cbd efs_file:dir r_dir_perms;
+allow cbd efs_file:file { open read };
 
 # /efs/nv_data.bin
 allow cbd bin_nv_data_efs_file:file rw_file_perms;
@@ -44,10 +40,13 @@ allow cbd radio_block_device:blk_file { read open };
 allow cbd rootfs:file { entrypoint read };
 allow cbd sysfs:file { read open write };
 
+allow cbd proc_cmdline:file { open read };
+allow cbd modemloader_prop:property_service set;
+
+allow cbd vendor_file:file entrypoint;
+
 # set properties on boot
 set_prop(cbd, cbd_prop)
 set_prop(cbd, radio_prop)
 set_prop(cbd, system_prop)
 
-allow cbd proc_cmdline:file { open read };
-allow cbd modemloader_prop:property_service set;
