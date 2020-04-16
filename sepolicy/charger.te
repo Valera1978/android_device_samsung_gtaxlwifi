@@ -1,0 +1,4 @@
+allow charger sysfs:file { getattr open read };
+allow charger self:capability { dac_read_search dac_override };
+allow charger device:dir { open read };
+allow charger proc_last_kmsg:file { getattr open read };
