@@ -415,9 +415,6 @@ service charger /charger
     critical
     seclabel u:r:charger:s0
 
-on property:ro.boot.mode=charger
-    trigger late-init
-
 # Bluetooth
 on property:wc_transport.start_hci=true
     start start_hci_filter
