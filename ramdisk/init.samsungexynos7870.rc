@@ -257,10 +257,6 @@ on boot
     chown system radio /sys/class/sec/ccic/lpm_mode
     chown system radio /sys/class/sec/ccic/ccic_control_option
 
-    # IPSec for VOLTE
-    chown root system /dev/socket
-    chmod 0775 /dev/socket
-
 on fs
     mount_all /vendor/etc/fstab.samsungexynos7870
     setprop ro.crypto.fuse_sdcard true
@@ -396,12 +392,6 @@ on fs
     # ARGOSD network_throughput
     chown system system /dev/network_throughput
 
-# ARGOSD
-service argos-daemon /system/bin/argosd
-    class main
-    user system
-    group system radio
-
 # GPS
 service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     user gps
@@ -436,12 +426,6 @@ service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmm
     seclabel u:r:cbd:s0
     oneshot
 
-# RPMB daemon
-service rpmbd /system/bin/rpmbd
-     user root
-     group drmrpc
-     class main
-
 on property:ro.multisim.simslotcount=1
     setprop persist.radio.multisim.config ss
 
@@ -454,13 +438,6 @@ service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /
 service fuse_usb1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb1 /storage/usb1
     class late_start
     disabled
-
-# IPSec for VOLTE
-service ipsec-daemon /system/bin/IPSecService
-    class main
-    socket ipsec_socket stream 660 system net_admin
-    user system
-    group system net_raw inet net_admin
 
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /sbin/watchdogd 10 20

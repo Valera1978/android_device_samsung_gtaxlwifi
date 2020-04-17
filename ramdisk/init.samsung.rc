@@ -187,13 +187,7 @@ on post-fs-data
     chmod 0644 /efs/cpk/h2k.dat
     chown system system /efs/drm/h2k
 
-    chown system system /dev/icd
-    chmod 0644 /dev/icd
-    chown system system /dev/icdr
-    chmod 0644 /dev/icdr
     chown system system /dev/tzic
-    restorecon /dev/icd
-    restorecon /dev/icdr
 
     # mobicore
     export MC_AUTH_TOKEN_PATH /efs
@@ -723,13 +717,3 @@ service scs /system/bin/scs
    group system
    oneshot
    disabled
-
-# icd
-service icd /system/bin/icd
-    class main
-    user system
-    group system log
-    oneshot
-
-on property:init.svc.media=restarting
-    start icd

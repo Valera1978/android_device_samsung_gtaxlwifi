@@ -86,12 +86,3 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service macloader /vendor/bin/macloader
-    class main
-    oneshot
-
-on property:init.svc.macloader=stopped
-    chown system root /data/misc/conn/.cid.info
-    chmod 0664 /data/misc/conn/.cid.info
-    chown system root /data/.rev
-    chmod 0664 /data/.rev
