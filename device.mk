@@ -170,12 +170,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     modemloader
 
-# IPv6
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes \
-    libebtc
-
 # Net
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
