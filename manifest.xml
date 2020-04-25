@@ -35,15 +35,6 @@
             <instance>legacy/0</instance>
         </interface>
     </hal>
-<!--    <hal format="hidl">
-        <name>android.hardware.cas</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IMediaCasService</name>
-            <instance>default</instance>
-        </interface>
-    </hal> -->
     <hal format="hidl">
         <name>android.hardware.configstore</name>
         <transport>hwbinder</transport>
@@ -68,15 +59,6 @@
              <instance>default</instance>
          </interface>
     </hal>
-<!--    <hal format="hidl">
-        <name>vendor.samsung.hardware.gnss</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>ISecGnss</name>
-            <instance>default</instance>
-        </interface>
-   </hal> -->
     <hal format="hidl">
         <name>vendor.lineage.power</name>
         <transport arch="32+64">passthrough</transport>
@@ -202,15 +184,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-<!--    <hal format="hidl">
-        <name>android.hardware.sensors</name>
-        <transport arch="32">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISensors</name>
-            <instance>default</instance>
-        </interface>
-    </hal> -->
     <hal format="hidl">
         <name>android.hardware.usb</name>
         <transport>hwbinder</transport>
@@ -220,15 +193,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-<!--    <hal format="hidl">
-        <name>android.hardware.vibrator</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IVibrator</name>
-            <instance>default</instance>
-        </interface>
-    </hal> -->
     <hal format="hidl">
         <name>android.hardware.wifi</name>
         <transport>hwbinder</transport>
