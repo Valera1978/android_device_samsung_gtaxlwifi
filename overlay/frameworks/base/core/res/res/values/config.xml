@@ -196,7 +196,19 @@
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">17</integer>
+    <integer name="config_screenBrightnessDoze">3</integer>
+
+    <!-- Type of the double tap sensor. Empty if double tap is not supported.
+    <string name="config_dozeDoubleTapSensorType" translatable="false">com.google.sensor.double_touch</string> -->
+
+    <!-- Control whether the always on display mode is available. This should only be enabled on
+     devices where the display has been tuned to be power efficient in DOZE and/or DOZE_SUSPEND
+     states. -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+
+    <!-- Control whether the always on display mode is enabled by default. This value will be used
+     during initialization when the setting is still null. -->
+    <bool name="config_dozeAlwaysOnEnabled">false</bool>
 
     <!-- Permit doze mode to operate -->
     <bool name="config_enableAutoPowerModes">true</bool>
