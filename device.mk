@@ -87,7 +87,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
 PRODUCT_PACKAGES += \
-    libhwc2on1adapter \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
@@ -275,8 +274,8 @@ PRODUCT_PACKAGES += \
 
 # Keys
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
+    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
 
 # Configstore
 PRODUCT_PACKAGES += \
@@ -321,10 +320,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=adb \
     ro.adb.secure=0 \
     ro.secure=0
-
-# Root
-PRODUCT_PACKAGES += \
-    su
 
 # Offmode charger
 PRODUCT_PACKAGES += \
