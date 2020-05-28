@@ -211,7 +211,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wificond \
-    android.hardware.wifi@1.0-service.exynos7870
+    android.hardware.wifi@1.0-service
 
 # Bluetooth
 PRODUCT_PACKAGES += \
