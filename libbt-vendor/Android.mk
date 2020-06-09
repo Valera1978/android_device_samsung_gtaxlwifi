@@ -87,7 +87,7 @@ ifeq ($(QCOM_BT_READ_ADDR_FROM_PROP),true)
 LOCAL_CFLAGS += -DREAD_BT_ADDR_FROM_PROP
 endif
 
-LOCAL_CFLAGS += -Wno-implicit-function-declaration
+LOCAL_CFLAGS += -Wno-implicit-function-declaration -Wno-incompatible-pointer-types-discards-qualifiers
 
 #include $(LOCAL_PATH)/vnd_buildcfg.mk
 

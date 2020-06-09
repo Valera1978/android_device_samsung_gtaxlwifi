@@ -1272,16 +1272,15 @@ int ath3k_post(int fd, int pm)
 /* Initialize UART driver */
 static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
 {
-    ALOGI(" %s ", __FUNCTION__);
-
     struct termios ti;
-
-    int i, fd;
+    //int i;
+    int fd;
     unsigned long flags = 0;
+
+    ALOGI(" %s ", __FUNCTION__);
 
     if (raw)
         flags |= 1 << HCI_UART_RAW_DEVICE;
-
 
     fd = open(dev, O_RDWR | O_NOCTTY);
 
@@ -1289,7 +1288,6 @@ static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
         ALOGI("Can't open serial port");
         return -1;
     }
-
 
     tcflush(fd, TCIOFLUSH);
 
@@ -1366,8 +1364,7 @@ int hw_config_ath3k(char *port_name)
 {
     ALOGI(" %s ", __FUNCTION__);
     PSCounter=0;
-    struct sigaction sa;
-    struct uart_t u ;
+    struct uart_t u;
     int n=0,send_break=0,raw=0;
 
     memset(&u, 0, sizeof(u));
@@ -1386,7 +1383,6 @@ int hw_config_ath3k(char *port_name)
 
 void lpm_set_ar3k(uint8_t pio, uint8_t action, uint8_t polarity)
 {
-    int rc;
     int fd = -1;
     char buffer;
 

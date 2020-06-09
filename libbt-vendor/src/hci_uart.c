@@ -464,8 +464,6 @@ int userial_set_port(char *p_conf_name, char *p_conf_value, int param)
 *******************************************************************************/
 int userial_vendor_set_hw_flow_control(userial_vendor_ioctl_op_t op)
 {
-    int ret = 0;
-
     tcgetattr(vnd_userial.fd, &vnd_userial.termios);
     switch(op)
     {

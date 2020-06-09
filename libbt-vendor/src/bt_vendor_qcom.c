@@ -53,7 +53,9 @@
 #define CMD_TIMEOUT  0x22
 
 static void wait_for_patch_download(bool is_ant_req);
+#ifdef ENABLE_ANT
 static bool is_debug_force_special_bytes(void);
+#endif
 int connect_to_local_socket(char* name);
 /******************************************************************************
 **  Externs
@@ -222,7 +224,6 @@ static int get_bt_soc_type()
 bool can_perform_action(char action) {
     bool can_perform = false;
     char ref_count[PROPERTY_VALUE_MAX];
-    char inProgress[PROPERTY_VALUE_MAX] = {'\0'};
     int value, ret;
 
     property_get("wc_transport.ref_count", ref_count, "0");
@@ -383,7 +384,6 @@ static int bt_powerup(int en )
     int fd = 0, size, i, ret, fd_ldo, fd_btpower;
 
     char disable[PROPERTY_VALUE_MAX];
-    char state;
     char on = (en)?'1':'0';
 
 #ifdef WIFI_BT_STATUS_SYNC
@@ -497,7 +497,7 @@ static int bt_powerup(int en )
 
     if (q->soc_type >= BT_SOC_CHEROKEE && q->soc_type < BT_SOC_RESERVED) {
        ALOGI("open bt power devnode,send ioctl power op  :%d ",en);
-       fd_btpower = open(BT_PWR_CNTRL_DEVICE, O_RDWR, O_NONBLOCK);
+       fd_btpower = open(BT_PWR_CNTRL_DEVICE, O_CREAT | O_RDWR, O_NONBLOCK);
        if (fd_btpower < 0) {
            ALOGE("\nfailed to open bt device error = (%s)\n",strerror(errno));
 #ifdef WIFI_BT_STATUS_SYNC
@@ -563,8 +563,9 @@ static int bt_powerup(int en )
     bt_semaphore_release(lock_fd);
     bt_semaphore_destroy(lock_fd);
 #endif /* WIFI_BT_STATUS_SYNC */
-
+#ifdef CHECK_BT_POWER_PERFORM_ACTION
 done:
+#endif
     if (fd >= 0)
         close(fd);
     return 0;
@@ -612,7 +613,7 @@ static int init(const bt_vendor_callbacks_t *cb, unsigned char *bdaddr)
 {
     char prop[PROPERTY_VALUE_MAX] = {0};
     struct bt_qcom_struct *temp = NULL;
-    int ret = BT_STATUS_SUCCESS, i;
+    int ret = BT_STATUS_SUCCESS;
 
     ALOGI("++%s", __FUNCTION__);
 
@@ -693,7 +694,7 @@ static bool validate_tok(char* bdaddr_tok) {
 #endif /*READ_BT_ADDR_FROM_PROP*/
 
 int connect_to_local_socket(char* name) {
-       socklen_t len; int sk = -1;
+       int sk = -1;
 
        ALOGE("%s: ACCEPT ", __func__);
        sk  = socket(AF_LOCAL, SOCK_STREAM, 0);
@@ -739,13 +740,11 @@ bool is_soc_initialized() {
 static int __op(bt_vendor_opcode_t opcode, void *param)
 {
     int retval = BT_STATUS_SUCCESS;
-    int nCnt = 0;
     int nState = -1;
     bool is_ant_req = false;
     bool is_fm_req = false;
     char wipower_status[PROPERTY_VALUE_MAX];
     char emb_wp_mode[PROPERTY_VALUE_MAX];
-    char bt_version[PROPERTY_VALUE_MAX];
     char lpm_config[PROPERTY_VALUE_MAX];
     bool ignore_boot_prop = TRUE;
 #ifdef READ_BT_ADDR_FROM_PROP
@@ -852,7 +851,9 @@ static int __op(bt_vendor_opcode_t opcode, void *param)
                 is_fm_req = true;
                 goto userial_open;
 #endif
+#if defined(ENABLE_ANT) || defined(FM_OVER_UART)
 userial_open:
+#endif
         case BT_VND_OP_USERIAL_OPEN:
             {
                 if (!param) {
@@ -1298,7 +1299,6 @@ userial_open:
             }
     }
 
-out:
     ALOGV("--%s", __FUNCTION__);
     return retval;
 }
@@ -1324,11 +1324,15 @@ out:
     return ret;
 }
 
+/* ssr_cleanup is not used */
+#if 0
 static void ssr_cleanup(int reason)
 {
     int pwr_state = BT_VND_PWR_OFF;
+#ifdef ENABLE_ANT
     int ret;
     unsigned char trig_ssr = 0xEE;
+#endif
 
     ALOGI("++%s", __FUNCTION__);
 
@@ -1381,6 +1385,7 @@ out:
     pthread_mutex_unlock(&q_lock);
     ALOGI("--%s", __FUNCTION__);
 }
+#endif
 
 /** Closes the interface */
 static void cleanup(void)
@@ -1456,6 +1461,7 @@ bool is_download_progress () {
     return retval;
 }
 
+#ifdef ENABLE_ANT
 static bool is_debug_force_special_bytes() {
     int ret = 0;
     char value[PROPERTY_VALUE_MAX] = {'\0'};
@@ -1474,6 +1480,7 @@ static bool is_debug_force_special_bytes() {
 
     return enabled;
 }
+#endif
 
 // Entry point of DLib
 /* Remove 'ssr_cleanup' because it's not defined in 'bt_vendor_interface_t'. */
