@@ -29,7 +29,7 @@ PRODUCT_NAME := lineage_gtaxlwifi
 PRODUCT_DEVICE := gtaxlwifi
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := SM-T580
-PRODUCT_MANUFACTURER := samsung
+PRODUCT_MANUFACTURER := Samsung
 
 PRODUCT_GMS_CLIENTID_BASE := android-samsung
 
