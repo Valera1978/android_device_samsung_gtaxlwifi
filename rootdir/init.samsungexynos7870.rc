@@ -49,13 +49,13 @@ on post-fs-data
     rm /data/system/gps/smd_started
     rm /data/system/gps/sv_cno.info
 
-    setprop vold.post_fs_data_done 1
+    restorecon /sys/kernel/debug/tracing/trace_marker
 
     # /efs/factory.prop for Dual / Single SIM settings
     chown radio radio /efs/factory.prop
     chmod 0600 /efs/factory.prop
 
-    restorecon /sys/kernel/debug/tracing/trace_marker
+    setprop vold.post_fs_data_done 1
 
 on boot
     # SSWAP
