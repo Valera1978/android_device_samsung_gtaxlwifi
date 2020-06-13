@@ -1,5 +1,4 @@
 import /vendor/etc/init/hw/init.samsungexynos7870.usb.rc
-import /vendor/etc/init/hw/init.rilcommon.rc
 import /vendor/etc/init/hw/init.wifi.rc
 
 # Samsung stock init.rc additions
@@ -11,7 +10,6 @@ on early-init
 on init
     start watchdogd
 
-    mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
     # Support legacy paths
@@ -30,10 +28,6 @@ on post-fs-data
     # CPU Idle
     chown system system /sys/module/cpuidle_exynos64/parameters/enable_mask
 
-    # Audio I2C node for TFA amp
-    chmod 0660 /dev/i2c-20
-    chown audio audio /dev/i2c-20
-
     # GPS
     chown root system /dev/ttySAC1
     chmod 0660 /dev/ttySAC1
@@ -50,10 +44,6 @@ on post-fs-data
     rm /data/system/gps/sv_cno.info
 
     restorecon /sys/kernel/debug/tracing/trace_marker
-
-    # /efs/factory.prop for Dual / Single SIM settings
-    chown radio radio /efs/factory.prop
-    chmod 0600 /efs/factory.prop
 
     setprop vold.post_fs_data_done 1
 
@@ -76,21 +66,6 @@ on boot
 
     # sec_log
     chown system log /proc/sec_log
-
-    # Permissions for NAD
-    symlink /dev/block/platform/13540000.dwmmc0/by-name/NAD_REFER /dev/block/NAD_REFER
-    chown system radio /sys/class/sec/sec_nad/nad_stat
-    chmod 0664 /sys/class/sec/sec_nad/nad_stat
-    chown system radio /sys/class/sec/sec_nad/nad_erase
-    chmod 0664 /sys/class/sec/sec_nad/nad_erase
-    chown system radio /sys/class/sec/sec_nad/nad_acat
-    chmod 0664 /sys/class/sec/sec_nad/nad_acat
-    chown system radio /sys/class/sec/sec_nad/nad_dram
-    chmod 0664 /sys/class/sec/sec_nad/nad_dram
-    chown system radio /sys/class/sec/sec_nad/nad_all
-    chmod 0664 /sys/class/sec/sec_nad/nad_all
-    chown system radio /dev/block/NAD_REFER
-    chmod 0664 /dev/block/NAD_REFER
 
     # 1-key hard reset
     chown system system /sys/power/reset_enabled
@@ -184,10 +159,6 @@ on boot
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
 
-    # sem_daemon permission
-    chown system system /efs/sec_efs/ssp_data
-    chmod 0644 /efs/sec_efs/ssp_data
-
     # MST HW Support
     setprop ro.mst.support 1
 
@@ -206,13 +177,6 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
 
-    # MOBEAM
-    chown system radio /sys/class/sec/sec_barcode_emul/vendor
-    chown system radio /sys/class/sec/sec_barcode_emul/name
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
-
     # Meta event
     chown system radio /sys/class/sensors/sensor_dev/flush
 
@@ -230,9 +194,6 @@ on boot
     chown system system /sys/class/android_usb/android0/bDeviceClass
     chmod 0660 /sys/class/android_usb/android0/bDeviceClass
 
-    # Support DM logging
-    chmod 0770 /system/bin/diagexe
-
     # terminal mode
     chmod 0660 /sys/class/android_usb/android0/terminal_version
     chown system system /sys/class/android_usb/android0/terminal_version
@@ -244,105 +205,27 @@ on boot
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
 
-    # Support Virtual Com
-    chmod 0770 /system/bin/vcd
-
-    # Support AP/CP log dump
-    chmod 0770 /system/bin/sced
-
-    # Switch Device
-    chown system radio /sys/class/sec/switch/vbus_value
-
-    # LPM mode for ccic
-    chown system radio /sys/class/sec/ccic/lpm_mode
-    chown system radio /sys/class/sec/ccic/ccic_control_option
-
 on fs
     mount_all /vendor/etc/fstab.samsungexynos7870
-    setprop ro.crypto.fuse_sdcard true
     chown radio system /efs
-
-    # Permissions for ION
-    chmod 0660 /sys/class/ion_cma/ion_video_ext/isolated
-    chown system system /sys/class/ion_cma/ion_video_ext/isolated
 
     # Permissions for backlight
     chown system system /sys/class/backlight/panel/brightness
 
     # Permissions for LCD
-    chown system radio /sys/class/lcd/panel/manufacture_code
     chown system radio /sys/class/lcd/panel/lcd_type
-    chown system system /sys/class/lcd/panel/siop_enable
-    chown system system /sys/class/lcd/panel/temperature
-    chown system radio /sys/class/lcd/panel/power_reduce
-    chown system system /sys/class/lcd/panel/lux
-    chown system system /sys/class/lcd/panel/adaptive_control
-    chown system system /sys/class/lcd/panel/alpm
-    chown system system /sys/class/lcd/panel/dpui
-    chown system system /sys/class/lcd/panel/dpui_dbg
-    chown system system /sys/devices/svc/OCTA/SVC_OCTA
-
-    # Permissions for MDNIE
-    chown system media_rw /sys/class/mdnie/mdnie/mode
-    chown system media_rw /sys/class/mdnie/mdnie/scenario
-    chown system system /sys/class/mdnie/mdnie/accessibility
-    chown system system /sys/class/mdnie/mdnie/sensorRGB
-    chown system system /sys/class/mdnie/mdnie/mdnie_ldu
-    chown system system /sys/class/mdnie/mdnie/night_mode
-    chown system system /sys/class/mdnie/mdnie/whiteRGB
-
-    chown system system /sys/class/lcd/panel/hmt_on
-    chmod 0660 /sys/class/lcd/panel/hmt_on
-    chown system system /sys/class/lcd/panel/hmt_bright
-    chmod 0660 /sys/class/lcd/panel/hmt_bright
-    chown system system /sys/class/mdnie/mdnie/hmt_color_temperature
-    chmod 0660 /sys/class/mdnie/mdnie/hmt_color_temperature
-
-    # Copy DRM Key
-    copy /system/app/wv.keys /factory/wv.keys
-
-    # Permission for DRM Key
-    chmod 0644 /factory/wv.keys
-
-    # Permissions for System LSI NFC
-    # NFC : Permissions for NFC
-    chmod 0660 /dev/sec-nfc
-    chown nfc nfc /dev/sec-nfc
-
-    # Permissions for S.LSI ESE
-    chmod 0660 /dev/p3
-    chown system system /dev/p3
 
     # Permission for flashlight control for HAL3.3
     chmod 0660 /sys/class/camera/flash/rear_torch_flash
     chown media system /sys/class/camera/flash/rear_torch_flash
-    chmod 0660 /sys/class/camera/flash/front_torch_flash
-    chown media system /sys/class/camera/flash/front_torch_flash
 
     # Permissions for touchscreen
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/input/enabled
-    chown system system /sys/class/sec/tsp/ito_check
-    chown system system /sys/class/sec/tsp/raw_check
-    chown system system /sys/class/sec/tsp/module_id
-    chown system system /sys/class/sec/tsp/multi_count
-    chown system system /sys/class/sec/tsp/wet_mode
-    chown system system /sys/class/sec/tsp/comm_err_count
 
     # Permissions for Touchkey
     chown system radio /sys/class/sec/sec_touchkey/brightness
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
-    chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
-    chown system radio /sys/class/sec/sec_touchkey/glove_mode
-    chown system radio /sys/class/sec/sec_touchkey/flip_mode
-    chown system radio /sys/class/sec/sec_touchkey/sar_enable
-    chown system radio /sys/class/sec/sec_touchkey/sw_reset
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_earjack
     chown system system /sys/class/sec/sec_touchkey/input/enabled
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_version
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_update
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_id_compare
-    chown system radio /sys/class/sec/sec_touchkey/touchkey_light_table_write
 
     # Permissions for gpio_keys
     chown radio system /sys/class/sec/sec_key/wakeup_keys
@@ -356,38 +239,17 @@ on fs
     chown system radio /sys/class/camera/rear/rear_checkfw_factory
     chown system radio /sys/class/camera/rear/rear_sensor_standby
     chown system radio /sys/class/camera/rear/rear_camtype
-    chown system radio /sys/class/camera/rear/rear_companionfw
-    chown system radio /sys/class/camera/rear/rear_companionfw_full
     chown system radio /sys/class/camera/rear/rear_calcheck
     chown system radio /sys/class/camera/rear/rear_caminfo
     chown system radio /sys/class/camera/rear/rear_sensorid
-    chown system radio /sys/class/camera/rear/from_write
-    chown system radio /sys/class/camera/rear/isp_core
     chown system radio /sys/class/camera/rear/fw_update
     chown system radio /sys/class/camera/flash/rear_flash
-    chown system radio /sys/class/camera/flash/front_flash
     chown cameraserver system /sys/class/camera/flash/rear_torch_flash
-    chown cameraserver system /sys/class/camera/flash/front_torch_flash
     chown system radio /sys/class/camera/front/front_camfw
-    chown system radio /sys/class/camera/front/front_camfw_full
-    chown system radio /sys/class/camera/front/front_checkfw_factory
     chown system radio /sys/class/camera/front/front_camtype
-    chown system radio /sys/class/camera/front/front_moduleid
     chown system radio /sys/class/camera/front/front_caminfo
     chown system radio /sys/class/camera/front/front_sensorid
-    chown system radio /sys/class/camera/ois/selftest
-    chown system radio /sys/class/camera/ois/ois_power
-    chown system radio /sys/class/camera/ois/ois_rawdata
-    chown system radio /sys/class/camera/ois/oisfw
-    chown system radio /sys/class/camera/ois/ois_diff
-    chown system radio /sys/class/camera/ois/fw_update
-    chown system radio /sys/class/camera/ois/ois_exif
     chown system system /sys/devices/svc/Camera/SVC_rear_module
-    chown system system /sys/devices/svc/Camera/SVC_front_module
-
-    # FM Radio
-    chown system audio /dev/radio0
-    chmod 0660 /dev/radio0
 
     # ARGOSD network_throughput
     chown system system /dev/network_throughput
@@ -426,15 +288,10 @@ service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmm
     seclabel u:r:cbd:s0
     oneshot
 
-on property:ro.multisim.simslotcount=1
-    setprop persist.radio.multisim.config ss
-
-on property:ro.multisim.simslotcount=2
-    setprop persist.radio.multisim.config dsds
-
 service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
     class late_start
     disabled
+
 service fuse_usb1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb1 /storage/usb1
     class late_start
     disabled
@@ -456,39 +313,6 @@ service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.
     seclabel u:r:prepare_param:s0
     oneshot
 
-# Secure Storage startup
-service secure_storage /system/bin/secure_storage_daemon
-    class core
-    user system
-    group system
-    disabled
-
-on property:ro.securestorage.knox=true
-    mkdir /dev/.secure_storage
-    chmod 0711 /dev/.secure_storage
-    chown system system /dev/.secure_storage
-    restorecon -R /dev/.secure_storage
-    start secure_storage
-
-on property:ro.securestorage.support=true
-    mkdir /dev/.secure_storage
-    chmod 0711 /dev/.secure_storage
-    chown system system /dev/.secure_storage
-    restorecon -R /dev/.secure_storage
-    start secure_storage
-
-# umount service
-service umount_service /system/bin/umount -D /preload
-    disabled
-    oneshot
-
-# Support Preload install apks
-on property:persist.sys.storage_preload=1
-    setprop storage.preload.complete 1
-
-on property:persist.sys.storage_preload=0
-    start umount_service
-
 # SSWAP
 service sswap /vendor/bin/sswap -s
     class core
@@ -496,17 +320,5 @@ service sswap /vendor/bin/sswap -s
     group root
     oneshot
 
-# sem_daemon
-service sem_daemon /system/bin/sem_daemon
-    class core
-    user system
-    group system nfc
-    disabled
-
 on property:sys.boot_completed=1
     start gpsd
-    setprop security.semdaemonfinish 0
-    start sem_daemon
-
-on property:security.semdaemonfinish=1
-    stop sem_daemon

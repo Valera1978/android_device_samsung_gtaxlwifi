@@ -47,7 +47,6 @@ PRODUCT_COPY_FILES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.samsungexynos7870 \
-    init.rilcommon.rc \
     init.power.rc \
     init.samsung.rc \
     init.samsungexynos7870.rc \
