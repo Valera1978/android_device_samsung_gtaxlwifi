@@ -7,6 +7,9 @@ import /vendor/etc/init/hw/init.samsung.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
+    write /sys/block/zram0/comp_algorithm lz4
+    write /proc/sys/vm/page-cluster 0
+
 on init
     start watchdogd
 
@@ -312,3 +315,4 @@ service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.
 
 on property:sys.boot_completed=1
     start gpsd
+    swapon_all /vendor/etc/fstab.samsungexynos7870
