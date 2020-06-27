@@ -72,8 +72,6 @@ allow init sysfs:file { setattr open read write };
 allow init sysfs_wlan_fwpath:file { setattr open write };
 allow init vendor_file:file execute_no_trans;
 
-allow init sswap_data_file:blk_file { open read write };
-
 allow init hal_gnss_hwservice:hwservice_manager { add find };
 allow init hwservicemanager:binder call;
 allow init system_server:binder call;

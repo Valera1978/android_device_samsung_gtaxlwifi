@@ -21,8 +21,5 @@ allow sysfs_type tmpfs:filesystem associate;
 
 type biometrics_data_file, file_type;
 
-#type mobicore_data_file, file_type;
-type sswap_data_file, file_type;
-
 type sysinit, file_type;
 

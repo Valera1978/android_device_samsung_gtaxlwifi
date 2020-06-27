@@ -48,9 +48,6 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on boot
-    # SSWAP
-    write /proc/sys/vm/swappiness 130
-
     # Allow to access debugfs for user and group system
     chmod 755 /sys/kernel/debug
     chown system system /sys/kernel/debug
@@ -311,13 +308,6 @@ service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.
     user root
     group root
     seclabel u:r:prepare_param:s0
-    oneshot
-
-# SSWAP
-service sswap /vendor/bin/sswap -s
-    class core
-    user root
-    group root
     oneshot
 
 on property:sys.boot_completed=1

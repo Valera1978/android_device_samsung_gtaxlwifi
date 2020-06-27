@@ -102,8 +102,6 @@
 /sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/mode       u:object_r:sysfs_mdnie_writable:s0
 /sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/scenario   u:object_r:sysfs_mdnie_writable:s0
 
-/dev/block/vnswap0           u:object_r:sswap_data_file:s0
-
 ####################################
 # deamons
 #
@@ -113,7 +111,6 @@
 /vendor/bin/modemloader      u:object_r:modemloader_exec:s0
 
 /vendor/bin/cbd              u:object_r:cbd_exec:s0
-/vendor/bin/sswap            u:object_r:sswap_exec:s0
 /vendor/bin/hw/gpsd          u:object_r:gpsd_exec:s0
 
 # gps

@@ -11,7 +11,5 @@ allow ueventd gps_data_file:file relabelto;
 allow ueventd camera_device:dir relabelto;
 allow ueventd camera_device:lnk_file relabelto;
 
-allow ueventd sswap_data_file:blk_file { create getattr setattr };
-
 allow ueventd sec_efs_file:blk_file { getattr setattr create };
 
