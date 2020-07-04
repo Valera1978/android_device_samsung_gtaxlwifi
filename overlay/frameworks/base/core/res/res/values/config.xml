@@ -175,9 +175,6 @@
          Set this to 0 to disable this feature. -->
     <integer name="config_autoBrightnessInitialLightSensorRate">50</integer>
 
-    <!-- Boolean to enable stk functionality on Samsung phones -->
-    <!--    <bool name="config_samsung_stk">true</bool> -->
-
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
          try to start this dream if possible.  The dream should typically call startDozing()
@@ -243,9 +240,6 @@
          1 - The device DOES have a permanent menu key; ignore autodetection.		
          2 - The device DOES NOT have a permanent menu key; ignore autodetection. -->		
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
-
-    <!-- Enable blur support -->
-    <!-- <bool name="config_uiBlurEnabled">true</bool> -->
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
