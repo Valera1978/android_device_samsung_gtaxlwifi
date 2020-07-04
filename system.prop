@@ -1,9 +1,3 @@
-# Low memory optimization
-#ro.config.low_ram=true
-
-# add tweeks
-#logcat.live=disable
-
 # Audio
 af.fast_track_multiplier=1
 audio_hal.force_voice_config=wide
@@ -53,7 +47,7 @@ ro.product.first_api_level=23
 # Radio
 ro.radio.noril=yes
 
-#Treble
+# Treble
 persist.media.treble_omx=false
 
 # sdcardfs
