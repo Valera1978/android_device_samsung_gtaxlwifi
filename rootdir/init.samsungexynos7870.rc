@@ -219,9 +219,6 @@ on fs
     # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_type
 
-    # Permission for flashlight control for HAL3.3
-    chown media system /sys/class/camera/flash/rear_torch_flash
-
     # Permissions for touchscreen
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/input/enabled
