@@ -251,9 +251,6 @@ on fs
     chown system radio /sys/class/camera/front/front_sensorid
     chown system system /sys/devices/svc/Camera/SVC_rear_module
 
-    # ARGOSD network_throughput
-    chown system system /dev/network_throughput
-
 # GPS
 service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     user gps
