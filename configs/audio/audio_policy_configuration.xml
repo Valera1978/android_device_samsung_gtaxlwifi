@@ -37,7 +37,7 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </devicePort>
-                <devicePort tagName="Wired Headphone" role="sink" type="AUDIO_DEVICE_OUT_WIRED_HEADPHONE">
+                <devicePort tagName="Wired Headphones" role="sink" type="AUDIO_DEVICE_OUT_WIRED_HEADPHONE">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </devicePort>
@@ -58,7 +58,7 @@
                        sources="primary-out,fast"/>
                 <route type="mix" sink="Wired Headset"
                        sources="primary-out,fast"/>
-                <route type="mix" sink="Wired Headphone"
+                <route type="mix" sink="Wired Headphones"
                        sources="primary-out,fast"/>
                 <route type="mix" sink="primary-in"
                        sources="Built-In Mic,Wired Headset Mic"/>
