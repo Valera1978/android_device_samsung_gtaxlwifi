@@ -123,8 +123,8 @@
 /data/gps/nmeapipe           u:object_r:gps_data_file:s0
 /sys/devices/soc0/machine    u:object_r:gps_data_file:s0
 
-/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service.widevine     u:object_r:drm_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey	u:object_r:hal_drm_clearkey_exec:s0
 
-/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.samsung               u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.samsung	u:object_r:hal_light_default_exec:s0
 
-/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.0-service\.exynos    u:object_r:hal_power_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.0-service\.exynos	u:object_r:hal_power_default_exec:s0

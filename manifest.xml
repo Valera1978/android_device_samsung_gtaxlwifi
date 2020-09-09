@@ -46,18 +46,18 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.drm</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>ICryptoFactory</name>
-            <instance>widevine</instance>
             <instance>default</instance>
         </interface>
         <interface>
              <name>IDrmFactory</name>
-             <instance>widevine</instance>
              <instance>default</instance>
          </interface>
+         <fqname>@1.2::ICryptoFactory/clearkey</fqname>
+         <fqname>@1.2::IDrmFactory/clearkey</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.power</name>
