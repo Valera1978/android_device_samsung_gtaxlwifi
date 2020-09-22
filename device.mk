@@ -254,6 +254,8 @@ PRODUCT_PACKAGES += \
     libhwbinder \
     libhwbinder.vendor
 
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+
 # Healthd
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-impl \
