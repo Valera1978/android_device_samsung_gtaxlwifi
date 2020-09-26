@@ -1,16 +1,6 @@
-allow untrusted_app_27 gpsd_exec:file getattr;
 allow untrusted_app_27 adb_data_file:file { getattr open read execute };
 allow untrusted_app_27 adb_data_file:dir { getattr search };
 allow untrusted_app_27 proc_asound:dir search;
 allow untrusted_app_27 proc_asound:file { open read getattr };
-allow untrusted_app_27 proc_net:file read;
-allow untrusted_app_27 proc_net_tcp_udp:file { open read };
 allow untrusted_app_27 serialno_prop:file { open read getattr };
-allow untrusted_app_27 su_exec:file getattr;
-allow untrusted_app_27 proc:file { getattr open read };
-allow untrusted_app_27 proc_tty_drivers:file { getattr open read };
 allow untrusted_app_27 apk_data_file:file setattr;
-allow untrusted_app_27 proc_vmstat:file open;
-allow untrusted_app_27 sysfs_net:dir search;
-allow untrusted_app_27 proc_stat:file open;
-

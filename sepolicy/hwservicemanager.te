@@ -11,5 +11,3 @@ allow hwservicemanager init:dir search;
 allow hwservicemanager init:file { open read };
 allow hwservicemanager init:process getattr;
 allow hwservicemanager sysfs:file { getattr open read };
-allow hwservicemanager gpsd_exec:file getattr;
-

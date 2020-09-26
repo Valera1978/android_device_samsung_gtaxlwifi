@@ -3,12 +3,8 @@ allow netd dhcp_data_file:dir setattr;
 allow netd wifi_data_file:sock_file { create setattr unlink };
 allow netd self:system module_request;
 allow netd gpsd:fd use;
-allow netd gpsd:udp_socket { setopt getopt read write };
-allow netd gpsd:tcp_socket { setopt getopt read write };
-allow netd gpsd_exec:file { write getattr };
-allow netd init:udp_socket { read write getopt setopt };
+allow netd gpsd:udp_socket rw_socket_perms;
+allow netd gpsd:tcp_socket rw_socket_perms;
 allow netd untrusted_app:unix_stream_socket { read write };
 allow netd device:file { open write };
-allow netd debugfs_tracing_debug:file { open write };
-allow netd sysfs:file { open read write };
-
+allow netd sysfs:file { open write };

@@ -1,1 +1,0 @@
-allow drmserver gpsd_exec:file getattr;

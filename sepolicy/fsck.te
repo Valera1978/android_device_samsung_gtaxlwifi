@@ -7,9 +7,6 @@ allow fsck tmpfs:blk_file getattr;
 
 allowxperm fsck emmcblk_device:blk_file ioctl { BLKDISCARDZEROES BLKROGET };
 
-allow fsck gpsd_exec:file getattr;
-
 allow fsck cache_file:dir getattr;
 
 allow fsck sec_efs_file:blk_file { getattr ioctl open read write };
-

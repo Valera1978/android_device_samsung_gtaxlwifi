@@ -275,6 +275,7 @@ service start_hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
     group bluetooth
+    seclabel u:r:wcnss_filter:s0
     disabled
 
 # MobiCore startup

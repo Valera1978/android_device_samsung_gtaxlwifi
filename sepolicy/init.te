@@ -14,12 +14,7 @@ allow init sdcardd_exec:file r_file_perms;
 # sysfs iio:device[0-9]
 allow init sysfs:lnk_file setattr;
 
-# read/chown mDNIE symlinks
-allow init sysfs_mdnie_writable:lnk_file { read setattr };
-
 allow init tee_device:chr_file { write ioctl };
-
-allow init mif_device:chr_file { write ioctl };
 
 allow init kmsg_device:chr_file write;
 
@@ -36,12 +31,7 @@ allow init efs_file:dir mounton;
 # superuser
 allow init su:process { transition rlimitinh siginh noatsecure };
 
-# RIL
-allow init socket_device:sock_file { create open read write getattr setattr unlink };
-
 allow init vendor_file:system module_load;
-allow init uart_device:chr_file { write ioctl };
-allow init rild:unix_stream_socket connectto;
 allow init device:chr_file ioctl;
 
 allow init dnsproxyd_socket:sock_file write;
@@ -59,8 +49,6 @@ allow init system_data_file:file rename;
 
 allow init pmsg_device:chr_file { open read };
 
-allow init bluetooth_device:chr_file { open read write ioctl };
-
 allow init vndbinder_device:chr_file { open read write ioctl };
 
 allow init gps_data_file:fifo_file write;
@@ -76,27 +64,25 @@ allow init hal_gnss_hwservice:hwservice_manager { add find };
 allow init hwservicemanager:binder call;
 allow init system_server:binder call;
 
-allow init debugfs_tracing_debug:file { open write };
-allow init debugfs_tracing_debug:dir { add_name create write };
-
 allow init sec_efs_file:blk_file { getattr open read };
 allow init sec_efs_file:dir mounton;
 
 allow init hwservicemanager:binder transfer;
 allow init sysfs_devices_block:file { open write };
-allow init system_file:file execute_no_trans;
 allow init default_android_hwservice:hwservice_manager { add find };
 allow init system_server:binder transfer;
 
-allow init gps_device:chr_file { ioctl open read write };
 allow init hal_power_stats_hwservice:hwservice_manager add;
 allow init hal_usb_hwservice:hwservice_manager add;
-allow init mif_device:chr_file { open read };
 allow init sysfs_wake_lock:file { open write };
 allow init vendor_data_file:file lock;
 
 allow init hal_wifi_hwservice:hwservice_manager add;
 allow init self:netlink_socket { bind create getattr read setopt write };
-allow init self:udp_socket { setopt getopt connect ioctl write };
-allow init su_exec:file getattr;
 
+allow init system_file:file relabelfrom;
+allow init system_file:dir relabelfrom;
+allow init vendor_file:file relabelfrom;
+allow init vendor_file:dir relabelfrom;
+allow init vendor_configs_file:file relabelfrom;
+allow init vendor_configs_file:dir relabelfrom;

@@ -1,4 +1,1 @@
-allow installd debugfs_tracing_debug:file { open write };
 allow installd device:file { open write };
-allow installd gpsd_exec:file getattr;
-

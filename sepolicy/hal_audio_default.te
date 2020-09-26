@@ -1,1 +1,1 @@
-allow hal_audio_default debugfs_tracing_debug:file { open write };
+allow hal_audio_default adb_data_file:file { getattr open read execute };

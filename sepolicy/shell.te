@@ -2,13 +2,8 @@ allow shell bin_nv_data_efs_file:file getattr;
 allow shell efs_file:file getattr;
 allow shell hidl_base_hwservice:hwservice_manager add;
 allow shell sec_efs_file:file getattr;
-allow shell self:udp_socket ioctl;
 allow shell sysfs:file { getattr open read };
-allow shell gpsd_exec:file getattr;
 allow shell kernel:system syslog_read;
 allow shell hal_telephony_hwservice:hwservice_manager add;
-allow shell mif_device:chr_file ioctl;
 allow shell radio_data_file:dir getattr;
-allow shell rild_exec:file execute_no_trans;
-allow shell shell:udp_socket ioctl;
-
+allow shell devpts:chr_file ioctl;

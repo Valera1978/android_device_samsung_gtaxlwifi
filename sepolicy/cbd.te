@@ -1,6 +1,7 @@
-# modem daemon sec label
 type cbd, domain;
 type cbd_exec, exec_type, file_type;
+
+type cbd_prop, property_type;
 
 net_domain(cbd);
 init_daemon_domain(cbd);
@@ -17,16 +18,15 @@ allow cbd kmsg_device:chr_file rw_file_perms;
 
 # /dev/umts_boot0
 allow cbd mif_device:chr_file rw_file_perms;
+
 # /dev/mbin0
 allow cbd emmcblk_device:blk_file r_file_perms;
-# /dev/spi_boot_link
+
 allow cbd radio_device:chr_file rw_file_perms;
+
 # /dev/block/mmcblk0p13
 allow cbd block_device:dir r_dir_perms;
 allow cbd radio_block_device:blk_file r_file_perms;
-
-# /dev/mipi-lli/lli_control
-allow cbd sysfs_mipi_writable:file rw_file_perms;
 
 # /efs
 allow cbd efs_file:dir r_dir_perms;
@@ -41,7 +41,7 @@ allow cbd rootfs:file { entrypoint read };
 allow cbd sysfs:file { read open write };
 
 allow cbd proc_cmdline:file { open read };
-allow cbd modemloader_prop:property_service set;
+allow cbd cbd_prop:property_service set;
 
 allow cbd vendor_file:file entrypoint;
 

@@ -1,3 +1,0 @@
-allow gatekeeperd debugfs_tracing_debug:file { open write };
-allow gatekeeperd gpsd_exec:file getattr;
-

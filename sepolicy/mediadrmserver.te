@@ -1,9 +1,6 @@
 allow mediadrmserver secmem_device:chr_file { ioctl open read write };
 allow mediadrmserver tee:unix_stream_socket connectto;
 allow mediadrmserver sec_efs_file:file { getattr open read };
-allow mediadrmserver debugfs_tracing_debug:file { open write };
-allow mediadrmserver gpsd_exec:file getattr;
 allow mediadrmserver media_data_file:dir { getattr write search add_name };
 allow mediadrmserver media_data_file:file { getattr open read write create };
 allow mediadrmserver vendor_file:file { open read execute };
-

@@ -1,14 +1,4 @@
 allow bluetooth sysfs:file rw_file_perms;
-allow bluetooth sysfs_usb:file w_file_perms;
-
-allow bluetooth ttyHS0_device:chr_file rw_file_perms;
-allow bluetooth start_hci_filter:unix_stream_socket connectto;
-
-set_prop(bluetooth, wc_transport_prop)
-
-allow bluetooth system_data_file:file open;
-allow bluetooth bluetooth_prop:property_service set;
-
-#r_dir_file(bluetooth, firmware_file)
 allow bluetooth wcnss_filter:unix_stream_socket connectto;
 allow bluetooth bluetooth_device:chr_file { open read write ioctl };
+allow bluetooth gpuservice:binder call;

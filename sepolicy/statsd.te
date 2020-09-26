@@ -1,3 +1,0 @@
-allow statsd debugfs_tracing_debug:file { open write };
-allow statsd gpsd_exec:file getattr;
-

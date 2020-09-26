@@ -2,23 +2,9 @@
 # Devices
 #
 /dev/mali[0-9]*              u:object_r:gpu_device:s0
-/dev/mali.*            	     u:object_r:video_device:s0
-
-/dev/seiren                  u:object_r:seiren_device:s0
-
-/dev/bcm2079x                u:object_r:nfc_device:s0
-/dev/sec-nfc                 u:object_r:nfc_device:s0
-
-/dev/batch_io                u:object_r:batch_io_device:s0
-
-/dev/bbd_control             u:object_r:bbd_device:s0
-/dev/bbd_patch               u:object_r:bbd_device:s0
-/dev/bbd_sensor              u:object_r:bbd_device:s0
+/dev/mali.*                  u:object_r:video_device:s0
 
 /dev/s5p-smem                u:object_r:secmem_device:s0
-#/dev/mobicore                u:object_r:tee_device:s0
-#/dev/mobicore-user           u:object_r:tee_device:s0
-/dev/vfsspi                  u:object_r:vfs_device:s0
 
 /dev/v4l-subdev[0-9]*        u:object_r:video_device:s0
 /dev/media[0-3]*             u:object_r:camera_device:s0
@@ -26,27 +12,22 @@
 /dev/m2m1shot_scaler0        u:object_r:video_device:s0
 /dev/m2m1shot_scaler1        u:object_r:video_device:s0
 
-/dev/mtp_usb*                u:object_r:mtp_device:s0
-
-/dev/__cbd_msg_              u:object_r:mif_device:s0
 /dev/umts.*                  u:object_r:mif_device:s0
-/dev/ehci_power              u:object_r:mif_device:s0
-/dev/mipi-lli/lli_control    u:object_r:mif_device:s0
 
-/dev/ttyBCM[0-9]*            u:object_r:bbd_device:s0
-/dev/ttySAC[0-9]*            u:object_r:bluetooth_device:s0
-#/dev/ttySAC0                u:object_r:hci_attach_dev:s0
+/dev/ttySAC0                 u:object_r:bluetooth_device:s0
+
+/dev/ttySAC1                 u:object_r:gps_device:s0
+/dev/gnss_ipc                u:object_r:gps_device:s0
 
 /dev/block/mmcblk0p[0-9]*    u:object_r:emmcblk_device:s0
 
 /dev/block/zram0             u:object_r:swap_block_device:s0
 
-/dev/block/platform/13540000.dwmmc0/by-name/EFS u:object_r:efs_block_device:s0
-/dev/block/platform/13540000.dwmmc0/by-name/CPEFS   u:object_r:sec_efs_file:s0
-/dev/block/platform/13540000.dwmmc0/by-name/RADIO u:object_r:radio_block_device:s0
+/dev/block/platform/13540000.dwmmc0/by-name/EFS         u:object_r:efs_block_device:s0
+/dev/block/platform/13540000.dwmmc0/by-name/CPEFS       u:object_r:sec_efs_file:s0
+/dev/block/platform/13540000.dwmmc0/by-name/RADIO       u:object_r:radio_block_device:s0
 
 /dev/rfkill                  u:object_r:rfkill_device:s0
-/dev/knox_kap                u:object_r:knox_kap_device:s0
 
 ####################################
 # efs files
@@ -70,57 +51,28 @@
 ####################################
 # data files
 /data/camera(/.*)?           u:object_r:camera_data_file:s0
-/data/nfc(/.*)?              u:object_r:nfc_data_file:s0
 /data/.cid.info              u:object_r:wifi_data_file:s0
 /data/.wifiver.info          u:object_r:wifi_data_file:s0
 
 /data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
 
-/system/bin/wcnss_filter     u:object_r:wcnss_filter_exec:s0
-
-# biometrics
-/data/biometrics(/.*)?	     u:object_r:biometrics_data_file:s0
-
-# tee
-#/data/misc/mcRegistry(/.*)?  u:object_r:mobicore_data_file:s0
+/(vendor|system/vendor)/bin/wcnss_filter     u:object_r:wcnss_filter_exec:s0
 
 # bluetooth
 /sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
 
 # camera
-/sys/devices/virtual/camera(/.*)?           u:object_r:camera_device:s0
-
-# cbd
-/sys/devices/10f24000.mipi-lli/lli_control  u:object_r:sysfs_mipi_writable:s0
-
-# rild
-/sys/devices/virtual/misc/multipdp(/.*)     u:object_r:sysfs_multipdp_writable:s0
-/dev/socket/rild2                           u:object_r:rild_socket:s0
-/dev/socket/rild-debug[0-9]*                u:object_r:rild_debug_socket:s0
-
-# mDNIe
-/sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/mode       u:object_r:sysfs_mdnie_writable:s0
-/sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/scenario   u:object_r:sysfs_mdnie_writable:s0
+/sys/devices/virtual/camera(/.*)?            u:object_r:camera_device:s0
 
 ####################################
-# deamons
+# daemons
 #
-
-#/system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
-/vendor/bin/macloader        u:object_r:macloader_exec:s0
-/vendor/bin/modemloader      u:object_r:modemloader_exec:s0
 
 /vendor/bin/cbd              u:object_r:cbd_exec:s0
 /vendor/bin/hw/gpsd          u:object_r:gpsd_exec:s0
 
-# gps
-/dev/gnss_ipc                u:object_r:gps_device:s0
-
 /data/system/gps(/.*)?       u:object_r:gps_data_file:s0
-/data/gps/ctrlpipe           u:object_r:gps_data_file:s0
-/data/gps/\.gpslogd\.pipe    u:object_r:gps_data_file:s0
-/data/gps/nmeapipe           u:object_r:gps_data_file:s0
 /sys/devices/soc0/machine    u:object_r:gps_data_file:s0
 
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey	u:object_r:hal_drm_clearkey_exec:s0

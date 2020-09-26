@@ -1,37 +1,21 @@
-# /dev/ttySAC3
+# /dev/ttySAC0
 type bluetooth_device, dev_type;
-
-type bbd_device, dev_type;
 
 # /dev/block/mmcblk0p[0-9] (/dev/mbin0)
 type emmcblk_device, file_type, dev_type, mlstrustedsubject;
 
-# /dev/umts_boot*, /dev/ehci_power
+# /dev/umts_boot*
 type mif_device, dev_type;
 
 # /dev/rfkill
 type rfkill_device, dev_type;
 
-# /dev/seiren
-type seiren_device, dev_type;
-
 # /dev/s5p-smem
 type secmem_device, dev_type;
-
-# /dev/knox_kap
-type knox_kap_device, dev_type;
 
 # efs
 type efs_block_device, dev_type;
 
 type radio_block_device, dev_type;
-
-type uart_device, dev_type;
-
-type vfs_device, dev_type;
-
-type batch_io_device, dev_type;
-
-type ttyHS0_device, dev_type;
 
 type gps_device, dev_type;

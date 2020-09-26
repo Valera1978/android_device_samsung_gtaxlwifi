@@ -1,3 +1,1 @@
 allow mediametrics sysfs:file { getattr open read };
-allow mediametrics gpsd_exec:file getattr;
-

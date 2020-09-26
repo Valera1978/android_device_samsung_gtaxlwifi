@@ -1,9 +1,5 @@
-# mobicore
-
-# Allow to create files and directories /data/app/mcRegistry
 file_type_auto_trans(tee, apk_data_file, tee_data_file);
 
-allow tee property_socket:sock_file write;
 allow tee init:unix_stream_socket connectto;
 
 allow tee efs_file:dir { getattr search };
@@ -12,5 +8,3 @@ allow tee efs_file:file { getattr open read };
 allow tee system_prop:property_service set;
 
 allow tee prov_efs_file:dir search;
-
-allow tee gpsd_exec:file getattr;

@@ -1,6 +1,3 @@
 allow zygote self:capability sys_nice;
 allow zygote system_file:file write;
 allow zygote system_file:dir { write mounton };
-allow zygote gpsd_exec:file getattr;
-allow zygote debugfs_tracing_debug:file { open write getattr };
-
