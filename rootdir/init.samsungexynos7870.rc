@@ -1,5 +1,6 @@
 import /vendor/etc/init/hw/init.samsungexynos7870.usb.rc
 import /vendor/etc/init/hw/init.wifi.rc
+import /vendor/etc/init/hw/init.power.rc
 
 # Samsung stock init.rc additions
 import /vendor/etc/init/hw/init.samsung.rc
@@ -15,15 +16,8 @@ on early-init
     write /proc/sys/vm/page-cluster 0
 
 on init
-    start watchdogd
-
     mkdir /storage/emulated 0555 root root
 
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
-
-    export EXTERNAL_STORAGE /sdcard
-    symlink /data/app /factory
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
     symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
 
@@ -68,20 +62,9 @@ on boot
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
 
-    # sec_log
-    chown system log /proc/sec_log
-
     # 1-key hard reset
     chown system system /sys/power/reset_enabled
     chmod 0660 /sys/power/reset_enabled
-
-    # CPU hotplug
-    chown system system /sys/power/cpuhotplug/enable
-    chmod 0660 /sys/power/cpuhotplug/enable
-    chown system system /sys/power/cpuhotplug/min_online_cpu
-    chmod 0664 /sys/power/cpuhotplug/min_online_cpu
-    chown system system /sys/power/cpuhotplug/max_online_cpu
-    chmod 0664 /sys/power/cpuhotplug/max_online_cpu
 
     # GPU dvfs node
     chown radio system /sys/devices/11400000.mali/dvfs_table
@@ -105,55 +88,6 @@ on boot
     chown radio system /sys/class/devfreq/17000020.devfreq_int/available_frequencies
     chmod 0664 /sys/class/devfreq/17000020.devfreq_int/available_frequencies
 
-    # Change permission for interactive governor
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/input_boost
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-
     # RTC status
     chown system system /sys/power/rtc_status
     chmod 0444 /sys/power/rtc_status
@@ -162,9 +96,6 @@ on boot
 
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
-
-    # MST HW Support
-    setprop ro.mst.support 1
 
     # Secure OS migration
     chown radio system /sys/devices/system/sec_os_ctrl/migrate_os
@@ -231,7 +162,7 @@ on fs
     chown radio system /sys/class/sec/sec_key/wakeup_keys
     write /sys/class/sec/sec_key/wakeup_keys 116,172
 
-    # Permissions Camera
+    # Permissions for camera
     mkdir /data/camera 0770 cameraserver system
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camfw_full
@@ -242,9 +173,11 @@ on fs
     chown system radio /sys/class/camera/rear/rear_calcheck
     chown system radio /sys/class/camera/rear/rear_caminfo
     chown system radio /sys/class/camera/rear/rear_sensorid
-    chown system radio /sys/class/camera/rear/fw_update
+    chmod 0660 /sys/class/camera/flash/rear_flash
     chown system radio /sys/class/camera/flash/rear_flash
+    chmod 0660 /sys/class/camera/flash/rear_torch_flash
     chown cameraserver system /sys/class/camera/flash/rear_torch_flash
+    chown system radio /sys/class/camera/rear/fw_update
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
     chown system radio /sys/class/camera/front/front_caminfo
@@ -284,31 +217,6 @@ service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmm
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
     seclabel u:r:cbd:s0
-    oneshot
-
-service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
-    class late_start
-    disabled
-
-service fuse_usb1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb1 /storage/usb1
-    class late_start
-    disabled
-
-# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
-service watchdogd /sbin/watchdogd 10 20
-    class core
-    seclabel u:r:watchdogd:s0
-
-# on userdebug and eng builds, enable kgdb on the serial console
-on property:ro.debuggable=1
-    write /sys/module/kgdboc/parameters/kgdboc ttyFIQ1
-    write /sys/module/fiq_debugger/parameters/kgdb_enable 1
-
-service prepare_param /system/bin/prepare_param.sh /dev/block/platform/13540000.dwmmc0/by-name/PARAM
-    class core
-    user root
-    group root
-    seclabel u:r:prepare_param:s0
     oneshot
 
 on property:sys.boot_completed=1
