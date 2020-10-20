@@ -287,6 +287,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
+# FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
+
 # ADB
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=adb \
