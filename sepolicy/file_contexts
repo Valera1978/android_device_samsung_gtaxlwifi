@@ -63,7 +63,7 @@
 /sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
 
 # camera
-/sys/devices/virtual/camera(/.*)?            u:object_r:camera_device:s0
+/sys/devices/virtual/camera(/.*)?           u:object_r:camera_device_sysfs:s0
 
 ####################################
 # daemons

@@ -14,3 +14,5 @@ type sec_efs_file, file_type;
 type wifi_efs_file, file_type;
 
 allow sysfs_type tmpfs:filesystem associate;
+
+type camera_device_sysfs, sysfs_type, file_type;
