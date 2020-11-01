@@ -1,4 +1,0 @@
-allow bluetooth sysfs:file rw_file_perms;
-allow bluetooth wcnss_filter:unix_stream_socket connectto;
-allow bluetooth bluetooth_device:chr_file { open read write ioctl };
-allow bluetooth gpuservice:binder call;
