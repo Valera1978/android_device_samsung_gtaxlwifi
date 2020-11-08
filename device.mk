@@ -44,8 +44,7 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # first_stage_mount
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870:$(TARGET_COPY_OUT_RAMDISK)/fstab.samsungexynos7870 \
-    $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870:$(TARGET_COPY_OUT_VENDOR)/fstab.samsungexynos7870
+    $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870:$(TARGET_COPY_OUT_RAMDISK)/fstab.samsungexynos7870
 
 # Ramdisk
 PRODUCT_PACKAGES += \
