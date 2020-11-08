@@ -249,7 +249,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gps.xml
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl
+    android.hardware.gnss@1.0-impl.gtaxlwifi \
+    android.hardware.gnss@1.0-service.gtaxlwifi
 
 PRODUCT_PACKAGES += \
     gpsd_shim
