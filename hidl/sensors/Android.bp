@@ -48,6 +48,7 @@ cc_binary {
     relative_install_path: "hw",
     vendor: true,
     init_rc: ["android.hardware.sensors@1.0-service.gtaxlwifi.rc"],
+    compile_multilib: "32",
     srcs: ["service.cpp"],
 
     shared_libs: [
