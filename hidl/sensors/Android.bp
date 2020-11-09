@@ -1,5 +1,5 @@
 cc_library_shared {
-    name: "android.hardware.sensors@1.0-impl",
+    name: "android.hardware.sensors@1.0-impl.gtaxlwifi",
     defaults: ["hidl_defaults"],
     proprietary: true,
     relative_install_path: "hw",
@@ -22,7 +22,7 @@ cc_library_shared {
 }
 
 cc_library_static {
-    name: "android.hardware.sensors@1.0-convert",
+    name: "android.hardware.sensors@1.0-convert.gtaxlwifi",
     vendor_available: true,
     defaults: ["hidl_defaults"],
     srcs: ["convert.cpp"],
@@ -44,10 +44,10 @@ cc_library_static {
 }
 
 cc_binary {
-    name: "android.hardware.sensors@1.0-service",
+    name: "android.hardware.sensors@1.0-service.gtaxlwifi",
     relative_install_path: "hw",
     vendor: true,
-    init_rc: ["android.hardware.sensors@1.0-service.rc"],
+    init_rc: ["android.hardware.sensors@1.0-service.gtaxlwifi.rc"],
     srcs: ["service.cpp"],
 
     shared_libs: [
