@@ -252,6 +252,10 @@ TARGET_LD_SHIM_LIBS += \
 TARGET_LD_SHIM_LIBS += \
     /vendor/bin/hw/gpsd|gpsd_shim.so
 
+# Widevine
+TARGET_LD_SHIM_LIBS += \
+    /system/vendor/lib/mediadrm/libwvdrmengine.so|/vendor/lib/libprotobuf-cpp-lite-v29.so
+
 # Security patch level - T580XXU4CRK5
 VENDOR_SECURITY_PATCH := 2018-11-01
 
