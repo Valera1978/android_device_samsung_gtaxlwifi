@@ -69,7 +69,6 @@
 # daemons
 #
 
-/vendor/bin/cbd              u:object_r:cbd_exec:s0
 /vendor/bin/hw/gpsd          u:object_r:gpsd_exec:s0
 
 /data/system/gps(/.*)?       u:object_r:gps_data_file:s0

@@ -109,9 +109,6 @@
 # Secure MEM driver
 /dev/s5p-smem             0660   drm        drmrpc
 
-# cbd modem block
-/dev/block/mmcblk0p5      0400  radio   system
-
 # for DM tools
 /dev/umts_dm0             0660   radio      radio
 /dev/umts_router          0660   radio      radio

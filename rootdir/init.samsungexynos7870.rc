@@ -212,14 +212,6 @@ service start_hci_filter /vendor/bin/wcnss_filter
     seclabel u:r:wcnss_filter:s0
     disabled
 
-# MobiCore startup
-service wifi-daemon /vendor/bin/cbd -tmodap_ap -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
-    class main
-    user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r shell
-    seclabel u:r:cbd:s0
-    oneshot
-
 on property:sys.boot_completed=1
     start gpsd
     swapon_all /vendor/etc/fstab.samsungexynos7870

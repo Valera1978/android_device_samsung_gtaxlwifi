@@ -1,6 +1,3 @@
-ro.cbd.dt_revision     u:object_r:cbd_prop:s0
-ril.cbd.dt_revision    u:object_r:cbd_prop:s0
-
 wc_transport.          u:object_r:bluetooth_prop:s0
 
 hwservicemanager.ready u:object_r:hwservicemanager_prop:s0
