@@ -220,7 +220,7 @@ BOARD_ROOT_EXTRA_FOLDERS := efs
 #RECOVERY_VARIANT := twrp
 BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870
-TARGET_OTA_ASSERT_DEVICE := gtaxlwifi
+TARGET_OTA_ASSERT_DEVICE := gtaxlwifi,gtaxllte
 
 # TWRP
 ifeq ($(RECOVERY_VARIANT),twrp)
