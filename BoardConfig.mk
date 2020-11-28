@@ -16,7 +16,6 @@
 
 LOCAL_PATH := device/samsung/gtaxlwifi
 
-# temporary
 BUILD_BROKEN_DUP_RULES := true
 
 # Include path
@@ -208,7 +207,6 @@ BOARD_VENDOR := samsung
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
 
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
