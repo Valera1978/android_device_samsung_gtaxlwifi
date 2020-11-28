@@ -93,12 +93,6 @@
             <Limit name="measured-frame-rate-1280x720" range="270-540" />
             <Limit name="measured-frame-rate-1920x1080" range="130-260" />
         </MediaCodec>
-<!--        <MediaCodec name="OMX.Exynos.vp9.dec" type="video/x-vnd.on2.vp9" update="true" >
-            <Limit name="measured-frame-rate-320x240" range="450-900" />
-            <Limit name="measured-frame-rate-720x480" range="360-720" />
-            <Limit name="measured-frame-rate-1280x720" range="250-500" />
-            <Limit name="measured-frame-rate-1920x1080" range="120-240" />
-        </MediaCodec> -->
 
         <MediaCodec name="OMX.google.h264.decoder" type="video/avc" update="true">
             <Limit name="measured-frame-rate-320x240" range="250-500" />
