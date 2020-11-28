@@ -105,10 +105,6 @@ on post-fs-data
     chmod 0664 /dev/cpuset/cpus
 
 on post-fs-data
-    # avoid USB crash
-    setprop persist.adb.nonblocking_ffs 0
-    setprop ro.adb.nonblocking_ffs 0
-
     # Reload Android sepolicy
     setprop selinux.reload_policy 1
 

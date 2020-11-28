@@ -16,10 +16,7 @@ on early-init
     write /proc/sys/vm/page-cluster 0
 
 on init
-    mkdir /storage/emulated 0555 root root
-
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
-    symlink /dev/block/platform/13540000.dwmmc0/by-name/STEADY /dev/block/steady
 
 on post-fs
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
