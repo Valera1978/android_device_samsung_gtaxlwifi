@@ -194,9 +194,6 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 WPA_SUPPLICANT_USE_HIDL          := true
 
-# Wifi loader
-BOARD_HAVE_SAMSUNG_WIFI := true
-
 # Charger
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_SHOW_PERCENTAGE := true
