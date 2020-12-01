@@ -244,10 +244,6 @@ TARGET_IGNORES_FTP_PPTP_CONNTRACK_FAILURE := true
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
-# Widevine
-TARGET_LD_SHIM_LIBS += \
-    /system/vendor/lib/mediadrm/libwvdrmengine.so|/vendor/lib/libprotobuf-cpp-lite-v29.so
-
 # Vendor security patch level - T580XXS5CTD1
 VENDOR_SECURITY_PATCH := 2020-04-01
 
