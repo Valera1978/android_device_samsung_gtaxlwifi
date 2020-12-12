@@ -61,3 +61,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.enable_suspend=true
+
+# Do not update the recovery image
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.recovery_update=false
