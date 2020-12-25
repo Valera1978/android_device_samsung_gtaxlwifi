@@ -16,10 +16,9 @@ lib/libExynosOMX_Core.so
 lib/libExynosOMX_Resourcemanager.so
 lib/libexynoscamera.so
 lib/libexynoscamera3.so
-lib/libsecnativefeature.so
 lib/libsensorlistener.so
-lib/libstainkiller.so
 lib/libuniplugin.so
+vendor/lib/libstainkiller.so
 lib/omx/libOMX.Exynos.AVC.Decoder.so
 lib/omx/libOMX.Exynos.AVC.Encoder.so
 lib/omx/libOMX.Exynos.HEVC.Decoder.so
