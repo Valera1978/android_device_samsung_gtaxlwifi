@@ -12,6 +12,7 @@ type prov_efs_file, file_type;
 type sensor_efs_file, file_type;
 type sec_efs_file, file_type;
 type wifi_efs_file, file_type;
+type mediadrm_vendor_data_file, file_type, data_file_type;
 
 allow sysfs_type tmpfs:filesystem associate;
 
