@@ -330,6 +330,10 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     lineage_charger_res_images
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
 # Call empty .mk files in the BSP sources as an existence check for them
 $(call inherit-product, hardware/samsung_slsi/exynos/empty.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos5/empty.mk)
