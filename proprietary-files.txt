@@ -1,3 +1,4 @@
+# Firmware - from T580XXS5CTK1/T580XXS5CTD1 (no changes to vendor blobs between those versions)
 etc/firmware/Data.msc
 etc/firmware/bdwlan30.bin
 etc/firmware/bdwlan32.bin
@@ -9,16 +10,20 @@ etc/firmware/rampatch_tlv_tf_1.1.tlv
 etc/firmware/utf30.bin
 etc/firmware/utfbd30.bin
 etc/firmware/utfbd32.bin
-etc/srm.bin
-lib/hw/camera.vendor.universal7870.so
-lib/hw/gps.default.so
+vendor/firmware/fimc_is_lib.bin
+vendor/firmware/mfc_fw.bin
+vendor/firmware/setfile_4h5yc.bin
+vendor/firmware/setfile_sr259.bin
+
+# Mali graphics - r28p0 - from the 9.0 SM-A720S stock firmware
+vendor/lib/egl/libGLES_mali.so
+vendor/lib/hw/vulkan.exynos5.so
+vendor/lib64/egl/libGLES_mali.so
+vendor/lib64/hw/vulkan.exynos5.so
+
+# OMX - from A520FXXUGCTI9
 lib/libExynosOMX_Core.so
 lib/libExynosOMX_Resourcemanager.so
-lib/libexynoscamera.so
-lib/libexynoscamera3.so
-lib/libsensorlistener.so
-lib/libuniplugin.so
-vendor/lib/libstainkiller.so
 lib/omx/libOMX.Exynos.AVC.Decoder.so
 lib/omx/libOMX.Exynos.AVC.Encoder.so
 lib/omx/libOMX.Exynos.HEVC.Decoder.so
@@ -39,18 +44,54 @@ lib64/omx/libOMX.Exynos.MPEG4.Encoder.so
 lib64/omx/libOMX.Exynos.VP8.Decoder.so
 lib64/omx/libOMX.Exynos.VP8.Encoder.so
 lib64/omx/libOMX.Exynos.WMV.Decoder.so
+
+# Camera - from T580XXS5CTK1/T580XXS5CTD1
+lib/hw/camera.vendor.universal7870.so
+lib/libexynoscamera.so
+lib/libexynoscamera3.so
+lib/libsensorlistener.so
+lib/libuniplugin.so
+vendor/lib/libstainkiller.so
+
+# DRM - from "crosshatch-user 10 QQ3A.200805.001 6578210 release-keys"
+vendor/lib64/libwvhidl.so
+vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc
+vendor/bin/hw/android.hardware.drm@1.2-service.widevine
+
+# aptX - from "crosshatch-user 10 QP1A.190711.020 5800535 release-keys"
 product/lib64/libaptXHD_encoder.so
 product/lib64/libaptX_encoder.so
+
+# GPS - from T580XXS5CTK1/T580XXS5CTD1
+# Modifications made to gpsd to get it to work:
+#  * SSLv3_client_method has been replaced with SSLv23_method:
+#  $ sed -i "s/SSLv3_client_method/SSLv23_method\x00\x00\x00\x00\x00\x00/" gpsd
+#  * The android.hidl.base@1.0 dependancy has been removed using patchelf:
+#  $ patchelf --remove-needed android.hidl.base@1.0.so gpsd
+# No modifications were made to gps.default.so.
 vendor/bin/hw/gpsd
-vendor/bin/wcnss_filter
-vendor/firmware/fimc_is_lib.bin
-vendor/firmware/mfc_fw.bin
-vendor/firmware/setfile_4h5yc.bin
-vendor/firmware/setfile_sr259.bin
-vendor/lib/egl/libGLES_mali.so
+lib/hw/gps.default.so
+
+# Sensors - from T580XXS5CTK1/T580XXS5CTD1
 vendor/lib/hw/sensors.universal7870.so
-vendor/lib/hw/vulkan.exynos5.so
-vendor/lib/libstagefrighthw.so
-vendor/lib/mediadrm/libwvdrmengine.so
-vendor/lib64/egl/libGLES_mali.so
-vendor/lib64/hw/vulkan.exynos5.so
+
+# Samsung stock audio
+vendor/lib/hw/audio.primary.universal7870.so
+vendor/lib/lib_SamsungRec_06004.so
+vendor/lib/lib_SoundAlive_SRC384_ver320.so
+vendor/lib/lib_soundaliveresampler.so
+vendor/lib/libaudio-ril.so
+vendor/lib/libaudioroute.so
+vendor/lib/libpreprocessing_nxp.so
+vendor/lib/librecordalive.so
+vendor/lib/libsamsungDiamondVoice.so
+vendor/lib/libSamsungPostProcessConvertor.so
+vendor/lib/libsecaudioinfo.so
+vendor/lib/libtinyals_.so
+vendor/lib/libvndsecril-client.so
+vendor/lib/libfloatingfeature.so
+vendor/lib/libLifevibes_lvverx.so
+vendor/lib/libLifevibes_lvvetx.so
+
+# wcnss_filter - for Bluetooth - from the stock 7.1.1 firmware - T580XXU3BRF1
+vendor/bin/wcnss_filter
