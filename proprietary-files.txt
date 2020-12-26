@@ -53,14 +53,14 @@ lib/libsensorlistener.so
 lib/libuniplugin.so
 vendor/lib/libstainkiller.so
 
-# DRM - from "crosshatch-user 10 QQ3A.200805.001 6578210 release-keys"
+# DRM - from "crosshatch-user 11 RQ1A.201205.003 6906706 release-keys"
 vendor/lib64/libwvhidl.so
-vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc
-vendor/bin/hw/android.hardware.drm@1.2-service.widevine
+vendor/etc/init/android.hardware.drm@1.3-service.widevine.rc
+vendor/bin/hw/android.hardware.drm@1.3-service.widevine
 
-# aptX - from "crosshatch-user 10 QP1A.190711.020 5800535 release-keys"
-product/lib64/libaptXHD_encoder.so
-product/lib64/libaptX_encoder.so
+# aptX - from "crosshatch-user 11 RQ1A.201205.003 6906706 release-keys"
+system_ext/lib64/libaptXHD_encoder.so
+system_ext/lib64/libaptX_encoder.so
 
 # GPS - from T580XXS5CTK1/T580XXS5CTD1
 # Modifications made to gpsd to get it to work:
