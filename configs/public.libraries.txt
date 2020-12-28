@@ -1,1 +1,2 @@
 libGLES_mali.so
+libprotobuf-cpp-lite.so
