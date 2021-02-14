@@ -1,3 +1,8 @@
+on fs
+    wait /dev/block/platform/13540000.dwmmc0
+    symlink /dev/block/platform/13540000.dwmmc0 /dev/block/bootdevice
+    symlink /dev/block/platform/13540000.dwmmc0/by-name/SYSTEM /dev/block/platform/13540000.dwmmc0/by-name/system
+
 on post-fs-data
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
