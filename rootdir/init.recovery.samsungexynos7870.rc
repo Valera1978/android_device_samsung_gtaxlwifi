@@ -1,0 +1,3 @@
+on post-fs-data
+    setprop persist.adb.nonblocking_ffs 0
+    setprop ro.adb.nonblocking_ffs 0
