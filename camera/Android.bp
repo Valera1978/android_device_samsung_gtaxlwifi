@@ -1,0 +1,15 @@
+cc_library_shared {
+    name: "camera.universal7870",
+
+    srcs: ["CameraWrapper.cpp"],
+
+    shared_libs: [
+        "libhardware",
+        "liblog",
+        "libcamera_client",
+        "libutils",
+    ],
+
+    relative_install_path: "hw",
+
+}
