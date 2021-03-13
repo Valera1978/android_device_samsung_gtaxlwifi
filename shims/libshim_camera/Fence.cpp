@@ -14,8 +14,4 @@
  * limitations under the License.
  */
 
-#include <ui/GraphicBuffer.h>
-
-extern "C" void _ZN7android5FenceD1Ev()
-{
-}
+extern "C" void _ZN7android5FenceD1Ev() { }
