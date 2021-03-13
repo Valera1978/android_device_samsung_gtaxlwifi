@@ -1,0 +1,22 @@
+cc_library_shared {
+    name: "libsecnativefeature",
+
+    srcs: [
+        "SecNativeFeatureCIf.cpp",
+        "SecNativeFeatureCppIf.cpp",
+    ],
+
+    include_dirs: ["external/expat/lib"],
+
+    shared_libs: ["libexpat"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+
+    vendor: true,
+
+    compile_multilib: "32",
+
+}
