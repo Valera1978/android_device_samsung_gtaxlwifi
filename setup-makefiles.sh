@@ -64,6 +64,9 @@ SYMLINKS := \$(TARGET_OUT)/vendor
 \$(SYMLINKS):
 	@mkdir -p \$@/lib/hw
 	@mkdir -p \$@/lib64/hw
+	@echo "Symlink: vulkan.exynos5.so"
+	\$(hide) ln -sf egl/libGLES_mali.so \$@/lib/vulkan.exynos5.so
+	\$(hide) ln -sf egl/libGLES_mali.so \$@/lib64/vulkan.exynos5.so
 	@echo "Symlink: libOpenCL.so"
 	\$(hide) ln -sf egl/libGLES_mali.so \$@/lib/libOpenCL.so
 	\$(hide) ln -sf egl/libGLES_mali.so \$@/lib64/libOpenCL.so
@@ -83,7 +86,7 @@ EOF
 
 (cat << EOF) >> $LINEAGE_ROOT/$OUTDIR/$DEVICE-vendor.mk
 
-# Create Mali links for Vulkan and OpenCL
+# Create Mali symlinks for Vulkan and OpenCL
 PRODUCT_PACKAGES += libGLES_mali
 EOF
 ###################################################################################################

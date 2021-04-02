@@ -17,9 +17,7 @@ vendor/firmware/setfile_sr259.bin
 
 # Mali graphics - r28p0 - from the 9.0 SM-A720S stock firmware
 vendor/lib/egl/libGLES_mali.so
-vendor/lib/hw/vulkan.exynos5.so
 vendor/lib64/egl/libGLES_mali.so
-vendor/lib64/hw/vulkan.exynos5.so
 
 # OMX - from A520FXXUGCTI9
 lib/libExynosOMX_Core.so
