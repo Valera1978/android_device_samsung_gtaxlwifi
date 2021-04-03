@@ -79,3 +79,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # UI
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.use_fifo_ui=1
+
+# Set fdsan to the warn_once severity level
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.fdsan=warn_once
