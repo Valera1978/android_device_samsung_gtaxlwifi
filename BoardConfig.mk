@@ -235,9 +235,6 @@ TW_USE_TOOLBOX=true
 TW_EXCLUDE_TWRPAPP := true
 endif
 
-# Network Routing
-TARGET_IGNORES_FTP_PPTP_CONNTRACK_FAILURE := true
-
 # Shims: camera
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
