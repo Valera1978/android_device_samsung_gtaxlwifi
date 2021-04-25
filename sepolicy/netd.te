@@ -1,10 +1,4 @@
 allow netd self:capability sys_module;
-allow netd dhcp_data_file:dir setattr;
-allow netd wifi_data_file:sock_file { create setattr unlink };
-allow netd self:system module_request;
 allow netd gpsd:fd use;
 allow netd gpsd:udp_socket rw_socket_perms;
 allow netd gpsd:tcp_socket rw_socket_perms;
-allow netd untrusted_app:unix_stream_socket { read write };
-allow netd device:file { open write };
-allow netd sysfs:file { open write };

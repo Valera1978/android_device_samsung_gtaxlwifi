@@ -1,1 +1,3 @@
 get_prop(appdomain, exported_camera_prop);
+
+r_dir_file({ appdomain -isolated_app }, sysfs_thermal)

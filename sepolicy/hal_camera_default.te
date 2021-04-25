@@ -1,7 +1,6 @@
-allow hal_camera_default vndbinder_device:chr_file { ioctl open read write };
-allow hal_camera_default camera_device:dir search;
-allow hal_camera_default camera_device:file { getattr open read write };
+allow hal_camera_default sysfs_camera:dir search;
+allow hal_camera_default sysfs_camera:file { getattr open read write };
+
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
-allow hal_camera_default vndservicemanager:binder call;
-allow hal_camera_default camera_device_sysfs:dir search;
-allow hal_camera_default camera_device_sysfs:file { getattr open read };
+
+vndbinder_use(hal_camera_default)

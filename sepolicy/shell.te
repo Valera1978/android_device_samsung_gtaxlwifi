@@ -1,9 +1,0 @@
-allow shell bin_nv_data_efs_file:file getattr;
-allow shell efs_file:file getattr;
-allow shell hidl_base_hwservice:hwservice_manager add;
-allow shell sec_efs_file:file getattr;
-allow shell sysfs:file { getattr open read };
-allow shell kernel:system syslog_read;
-allow shell hal_telephony_hwservice:hwservice_manager add;
-allow shell radio_data_file:dir getattr;
-allow shell devpts:chr_file ioctl;

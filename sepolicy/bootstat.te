@@ -1,2 +1,0 @@
-allow bootstat sysfs:file { getattr open read };
-

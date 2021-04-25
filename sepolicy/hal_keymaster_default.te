@@ -1,1 +1,0 @@
-allow hal_keymaster_default sysfs:file { getattr open read };

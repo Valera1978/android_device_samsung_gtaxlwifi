@@ -1,77 +1,121 @@
 ##########################
 # Devices
 #
-/dev/mali[0-9]*              u:object_r:gpu_device:s0
+/dev/mali[0-9]*                                                           u:object_r:gpu_device:s0
 
-/dev/s5p-smem                u:object_r:secmem_device:s0
+/dev/s5p-smem                                                             u:object_r:secmem_device:s0
 
-/dev/v4l-subdev[0-9]*        u:object_r:video_device:s0
-/dev/m2m1shot_scaler[0-9]*   u:object_r:video_device:s0
-/dev/media[0-3]*             u:object_r:camera_device:s0
-/dev/m2m1shot_jpeg           u:object_r:camera_device:s0
+/dev/v4l-subdev[0-9]*                                                     u:object_r:video_device:s0
+/dev/m2m1shot_scaler[0-9]*                                                u:object_r:video_device:s0
+/dev/media[0-3]*                                                          u:object_r:camera_device:s0
 
-/dev/ttySAC0                 u:object_r:bluetooth_device:s0
+/dev/ttySAC0                                                              u:object_r:bluetooth_device:s0
 
-/dev/ttySAC1                 u:object_r:gps_device:s0
-/dev/gnss_ipc                u:object_r:gps_device:s0
+/dev/ttySAC1                                                              u:object_r:gps_device:s0
+/dev/gnss_ipc                                                             u:object_r:gps_device:s0
 
-/dev/block/mmcblk0p[0-9]*    u:object_r:emmcblk_device:s0
+/dev/block/mmcblk0p[0-9]*                                                 u:object_r:emmcblk_device:s0
 
-/dev/block/zram0             u:object_r:swap_block_device:s0
+/dev/block/zram0                                                          u:object_r:swap_block_device:s0
 
-/dev/block/platform/13540000.dwmmc0/by-name/EFS         u:object_r:efs_block_device:s0
-/dev/block/platform/13540000.dwmmc0/by-name/CPEFS       u:object_r:sec_efs_file:s0
-/dev/block/platform/13540000.dwmmc0/by-name/RADIO       u:object_r:radio_block_device:s0
+/dev/block/mmcblk0p13                                                     u:object_r:radio_block_device:s0
 
-/dev/rfkill                  u:object_r:rfkill_device:s0
+/dev/rfkill                                                               u:object_r:rfkill_device:s0
 
 ####################################
 # efs files
-/efs/bluetooth(/.*)?         u:object_r:bluetooth_efs_file:s0
-/efs/Battery(/.*)?           u:object_r:battery_efs_file:s0
-/efs/drm(/.*)?               u:object_r:drm_efs_file:s0
-/efs/FactoryApp(/.*)?        u:object_r:app_efs_file:s0
-/efs/gyro_cal_data           u:object_r:sensor_efs_file:s0
-/efs/h2k.dat                 u:object_r:cpk_efs_file:s0
-/efs/imei(/.*)?              u:object_r:imei_efs_file:s0
-/efs/nv_data.bin(.*)         u:object_r:efs_file:s0
-/efs/.nv_data.bak            u:object_r:efs_file:s0
-/efs/nv.log                  u:object_r:efs_file:s0
-/efs/prov(/.*)?              u:object_r:prov_efs_file:s0
-/efs/prov_data(/.*)?         u:object_r:prov_efs_file:s0
-/efs/sec_efs(/.*)?           u:object_r:sec_efs_file:s0
-/efs/wifi(/.*)?              u:object_r:wifi_efs_file:s0
-/efs/wv.keys                 u:object_r:sec_efs_file:s0
-/cpefs(/.*)?                 u:object_r:sec_efs_file:s0
+/efs/FactoryApp(/.*)?                                                     u:object_r:app_efs_file:s0
+/efs/FactoryApp/baro_delta                                                u:object_r:baro_delta_factoryapp_efs_file:s0
+/efs/FactoryApp/factorymode                                               u:object_r:factorymode_factoryapp_efs_file:s0
+/efs/FactoryApp/fdata                                                     u:object_r:radio_factoryapp_efs_file:s0
+/efs/FactoryApp/hist_nv                                                   u:object_r:radio_factoryapp_efs_file:s0
+/efs/FactoryApp/test_nv                                                   u:object_r:radio_factoryapp_efs_file:s0
+
+/efs/Battery(/.*)?                                                        u:object_r:battery_efs_file:s0
+/efs/bluetooth(/.*)?                                                      u:object_r:bluetooth_efs_file:s0
+/efs/drm(/.*)?                                                            u:object_r:drm_efs_file:s0
+/efs/h2k.dat                                                              u:object_r:cpk_efs_file:s0
+/efs/imei(/.*)?                                                           u:object_r:imei_efs_file:s0
+/efs/nv_data.bin(.*)                                                      u:object_r:bin_nv_data_efs_file:s0
+/efs/.nv_data.bak                                                         u:object_r:bin_nv_data_efs_file:s0
+/efs/nv.log                                                               u:object_r:bin_nv_data_efs_file:s0
+/efs/prov(/.*)?                                                           u:object_r:prov_efs_file:s0
+/efs/prov_data(/.*)?                                                      u:object_r:prov_efs_file:s0
+/efs/sec_efs(/.*)?                                                        u:object_r:sec_efs_file:s0
+/efs/wifi(/.*)?                                                           u:object_r:wifi_efs_file:s0
+/efs/wv\.keys                                                             u:object_r:cpk_efs_file:s0
+/cpefs(/.*)?                                                              u:object_r:sec_efs_file:s0
 
 ####################################
 # data files
-/data/camera(/.*)?           u:object_r:camera_data_file:s0
-/data/.cid.info              u:object_r:wifi_data_file:s0
-/data/.wifiver.info          u:object_r:wifi_data_file:s0
+#
+/data/nfc(/.*)?                                                           u:object_r:nfc_data_file:s0
+/data/misc/radio(/.*)?                                                    u:object_r:radio_data_file:s0
 
-/data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
+# GPS
+/data/system/gps(/.*)?                                                    u:object_r:gps_data_file:s0
 
-/(vendor|system/vendor)/bin/wcnss_filter     u:object_r:wcnss_filter_exec:s0
+# DRM
+/data/vendor/mediadrm(/.*)?                                               u:object_r:mediadrm_vendor_data_file:s0
 
-# bluetooth
-/sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
+####################################
+# sysfs files
+#
 
-# camera
-/sys/devices/virtual/camera(/.*)?           u:object_r:camera_device_sysfs:s0
+# Bluetooth
+/sys/devices/bluetooth/extldo                                             u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bluetooth/rfkill/rfkill0/state                               u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bluetooth/rfkill/rfkill0/type                                u:object_r:sysfs_bluetooth_writable:s0
+/sys/class/rfkill/rfkill0/state                                           u:object_r:sysfs_bluetooth_writable:s0
+/sys/class/rfkill/rfkill0/type                                            u:object_r:sysfs_bluetooth_writable:s0
+
+# Camera
+/sys/devices/virtual/camera(/.*)?                                         u:object_r:sysfs_camera:s0
+
+# Thermal
+/sys/devices/virtual/thermal(/.*)?                                        u:object_r:sysfs_thermal:s0
+/sys/class/thermal(/.*)?                                                  u:object_r:sysfs_thermal:s0
+/sys/devices/virtual/hwmon(/.*)?                                          u:object_r:sysfs_thermal:s0
+/sys/class/hwmon(/.*)?                                                    u:object_r:sysfs_thermal:s0
+
+# GPS
+/sys/class/sec/gps                                                        u:object_r:sysfs_gps:s0
+/sys/devices/139c0000.pinctrl/gpio/gpio81/value                           u:object_r:sysfs_gps:s0
+
+# Power supply
+/sys/devices/battery/power_supply(/.*)                                    u:object_r:sysfs_power_supply:s0
+/sys/devices/13870000.i2c/i2c-4/4-0049/sm5703-charger/power_supply(/.*)   u:object_r:sysfs_power_supply:s0
+/sys/devices/13830000.i2c/i2c-8/8-0071/power_supply(/.*)                  u:object_r:sysfs_power_supply:s0
+
+# Input
+/sys/class/input(/.*)?                                                    u:object_r:sysfs_input:s0
+/sys/devices/virtual/input(/.*)?                                          u:object_r:sysfs_input:s0
+/sys/devices/virtual/sec/sec_key(/.*)?                                    u:object_r:sysfs_input:s0
+/sys/devices/virtual/sec/tsp(/.*)?                                        u:object_r:sysfs_input:s0
+/sys/devices/13840000.i2c/i2c-7/7-0049/input/input1(/.*)?                 u:object_r:sysfs_input:s0
+
+# Brightness
+/sys/devices/14800000.dsim/backlight/panel/brightness                     u:object_r:sysfs_brightness:s0
+/sys/devices/14800000.dsim/backlight/panel/max_brightness                 u:object_r:sysfs_brightness:s0
+
+# Graphics
+/sys/devices/14830000.decon_fb(/.*)?                                      u:object_r:sysfs_graphics:s0
+
+# video4linux
+/sys/devices/12c30000.mfc0(/.*)?                                          u:object_r:sysfs_v4l:s0
+
+# Lights
+/sys/devices/virtual/sec/sec_touchkey/brightness                          u:object_r:sysfs_light:s0
+
+# Sensors
+/sys/devices/virtual/sensors(/.*)?                                        u:object_r:sysfs_sensors:s0
 
 ####################################
 # daemons
 #
 
-/(vendor|system/vendor)/bin/hw/gpsd          u:object_r:gpsd_exec:s0
-
-# DRM
-/data/vendor/mediadrm(/.*)?  u:object_r:mediadrm_vendor_data_file:s0
-
-/data/system/gps(/.*)?       u:object_r:gps_data_file:s0
-/sys/devices/soc0/machine    u:object_r:gps_data_file:s0
+/(vendor|system/vendor)/bin/hw/gpsd                                       u:object_r:gpsd_exec:s0
+/(vendor|system/vendor)/bin/wcnss_filter                                  u:object_r:wcnss_filter_exec:s0
 
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.3-service\.clearkey		u:object_r:hal_drm_clearkey_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.3-service\.widevine		u:object_r:hal_drm_widevine_exec:s0

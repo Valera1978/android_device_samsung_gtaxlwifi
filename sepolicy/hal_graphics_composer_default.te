@@ -1,6 +1,7 @@
-allow hal_graphics_composer_default self:netlink_kobject_uevent_socket { read create setopt bind };
-allow hal_graphics_composer_default vndbinder_device:chr_file { open read write ioctl };
-allow hal_graphics_composer_default sysfs:file { open read getattr };
-allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
+vndbinder_use(hal_graphics_composer_default);
+
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow hal_graphics_composer_default sysfs_graphics:file { getattr open read };
+allow hal_graphics_composer_default sysfs_graphics:dir search;
 allow hal_graphics_composer_default default_android_vndservice:service_manager { add find };
 allow hal_graphics_composer_default video_device:chr_file { open read write ioctl };

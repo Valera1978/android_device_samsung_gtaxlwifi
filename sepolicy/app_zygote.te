@@ -1,2 +1,0 @@
-allow app_zygote zygote_exec:file { open read execute };
-allow app_zygote app_data_file:dir getattr;

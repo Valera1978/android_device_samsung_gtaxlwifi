@@ -3,11 +3,9 @@ allow vold efs_file:dir r_dir_perms;
 
 # /dev/block/mmcblk0p[0-9]
 allow vold emmcblk_device:dir create_dir_perms;
-allow vold emmcblk_device:blk_file { ioctl open read write create getattr setattr lock append unlink };
-
-allow vold vold:capability sys_resource;
-
-allow vold hal_bootctl_hwservice:hwservice_manager find;
+allow vold emmcblk_device:blk_file { setattr unlink rw_file_perms };
 
 allowxperm vold vold_device:blk_file ioctl 0x1271;
 allowxperm vold vold_device:blk_file ioctl BLKROGET;
+
+dontaudit vold hal_bootctl_hwservice:hwservice_manager find;

@@ -1,3 +1,4 @@
-allow hal_drm_default vndbinder_device:chr_file { ioctl open read write };
+vndbinder_use(hal_drm_default)
+
 allow hal_drm_default media_data_file:file create_file_perms;
 allow hal_drm_default media_data_file:dir create_dir_perms;

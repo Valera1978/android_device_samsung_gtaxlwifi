@@ -1,2 +1,0 @@
-allow recovery_refresh sysfs:file { getattr open read };
-

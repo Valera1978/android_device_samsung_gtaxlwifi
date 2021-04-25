@@ -1,3 +1,0 @@
-allow audioserver audio_prop:property_service set;
-allow audioserver init:unix_stream_socket connectto;
-allow audioserver property_socket:sock_file write;

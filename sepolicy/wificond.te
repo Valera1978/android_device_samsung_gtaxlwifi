@@ -1,1 +1,0 @@
-allow wificond wifi_data_file:file { read write };

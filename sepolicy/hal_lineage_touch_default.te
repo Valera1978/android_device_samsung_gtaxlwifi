@@ -1,2 +1,2 @@
-allow hal_lineage_touch_default sysfs:file { getattr open read write };
-
+allow hal_lineage_touch_default sysfs_input:file { getattr open read write };
+allow hal_lineage_touch_default sysfs_input:dir search;

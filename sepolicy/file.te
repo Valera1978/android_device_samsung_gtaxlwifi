@@ -1,19 +1,26 @@
-### efs types
+# efs types
 type app_efs_file, file_type;
 type battery_efs_file, file_type;
 type bin_nv_data_efs_file, file_type;
 type nv_log_efs_file, file_type;
-
-# drm
 type cpk_efs_file, file_type;
 type drm_efs_file, file_type;
 type imei_efs_file, file_type;
 type prov_efs_file, file_type;
-type sensor_efs_file, file_type;
 type sec_efs_file, file_type;
 type wifi_efs_file, file_type;
 type mediadrm_vendor_data_file, file_type, data_file_type;
+type radio_factoryapp_efs_file, file_type;
+type factorymode_factoryapp_efs_file, file_type;
+type baro_delta_factoryapp_efs_file, file_type;
 
-allow sysfs_type tmpfs:filesystem associate;
-
-type camera_device_sysfs, sysfs_type, file_type;
+# sysfs types
+type sysfs_camera, sysfs_type, file_type, mlstrustedobject;
+type sysfs_gps, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_power_supply, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_input, fs_type, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_graphics, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_brightness, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_v4l, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_light, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_sensors, fs_type, sysfs_type, fs_type, mlstrustedobject;
