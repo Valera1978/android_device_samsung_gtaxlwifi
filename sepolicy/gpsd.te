@@ -3,31 +3,34 @@ type gpsd_exec, exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(gpsd)
 
-type gps_data_file, file_type, sysfs_type, core_data_file_type, data_file_type;
+type gps_data_file, file_type, core_data_file_type, data_file_type;
 file_type_auto_trans(gpsd, system_data_file, gps_data_file);
 
-allow gpsd gps_data_file:dir { search write add_name remove_name };
-allow gpsd gps_data_file:file { create rw_file_perms };
-allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
-allow gps_data_file sysfs:filesystem associate;
+unix_socket_connect(gpsd, property, netd)
 
-allow gpsd gps_device:chr_file { getattr setattr rw_file_perms };
-allow gpsd sysfs:file { getattr read open write };
-allow gpsd sysfs_wake_lock:file { write open };
+binder_call(gpsd, system_server)
+binder_call(gpsd, system_suspend_server)
+hwbinder_use(gpsd)
+
+allow gpsd system_suspend_hwservice:hwservice_manager find;
 
 allow gpsd dnsproxyd_socket:sock_file write;
-allow gpsd netd:unix_stream_socket connectto;
-allow gpsd shell_exec:file { open read execute execute_no_trans getattr };
 allow gpsd fwmarkd_socket:sock_file write;
-allow gpsd toolbox_exec:file { open read execute getattr execute_no_trans };
-allow gpsd vendor_toolbox_exec:file execute_no_trans;
-allow gpsd sysfs_wake_lock:file read;
+
+allow gpsd sysfs:file { getattr read open write };
+allow gpsd sysfs_wake_lock:file { open read write };
+
+allow gpsd gps_device:chr_file { setattr rw_file_perms };
+allow gpsd gps_data_file:dir { search write add_name remove_name };
+allow gpsd gps_data_file:file { create rw_file_perms };
+allow gpsd gps_data_file:fifo_file create_file_perms;
+
 allow gpsd port:tcp_socket { name_connect name_bind };
 allow gpsd node:tcp_socket node_bind;
-allow gpsd self:tcp_socket { create connect getopt setopt bind write read };
-allow gpsd self:udp_socket { create connect getopt setopt bind write read };
-allow gpsd vendor_file:file entrypoint;
+allow gpsd self:tcp_socket create_socket_perms;
+allow gpsd self:udp_socket create_socket_perms;
+
 allow gpsd hwservicemanager_prop:file { getattr open read };
-allow gpsd hwservicemanager_prop:binder call;
 allow gpsd hwservicemanager:binder call;
-allow gpsd system_file:dir { open read };
+
+allow gpsd vendor_file:file entrypoint;

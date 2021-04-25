@@ -1,3 +1,5 @@
 allow zygote self:capability sys_nice;
 allow zygote system_file:file write;
 allow zygote system_file:dir { write mounton };
+
+get_prop(zygote, exported_camera_prop);

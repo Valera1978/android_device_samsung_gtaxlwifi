@@ -2,17 +2,13 @@
 # Devices
 #
 /dev/mali[0-9]*              u:object_r:gpu_device:s0
-/dev/mali.*                  u:object_r:video_device:s0
 
 /dev/s5p-smem                u:object_r:secmem_device:s0
 
 /dev/v4l-subdev[0-9]*        u:object_r:video_device:s0
+/dev/m2m1shot_scaler[0-9]*   u:object_r:video_device:s0
 /dev/media[0-3]*             u:object_r:camera_device:s0
 /dev/m2m1shot_jpeg           u:object_r:camera_device:s0
-/dev/m2m1shot_scaler0        u:object_r:video_device:s0
-/dev/m2m1shot_scaler1        u:object_r:video_device:s0
-
-/dev/umts.*                  u:object_r:mif_device:s0
 
 /dev/ttySAC0                 u:object_r:bluetooth_device:s0
 
@@ -69,7 +65,7 @@
 # daemons
 #
 
-/vendor/bin/hw/gpsd          u:object_r:gpsd_exec:s0
+/(vendor|system/vendor)/bin/hw/gpsd          u:object_r:gpsd_exec:s0
 
 # DRM
 /data/vendor/mediadrm(/.*)?  u:object_r:mediadrm_vendor_data_file:s0

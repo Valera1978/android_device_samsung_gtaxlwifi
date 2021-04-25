@@ -5,7 +5,7 @@ allow fsck efs_block_device:blk_file rw_file_perms;
 allow fsck fsck:capability dac_override;
 allow fsck tmpfs:blk_file getattr;
 
-allowxperm fsck emmcblk_device:blk_file ioctl { BLKDISCARDZEROES BLKROGET };
+allowxperm fsck emmcblk_device:blk_file ioctl { BLKGETSIZE64 BLKDISCARDZEROES BLKROGET };
 
 allow fsck cache_file:dir getattr;
 

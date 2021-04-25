@@ -22,10 +22,11 @@ allow system_server app_efs_file:dir search;
 allow system_server debugfs:dir r_dir_perms;
 allow system_server debugfs:file r_file_perms;
 
-allow system_server gpsd:unix_stream_socket connectto;
-allow system_server gps_data_file:dir { add_name search write remove_name };
-allow system_server gps_data_file:file { getattr setattr open write create unlink };
-allow system_server crash_dump:process getpgid;
+type_transition system_server system_data_file:fifo_file gps_data_file ".flp.interface.pipe.to_gpsd";
+type_transition system_server system_data_file:fifo_file gps_data_file ".gps.interface.pipe.to_gpsd";
+type_transition system_server system_data_file:fifo_file gps_data_file ".gps.interface.pipe.to_jni";
+allow system_server gps_data_file:dir rw_dir_perms;
+allow system_server gps_data_file:fifo_file create_file_perms;
 
 allow system_server exfat:dir { open read write };
 allow system_server vfat:dir { open read write };
@@ -46,3 +47,8 @@ allow system_server unlabeled:file unlink;
 allow system_server default_android_hwservice:hwservice_manager find;
 allow system_server default_android_service:service_manager { add find };
 
+unix_socket_connect(system_server, property, gpsd)
+
+get_prop(system_server, userspace_reboot_exported_prop);
+get_prop(system_server, userspace_reboot_config_prop);
+get_prop(system_server, exported_camera_prop);
