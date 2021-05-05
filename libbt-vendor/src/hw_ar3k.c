@@ -34,26 +34,28 @@ extern "C" {
 
 #define LOG_TAG "bt_vendor"
 
-#include <sys/socket.h>
-#include <utils/Log.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h>
-#include <time.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <ctype.h>
-#include <cutils/properties.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <string.h>
-
 #include "bt_hci_bdroid.h"
 #include "bt_vendor_qcom.h"
 #include "hci_uart.h"
 #include "hw_ar3k.h"
 
+#include <ctype.h>
+#include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+
+#include <cutils/properties.h>
+#include <utils/Log.h>
 /******************************************************************************
 **  Variables
 ******************************************************************************/
@@ -106,13 +108,13 @@ struct ps_cfg_entry ps_list[MAX_TAGS];
 int is_bt_soc_ath() {
     int ret = 0;
     char bt_soc_type[PROPERTY_VALUE_MAX];
-    ret = property_get("qcom.bluetooth.soc", bt_soc_type, NULL);
+    ret = property_get("vendor.qcom.bluetooth.soc", bt_soc_type, NULL);
     if (ret != 0) {
-        ALOGI("qcom.bluetooth.soc set to %s\n", bt_soc_type);
+        ALOGI("vendor.qcom.bluetooth.soc set to %s\n", bt_soc_type);
         if (!strncasecmp(bt_soc_type, "ath3k", sizeof("ath3k")))
             return 1;
     } else {
-        ALOGI("qcom.bluetooth.soc not set, so using default.\n");
+        ALOGI("vendor.qcom.bluetooth.soc not set, so using default.\n");
     }
 
     return 0;

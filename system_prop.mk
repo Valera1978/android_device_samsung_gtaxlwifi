@@ -10,7 +10,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # The new CAF code defaults to MCT HAL
 PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=rome
+    vendor.qcom.bluetooth.soc=rome
 
 # Dalvik/Art
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -24,15 +24,18 @@
 
 #define LOG_TAG "bt_vendor"
 
-#include <utils/Log.h>
-#include <termios.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdio.h>
 #include "bt_vendor_qcom.h"
 #include "hci_smd.h"
+
+#include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include <string.h>
+#include <termios.h>
+#include <unistd.h>
+
 #include <cutils/properties.h>
+#include <utils/Log.h>
 
 /*****************************************************************************
 **   Macros & Constants
@@ -87,14 +90,14 @@ int bt_hci_init_transport_id (int chId )
      TODO: Following sleep to be removed once SMD port is successfully
      opened immediately on return from the aforementioned open call */
 
-  property_get("bluetooth.isSSR", ssrvalue, "");
+  property_get("vendor.bluetooth.isSSR", ssrvalue, "");
 
   if(ssrvalue[0] == '1')
   {
       /*reset the SSR flag */
       if(chId == 1)
       {
-          if(property_set("bluetooth.isSSR", "0") < 0)
+          if(property_set("vendor.bluetooth.isSSR", "0") < 0)
           {
               ALOGE("SSR: hci_smd.c:SSR case : error in setting up property new\n ");
           }

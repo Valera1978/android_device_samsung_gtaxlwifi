@@ -1,12 +1,10 @@
-# Firmware - from T580XXS5CTK1/T580XXS5CTD1 (no changes to vendor blobs between those versions)
+# Firmware - from T585XXS6CTJ7
 etc/firmware/Data.msc
 etc/firmware/bdwlan30.bin
 etc/firmware/bdwlan32.bin
-etc/firmware/nvm_tlv_tf_1.1.bin
 etc/firmware/otp30.bin
 etc/firmware/qwlan30.bin
 etc/firmware/qwlan30_ibss.bin
-etc/firmware/rampatch_tlv_tf_1.1.tlv
 etc/firmware/utf30.bin
 etc/firmware/utfbd30.bin
 etc/firmware/utfbd32.bin
@@ -14,6 +12,8 @@ vendor/firmware/fimc_is_lib.bin
 vendor/firmware/mfc_fw.bin
 vendor/firmware/setfile_4h5yc.bin
 vendor/firmware/setfile_sr259.bin
+vendor/firmware/nvm_tlv_tf_1.1.bin
+vendor/firmware/rampatch_tlv_tf_1.1.tlv
 
 # Mali graphics - r28p0 - from the 9.0 SM-A720S stock firmware
 vendor/lib/egl/libGLES_mali.so

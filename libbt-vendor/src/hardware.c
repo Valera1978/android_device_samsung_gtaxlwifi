@@ -26,20 +26,22 @@
 
 #define LOG_TAG "bt_vendor"
 
-#include <utils/Log.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h>
-#include <time.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <ctype.h>
-#include <cutils/properties.h>
-#include <stdlib.h>
 #include "bt_hci_bdroid.h"
 #include "bt_vendor_qcom.h"
+#include <ctype.h>
+#include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
+
+#include <cutils/properties.h>
+#include <utils/Log.h>
 #define MAX_CNT_RETRY 100
 
 int hw_config(int nState)
@@ -53,11 +55,11 @@ int hw_config(int nState)
     else
         szReqSt = szState[0];
 
-    if((property_get("bluetooth.status", szBtSocStatus, "") <= 0))
+    if((property_get("vendor.bluetooth.status", szBtSocStatus, "") <= 0))
     {
        if(nState == BT_VND_PWR_ON ) {
           ALOGW("Hw_config: First Time BT on after boot.Starting hciattach daemon BTStatus=%s",szBtSocStatus);
-          if (property_set("bluetooth.hciattach", szReqSt) < 0)
+          if (property_set("vendor.bluetooth.hciattach", szReqSt) < 0)
           {
               ALOGE("Hw_config: Property Setting fail");
               return -1;
@@ -68,7 +70,7 @@ int hw_config(int nState)
           ALOGW("Hw_config: nState = %d", nState);
     } else {
           ALOGW("Hw_config: trigerring hciattach");
-          if (property_set("bluetooth.hciattach", szReqSt) < 0)
+          if (property_set("vendor.bluetooth.hciattach", szReqSt) < 0)
           {
               ALOGE("Hw_config: Property Setting fail");
               return -1;
@@ -81,7 +83,7 @@ int hw_config(int nState)
 int readTrpState()
 {
     char szBtStatus[PROPERTY_VALUE_MAX] = {0, };
-    if(property_get("bluetooth.status", szBtStatus, "") < 0){
+    if(property_get("vendor.bluetooth.status", szBtStatus, "") < 0){
         ALOGE("Fail to get bluetooth status");
         return FALSE;
     }

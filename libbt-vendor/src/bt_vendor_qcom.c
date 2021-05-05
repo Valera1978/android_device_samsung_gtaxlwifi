@@ -26,20 +26,24 @@
 #define LOG_TAG "bt_vendor"
 #define BLUETOOTH_MAC_ADDR_BOOT_PROPERTY "ro.boot.btmacaddr"
 
-#include <utils/Log.h>
-#include <cutils/properties.h>
-#include <fcntl.h>
-#include <termios.h>
+#include "bt_vendor_lib.h"
+#include "bt_vendor_persist.h"
 #include "bt_vendor_qcom.h"
-#include "hci_uart.h"
 #include "hci_smd.h"
+#include "hci_uart.h"
+#include "hw_rome.h"
+
+#include <fcntl.h>
+#include <linux/un.h>
+#include <pthread.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <termios.h>
+#include <unistd.h>
+
+#include <cutils/properties.h>
 #include <cutils/sockets.h>
-#include <linux/un.h>
-#include "bt_vendor_persist.h"
-#include "hw_rome.h"
-#include "bt_vendor_lib.h"
+#include <utils/Log.h>
 #define WAIT_TIMEOUT 200000
 #define BT_VND_OP_GET_LINESPEED 30
 
@@ -93,9 +97,9 @@ void __hw_epilog_process(void);
 #include "cutils/properties.h"
 
 static const char WIFI_PROP_NAME[]    = "wlan.driver.status";
-static const char SERVICE_PROP_NAME[]    = "bluetooth.hsic_ctrl";
-static const char BT_STATUS_NAME[]    = "bluetooth.enabled";
-static const char WIFI_SERVICE_PROP[] = "wlan.hsic_ctrl";
+static const char SERVICE_PROP_NAME[]    = "vendor.bluetooth.hsic_ctrl";
+static const char BT_STATUS_NAME[]    = "vendor.bluetooth.enabled";
+static const char WIFI_SERVICE_PROP[] = "vendor.wlan.hsic_ctrl";
 
 #define WIFI_BT_STATUS_LOCK    "/data/connectivity/wifi_bt_lock"
 int isInit=0;
@@ -193,9 +197,9 @@ static int get_bt_soc_type()
 
     ALOGI("bt-vendor : get_bt_soc_type");
 
-    ret = property_get("qcom.bluetooth.soc", bt_soc_type, NULL);
+    ret = property_get("vendor.qcom.bluetooth.soc", bt_soc_type, NULL);
     if (ret >= 0) {
-        ALOGI("qcom.bluetooth.soc set to %s\n", bt_soc_type);
+        ALOGI("vendor.qcom.bluetooth.soc set to %s\n", bt_soc_type);
         if (!strncasecmp(bt_soc_type, "rome", sizeof("rome"))) {
             return BT_SOC_ROME;
         }
@@ -208,8 +212,11 @@ static int get_bt_soc_type()
         else if (!strncasecmp(bt_soc_type, "cherokee", sizeof("cherokee"))) {
             return BT_SOC_CHEROKEE;
         }
+        else if (!strncasecmp(bt_soc_type, "hastings", sizeof("hastings"))) {
+            return BT_SOC_HASTINGS;
+        }
         else {
-            ALOGI("qcom.bluetooth.soc not set, so using default.\n");
+            ALOGI("vendor.qcom.bluetooth.soc not set, so using default.\n");
             return BT_SOC_DEFAULT;
         }
     }
@@ -275,65 +282,53 @@ bool can_perform_action(char action) {
 }
 
 void stop_hci_filter() {
-    char value[PROPERTY_VALUE_MAX] = {'\0'};
-    int retval, filter_ctrl, i;
-    char stop_val = STOP_WCNSS_FILTER;
-    int soc_type = BT_SOC_DEFAULT;
+       char value[PROPERTY_VALUE_MAX] = {'\0'};
+       int retval, filter_ctrl, i;
+       char stop_val = STOP_WCNSS_FILTER;
+       int soc_type = get_bt_soc_type();
 
-    ALOGV("%s: Entry ", __func__);
+       ALOGV("%s: Entry ", __func__);
 
-    if ((soc_type = get_bt_soc_type()) == BT_SOC_CHEROKEE) {
-        property_get("wc_transport.hci_filter_status", value, "0");
-        if (strcmp(value, "0") == 0) {
-            ALOGI("%s: hci_filter has been stopped already", __func__);
-        }
-        else {
-            filter_ctrl = connect_to_local_socket("wcnssfilter_ctrl");
-            if (filter_ctrl < 0) {
-                ALOGI("%s: Error while connecting to CTRL_SOCK, filter should stopped: %d",
-                       __func__, filter_ctrl);
-            }
-            else {
-                retval = write(filter_ctrl, &stop_val, 1);
-                if (retval != 1) {
-                    ALOGI("%s: problem writing to CTRL_SOCK, ignore: %d", __func__, retval);
-                    //Ignore and fallback
-                }
+       property_get("wc_transport.hci_filter_status", value, "0");
+       if (strcmp(value, "0") == 0) {
+           ALOGI("%s: hci_filter has been stopped already", __func__);
+       }
+       if (soc_type == BT_SOC_ROME) {
+           property_set(BT_VND_FILTER_START, "false");
+       } else {
+           filter_ctrl = connect_to_local_socket("wcnssfilter_ctrl");
+           if (filter_ctrl < 0) {
+               ALOGI("%s: Error while connecting to CTRL_SOCK, filter should stopped: %d",
+                     __func__, filter_ctrl);
+           }
+           else {
+               retval = write(filter_ctrl, &stop_val, 1);
+               if (retval != 1) {
+                   ALOGI("%s: problem writing to CTRL_SOCK, ignore: %d", __func__, retval);
+                   //Ignore and fallback
+               }
 
-                close(filter_ctrl);
-            }
-        }
+               close(filter_ctrl);
+           }
+       }
 
-        /* Ensure Filter is closed by checking the status before
-           RFKILL 0 operation. this should ideally comeout very
-           quick */
-        for(i=0; i<500; i++) {
-            property_get(BT_VND_FILTER_START, value, "false");
-            if (strcmp(value, "false") == 0) {
-                ALOGI("%s: WCNSS_FILTER stopped", __func__);
-                usleep(STOP_WAIT_TIMEOUT * 10);
-                break;
-            } else {
-                /*sleep of 1ms, This should give enough time for FILTER to
-                exit with all necessary cleanup*/
-                usleep(STOP_WAIT_TIMEOUT);
-            }
-        }
+       /* Ensure Filter is closed by checking the status before
+          RFKILL 0 operation. this should ideally comeout very
+          quick */
+       for(i=0; i<500; i++) {
+           property_get(BT_VND_FILTER_START, value, "false");
+           if (strcmp(value, "false") == 0) {
+               ALOGI("%s: WCNSS_FILTER stopped", __func__);
+               usleep(STOP_WAIT_TIMEOUT * 10);
+               break;
+           } else {
+               /*sleep of 1ms, This should give enough time for FILTER to
+               exit with all necessary cleanup*/
+               usleep(STOP_WAIT_TIMEOUT);
+           }
+       }
 
-        /*Never use SIGKILL to stop the filter*/
-        /* Filter will be stopped by below two conditions
-         - by Itself, When it realizes there are no CONNECTED clients
-         - Or through STOP_WCNSS_FILTER byte on Control socket
-         both of these ensure clean shutdown of chip
-        */
-        //property_set(BT_VND_FILTER_START, "false");
-    } else if (soc_type == BT_SOC_ROME) {
-        property_set(BT_VND_FILTER_START, "false");
-    } else {
-        ALOGI("%s: Unknown soc type %d, Unexpected!", __func__, soc_type);
-    }
-
-    ALOGV("%s: Exit ", __func__);
+       ALOGV("%s: Exit ", __func__);
 }
 
 int start_hci_filter() {
@@ -394,14 +389,14 @@ static int bt_powerup(int en )
     ALOGI("bt_powerup: %c", on);
 
     /* Check if rfkill has been disabled */
-    ret = property_get("ro.rfkilldisabled", disable, "0");
+    ret = property_get("ro.vendor.rfkilldisabled", disable, "0");
     if (!ret ){
-        ALOGE("Couldn't get ro.rfkilldisabled (%d)", ret);
+        ALOGE("Couldn't get ro.vendor.rfkilldisabled (%d)", ret);
         return -1;
     }
     /* In case rfkill disabled, then no control power*/
     if (strcmp(disable, "1") == 0) {
-        ALOGI("ro.rfkilldisabled : %s", disable);
+        ALOGI("ro.vendor.rfkilldisabled : %s", disable);
         return -1;
     }
 
@@ -633,7 +628,7 @@ static int init(const bt_vendor_callbacks_t *cb, unsigned char *bdaddr)
 
     temp->rfkill_id = -1;
     temp->enable_extldo = FALSE;
-    temp->cb = cb;
+    temp->cb = (bt_vendor_callbacks_t*)cb;
     temp->ant_fd = -1;
     temp->soc_type = get_bt_soc_type();
     soc_init(temp->soc_type);
@@ -800,6 +795,7 @@ static int __op(bt_vendor_opcode_t opcode, void *param)
                     case BT_SOC_ROME:
                     case BT_SOC_AR3K:
                     case BT_SOC_CHEROKEE:
+                    case BT_SOC_HASTINGS:
                         if (q->soc_type == BT_SOC_ROME)
                         {
                             if (nState == BT_VND_PWR_ON)
@@ -906,7 +902,7 @@ userial_open:
                     case BT_SOC_ROME:
                         {
                             wait_for_patch_download(is_ant_req);
-                            property_get("ro.bluetooth.emb_wp_mode", emb_wp_mode, false);
+                            property_get("ro.vendor.bluetooth.emb_wp_mode", emb_wp_mode, false);
                             if (!is_soc_initialized()) {
                                 char* dlnd_inprog = is_ant_req ? "ant" : "bt";
                                 if (property_set("wc_transport.patch_dnld_inprog", dlnd_inprog) < 0) {
@@ -921,7 +917,7 @@ userial_open:
                                 }
 
                                 if(strcmp(emb_wp_mode, "true") == 0) {
-                                    property_get("ro.bluetooth.wipower", wipower_status, false);
+                                    property_get("ro.vendor.bluetooth.wipower", wipower_status, false);
                                     if(strcmp(wipower_status, "true") == 0) {
                                         check_embedded_mode(fd);
                                     } else {
@@ -1047,7 +1043,7 @@ userial_open:
                         break;
                     case BT_SOC_CHEROKEE:
                         {
-                            property_get("ro.bluetooth.emb_wp_mode", emb_wp_mode, false);
+                            property_get("ro.vendor.bluetooth.emb_wp_mode", emb_wp_mode, false);
                             retval = start_hci_filter();
 
                             if (retval < 0) {
@@ -1189,8 +1185,8 @@ userial_open:
             } else {
                 int lpm_result = BT_VND_OP_RESULT_SUCCESS;
 
-                property_get("persist.service.bdroid.lpmcfg", lpm_config, "all");
-                ALOGI("%s: property_get: persist.service.bdroid.lpmcfg: %s",
+                property_get("persist.vendor.service.bdroid.lpmcfg", lpm_config, "all");
+                ALOGI("%s: property_get: persist.vendor.service.bdroid.lpmcfg: %s",
                             __func__, lpm_config);
 
                 if (!strcmp(lpm_config, "all")) {
@@ -1324,69 +1320,6 @@ out:
     return ret;
 }
 
-/* ssr_cleanup is not used */
-#if 0
-static void ssr_cleanup(int reason)
-{
-    int pwr_state = BT_VND_PWR_OFF;
-#ifdef ENABLE_ANT
-    int ret;
-    unsigned char trig_ssr = 0xEE;
-#endif
-
-    ALOGI("++%s", __FUNCTION__);
-
-    pthread_mutex_lock(&q_lock);
-    if (!q) {
-        ALOGE("ssr_cleanup called with NULL context");
-        goto out;
-    }
-    if (property_set("wc_transport.patch_dnld_inprog", "null") < 0) {
-        ALOGE("Failed to set property");
-    }
-
-    if (q->soc_type >= BT_SOC_ROME && q->soc_type < BT_SOC_RESERVED) {
-#ifdef ENABLE_ANT
-        /*Indicate to filter by sending special byte */
-        if (reason == CMD_TIMEOUT) {
-            trig_ssr = 0xEE;
-            ret = write (vnd_userial.fd, &trig_ssr, 1);
-            ALOGI("Trig_ssr is being sent to BT socket, ret %d err %s",
-                        ret, strerror(errno));
-
-            if (is_debug_force_special_bytes()) {
-                /*
-                 * Then we should send special byte to crash SOC in
-                 * WCNSS_Filter, so we do not need to power off UART here.
-                 */
-                goto out;
-            }
-        }
-
-        /* Close both ANT channel */
-        __op(BT_VND_OP_ANT_USERIAL_CLOSE, NULL);
-#endif
-        /* Close both BT channel */
-        __op(BT_VND_OP_USERIAL_CLOSE, NULL);
-
-#ifdef FM_OVER_UART
-        __op(BT_VND_OP_FM_USERIAL_CLOSE, NULL);
-#endif
-        /*CTRL OFF twice to make sure hw
-         * turns off*/
-#ifdef ENABLE_ANT
-        __op(BT_VND_OP_POWER_CTRL, &pwr_state);
-#endif
-    }
-    /*Generally switching of chip should be enough*/
-    __op(BT_VND_OP_POWER_CTRL, &pwr_state);
-
-out:
-    pthread_mutex_unlock(&q_lock);
-    ALOGI("--%s", __FUNCTION__);
-}
-#endif
-
 /** Closes the interface */
 static void cleanup(void)
 {
@@ -1483,7 +1416,6 @@ static bool is_debug_force_special_bytes() {
 #endif
 
 // Entry point of DLib
-/* Remove 'ssr_cleanup' because it's not defined in 'bt_vendor_interface_t'. */
 const bt_vendor_interface_t BLUETOOTH_VENDOR_LIB_INTERFACE = {
     sizeof(bt_vendor_interface_t),
     init,

@@ -34,25 +34,28 @@ extern "C" {
 
 #define LOG_TAG "bt_vendor"
 
-#include <sys/socket.h>
-#include <utils/Log.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h>
-#include <time.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <ctype.h>
-#include <cutils/properties.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <string.h>
-#include <stdbool.h>
 #include "bt_hci_bdroid.h"
 #include "bt_vendor_qcom.h"
 #include "hci_uart.h"
 #include "hw_rome.h"
+
+#include <ctype.h>
+#include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+
+#include <cutils/properties.h>
+#include <utils/Log.h>
 
 #define BT_VERSION_FILEPATH "/data/misc/bluedroid/bt_fw_version.txt"
 
@@ -284,7 +287,7 @@ int get_vs_hci_event(unsigned char *rsp)
             if ((rsp[4] & ADDON_FEATURES_EVT_WIPOWER_MASK))
             {
                ALOGD("%s: WiPower feature supported!!", __FUNCTION__);
-               property_set("persist.bluetooth.a4wp", "true");
+               property_set("persist.vendor.bluetooth.a4wp", "true");
             }
             break;
         case HCI_VS_STRAY_EVT:
@@ -1741,7 +1744,7 @@ void enable_controller_log (int fd, unsigned char wait_for_evt)
    unsigned char rsp[HCI_MAX_EVENT_SIZE];
    char value[PROPERTY_VALUE_MAX] = {'\0'};
 
-   property_get("persist.service.bdroid.soclog", value, "false");
+   property_get("persist.vendor.service.bdroid.soclog", value, "false");
 
    // value at cmd[5]: 1 - to enable, 0 - to disable
    ret = (strcmp(value, "true") == 0) ? cmd[5] = 0x01: 0;

@@ -39,6 +39,7 @@ typedef enum {
     BT_SOC_ROME,
     BT_SOC_CHEROKEE,
     BT_SOC_NAPIER,
+    BT_SOC_HASTINGS,
     /* Add chipset type here */
     BT_SOC_RESERVED
 }bt_soc_type;

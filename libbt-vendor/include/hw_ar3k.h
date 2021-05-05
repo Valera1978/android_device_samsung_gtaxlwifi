@@ -18,6 +18,8 @@
 #ifndef HW_AR3K_H
 #define HW_AR3K_H
 
+#include <sys/socket.h>
+
 /******************************************************************************
 **  Constants & Macros
 ******************************************************************************/
@@ -46,7 +48,7 @@
 #error "Unknown byte order"
 #endif
 
-#define FW_PATH "/system/etc/firmware/ar3k/"
+#define FW_PATH "/vendor/firmware/ar3k/"
 
 #define STREAM_TO_UINT16(u16, p) \
     {u16 = ((uint16_t)(*(p)) + (((uint16_t)(*((p) + 1))) << 8)); (p) += 2;}

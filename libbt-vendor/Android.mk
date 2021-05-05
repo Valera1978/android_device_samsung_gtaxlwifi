@@ -20,7 +20,6 @@ ifeq ($(BOARD_HAVE_BLUETOOTH_QCOM),true)
 
 include $(CLEAR_VARS)
 
-
 LOCAL_SRC_FILES := \
         src/bt_vendor_qcom.c \
         src/hardware.c \
@@ -45,11 +44,7 @@ LOCAL_C_INCLUDES += \
         $(LOCAL_PATH)/include \
         external/bluetooth/bluedroid/hci/include \
         system/bt/hci/include \
-        $(TARGET_OUT_HEADERS)/bt/hci_qcomm_init \
-        $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
-
-LOCAL_ADDITIONAL_DEPENDENCIES += \
-$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+        $(TARGET_OUT_HEADERS)/bt/hci_qcomm_init
 
 ifeq ($(BOARD_HAS_QCA_BT_AR3002), true)
 LOCAL_C_FLAGS := \
@@ -64,7 +59,12 @@ LOCAL_SHARED_LIBRARIES := \
         libcutils \
         liblog
 
+LOCAL_HEADER_LIBRARIES := \
+        generated_kernel_headers \
+        libutils_headers
+
 LOCAL_MODULE := libbt-vendor
+LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_OWNER := qcom
 
@@ -86,8 +86,6 @@ endif
 ifeq ($(QCOM_BT_READ_ADDR_FROM_PROP),true)
 LOCAL_CFLAGS += -DREAD_BT_ADDR_FROM_PROP
 endif
-
-LOCAL_CFLAGS += -Wno-implicit-function-declaration -Wno-incompatible-pointer-types-discards-qualifiers
 
 #include $(LOCAL_PATH)/vnd_buildcfg.mk
 
