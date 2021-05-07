@@ -741,7 +741,9 @@ static int __op(bt_vendor_opcode_t opcode, void *param)
     char wipower_status[PROPERTY_VALUE_MAX];
     char emb_wp_mode[PROPERTY_VALUE_MAX];
     char lpm_config[PROPERTY_VALUE_MAX];
+#if defined(READ_BT_ADDR_FROM_PROP) || defined(BT_NV_SUPPORT)
     bool ignore_boot_prop = TRUE;
+#endif
 #ifdef READ_BT_ADDR_FROM_PROP
     int i = 0;
     static char bd_addr[PROPERTY_VALUE_MAX];
