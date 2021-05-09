@@ -321,12 +321,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
-# ADB
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.sys.usb.config=adb \
-    ro.adb.secure=0 \
-    service.adb.root=1
-
 # Offline charging
 PRODUCT_PACKAGES += \
     charger_res_images \
