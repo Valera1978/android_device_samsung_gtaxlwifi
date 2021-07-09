@@ -12,7 +12,7 @@
 	</path>
 
 	<path name="gain-media-headset">
-		<ctl name="DAC1 Playback Volume" value="162"/>
+		<ctl name="DAC1 Playback Volume" value="175"/>
 		<ctl name="Headphone Playback Volume" value="31"/>
 	</path>
 
