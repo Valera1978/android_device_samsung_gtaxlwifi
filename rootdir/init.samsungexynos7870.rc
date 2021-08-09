@@ -94,10 +94,6 @@ on boot
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
 
-    # Secure OS migration
-    chown radio system /sys/devices/system/sec_os_ctrl/migrate_os
-    chmod 664 /sys/devices/system/sec_os_ctrl/migrate_os
-
     # permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
@@ -189,6 +185,7 @@ service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     ioprio be 0
     seclabel u:r:gpsd:s0
 
+# Offline charging
 service charger /system/bin/charger
     class charger
     user system
