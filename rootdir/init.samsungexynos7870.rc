@@ -6,21 +6,13 @@ import /vendor/etc/init/hw/init.power.rc
 import /vendor/etc/init/hw/init.samsung.rc
 
 on early-init
-    mount debugfs debugfs /sys/kernel/debug
-
-    # Allow access to debugfs for user and group system
-    chmod 0755 /sys/kernel/debug
-    chown system system /sys/kernel/debug
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
     write /sys/block/zram0/comp_algorithm lz4
     write /proc/sys/vm/page-cluster 0
 
 on init
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
-
-on post-fs
-    chmod 0222 /sys/kernel/debug/tracing/trace_marker
-    chmod 0222 /sys/kernel/tracing/trace_marker
 
 on post-fs-data
     # C-STATE
@@ -45,8 +37,6 @@ on post-fs-data
     rm /data/system/gps/smd_started
     rm /data/system/gps/sv_cno.info
 
-    restorecon /sys/kernel/debug/tracing/trace_marker
-
     setprop vold.post_fs_data_done 1
 
 on boot
@@ -54,6 +44,10 @@ on boot
     # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  4194304
     write /proc/sys/net/core/wmem_max  4194304
+
+    # Allow access to debugfs for user and group system
+    chmod 0755 /sys/kernel/debug
+    chown system system /sys/kernel/debug
 
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -91,21 +85,52 @@ on boot
     chown system system /efs/FactoryApp/rtc_status
     chmod 0664 /efs/FactoryApp/rtc_status
 
+    # Permissions for Bluetooth
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
 
-    # permissions for bluetooth.
+    mkdir /efs/bluetooth 0770 system bluetooth
+    chown system bluetooth /efs/bluetooth
+    chown system bluetooth /efs/bluetooth/bt_addr
+    chmod 0770 /efs/bluetooth
+    chmod 0640 /efs/bluetooth/bt_addr
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown radio bluetooth /efs/bluetooth/bt_addr
-    chmod 0640 /efs/bluetooth/bt_addr
+
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/device/extldo
 
-    # Meta event
+    # Accelerometer sensor
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
+
+    # Light sensor
+    chown system radio /sys/class/sensors/light_sensor/lux
+    chown system radio /sys/class/sensors/light_sensor/raw_data
+    chown system radio /sys/class/sensors/light_sensor/vendor
+    chown system radio /sys/class/sensors/light_sensor/name
+
+    # WIFI Grip sensor
+    chown system radio /sys/class/sensors/grip_sensor_wifi/name
+    chown system radio /sys/class/sensors/grip_sensor_wifi/vendor
+    chown system radio /sys/class/sensors/grip_sensor_wifi/raw_data
+    chown system radio /sys/class/sensors/grip_sensor_wifi/threshold
+    chown system radio /sys/class/sensors/grip_sensor_wifi/calibration
+    chown system radio /sys/class/sensors/grip_sensor_wifi/onoff
+    chown system radio /sys/class/sensors/grip_sensor_wifi/reset
+    chown system radio /sys/class/sensors/grip_sensor_wifi/mode
+    chown system radio /sys/class/sensors/grip_sensor_wifi/gain
+    chown system radio /sys/class/sensors/grip_sensor_wifi/normal_threshold
+    chown system radio /sys/class/sensors/grip_sensor_wifi/freq
+
+    # Sensor flush
     chown system radio /sys/class/sensors/sensor_dev/flush
 
     # Permissions for USB SELECT
@@ -135,6 +160,7 @@ on boot
 
 on fs
     mount_all /vendor/etc/fstab.samsungexynos7870
+
     chown radio system /efs
 
     # Permissions for backlight
@@ -147,7 +173,7 @@ on fs
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/input/enabled
 
-    # Permissions for Touchkey
+    # Permissions for touchkey
     chown system radio /sys/class/sec/sec_touchkey/brightness
     chown system system /sys/class/sec/sec_touchkey/input/enabled
 
@@ -156,7 +182,6 @@ on fs
     write /sys/class/sec/sec_key/wakeup_keys 116,172
 
     # Permissions for camera
-    mkdir /data/camera 0770 cameraserver system
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camfw_full
     chown system radio /sys/class/camera/rear/rear_checkfw_user
