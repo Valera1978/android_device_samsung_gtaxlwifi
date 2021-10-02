@@ -6,10 +6,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/efs/bluetooth/bt_addr
-
-# The new CAF code defaults to MCT HAL
-PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/efs/bluetooth/bt_addr \
     vendor.qcom.bluetooth.soc=rome
 
 # Dalvik/Art
@@ -40,31 +37,27 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.latch_unsignaled=1 \
     debug.sf.disable_backpressure=1
 
+# Display
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
+    ro.sf.lcd_density=240
+
+# Lockscreen rotation
+PRODUCT_PROPERTY_OVERRIDES += \
     lockscreen.rot_override=true
 
-# Disable more Codec2.0 components
+# Media
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.ccodec=0
-
-# ro.product.first_api_level indicates the first api level the device has commercially launched on.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=23
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=yes
 
-# Treble
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.media.treble_omx=false
-
 # sdcardfs
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
 
-# Wifi
+# WiFi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 

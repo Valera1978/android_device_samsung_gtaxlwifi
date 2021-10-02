@@ -19,9 +19,9 @@ $(call inherit-product, device/samsung/gtaxlwifi/device.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
-# Inherit some common CM stuff.
+# Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 
 ## Device identifier. This must come after all inclusions
@@ -34,11 +34,8 @@ PRODUCT_MANUFACTURER := Samsung
 PRODUCT_GMS_CLIENTID_BASE := android-samsung
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE="gtaxlwifi" \
     PRODUCT_NAME="gtaxlwifi" \
     PRIVATE_BUILD_DESC="gtaxlwifixx-user 8.1.0 M1AJQ T580XXS5CTD1 release-keys"
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := google/ryu/dragon:8.1.0/OPM1.171019.016/4503492:user/release-keys
-
-TARGET_VENDOR := Samsung

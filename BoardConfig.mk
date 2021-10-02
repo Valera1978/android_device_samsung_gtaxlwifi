@@ -30,6 +30,7 @@ TARGET_BOARD_PLATFORM := exynos5
 TARGET_SLSI_VARIANT := bsp
 TARGET_SOC := exynos7870
 TARGET_BOOTLOADER_BOARD_NAME := universal7870
+BOARD_VENDOR := samsung
 
 # CPU
 TARGET_ARCH := arm64
@@ -50,48 +51,40 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
+TARGET_KERNEL_CONFIG := lineage-gtaxlwifi_defconfig
+TARGET_LINUX_KERNEL_VERSION := 3.18
 TARGET_KERNEL_ADDITIONAL_FLAGS := \
     HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 
-BOARD_KERNEL_BASE := 0x10000000
-BOARD_KERNEL_PAGESIZE := 2048
-
-TARGET_LINUX_KERNEL_VERSION := 3.18
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos7870
-TARGET_KERNEL_CONFIG := lineage-gtaxlwifi_defconfig
-
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-
-BOARD_KERNEL_SEPARATED_DT := true
-TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
-
+# Boot image
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+BOARD_KERNEL_BASE := 0x10000000
+BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_SEPARATED_DT := true
+TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 39845888
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3072000000
-#original system size = 3565158400, but some times device had diff system size (us-eu), better decrease a bit
+BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3145728000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# Use these flags if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
-
 # Filesystems
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Root
+BOARD_ROOT_EXTRA_FOLDERS := efs
+
 # Vendor separation
 TARGET_COPY_OUT_VENDOR := system/vendor
-
-# Audio
-USE_XML_AUDIO_POLICY_CONF := 1
-AUDIOSERVER_MULTILIB := 32
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -104,23 +97,9 @@ QCOM_BT_USE_SMD_TTY := true
 TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 
-# Samsung Camera
-BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
-TARGET_USES_MEDIA_EXTENSIONS := true
-USE_DEVICE_SPECIFIC_CAMERA := true
-
-BOARD_BACK_CAMERA_SENSOR := 0
-BOARD_FRONT_CAMERA_SENSOR := 1
-
 # Graphics
-USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_USES_EXYNOS7870_GRALLOC := true
-
-BOARD_USES_DECON_64BIT_ADDRESS := true
-
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 
 # VR Front buffer
 #BOARD_USES_VR_FRONT_BUFFER := true
@@ -178,14 +157,13 @@ BOARD_USES_FIMGAPI_V5X := true
 BOARD_USES_DEFAULT_CSC_HW_SCALER := true
 BOARD_USES_SCALER_M2M1SHOT := true
 
-# Wifi
+# WiFi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_MODULE_PATH          := "/vendor/lib/modules/wlan.ko"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
@@ -197,18 +175,13 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 CHARGING_ENABLED_PATH := /sys/class/power_supply/battery/batt_lp_charging
 
-# RIL
-BOARD_VENDOR := samsung
-
 # HIDL
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
 
 # Release tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
-
-# Ramdisk
-BOARD_ROOT_EXTRA_FOLDERS := efs
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870
@@ -216,17 +189,16 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870
 # OTA assertions
 TARGET_OTA_ASSERT_DEVICE := gtaxlwifi,gtaxllte
 
-# Shims: camera
+# Shims
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
 # Vendor security patch level - T580XXS5CTD1
 VENDOR_SECURITY_PATCH := 2020-04-01
 
-SELINUX_IGNORE_NEVERALLOWS := true
-
 # SELinux
 BOARD_VENDOR_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # Inherit from the proprietary version
 -include vendor/samsung/gtaxlwifi/BoardConfigVendor.mk

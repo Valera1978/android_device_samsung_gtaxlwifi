@@ -1,4 +1,7 @@
-# Firmware - from T585XXS6CTJ7
+# WiFi firmware - partly from T390XXS9CUG1, partly from T585XXS6CTJ7
+# bdwlan30.bin and utfbd30.bin are as in the T585XXS6CTJ7 firmware, and are also copies of bdwlan32.bin
+# and utfbd32.bin as in the T390XXS9CUG1 firmware respectively. With bdwlan30.bin and utfbd30.bin from
+# the T390XXS9CUG1 firmware, WiFi regulatory domain selection doesn't work properly.
 etc/firmware/Data.msc
 etc/firmware/bdwlan30.bin
 etc/firmware/bdwlan32.bin
@@ -8,12 +11,19 @@ etc/firmware/qwlan30_ibss.bin
 etc/firmware/utf30.bin
 etc/firmware/utfbd30.bin
 etc/firmware/utfbd32.bin
-vendor/firmware/fimc_is_lib.bin
-vendor/firmware/mfc_fw.bin
-vendor/firmware/setfile_4h5yc.bin
-vendor/firmware/setfile_sr259.bin
+
+# Bluetooth firmware - from T390XXS9CUG1
 vendor/firmware/nvm_tlv_tf_1.1.bin
 vendor/firmware/rampatch_tlv_tf_1.1.tlv
+
+# Camera firmware - from T585XXS6CTJ7
+vendor/firmware/fimc_is_lib.bin
+vendor/firmware/setfile_4h5yc.bin
+vendor/firmware/setfile_sr259.bin
+
+# MFC (Multi Format Codec) firmware - from M105FDDU3CTK3
+# Version information: "MFC v10.11, F/W: 19yy, 02mm, 08dd"
+vendor/firmware/mfc_fw.bin
 
 # Mali graphics - r28p0 - from the 9.0 SM-A720S stock firmware
 vendor/lib/egl/libGLES_mali.so
@@ -44,6 +54,7 @@ lib64/omx/libOMX.Exynos.VP8.Encoder.so
 lib64/omx/libOMX.Exynos.WMV.Decoder.so
 
 # Camera - from T580XXS5CTK1/T580XXS5CTD1
+# camera.vendor.universal7870.so was taken directly from /system/lib/hw/camera.exynos7870.so
 lib/hw/camera.vendor.universal7870.so
 lib/libexynoscamera.so
 lib/libexynoscamera3.so
@@ -70,7 +81,7 @@ system_ext/lib64/libaptX_encoder.so
 vendor/bin/hw/gpsd
 lib/hw/gps.default.so
 
-# Sensors - from T580XXS5CTK1/T580XXS5CTD1
+# Sensors - from P580ZSS1CTI1
 vendor/lib/hw/sensors.universal7870.so
 
 # Samsung stock audio
@@ -91,5 +102,5 @@ vendor/lib/libfloatingfeature.so
 vendor/lib/libLifevibes_lvverx.so
 vendor/lib/libLifevibes_lvvetx.so
 
-# wcnss_filter - for Bluetooth - from the stock 7.1.1 firmware - T580XXU3BRF1
+# wcnss_filter - for Bluetooth - from A520FZTU4BRB1
 vendor/bin/wcnss_filter
