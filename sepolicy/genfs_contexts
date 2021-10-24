@@ -1,0 +1,6 @@
+## debugfs
+# ION debugfs
+genfscon debugfs /ion/                                                    u:object_r:debugfs_ion:s0
+
+# Mali debugfs
+genfscon debugfs /mali/                                                   u:object_r:debugfs_mali:s0

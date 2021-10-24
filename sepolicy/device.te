@@ -10,8 +10,5 @@ type rfkill_device, dev_type;
 # /dev/s5p-smem
 type secmem_device, dev_type;
 
-# Radio block device
-type radio_block_device, dev_type;
-
 # GPS
 type gps_device, dev_type;

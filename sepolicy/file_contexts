@@ -1,4 +1,4 @@
-##########################
+####################################
 # Devices
 #
 /dev/mali[0-9]*                                                           u:object_r:gpu_device:s0
@@ -12,18 +12,16 @@
 /dev/ttySAC0                                                              u:object_r:bluetooth_device:s0
 
 /dev/ttySAC1                                                              u:object_r:gps_device:s0
-/dev/gnss_ipc                                                             u:object_r:gps_device:s0
-
-/dev/block/mmcblk0p[0-9]*                                                 u:object_r:emmcblk_device:s0
 
 /dev/block/zram0                                                          u:object_r:swap_block_device:s0
 
-/dev/block/mmcblk0p13                                                     u:object_r:radio_block_device:s0
+/dev/block/mmcblk0p[0-9]*                                                 u:object_r:emmcblk_device:s0
 
 /dev/rfkill                                                               u:object_r:rfkill_device:s0
 
 ####################################
-# efs files
+# EFS files
+#
 /efs/FactoryApp(/.*)?                                                     u:object_r:app_efs_file:s0
 /efs/FactoryApp/baro_delta                                                u:object_r:baro_delta_factoryapp_efs_file:s0
 /efs/FactoryApp/factorymode                                               u:object_r:factorymode_factoryapp_efs_file:s0
@@ -44,13 +42,10 @@
 /efs/sec_efs(/.*)?                                                        u:object_r:sec_efs_file:s0
 /efs/wifi(/.*)?                                                           u:object_r:wifi_efs_file:s0
 /efs/wv\.keys                                                             u:object_r:cpk_efs_file:s0
-/cpefs(/.*)?                                                              u:object_r:sec_efs_file:s0
 
 ####################################
-# data files
+# Data files
 #
-/data/nfc(/.*)?                                                           u:object_r:nfc_data_file:s0
-/data/misc/radio(/.*)?                                                    u:object_r:radio_data_file:s0
 
 # GPS
 /data/system/gps(/.*)?                                                    u:object_r:gps_data_file:s0
@@ -111,9 +106,8 @@
 /sys/devices/virtual/sensors(/.*)?                                        u:object_r:sysfs_sensors:s0
 
 ####################################
-# daemons
+# Daemons
 #
-
 /(vendor|system/vendor)/bin/hw/gpsd                                       u:object_r:gpsd_exec:s0
 /(vendor|system/vendor)/bin/wcnss_filter                                  u:object_r:wcnss_filter_exec:s0
 

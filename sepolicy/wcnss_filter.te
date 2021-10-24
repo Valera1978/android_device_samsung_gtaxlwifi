@@ -4,6 +4,5 @@ type wcnss_filter_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(wcnss_filter)
 
 allow wcnss_filter bluetooth_device:chr_file { ioctl open read write };
-allow wcnss_filter vendor_file:file entrypoint;
 
 set_prop(wcnss_filter, bluetooth_prop)

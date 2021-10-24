@@ -33,5 +33,3 @@ allow gpsd self:udp_socket create_socket_perms;
 
 allow gpsd hwservicemanager_prop:file { getattr open read };
 allow gpsd hwservicemanager:binder call;
-
-allow gpsd vendor_file:file entrypoint;

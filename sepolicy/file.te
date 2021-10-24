@@ -15,7 +15,7 @@ type factorymode_factoryapp_efs_file, file_type;
 type baro_delta_factoryapp_efs_file, file_type;
 
 # sysfs types
-type sysfs_camera, sysfs_type, file_type, mlstrustedobject;
+type sysfs_camera, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_gps, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_power_supply, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_input, fs_type, sysfs_type, fs_type, mlstrustedobject;
@@ -24,3 +24,7 @@ type sysfs_brightness, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_v4l, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_light, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_sensors, fs_type, sysfs_type, fs_type, mlstrustedobject;
+
+# debugfs types
+type debugfs_ion, fs_type, debugfs_type;
+type debugfs_mali, fs_type, debugfs_type;
