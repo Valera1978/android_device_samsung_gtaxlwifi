@@ -7,7 +7,7 @@ on post-fs-data
     # for WIFI MAC address
     mkdir /efs/wifi 0775 radio system
     chown system wifi /efs/wifi/.mac.info
-    chmod 0660 /efs/wifi/.mac.info
+    chmod 0664 /efs/wifi/.mac.info
 
     # Set permissions for firmware path control
     chown wifi wifi /sys/module/wlan/parameters/fwpath
