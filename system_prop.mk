@@ -65,13 +65,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.enable_suspend=true
 
+# FIFO UI scheduling
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.use_fifo_ui=1
+
 # Do not update the recovery image
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.recovery_update=false
-
-# UI
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.use_fifo_ui=1
 
 # Set fdsan to the warn_once severity level
 PRODUCT_PROPERTY_OVERRIDES += \

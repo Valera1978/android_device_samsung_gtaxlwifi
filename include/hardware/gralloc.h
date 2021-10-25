@@ -363,7 +363,6 @@ typedef struct gralloc_module_t {
 
     /* reserved for future use */
     void* reserved_proc[1];
-
 } gralloc_module_t;
 
 /*****************************************************************************/

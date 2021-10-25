@@ -35,10 +35,6 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
-# Flat device tree for boot image
-#PRODUCT_HOST_PACKAGES += \
-#    dtbhtoolExynos
-
 # first_stage_mount
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870:$(TARGET_COPY_OUT_RAMDISK)/fstab.samsungexynos7870
@@ -56,7 +52,6 @@ PRODUCT_PACKAGES += \
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
-    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -136,10 +131,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software
 
-# Doze
-#PRODUCT_PACKAGES += \
-#    SamsungDoze
-
 # Touch features
 PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.samsung
@@ -152,9 +143,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
-
-#PRODUCT_PACKAGES += \
-#    Snap
 
 # TextClassifier
 PRODUCT_PACKAGES += \
@@ -260,10 +248,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
-
-# Configstore
-PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
