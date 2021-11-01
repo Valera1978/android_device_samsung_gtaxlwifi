@@ -326,9 +326,9 @@
 
     <EncoderProfile quality="high" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="12000000"
-             width="1280"
-             height="720"
+             bitRate="17000000"
+             width="1440"
+             height="1080"
              frameRate="30" />
 
       <Audio codec="aac"
@@ -389,6 +389,19 @@
              channels="2" />
     </EncoderProfile>
 
+    <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="17000000"
+             width="1440"
+             height="1080"
+             frameRate="30" />
+
+      <Audio codec="aac"
+             bitRate="256000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+
     <EncoderProfile quality="timelapselow" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="384000"
@@ -408,9 +421,9 @@
 
     <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="12000000"
-             width="1280"
-             height="720"
+             bitRate="17000000"
+             width="1440"
+             height="1080"
              frameRate="30" />
 
        <!--
@@ -479,6 +492,23 @@
              bitRate="12000000"
              width="1280"
              height="720"
+             frameRate="30" />
+
+       <!--
+             The Audio part of the profile will not be used since time lapse mode
+             does not capture audio
+       -->
+      <Audio codec="aac"
+             bitRate="256000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+
+    <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="17000000"
+             width="1440"
+             height="1080"
              frameRate="30" />
 
        <!--
