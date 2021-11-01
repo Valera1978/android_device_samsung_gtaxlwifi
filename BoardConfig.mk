@@ -195,8 +195,8 @@ TARGET_OTA_ASSERT_DEVICE := gtaxlwifi,gtaxllte
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libexynoscamera_shim.so
 
-# Vendor security patch level - T580XXS5CTD1
-VENDOR_SECURITY_PATCH := 2020-04-01
+# Vendor security patch level - P580ZSS1CTI1
+VENDOR_SECURITY_PATCH := 2020-09-01
 
 # SELinux
 BOARD_VENDOR_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
