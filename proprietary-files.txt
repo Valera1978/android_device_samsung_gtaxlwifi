@@ -16,20 +16,20 @@ etc/firmware/utfbd32.bin
 vendor/firmware/nvm_tlv_tf_1.1.bin
 vendor/firmware/rampatch_tlv_tf_1.1.tlv
 
-# Camera firmware - from T585XXS6CTJ7
+# Camera firmware - from P580ZSS1CTI1
 vendor/firmware/fimc_is_lib.bin
 vendor/firmware/setfile_4h5yc.bin
 vendor/firmware/setfile_sr259.bin
 
-# MFC (Multi Format Codec) firmware - from M105FDDU3CTK3
-# Version information: "MFC v10.11, F/W: 19yy, 02mm, 08dd"
+# MFC (Multi Format Codec) firmware - from A305FDDU6CUI3
+# Version information: "MFC v10.11, F/W: 20yy, 08mm, 31dd"
 vendor/firmware/mfc_fw.bin
 
-# Mali graphics - r28p0 - from the 9.0 SM-A720S stock firmware
+# Mali graphics - r28p0 - from A720SKSU5CUJ2
 vendor/lib/egl/libGLES_mali.so
 vendor/lib64/egl/libGLES_mali.so
 
-# OMX - from A520FXXUGCTI9
+# OMX - from A520FXXUGCTKA
 lib/libExynosOMX_Core.so
 lib/libExynosOMX_Resourcemanager.so
 lib/omx/libOMX.Exynos.AVC.Decoder.so
@@ -53,7 +53,7 @@ lib64/omx/libOMX.Exynos.VP8.Decoder.so
 lib64/omx/libOMX.Exynos.VP8.Encoder.so
 lib64/omx/libOMX.Exynos.WMV.Decoder.so
 
-# Camera - from T580XXS5CTK1/T580XXS5CTD1
+# Camera - from P580ZSS1CTI1
 # camera.vendor.universal7870.so was taken directly from /system/lib/hw/camera.exynos7870.so
 lib/hw/camera.vendor.universal7870.so
 lib/libexynoscamera.so
@@ -71,7 +71,7 @@ vendor/bin/hw/android.hardware.drm@1.3-service.widevine
 system_ext/lib64/libaptXHD_encoder.so
 system_ext/lib64/libaptX_encoder.so
 
-# GPS - from T580XXS5CTK1/T580XXS5CTD1
+# GPS - from P580ZSS1CTI1
 # Modifications made to gpsd to get it to work:
 #  * SSLv3_client_method has been replaced with SSLv23_method:
 #  $ sed -i "s/SSLv3_client_method/SSLv23_method\x00\x00\x00\x00\x00\x00/" gpsd
@@ -79,7 +79,7 @@ system_ext/lib64/libaptX_encoder.so
 #  $ patchelf --remove-needed android.hidl.base@1.0.so gpsd
 # No modifications were made to gps.default.so.
 vendor/bin/hw/gpsd
-lib/hw/gps.default.so
+vendor/lib/hw/gps.default.so
 
 # Sensors - from P580ZSS1CTI1
 vendor/lib/hw/sensors.universal7870.so
