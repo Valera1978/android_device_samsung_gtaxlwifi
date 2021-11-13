@@ -29,7 +29,7 @@ source "${HELPER}"
 setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true
 
 # Warning headers and guards
-write_headers "gtaxlwifi"
+write_headers "gtaxlwifi gtanotexlwifi"
 
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
 
