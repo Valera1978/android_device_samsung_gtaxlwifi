@@ -285,6 +285,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libsecnativefeature
 
+# ConfigStore
+PRODUCT_PACKAGES += \
+    disable_configstore
+
 # Public libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
