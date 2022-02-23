@@ -72,7 +72,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Do not update the recovery image
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.recovery_update=false
-
-# Set fdsan to the warn_once severity level
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.fdsan=warn_once
