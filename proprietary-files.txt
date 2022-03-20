@@ -1,7 +1,7 @@
-# WiFi firmware - partly from T390XXS9CUG1, partly from T585XXS6CTJ7
+# WiFi firmware - partly from T395XXSDCVA1, partly as in T585XXS6CTJ7
 # bdwlan30.bin and utfbd30.bin are as in the T585XXS6CTJ7 firmware, and are also copies of bdwlan32.bin
-# and utfbd32.bin as in the T390XXS9CUG1 firmware respectively. With bdwlan30.bin and utfbd30.bin from
-# the T390XXS9CUG1 firmware, WiFi regulatory domain selection doesn't work properly.
+# and utfbd32.bin as in the T395XXSDCVA1 firmware respectively. With bdwlan30.bin and utfbd30.bin from
+# the T395XXSDCVA1 firmware, WiFi regulatory domain selection doesn't work properly.
 etc/firmware/Data.msc
 etc/firmware/bdwlan30.bin
 etc/firmware/bdwlan32.bin
@@ -12,7 +12,7 @@ etc/firmware/utf30.bin
 etc/firmware/utfbd30.bin
 etc/firmware/utfbd32.bin
 
-# Bluetooth firmware - from T390XXS9CUG1
+# Bluetooth firmware - from T395XXSDCVA1
 vendor/firmware/nvm_tlv_tf_1.1.bin
 vendor/firmware/rampatch_tlv_tf_1.1.tlv
 
@@ -75,7 +75,7 @@ system_ext/lib64/libaptX_encoder.so
 # Modifications made to gpsd to get it to work:
 #  * SSLv3_client_method has been replaced with SSLv23_method:
 #  $ sed -i "s/SSLv3_client_method/SSLv23_method\x00\x00\x00\x00\x00\x00/" gpsd
-#  * The android.hidl.base@1.0 dependancy has been removed using patchelf:
+#  * The android.hidl.base@1.0 dependency has been removed using patchelf:
 #  $ patchelf --remove-needed android.hidl.base@1.0.so gpsd
 # No modifications were made to gps.default.so.
 vendor/bin/hw/gpsd

@@ -18,7 +18,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
 
-# Options for userspace lmkd
+# Userspace lmkd
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.low=1001 \
     ro.lmk.medium=800 \
@@ -48,10 +48,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.ccodec=0
-
-# Radio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.radio.noril=yes
 
 # sdcardfs
 PRODUCT_PROPERTY_OVERRIDES += \

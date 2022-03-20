@@ -16,14 +16,8 @@
 
 LOCAL_PATH := device/samsung/gtaxlwifi
 
+# Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-
-PRODUCT_CHARACTERISTICS := tablet
-
-PRODUCT_SHIPPING_API_LEVEL := 23
-
-# Properties
--include $(LOCAL_PATH)/system_prop.mk
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal
@@ -35,17 +29,14 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
-# first_stage_mount
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/fstab.samsungexynos7870:$(TARGET_COPY_OUT_RAMDISK)/fstab.samsungexynos7870
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.samsungexynos7870 \
-    init.power.rc \
+    fstab.samsungexynos7870.ramdisk \
     init.samsung.rc \
     init.samsungexynos7870.rc \
     init.samsungexynos7870.usb.rc \
+    init.power.rc \
     init.wifi.rc \
     ueventd.samsungexynos7870.rc
 
@@ -101,9 +92,7 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     android.hardware.renderscript@1.0-impl \
-    libhwc2on1adapter
-
-PRODUCT_PACKAGES += \
+    libhwc2on1adapter \
     libion
 
 # seccomp policy
@@ -115,9 +104,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.3-service.clearkey
-
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-lite-vendorcompat
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -138,16 +124,18 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     camera.universal7870
 
+# Shims
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
 
-# TextClassifier
+# libxml2
 PRODUCT_PACKAGES += \
-    textclassifier.bundle1
+    libxml2
 
+# Protobuf
 PRODUCT_PACKAGES += \
-    libxml2 \
-    libprotobuf-cpp-full
+    libprotobuf-cpp-full \
+    libprotobuf-cpp-lite-vendorcompat
 
 # Net
 PRODUCT_PACKAGES += \
@@ -297,6 +285,9 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+# Properties
+-include $(LOCAL_PATH)/system_prop.mk
 
 # Call empty .mk files present in the BSP sources to make sure they exist
 $(call inherit-product, hardware/samsung_slsi/exynos/empty.mk)
