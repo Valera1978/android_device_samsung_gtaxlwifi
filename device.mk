@@ -235,10 +235,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
 
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power.stats@1.0-service.mock
-
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.samsung
