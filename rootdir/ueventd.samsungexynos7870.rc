@@ -150,3 +150,4 @@
 
 # Google FRP solution
 /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT	0660	system	system
+/dev/block/platform/13540000.dwmmc0/by-name/STEADY	0660	system	system

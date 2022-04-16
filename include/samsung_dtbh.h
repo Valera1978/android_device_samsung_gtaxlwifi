@@ -22,7 +22,7 @@
 #define DTBH_VERSION       2
 #define DTBH_PLATFORM      "android"
 #define DTBH_SUBTYPE       "samsung"
- /* Hardcoded entry */
+/* Hardcoded entry */
 #define DTBH_PLATFORM_CODE 0x000050a6
 #define DTBH_SUBTYPE_CODE  0x217584da
 
