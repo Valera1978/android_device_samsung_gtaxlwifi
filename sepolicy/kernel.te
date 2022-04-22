@@ -2,6 +2,10 @@ allow kernel self:capability { chown mknod };
 
 allow kernel emmcblk_device:blk_file r_file_perms;
 
+allow kernel device:dir { create rmdir add_name remove_name write };
+allow kernel device:blk_file { create getattr setattr unlink };
+allow kernel device:chr_file { create getattr setattr unlink };
+
 allow kernel sysfs_input:file { open read };
 allow kernel sysfs_input:dir search;
 

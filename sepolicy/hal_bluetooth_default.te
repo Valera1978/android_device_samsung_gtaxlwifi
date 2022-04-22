@@ -4,3 +4,5 @@ allow hal_bluetooth_default bluetooth_data_file:dir rw_dir_perms;
 allow hal_bluetooth_default efs_file:dir search;
 
 unix_socket_connect(hal_bluetooth_default, property, wcnss_filter)
+
+set_prop(hal_bluetooth_default, vendor_bluetooth_prop)

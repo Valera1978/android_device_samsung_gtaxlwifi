@@ -5,4 +5,4 @@ init_daemon_domain(wcnss_filter)
 
 allow wcnss_filter bluetooth_device:chr_file { ioctl open read write };
 
-set_prop(wcnss_filter, bluetooth_prop)
+set_prop(wcnss_filter, vendor_bluetooth_prop)

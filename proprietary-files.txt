@@ -103,5 +103,5 @@ vendor/lib/libfloatingfeature.so
 vendor/lib/libLifevibes_lvverx.so
 vendor/lib/libLifevibes_lvvetx.so
 
-# wcnss_filter - for Bluetooth - from A520FZTU4BRB1
+# wcnss_filter - for Bluetooth - not from any stock firmware, built from source
 vendor/bin/wcnss_filter

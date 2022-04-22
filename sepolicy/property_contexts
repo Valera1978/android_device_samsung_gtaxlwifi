@@ -1,4 +1,4 @@
-wc_transport.                u:object_r:bluetooth_prop:s0
+vendor.wc_transport.         u:object_r:vendor_bluetooth_prop:s0
 
-vendor.wlan.driver.version   u:object_r:wifi_prop:s0
-vendor.wlan.firmware.version u:object_r:wifi_prop:s0
+vendor.wlan.driver.version   u:object_r:vendor_wlan_prop:s0
+vendor.wlan.firmware.version u:object_r:vendor_wlan_prop:s0
