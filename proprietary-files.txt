@@ -85,23 +85,5 @@ vendor/lib64/hw/gps.default.so
 # Sensors - from P580ZSS1CTI1
 vendor/lib/hw/sensors.universal7870.so
 
-# Samsung stock audio
-vendor/lib/hw/audio.primary.universal7870.so
-vendor/lib/lib_SamsungRec_06004.so
-vendor/lib/lib_SoundAlive_SRC384_ver320.so
-vendor/lib/lib_soundaliveresampler.so
-vendor/lib/libaudio-ril.so
-vendor/lib/libaudioroute.so
-vendor/lib/libpreprocessing_nxp.so
-vendor/lib/librecordalive.so
-vendor/lib/libsamsungDiamondVoice.so
-vendor/lib/libSamsungPostProcessConvertor.so
-vendor/lib/libsecaudioinfo.so
-vendor/lib/libtinyals_.so
-vendor/lib/libvndsecril-client.so
-vendor/lib/libfloatingfeature.so
-vendor/lib/libLifevibes_lvverx.so
-vendor/lib/libLifevibes_lvvetx.so
-
 # wcnss_filter - for Bluetooth - not from any stock firmware, built from source
 vendor/bin/wcnss_filter
