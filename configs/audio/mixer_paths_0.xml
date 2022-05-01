@@ -170,6 +170,8 @@
 		<ctl name="SPKVOL R Switch" value="1"/>
 		<ctl name="SPO Playback Switch" value="1"/>
 		<ctl name="SPK Switch" value="1" />
+		<ctl name="HP Switch" value="0" />
+		<ctl name="RCV Switch" value="0" />
 	</path>
 
 	<path name="dev-handset">
@@ -178,6 +180,8 @@
 		<ctl name="Mono MIX DAC L2 Switch" value="1"/>
 		<ctl name="Mono Playback Switch" value="1"/>
 		<ctl name="RCV Switch" value="1" />
+		<ctl name="HP Switch" value="0" />
+		<ctl name="SPK Switch" value="0" />
 	</path>
 
 	<path name="dev-headset">
@@ -186,11 +190,27 @@
 		<ctl name="HPO L Playback Switch" value="1"/>
 		<ctl name="HPO R Playback Switch" value="1"/>
 		<ctl name="HP Switch" value="1" />
+		<ctl name="SPK Switch" value="0" />
+		<ctl name="RCV Switch" value="0" />
 	</path>
 
 	<path name="dev-speaker-headset">
-		<path name="dev-speaker" />
-		<path name="dev-headset" />
+		<ctl name="Stereo DAC MIXL DAC L1 Switch" value="1"/>
+		<ctl name="Stereo DAC MIXR DAC R1 Switch" value="1"/>
+		<ctl name="DAC L2 Source" value="Stereo DAC Mixer"/>
+		<ctl name="DAC R2 Source" value="Stereo DAC Mixer"/>
+		<ctl name="SPK MIXL DAC L2 Switch" value="1"/>
+		<ctl name="SPK MIXR DAC R2 Switch" value="1"/>
+		<ctl name="SPO L MIX SPKVOL L Switch" value="1"/>
+		<ctl name="SPO R MIX SPKVOL R Switch" value="1"/>
+		<ctl name="SPKVOL L Switch" value="1"/>
+		<ctl name="SPKVOL R Switch" value="1"/>
+		<ctl name="SPO Playback Switch" value="1"/>
+		<ctl name="HPO L Playback Switch" value="1"/>
+		<ctl name="HPO R Playback Switch" value="1"/>
+		<ctl name="SPK Switch" value="1" />
+		<ctl name="HP Switch" value="1" />
+		<ctl name="RCV Switch" value="0" />
 	</path>
 
 	<path name="dev-codec-out-disable">
