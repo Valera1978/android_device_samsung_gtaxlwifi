@@ -225,13 +225,13 @@
 	</path>
 
 	<path name="dev-main-mic">
-        <ctl name="RECMIX1L BST3 Switch" value="1"/>
-        <ctl name="RECMIX1R BST3 Switch" value="1"/>
-        <ctl name="Stereo1 ADC Source" value="ADC1"/>
-        <ctl name="Stereo1 ADC1 Source" value="ADC"/>
-        <ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
-        <ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
-        <ctl name="Main Mic Switch" value="1" />
+		<ctl name="RECMIX1L BST3 Switch" value="1"/>
+		<ctl name="RECMIX1R BST3 Switch" value="1"/>
+		<ctl name="Stereo1 ADC Source" value="ADC1"/>
+		<ctl name="Stereo1 ADC1 Source" value="ADC"/>
+		<ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
+		<ctl name="Main Mic Switch" value="1" />
 	</path>
 
 	<path name="dev-2nd-mic">
@@ -243,13 +243,13 @@
 	</path>
 
 	<path name="dev-headset-mic">
-       <ctl name="RECMIX1L BST1 Switch" value="1"/>
-       <ctl name="RECMIX1R BST1 Switch" value="1"/>
-       <ctl name="Stereo1 ADC Source" value="ADC1"/>
-       <ctl name="Stereo1 ADC1 Source" value="ADC"/>
-       <ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
-       <ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
-       <ctl name="Headset Mic Switch" value="1" />
+		<ctl name="RECMIX1L BST1 Switch" value="1"/>
+		<ctl name="RECMIX1R BST1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC Source" value="ADC1"/>
+		<ctl name="Stereo1 ADC1 Source" value="ADC"/>
+		<ctl name="Stereo1 ADC MIXL ADC1 Switch" value="1"/>
+		<ctl name="Stereo1 ADC MIXR ADC1 Switch" value="1"/>
+		<ctl name="Headset Mic Switch" value="1" />
 	</path>
 
 	<path name="dev-codec-in-disable">
@@ -2560,14 +2560,6 @@
 		<path name="gain-media-bt-sco-headset"/>
 	</path>
 
-	<path name="hdmi">
-		<!-- TODO -->
-	</path>
-
-	<path name="speaker-and-hdmi">
-		<!-- TODO -->
-	</path>
-
 	<!-- Input -->
 	<path name="earpiece-mic">
 		<path name="media-mic"/>
@@ -2633,11 +2625,6 @@
 		<path name="media-bt-sco-headset-in"/>
 		<path name="gain-media-bt-sco-headset-in"/>
 	</path>
-
-	<!-- samsung uses the same path
-	<path name="camcorder-mic">
-	</path>
-	-->
 
 	<path name="voice-rec-mic">
 		<path name="recording-mic"/>
