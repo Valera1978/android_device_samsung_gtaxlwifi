@@ -117,7 +117,7 @@ enum {
  * We should take care of returning proper size when AudioFlinger queries for
  * the buffer size of an input/output stream
  */
-#define PLAYBACK_PERIOD_SIZE 256
+#define PLAYBACK_PERIOD_SIZE 128
 #define PLAYBACK_PERIOD_COUNT 2
 #define PLAYBACK_DEFAULT_CHANNEL_COUNT 2
 #define PLAYBACK_DEFAULT_SAMPLING_RATE 48000
@@ -147,7 +147,7 @@ enum {
 #define PLAYBACK_HDMI_DEFAULT_CHANNEL_COUNT   2
 
 #define CAPTURE_PERIOD_SIZE 1024
-#define CAPTURE_PERIOD_SIZE_LOW_LATENCY 256
+#define CAPTURE_PERIOD_SIZE_LOW_LATENCY 128
 #define CAPTURE_PERIOD_COUNT 2
 #define CAPTURE_PERIOD_COUNT_LOW_LATENCY 2
 #define CAPTURE_DEFAULT_CHANNEL_COUNT 2
