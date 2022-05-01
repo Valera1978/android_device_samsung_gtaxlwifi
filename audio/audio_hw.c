@@ -849,12 +849,6 @@ static int enable_snd_device(struct audio_device *adev,
     if (snd_device_name == NULL)
         return -EINVAL;
 
-    if (snd_device == SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES) {
-        ALOGV("Request to enable combo device: enable individual devices\n");
-        enable_snd_device(adev, uc_info, SND_DEVICE_OUT_SPEAKER);
-        enable_snd_device(adev, uc_info, SND_DEVICE_OUT_HEADPHONES);
-        return 0;
-    }
     adev->snd_dev_ref_cnt[snd_device]++;
     if (adev->snd_dev_ref_cnt[snd_device] > 1) {
         ALOGV("%s: snd_device(%d: %s) is already active",
@@ -902,13 +896,6 @@ int disable_snd_device(struct audio_device *adev,
 
     if (snd_device_name == NULL)
         return -EINVAL;
-
-    if (snd_device == SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES) {
-        ALOGV("Request to disable combo device: disable individual devices\n");
-        disable_snd_device(adev, uc_info, SND_DEVICE_OUT_SPEAKER);
-        disable_snd_device(adev, uc_info, SND_DEVICE_OUT_HEADPHONES);
-        return 0;
-    }
 
     if (adev->snd_dev_ref_cnt[snd_device] <= 0) {
         ALOGE("%s: device ref cnt is already 0", __func__);
