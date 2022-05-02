@@ -176,6 +176,7 @@ on fs
 
     # Permissions for touchkey
     chown system radio /sys/class/sec/sec_touchkey/brightness
+    chown system system /sys/class/sec/sec_touchkey/touchkeys_enabled
     chown system system /sys/class/sec/sec_touchkey/input/enabled
 
     # Permissions for gpio_keys
