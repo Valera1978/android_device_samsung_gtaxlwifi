@@ -88,7 +88,6 @@
 /sys/devices/virtual/sec/sec_key(/.*)?                                    u:object_r:sysfs_input:s0
 /sys/devices/virtual/sec/tsp(/.*)?                                        u:object_r:sysfs_input:s0
 /sys/devices/13840000.i2c/i2c-7/7-0049/input/input1(/.*)?                 u:object_r:sysfs_input:s0
-/sys/devices/virtual/sec/sec_touchkey/touchkeys_enabled                   u:object_r:sysfs_input:s0
 
 # Brightness
 /sys/devices/14800000.dsim/backlight/panel/brightness                     u:object_r:sysfs_brightness:s0
