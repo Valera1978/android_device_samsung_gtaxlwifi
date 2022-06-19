@@ -1,7 +1,7 @@
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
-    audio_hal.force_voice_config=wide \
+    ro.vendor.audio_hal.force_voice_config=wide \
     ro.config.media_vol_steps=25
 
 # Bluetooth
