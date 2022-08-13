@@ -2,15 +2,15 @@
 # bdwlan30.bin and utfbd30.bin are as in the T585XXS6CTJ7 firmware, and are also copies of bdwlan32.bin
 # and utfbd32.bin as in the T395XXSDCVA1 firmware respectively. With bdwlan30.bin and utfbd30.bin from
 # the T395XXSDCVA1 firmware, WiFi regulatory domain selection doesn't work properly.
-etc/firmware/Data.msc
-etc/firmware/bdwlan30.bin
-etc/firmware/bdwlan32.bin
-etc/firmware/otp30.bin
-etc/firmware/qwlan30.bin
-etc/firmware/qwlan30_ibss.bin
-etc/firmware/utf30.bin
-etc/firmware/utfbd30.bin
-etc/firmware/utfbd32.bin
+vendor/firmware/Data.msc
+vendor/firmware/bdwlan30.bin
+vendor/firmware/bdwlan32.bin
+vendor/firmware/otp30.bin
+vendor/firmware/qwlan30.bin
+vendor/firmware/qwlan30_ibss.bin
+vendor/firmware/utf30.bin
+vendor/firmware/utfbd30.bin
+vendor/firmware/utfbd32.bin
 
 # Bluetooth firmware - from T395XXSDCVA1
 vendor/firmware/nvm_tlv_tf_1.1.bin
@@ -30,36 +30,40 @@ vendor/lib/egl/libGLES_mali.so
 vendor/lib64/egl/libGLES_mali.so
 
 # OMX - from A520FXXUGCTKA
-lib/libExynosOMX_Core.so
-lib/libExynosOMX_Resourcemanager.so
-lib/omx/libOMX.Exynos.AVC.Decoder.so
-lib/omx/libOMX.Exynos.AVC.Encoder.so
-lib/omx/libOMX.Exynos.HEVC.Decoder.so
-lib/omx/libOMX.Exynos.HEVC.Encoder.so
-lib/omx/libOMX.Exynos.MPEG4.Decoder.so
-lib/omx/libOMX.Exynos.MPEG4.Encoder.so
-lib/omx/libOMX.Exynos.VP8.Decoder.so
-lib/omx/libOMX.Exynos.VP8.Encoder.so
-lib/omx/libOMX.Exynos.WMV.Decoder.so
-lib64/libExynosOMX_Core.so
-lib64/libExynosOMX_Resourcemanager.so
-lib64/omx/libOMX.Exynos.AVC.Decoder.so
-lib64/omx/libOMX.Exynos.AVC.Encoder.so
-lib64/omx/libOMX.Exynos.HEVC.Decoder.so
-lib64/omx/libOMX.Exynos.HEVC.Encoder.so
-lib64/omx/libOMX.Exynos.MPEG4.Decoder.so
-lib64/omx/libOMX.Exynos.MPEG4.Encoder.so
-lib64/omx/libOMX.Exynos.VP8.Decoder.so
-lib64/omx/libOMX.Exynos.VP8.Encoder.so
-lib64/omx/libOMX.Exynos.WMV.Decoder.so
+# All references to /system/ in paths within these blobs have been replaced with /vendor/
+# to get them working after moving them to vendor:
+#  $ sed -i "s|/system/|/vendor/|" vendor/lib*/*OMX*
+#  $ sed -i "s|/system/|/vendor/|" vendor/lib*/omx/*
+vendor/lib/libExynosOMX_Core.so
+vendor/lib/libExynosOMX_Resourcemanager.so
+vendor/lib/omx/libOMX.Exynos.AVC.Decoder.so
+vendor/lib/omx/libOMX.Exynos.AVC.Encoder.so
+vendor/lib/omx/libOMX.Exynos.HEVC.Decoder.so
+vendor/lib/omx/libOMX.Exynos.HEVC.Encoder.so
+vendor/lib/omx/libOMX.Exynos.MPEG4.Decoder.so
+vendor/lib/omx/libOMX.Exynos.MPEG4.Encoder.so
+vendor/lib/omx/libOMX.Exynos.VP8.Decoder.so
+vendor/lib/omx/libOMX.Exynos.VP8.Encoder.so
+vendor/lib/omx/libOMX.Exynos.WMV.Decoder.so
+vendor/lib64/libExynosOMX_Core.so
+vendor/lib64/libExynosOMX_Resourcemanager.so
+vendor/lib64/omx/libOMX.Exynos.AVC.Decoder.so
+vendor/lib64/omx/libOMX.Exynos.AVC.Encoder.so
+vendor/lib64/omx/libOMX.Exynos.HEVC.Decoder.so
+vendor/lib64/omx/libOMX.Exynos.HEVC.Encoder.so
+vendor/lib64/omx/libOMX.Exynos.MPEG4.Decoder.so
+vendor/lib64/omx/libOMX.Exynos.MPEG4.Encoder.so
+vendor/lib64/omx/libOMX.Exynos.VP8.Decoder.so
+vendor/lib64/omx/libOMX.Exynos.VP8.Encoder.so
+vendor/lib64/omx/libOMX.Exynos.WMV.Decoder.so
 
 # Camera - from P580ZSS1CTI1
 # camera.vendor.universal7870.so was taken directly from /system/lib/hw/camera.exynos7870.so
-lib/hw/camera.vendor.universal7870.so
-lib/libexynoscamera.so
-lib/libexynoscamera3.so
-lib/libsensorlistener.so
-lib/libuniplugin.so
+vendor/lib/hw/camera.vendor.universal7870.so
+vendor/lib/libexynoscamera.so
+vendor/lib/libexynoscamera3.so
+vendor/lib/libsensorlistener.so
+vendor/lib/libuniplugin.so
 vendor/lib/libstainkiller.so
 
 # DRM - from "crosshatch-user 11 RQ1A.201205.003 6906706 release-keys"

@@ -195,7 +195,7 @@ TARGET_OTA_ASSERT_DEVICE := gtaxlwifi,gtaxllte
 
 # Shims
 TARGET_LD_SHIM_LIBS += \
-    /system/lib/libexynoscamera.so|libexynoscamera_shim.so
+    /vendor/lib/libexynoscamera.so|libexynoscamera_shim.so
 
 # Vendor security patch level - P580ZSS1CTI1
 VENDOR_SECURITY_PATCH := 2020-09-01

@@ -12,4 +12,8 @@ cc_library_shared {
 
     relative_install_path: "hw",
 
+    vendor: true,
+
+    compile_multilib: "32",
+
 }
