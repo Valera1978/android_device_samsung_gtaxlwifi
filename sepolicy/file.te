@@ -15,19 +15,20 @@ type factorymode_factoryapp_efs_file, file_type;
 type baro_delta_factoryapp_efs_file, file_type;
 
 # sysfs types
-type sysfs_camera, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_gps, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_power_supply, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_input, fs_type, sysfs_type, fs_type, mlstrustedobject;
-type sysfs_graphics, sysfs_type, fs_type, mlstrustedobject;
-type sysfs_brightness, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_camera, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_camera_writable, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_gps, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_battery, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_input, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_decon, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_brightness, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_v4l, sysfs_type, fs_type, mlstrustedobject;
-type sysfs_light, fs_type, sysfs_type, mlstrustedobject;
-type sysfs_sensors, fs_type, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_light, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_sensors, sysfs_type, fs_type, mlstrustedobject;
 
 # debugfs types
-type debugfs_ion, fs_type, debugfs_type;
-type debugfs_mali, fs_type, debugfs_type;
+type debugfs_ion, debugfs_type, fs_type;
+type debugfs_mali, debugfs_type, fs_type;
 
 # proc types
-type proc_swappiness, fs_type, proc_type;
+type proc_swappiness, proc_type, fs_type;

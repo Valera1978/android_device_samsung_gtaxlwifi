@@ -1,1 +1,1 @@
-allow charger sysfs_power_supply:file { getattr open read };
+allow charger sysfs_battery:file { getattr open read };

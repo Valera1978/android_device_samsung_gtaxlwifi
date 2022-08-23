@@ -1,6 +1,58 @@
 ## debugfs
-genfscon debugfs /ion/                                                    u:object_r:debugfs_ion:s0
-genfscon debugfs /mali/                                                   u:object_r:debugfs_mali:s0
+genfscon debugfs /ion/                                                                            u:object_r:debugfs_ion:s0
+genfscon debugfs /mali/                                                                           u:object_r:debugfs_mali:s0
 
 ## proc
-genfscon proc /sys/vm/swappiness                                          u:object_r:proc_swappiness:s0
+genfscon proc /sys/vm/swappiness                                                                  u:object_r:proc_swappiness:s0
+
+## sysfs
+# Bluetooth
+genfscon sysfs /devices/bluetooth/extldo                                                          u:object_r:sysfs_bluetooth_writable:s0
+genfscon sysfs /devices/bluetooth/rfkill/rfkill0/state                                            u:object_r:sysfs_bluetooth_writable:s0
+genfscon sysfs /devices/bluetooth/rfkill/rfkill0/type                                             u:object_r:sysfs_bluetooth_writable:s0
+
+# Camera
+genfscon sysfs /devices/virtual/camera/                                                           u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/virtual/camera/rear/fw_update                                             u:object_r:sysfs_camera_writable:s0
+
+# Thermal
+genfscon sysfs /devices/virtual/thermal/                                                          u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/virtual/hwmon/                                                            u:object_r:sysfs_thermal:s0
+
+# GPS
+genfscon sysfs /class/sec/gps/                                                                    u:object_r:sysfs_gps:s0
+genfscon sysfs /devices/139c0000.pinctrl/gpio/gpio81/value                                        u:object_r:sysfs_gps:s0
+
+# Battery
+genfscon sysfs /devices/battery/power_supply/                                                     u:object_r:sysfs_battery:s0
+genfscon sysfs /devices/13870000.i2c/i2c-4/4-0049/sm5703-charger/power_supply/otg/type            u:object_r:sysfs_battery:s0
+genfscon sysfs /devices/13870000.i2c/i2c-4/4-0049/sm5703-charger/power_supply/sm5703-charger/type u:object_r:sysfs_battery:s0
+genfscon sysfs /devices/13830000.i2c/i2c-8/8-0071/power_supply/sm5703-fuelgauge/type              u:object_r:sysfs_battery:s0
+
+# Input
+genfscon sysfs /devices/virtual/sec/tsp/cmd_list                                                  u:object_r:sysfs_input:s0
+genfscon sysfs /devices/virtual/sec/sec_key/hall_detect                                           u:object_r:sysfs_input:s0
+genfscon sysfs /devices/virtual/sec/sec_touchkey/touchkeys_enabled                                u:object_r:sysfs_input:s0
+genfscon sysfs /devices/13840000.i2c/i2c-7/7-0049/input/input1/enabled                            u:object_r:sysfs_input:s0
+
+# Sensors
+genfscon sysfs /devices/virtual/sensors/                                                          u:object_r:sysfs_sensors:s0
+genfscon sysfs /devices/virtual/input/input0/                                                     u:object_r:sysfs_sensors:s0
+genfscon sysfs /devices/virtual/input/input2/                                                     u:object_r:sysfs_sensors:s0
+genfscon sysfs /devices/virtual/input/input3/                                                     u:object_r:sysfs_sensors:s0
+genfscon sysfs /devices/virtual/input/input4/                                                     u:object_r:sysfs_sensors:s0
+
+# Brightness
+genfscon sysfs /devices/14800000.dsim/backlight/panel/brightness                                  u:object_r:sysfs_brightness:s0
+genfscon sysfs /devices/14800000.dsim/backlight/panel/max_brightness                              u:object_r:sysfs_brightness:s0
+
+# Graphics
+genfscon sysfs /devices/14830000.decon_fb/psr_info                                                u:object_r:sysfs_decon:s0
+genfscon sysfs /devices/14830000.decon_fb/vsync                                                   u:object_r:sysfs_decon:s0
+
+# video4linux
+genfscon sysfs /devices/12c30000.mfc0/video6/name                                                 u:object_r:sysfs_v4l:s0
+genfscon sysfs /devices/12c30000.mfc0/video7/name                                                 u:object_r:sysfs_v4l:s0
+
+# Lights
+genfscon sysfs /devices/virtual/sec/sec_touchkey/brightness                                       u:object_r:sysfs_light:s0

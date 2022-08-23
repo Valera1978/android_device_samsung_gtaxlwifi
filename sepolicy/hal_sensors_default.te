@@ -1,7 +1,5 @@
-allow hal_sensors_default sysfs_input:file { open read write };
-allow hal_sensors_default sysfs_input:lnk_file read;
-allow hal_sensors_default sysfs_input:dir { search open read };
 allow hal_sensors_default sysfs_sensors:file { getattr open read write };
-allow hal_sensors_default sysfs_sensors:dir search;
+allow hal_sensors_default sysfs_sensors:dir { search open read };
+allow hal_sensors_default sysfs_sensors:lnk_file read;
 allow hal_sensors_default app_efs_file:dir search;
 allow hal_sensors_default efs_file:dir search;

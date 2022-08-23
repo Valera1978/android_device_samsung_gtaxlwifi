@@ -7,7 +7,6 @@ allow kernel device:blk_file { create getattr setattr unlink };
 allow kernel device:chr_file { create getattr setattr unlink };
 
 allow kernel sysfs_input:file { open read };
-allow kernel sysfs_input:dir search;
 
 allow kernel { app_efs_file efs_file battery_efs_file }:dir { search open read };
 allow kernel { app_efs_file efs_file battery_efs_file }:file { open read write };
