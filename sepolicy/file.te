@@ -28,3 +28,6 @@ type sysfs_sensors, fs_type, sysfs_type, fs_type, mlstrustedobject;
 # debugfs types
 type debugfs_ion, fs_type, debugfs_type;
 type debugfs_mali, fs_type, debugfs_type;
+
+# proc types
+type proc_swappiness, fs_type, proc_type;
