@@ -14,6 +14,7 @@ genfscon sysfs /devices/bluetooth/rfkill/rfkill0/type                           
 # Camera
 genfscon sysfs /devices/virtual/camera/                                                           u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/virtual/camera/rear/fw_update                                             u:object_r:sysfs_camera_writable:s0
+genfscon sysfs /devices/virtual/camera/flash/rear_torch_flash                                     u:object_r:sysfs_camera_writable:s0
 
 # Thermal
 genfscon sysfs /devices/virtual/thermal/                                                          u:object_r:sysfs_thermal:s0
