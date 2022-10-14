@@ -46,10 +46,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     lockscreen.rot_override=true
 
-# Media
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.stagefright.ccodec=0
-
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=yes
