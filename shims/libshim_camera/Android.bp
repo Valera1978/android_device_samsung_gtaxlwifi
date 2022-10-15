@@ -17,13 +17,6 @@ cc_library_shared {
     name: "libexynoscamera_shim",
     srcs: ["Fence.cpp"],
 
-    include_dirs: ["frameworks/native/include"],
-
-    shared_libs: [
-        "libgui",
-        "libui",
-    ],
-
     vendor: true,
 
     compile_multilib: "32",
